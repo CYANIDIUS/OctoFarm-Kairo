@@ -1,161 +1,202 @@
-[comment]: <> ([![Latest Release]&#40;https://img.shields.io/github/release/octofarm/octofarm?style=appveyor&#41;]&#40;https://img.shields.io/github/v/tag/octofarm/octofarm?sort=date&#41;)
-![Docker Pulls](https://img.shields.io/docker/pulls/octofarm/octofarm?style=appveyor)
-[![GitHub stars](https://img.shields.io/github/stars/octofarm/octofarm?style=appveyor)](https://github.com/NotExpectedYet/OctoFarm/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/octofarm/octofarm?style=appveyor)](https://github.com/NotExpectedYet/OctoFarm/network)
-[![GitHub license](https://img.shields.io/github/license/octofarm/octofarm?style=appveyor)](https://github.com/NotExpectedYet/octofarm/blob/master/LICENSE.txt)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/octofarm/octofarm/ci?style=appveyor)
-![GitHub issues](https://img.shields.io/github/issues/octofarm/octofarm?color=green&style=appveyor)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=appveyor)](https://GitHub.com/octofarm/octofarm/graphs/commit-activity)
-[![Download Dockerhub](https://img.shields.io/badge/DOCKERHUB-OCTOFARM-<COLOR>.svg?style=appveyor)](https://hub.docker.com/r/octofarm/octofarm)
+# OctoFarm-Kairo
 
-# OctoFarm [![Latest Release](https://img.shields.io/github/release/octofarm/octofarm)](https://img.shields.io/github/v/tag/octofarm/octofarm?sort=date)
+> Fork of [OctoFarm](https://github.com/OctoFarm/OctoFarm) with an automated order scheduling and distribution module for FDM 3D printer farms.
 
 <div align="center">
-  <a href="https://github.com/NotExpectedYet/OctoFarm">
+  <a href="https://github.com/CYANIDIUS/OctoFarm-Kairo">
     <img src="https://github.com/OctoFarm/OctoFarm/blob/master/server/assets/images/logo.png?raw=true" alt="Logo" width="400px">
   </a>
 
   <p align="center">
-    OctoFarm is a single pane of glass that combines multiple OctoPrint instances into a single interface. It utilises the OctoPrint API and websocket systems to monitor and allow management of your 3d printer farm. <br/>
-  </p>
-
-  <p align="center">
-    A free and open source makers farm management software
-    <br />
-    <a href="https://docs.octofarm.net"><strong>Explore the documentation</strong></a>
-    <br />
-    <br />
-    ·
-    <a href="https://github.com/octofarm/octofarm/issues">Report a bug</a>
-    ·
-    <a href="https://github.com/OctoFarm/OctoFarm/discussions/new">Request a feature or ask a question</a>
+    OctoFarm-Kairo extends OctoFarm with an intelligent order scheduling system that optimally distributes print jobs across multiple FDM printers, minimizing production time and balancing equipment load.
   </p>
 </div>
 
-- [About OctoFarm](#about-octofarm)
-- [Need help?](#need-help)
-- [Getting Started](#getting-started)
-- [Installation Production](#installation-production)
+- [About OctoFarm-Kairo](#about-octofarm-kairo)
+- [New Features: Order Scheduling Module](#new-features-order-scheduling-module)
+- [Getting Started with Docker](#getting-started-with-docker)
 - [Installation Development](#installation-development)
+- [Architecture](#architecture)
+- [API Reference](#api-reference)
 - [License](#license)
-- [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
-## About OctoFarm
+## About OctoFarm-Kairo
 
-![OctoFarm Dashboard][DashboardScreenshot]
+OctoFarm-Kairo is a fork of OctoFarm — a web-based management interface for 3D printer farms running OctoPrint. This fork adds an **automated order scheduling and distribution module** designed as part of a bachelor's thesis project:
 
-OctoFarm was built to fill a need that anyone with multiple 3D printers with Octoprint will have run into. How do I
-manage multiple printers from one place? That's where OctoFarm steps in, add your OctoPrint instances to the system and
-it will scan and keep you up to date on the status of your printers.
+**"Development of an automated load management system for a fleet of FDM 3D printers based on order distribution optimization"**
 
-Built by a maker, for makers to get more out of their OctoPrint run farms.
+All original OctoFarm features are preserved:
+- Manage your OctoPrint instances (updates, plugins, settings)
+- Multiple farm views (panel, list, camera, combined)
+- Customizable dashboard with real-time monitoring
+- Filament management and tracking
+- Print history and logs
+- Wide OctoPrint plugin support
 
-- Manager your OctoPrint instances right down to triggering Updates and Plugin installs.
-- Keep a track of all the live data on your farm with a selection of views.
-- Manage your OctoPrint file system.
-- Get an overview of your farm with the customisable dashboard.
-- Manage and track filament on your farm.
-- Track history and logs for all of your instances.
-- Supports a wide variety of OctoPrint plugins to augment the OctoFarm system with more information.
+## New Features: Order Scheduling Module
 
-## Need help?
+### Order Management
+- **Create orders** — upload 3MF/G-code files with parameters: name, comment, priority (1-5), total copies, parts per file, material, bounding box dimensions
+- **Order lifecycle** — status tracking: `queued` → `calculated` → `scheduled` → `printing` → `done` / `canceled`
+- **File management** — uploaded files stored in `server/uploads/orders/<orderId>/`
 
-Feel free to join any of the OctoFarm communities or follow OctoFarms progress on it's blog.
+### Scheduling Algorithm
+Two optimization modes:
+- **Minimize Time (Greedy)** — assigns batches to the fastest available printer, minimizing total makespan
+- **Minimize Idle (Balanced)** — distributes batches evenly across printers, minimizing load spread
 
-- [OctoFarms Website](https://octofarm.net/) - Having issues...
-- [OctoFarms Documentation](https://docs.octofarm.net/)
-- [OctoFarm Blog](https://octofarm.net/blog/) - Having issues...
-- [Community Support on Facebook](https://www.facebook.com/groups/octofarm/)
-- [Community Support on Discord](https://discord.gg/vjabMUn/)
-- [General Question or Feature Request?](https://github.com/OctoFarm/OctoFarm/discussionss/)
-- [Fancy donating to the project?](https://octofarm.net/sponsorship/)
+The scheduler automatically:
+1. Calculates total batches needed: `ceil(totalCopies / partsPerFile)`
+2. Filters compatible printers by bed size, material support, and availability
+3. Distributes batches according to the selected optimization mode
+4. Estimates print time for each printer based on its speed characteristics
 
-## Getting Started
+### Printer Specifications
+Extended printer model with new fields (all optional, no breaking changes):
+- `specifications.bedSize` — build volume (x, y, z in mm)
+- `specifications.nozzleDiameter` — nozzle diameter (mm, default 0.4)
+- `specifications.supportedMaterials` — list of supported materials (PLA, PETG, ABS, TPU, etc.)
+- `specifications.printSpeed` — average print speed (mm/s)
 
-Before installing, it is best to read the getting started documents here:
-[Getting Started](https://docs.octofarm.net/getting-started/)
+### Human-in-the-Loop Workflow
+The system follows a confirmation-based workflow:
+1. Operator creates an order and uploads a 3MF file
+2. System calculates optimal distribution (preview only, no DB changes)
+3. Operator reviews the recommendation and manually adjusts if needed
+4. Operator confirms assignment (writes to DB)
+5. Operator uploads G-code for each assigned printer
+6. Operator confirms print start
 
-## Installation Production
-Check out the OctoFarm documentation website for installation instructions on various platforms
-[Getting Started](https://docs.octofarm.net/installation/)
+### UI
+New "Orders" tab in the OctoFarm navigation with:
+- Order table with status filters (All, Calculated, Scheduled, Printing, Done, Canceled)
+- Create order modal with file upload
+- Schedule calculation preview with per-printer breakdown
+- G-code upload for individual assignments
+- Order detail view
+
+## Getting Started with Docker
+
+### Prerequisites
+- [Docker](https://www.docker.com/get-started) and Docker Compose
+- An OctoPrint instance running on each printer
+
+### Quick Start
+
+```bash
+git clone https://github.com/CYANIDIUS/OctoFarm-Kairo.git
+cd OctoFarm-Kairo
+git checkout feature/order-scheduler
+docker compose build
+docker compose up -d
+```
+
+OctoFarm-Kairo will be available at `http://localhost:4000`.
+
+### Docker Compose Configuration
+
+The included `docker-compose.yml` provides:
+- **octofarm** — Node.js 18 application server on port 4000
+- **mongo** — MongoDB 6 database
+- Persistent volumes for database, uploads, and logs
+
+### Environment Variables
+| Variable | Default | Description |
+|---|---|---|
+| `MONGO` | `mongodb://mongo:27017/octofarm` | MongoDB connection string |
+| `OCTOFARM_PORT` | `4000` | Application port |
 
 ## Installation Development
+
 ### Requirements
 - Git
-- NodeJS > v14
+- Node.js >= 14
 - npm
+- MongoDB
 
+### Setup
 
-1. Clone the OctoFarm
-
-```sh
-git clone https://github.com/NotExpectedYet/OctoFarm.git
+1. Clone the repository
+```bash
+git clone https://github.com/CYANIDIUS/OctoFarm-Kairo.git
+cd OctoFarm-Kairo
+git checkout feature/order-scheduler
 ```
 
-2. Install the mono-repo eslint dependencies (eslint, prettier and nodemon)
-
-```sh
+2. Install dependencies
+```bash
 npm install
-```
-
-3. Install server and client dependencies
-
-```sh
 npm run setup-dev
 ```
 
-4. Create an `.env` file in the OctoFarm folder's root directory. e.g. `OctoFarm/.env`.
-   Paste in the contents below.
+3. Create `.env` file in the root directory
 ```dotenv
 NODE_ENV=development
 MONGO=mongodb://127.0.0.1:27017/octofarm
 OCTOFARM_PORT=4000
 ```
 
-5. Build the latest client
-```sh
+4. Build the client
+```bash
 npm run build-client
 ```
 
-6. (Optional): Watch for client changes, requires a secondary console.
-```sh
-npm run dev-client
+5. Start the server
+```bash
+npm run dev-server
 ```
 
-7. Start the server
+## Architecture
 
-```sh
-npm run server-dev
-```
-- The developer version uses nodemon for live server reloading on changes. It will output all the logs to the console.
+### New Files
 
-## Contributing
+| File | Description |
+|---|---|
+| `server/models/Order.js` | Mongoose schema for print orders |
+| `server/services/scheduler.service.js` | Scheduling algorithm (min_time / min_idle modes) |
+| `server/routes/orders.routes.js` | REST API endpoints (9 routes) |
+| `server/templates/orders.ejs` | Orders page UI template |
+| `client/entry/orders.runner.js` | Client-side entry point (webpack) |
+| `client/js/pages/orders/orders.api.js` | Client API module |
+| `client/js/pages/orders/orders.utils.js` | UI rendering utilities |
 
-I don't mind taking contributions to the code. Just be warned OctoFarm is an ever evolving environment due to how it was originally a learning project for myself and JavaScript. 
+### Modified Files
 
-It's a great repository if anyone would like to practice their code clean-up and refactoring skills. 
+| File | Change |
+|---|---|
+| `server/models/Printer.js` | Added optional `specifications` sub-document |
+| `server/app-core.js` | Registered `/api/orders` route |
+| `server/routes/index.js` | Added GET `/orders` page route |
+| `server/templates/layout.ejs` | Added "Orders" navigation link |
+| `Dockerfile` | Updated to node:18-slim with webpack build stage |
+| `docker-compose.yml` | New: OctoFarm + MongoDB + volumes |
 
-Currently I'm planning to fix this with V2.0 but that is held on a private repository. 
+## API Reference
 
-If you'd like to contribute something, then please take a look at the open project on this repository, or feel free to open a discussion with your plans. 
+All endpoints require authentication (`ensureAuthenticated`).
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/orders` | List all orders (optional `?status=` filter) |
+| `GET` | `/api/orders/:id` | Get single order |
+| `POST` | `/api/orders` | Create order (multipart form with file upload) |
+| `PUT` | `/api/orders/:id` | Update order |
+| `DELETE` | `/api/orders/:id` | Delete order |
+| `POST` | `/api/orders/:id/calculate` | Calculate schedule (preview, no DB write) |
+| `POST` | `/api/orders/:id/assign` | Confirm and save assignments |
+| `POST` | `/api/orders/:id/confirm-print` | Confirm print start |
+| `POST` | `/api/orders/:id/upload-gcode` | Upload G-code for assignment |
 
 ## License
 
 This work [is licensed](https://github.com/OctoFarm/OctoFarm/blob/master/LICENSE.txt) under the [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.html).
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-
-## Contact
-
-You can contact me at [info@notexpectedyet.com](mailto:info@notexpectedyet.com)
+Based on [OctoFarm](https://github.com/OctoFarm/OctoFarm) by [NotExpectedYet](https://github.com/NotExpectedYet).
 
 ## Acknowledgements
 
-- [My Patreons](https://www.patreon.com/NotExpectedYet) - You all keep me going and afford me a financial incentive to keep OctoFarm up to date with new features and fixes! Biggest thanks of all.
-- [Gina Häußge](https://octoprint.org/) - Without OctoPrint none of this would be possible. Massive thanks to the work
-  of Gina and everyone who helps out with that.
-- [JetBrains IDE](https://www.jetbrains.com/webstorm/) - Thanks to JebBrains for allowing a free license to use with
-  developing my application. Their IDE is top notch!
-
-[DashboardScreenshot]: https://github.com/NotExpectedYet/OctoFarm/blob/master/screenshots/dashboard.png?raw=true
+- [OctoFarm](https://github.com/OctoFarm/OctoFarm) — the original project this fork is based on
+- [Gina Häußge](https://octoprint.org/) — creator of OctoPrint
+- [OctoFarm Patreons](https://www.patreon.com/NotExpectedYet) — supporters of the original project
