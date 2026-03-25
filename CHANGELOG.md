@@ -1,3 +1,36 @@
+## [1.8.0-kairo](https://github.com/CYANIDIUS/OctoFarm-Kairo/tree/feature/order-scheduler) (2026-03-25)
+
+### :rocket: New Features :rocket:
+
+* **orders:** Order scheduling module — automated distribution of print jobs across FDM printer fleet
+* **orders:** Two optimization modes: Minimize Time (greedy) and Minimize Idle (balanced load)
+* **orders:** Full order lifecycle: queued → calculated → scheduled → printing → done / canceled
+* **orders:** REST API with 9 endpoints: CRUD + calculate + assign + confirm-print + upload-gcode
+* **orders:** UI page "Orders" with order table, status filters, creation modal, schedule preview
+* **orders:** 3MF/G-code file upload and per-assignment G-code management
+* **printers:** Extended Printer model with specifications (bedSize, nozzleDiameter, supportedMaterials, printSpeed)
+* **docker:** Updated Dockerfile to node:18-slim with webpack client build stage
+* **docker:** Added docker-compose.yml (OctoFarm + MongoDB 6 + persistent volumes)
+
+### :hammer: Bug Fixes :hammer:
+
+* **docker:** Fixed Alpine 3.14 package repository unavailability by switching to Debian slim
+* **docker:** Fixed Windows CRLF entrypoint issue by inlining startup command in Dockerfile
+* **docker:** Fixed webpack client build — added server/constants/ to build context
+
+### :page_facing_up: New Files :page_facing_up:
+
+* `server/models/Order.js` — Mongoose model for print orders
+* `server/services/scheduler.service.js` — Scheduling algorithm with printer compatibility filtering
+* `server/routes/orders.routes.js` — REST API with multer file uploads
+* `server/templates/orders.ejs` — Orders management UI page
+* `client/entry/orders.runner.js` — Client-side webpack entry point
+* `client/js/pages/orders/orders.api.js` — Client API module
+* `client/js/pages/orders/orders.utils.js` — UI rendering utilities
+* `docker-compose.yml` — Docker Compose for local development
+
+---
+
 ### [1.7.3](https://github.com/OctoFarm/OctoFarm/compare/v1.7.2...v1.7.3) (2022-10-04)
 
 
