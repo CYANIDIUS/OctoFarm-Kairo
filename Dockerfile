@@ -37,11 +37,11 @@ FROM base AS runtime
 COPY --chown=octofarm:octofarm --from=compiler /tmp/app/server/node_modules /app/server/node_modules
 COPY --chown=octofarm:octofarm . /app
 
-RUN rm -rf /tmp/app
+RUN rm -rf /tmp/app && mkdir -p /app/logs /app/server/uploads/orders
 
 USER octofarm
 WORKDIR /app
 
-RUN chmod +x ./docker/entrypoint.sh
+# Inline entrypoint — avoids Windows CRLF issues with shell scripts
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["./docker/entrypoint.sh"]
+CMD ["sh", "-c", "cd server && pm2 start app.js --name OctoFarm --no-daemon -o 'logs/pm2.log' -e 'logs/pm2.error.log' --time --restart-delay=1000 --exp-backoff-restart-delay=1500"]
