@@ -18,4 +18,6 @@ else
     echo "Logs folder already exists..."
 fi
 
+mkdir -p server/uploads/orders
+
 cd server && pm2 start app.js --name OctoFarm --no-daemon -o 'logs/pm2.log' -e 'logs/pm2.error.log' --time  --restart-delay=1000 --exp-backoff-restart-delay=1500
