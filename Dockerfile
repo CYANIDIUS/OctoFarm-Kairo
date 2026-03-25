@@ -1,24 +1,19 @@
-# https://pkgs.alpinelinux.org/packages?name=nodejs&branch=v3.13
-# Results in NodeJS 14.17.0
-FROM alpine:3.14 as base
+# Node.js 18 on Alpine — includes nodejs, npm, and tini out of the box
+FROM node:18-alpine AS base
 
-RUN apk add --no-cache --virtual .base-deps \
-    nodejs \
-    npm \
-    tini
+RUN apk add --no-cache tini
 
 ENV NODE_ENV=production
 
-RUN npm install -g npm@latest
 RUN npm install -g pm2
 
 RUN adduser -D octofarm --home /app && \
     mkdir -p /scripts && \
     chown -R octofarm:octofarm /scripts/
 
-FROM base as compiler
+FROM base AS compiler
 
-RUN apk add --no-cache --virtual .build-deps \
+RUN apk add --no-cache \
     alpine-sdk \
     make \
     gcc \
@@ -34,11 +29,9 @@ WORKDIR /tmp/app/server
 
 RUN npm ci --omit=dev
 
-RUN apk del .build-deps
-
 WORKDIR /tmp/app
 
-FROM base as runtime
+FROM base AS runtime
 
 COPY --chown=octofarm:octofarm --from=compiler /tmp/app/server/node_modules /app/server/node_modules
 COPY --chown=octofarm:octofarm . /app
