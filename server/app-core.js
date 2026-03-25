@@ -156,6 +156,7 @@ function serveOctoFarmRoutes(app) {
     require('./routes/sse.printer-monitoring.routes.js', { page: 'route' })
   ); // DEPRECATE IN FAVOR OF EVENTS, WILL TAKE SOME WORK
   app.use('/events', require('./routes/sse.events.routes.js', { page: 'route' }));
+  app.use('/api/orders', ensureAuthenticated, require('./routes/orders.routes.js', { page: 'route' }));
 
   app.get('*', function (req, res) {
     const originalURL = sanitizeString(req.originalUrl);

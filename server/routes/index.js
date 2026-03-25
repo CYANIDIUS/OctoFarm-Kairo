@@ -329,6 +329,24 @@ router.get('/filament', ensureAuthenticated, ensureCurrentUserAndGroup, async (r
   });
 });
 
+// Orders Page
+router.get('/orders', ensureAuthenticated, ensureCurrentUserAndGroup, async (req, res) => {
+  const printers = getPrinterStoreCache().listPrintersInformation();
+  const serverSettings = SettingsClean.returnSystemSettings();
+
+  res.render('orders', {
+    name: req.user.name,
+    userGroup: req.user.group,
+    version,
+    printerCount: printers.length,
+    page: 'Orders',
+    octoFarmPageTitle: process.env[AppConstants.OCTOFARM_SITE_TITLE_KEY],
+    helpers: prettyHelpers,
+    serverSettings,
+    clientSettings: req.user.clientSettings,
+  });
+});
+
 router.get('/system', ensureAuthenticated, ensureCurrentUserAndGroup, async (req, res) => {
   const clientSettings = await SettingsClean.returnClientSettings();
   const serverSettings = SettingsClean.returnSystemSettings();

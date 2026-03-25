@@ -241,6 +241,28 @@ const PrinterSchema = new mongoose.Schema({
   quickConnectSettings: {
     type: Object,
     required: false
+  },
+  specifications: {
+    bedSize: {
+      x: { type: Number, required: false, default: 0 },
+      y: { type: Number, required: false, default: 0 },
+      z: { type: Number, required: false, default: 0 }
+    },
+    nozzleDiameter: {
+      type: Number,
+      required: false,
+      default: 0.4
+    },
+    supportedMaterials: {
+      type: [String],
+      required: false,
+      default: []
+    },
+    printSpeed: {
+      type: Number,
+      required: false,
+      default: 0
+    }
   }
 });
 
