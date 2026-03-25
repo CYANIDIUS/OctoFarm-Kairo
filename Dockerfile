@@ -1,24 +1,24 @@
-# Node.js 18 on Alpine — includes nodejs, npm, and tini out of the box
-FROM node:18-alpine AS base
+# Stage 1: base — Node.js 18 on Debian slim (no Alpine apk issues)
+FROM node:18-slim AS base
 
-RUN apk add --no-cache tini
+# Install dumb-init as lightweight PID 1 (replaces tini)
+RUN apt-get update && apt-get install -y --no-install-recommends dumb-init && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
 
-RUN npm install -g pm2
-
-RUN adduser -D octofarm --home /app && \
+RUN npm install -g pm2 && \
+    useradd -m -d /app octofarm && \
     mkdir -p /scripts && \
     chown -R octofarm:octofarm /scripts/
 
+# Stage 2: compiler — install native dependencies
 FROM base AS compiler
 
-RUN apk add --no-cache \
-    alpine-sdk \
-    make \
-    gcc \
-    g++ \
-    python3
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp/app
 
@@ -31,6 +31,7 @@ RUN npm ci --omit=dev
 
 WORKDIR /tmp/app
 
+# Stage 3: runtime — clean image
 FROM base AS runtime
 
 COPY --chown=octofarm:octofarm --from=compiler /tmp/app/server/node_modules /app/server/node_modules
@@ -42,5 +43,5 @@ USER octofarm
 WORKDIR /app
 
 RUN chmod +x ./docker/entrypoint.sh
-ENTRYPOINT [ "/sbin/tini", "--" ]
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["./docker/entrypoint.sh"]
