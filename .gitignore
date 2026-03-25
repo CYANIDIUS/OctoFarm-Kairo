@@ -4,7 +4,7 @@
 **/logs/
 **/.clinic/
 .env
-**/docker-compose.yml
+# docker-compose.yml tracked in this fork
 **/.build
 **/.cache
 **/coverage

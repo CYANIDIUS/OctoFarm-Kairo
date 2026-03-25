@@ -1,0 +1,25 @@
+services:
+  octofarm:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO=mongodb://mongo:27017/octofarm
+      - OCTOFARM_PORT=4000
+    volumes:
+      - octofarm_uploads:/app/server/uploads
+      - octofarm_logs:/app/logs
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:6
+    volumes:
+      - octofarm_db:/data/db
+    restart: unless-stopped
+
+volumes:
+  octofarm_db:
+  octofarm_uploads:
+  octofarm_logs:
