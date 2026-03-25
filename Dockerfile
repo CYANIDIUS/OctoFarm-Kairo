@@ -1,7 +1,6 @@
-# Stage 1: base — Node.js 18 on Debian slim (no Alpine apk issues)
+# Stage 1: base — Node.js 18 on Debian slim
 FROM node:18-slim AS base
 
-# Install dumb-init as lightweight PID 1 (replaces tini)
 RUN apt-get update && apt-get install -y --no-install-recommends dumb-init && \
     rm -rf /var/lib/apt/lists/*
 
@@ -12,8 +11,8 @@ RUN npm install -g pm2 && \
     mkdir -p /scripts && \
     chown -R octofarm:octofarm /scripts/
 
-# Stage 2: compiler — install native dependencies
-FROM base AS compiler
+# Stage 2: build server native dependencies
+FROM base AS server-compiler
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -26,22 +25,36 @@ COPY server/package.json ./server/package.json
 COPY server/package-lock.json ./server/package-lock.json
 
 WORKDIR /tmp/app/server
-
 RUN npm ci --omit=dev
 
-WORKDIR /tmp/app
+# Stage 3: build client (webpack)
+FROM node:18-slim AS client-compiler
 
-# Stage 3: runtime — clean image
+WORKDIR /tmp/app
+COPY package.json ./
+COPY client/ ./client/
+COPY server/assets/ ./server/assets/
+
+WORKDIR /tmp/app/client
+RUN npm ci
+RUN npm run build
+
+# Stage 4: runtime — clean image
 FROM base AS runtime
 
-COPY --chown=octofarm:octofarm --from=compiler /tmp/app/server/node_modules /app/server/node_modules
+# Copy server node_modules
+COPY --chown=octofarm:octofarm --from=server-compiler /tmp/app/server/node_modules /app/server/node_modules
+
+# Copy everything from repo
 COPY --chown=octofarm:octofarm . /app
+
+# Overwrite server/assets with freshly built client files
+COPY --chown=octofarm:octofarm --from=client-compiler /tmp/app/server/assets /app/server/assets
 
 RUN rm -rf /tmp/app && mkdir -p /app/logs /app/server/uploads/orders
 
 USER octofarm
 WORKDIR /app
 
-# Inline entrypoint — avoids Windows CRLF issues with shell scripts
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["sh", "-c", "cd server && pm2 start app.js --name OctoFarm --no-daemon -o 'logs/pm2.log' -e 'logs/pm2.error.log' --time --restart-delay=1000 --exp-backoff-restart-delay=1500"]
