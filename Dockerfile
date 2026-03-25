@@ -34,6 +34,7 @@ WORKDIR /tmp/app
 COPY package.json ./
 COPY client/ ./client/
 COPY server/assets/ ./server/assets/
+COPY server/constants/ ./server/constants/
 
 WORKDIR /tmp/app/client
 RUN npm ci
