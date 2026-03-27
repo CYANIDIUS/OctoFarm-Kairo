@@ -17,7 +17,7 @@
         <% if(dashboardSettings?.farmUtilisation.currentUtilisation){ %>
             <%- include(itemPath, {
             tile:{
-            w:2,h:5,mw:2,mh:5,id:"currentUtil",bodyId:"currentUtilisation",title:"Current Utilisation",i:"fa-star", c:"pt-2 text-center"
+            w:2,h:5,mw:2,mh:5,id:"currentUtil",bodyId:"currentUtilisation",title:"Текущая загрузка",i:"fa-star", c:"pt-2 text-center"
             }
             })
             %>
@@ -26,7 +26,7 @@
         <% if(dashboardSettings?.printerStates.currentStatus){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:2,mh:5,id:"currentStat",bodyId:"currentStatusChart",title:"Current Status",i:"fa-circle", c:"pt-0 text-center"
+            w:3,h:5,mw:2,mh:5,id:"currentStat",bodyId:"currentStatusChart",title:"Текущий статус",i:"fa-circle", c:"pt-0 text-center"
             }
             })
             %>
@@ -35,7 +35,7 @@
         <% if(dashboardSettings?.farmUtilisation.farmUtilisation){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:3,mh:5,id:"farmUtilisation",title:"Farm Utilisation",i:"fa-star-half-alt", c:"text-center"
+            w:3,h:5,mw:3,mh:5,id:"farmUtilisation",title:"Загрузка фермы",i:"fa-star-half-alt", c:"text-center"
             },
             bodyFile:'./farm-utilisation.ejs'
             })
@@ -45,7 +45,7 @@
         <% if(dashboardSettings?.farmActivity.averageTimes){ %>
             <%- include(itemPath, {
             tile:{
-            w:2,h:5,mw:2,mh:5,id:"averageTimes",title:"Average Times",i:"fa-stopwatch", c:"text-center"
+            w:2,h:5,mw:2,mh:5,id:"averageTimes",title:"Среднее время",i:"fa-stopwatch", c:"text-center"
             },
             bodyFile:'./dashboardEstimated.ejs'
             })
@@ -55,7 +55,7 @@
         <% if(dashboardSettings?.farmActivity.cumulativeTimes){ %>
             <%- include(itemPath, {
             tile:{
-            w:2,h:5,mw:2,mh:5,id:"cumulativeTimes",title:"Cumulative Times",i:"fa-stopwatch", c:"text-center"
+            w:2,h:5,mw:2,mh:5,id:"cumulativeTimes",title:"Суммарное время",i:"fa-stopwatch", c:"text-center"
             },
             bodyFile:'./dashboardCumulative.ejs'
             })
@@ -65,7 +65,7 @@
         <% if(dashboardSettings?.printerStates.printerState){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:1,mh:1,id:"printerStatus",title:"Printer Status",i:"fa-tint", c:"p-0 text-center"
+            w:3,h:5,mw:1,mh:1,id:"printerStatus",title:"Статус принтеров",i:"fa-tint", c:"p-0 text-center"
             },
             bodyFile:'./printer-state.ejs'
             })
@@ -75,7 +75,7 @@
         <% if(dashboardSettings?.printerStates.printerProgress){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:1,mh:1,id:"printerProgress",title:"Printer Progress",i:"fa-spinner", c:"p-0 text-center"
+            w:3,h:5,mw:1,mh:1,id:"printerProgress",title:"Прогресс печати",i:"fa-spinner", c:"p-0 text-center"
             },
             bodyFile:'./printer-progress.ejs'
             })
@@ -85,7 +85,7 @@
         <% if(dashboardSettings?.printerStates.printerTemps){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:1,mh:1,id:"printerTemps",title:"Printer Temps",i:"fa-thermometer-three-quarters", c:"p-0 text-center"
+            w:3,h:5,mw:1,mh:1,id:"printerTemps",title:"Температуры принтеров",i:"fa-thermometer-three-quarters", c:"p-0 text-center"
             },
             bodyFile:'./printer-temps.ejs'
             })
@@ -95,7 +95,7 @@
         <% if(dashboardSettings?.printerStates.printerUtilisation){ %>
             <%- include(itemPath, {
             tile:{
-            w:3,h:5,mw:1,mh:1,id:"printerUtilisation",title:"Printer Utilisation",i:"fa-star-half-alt", c:"p-0 text-center"
+            w:3,h:5,mw:1,mh:1,id:"printerUtilisation",title:"Загрузка принтеров",i:"fa-star-half-alt", c:"p-0 text-center"
             },
             bodyFile:'./printer-utilisation.ejs'
             })
@@ -105,7 +105,7 @@
         <% if(dashboardSettings?.historical.weeklyUtilisation){ %>
             <%- include(itemPath, {
             tile:{
-            w:6,h:6,mw:4,mh:5,maxh:10,id:"weeklyUtil",bodyId:"weeklyUtilisationPerDayHeatMap",title:"Weekly Utilisation",i:"fa-info-circle", c:"p-0"
+            w:6,h:6,mw:4,mh:5,maxh:10,id:"weeklyUtil",bodyId:"weeklyUtilisationPerDayHeatMap",title:"Недельная загрузка",i:"fa-info-circle", c:"p-0"
             }
             })
             %>
@@ -114,7 +114,7 @@
         <% if(dashboardSettings?.historical.hourlyTotalTemperatures){ %>
             <%- include(itemPath, {
             tile:{
-            w:6,h:6,mw:4,mh:7,maxh:10,id:"hourlyTemper",bodyId:"hourlyTotalTemperatureChart",title:"Hourly Total Temperature",i:"fa-thermometer-three-quarters", c:"p-0"
+            w:6,h:6,mw:4,mh:7,maxh:10,id:"hourlyTemper",bodyId:"hourlyTotalTemperatureChart",title:"Почасовая температура",i:"fa-thermometer-three-quarters", c:"p-0"
             },
             titleFile:'./hourly-total-temperature.title.ejs'
             })
@@ -124,7 +124,7 @@
         <% if(dashboardSettings?.historical.environmentalHistory){ %>
             <%- include(itemPath, {
             tile:{
-            w:12,h:6,mw:3,mh:6,maxh:10,id:"enviroData",bodyId:"environmentalHistory",title:"Environmental HistoryRoutes",i:"fa-tree", c:"pt-2 text-center"
+            w:12,h:6,mw:3,mh:6,maxh:10,id:"enviroData",bodyId:"environmentalHistory",title:"История окружения",i:"fa-tree", c:"pt-2 text-center"
             },
             titleFile:'./environment-alert.title.ejs'
             })
@@ -134,7 +134,7 @@
         <% if(dashboardSettings?.historical.filamentUsageOverTime){ %>
             <%- include(itemPath, {
             tile:{
-            w:12,h:7,mw:3,mh:7,maxh:10,id:"filamentUsageOverTime",bodyId:"filamentUsageOverTimeChart",title:"Filament Usage Over Time",i:"fa-star-half-alt", c:"pt-2 text-center"
+            w:12,h:7,mw:3,mh:7,maxh:10,id:"filamentUsageOverTime",bodyId:"filamentUsageOverTimeChart",title:"Расход филамента по времени",i:"fa-star-half-alt", c:"pt-2 text-center"
             }
             })
             %>
@@ -143,7 +143,7 @@
         <% if(dashboardSettings?.historical.filamentUsageByDay){ %>
             <%- include(itemPath, {
             tile:{
-            w:12,h:7,mw:3,mh:7,maxh:10,id:"filamentUsageByDay",bodyId:"filamentUsageByDayChart",title:"Filament Usage By Day",i:"fa-star-half-alt",c:"pt-2 text-center"
+            w:12,h:7,mw:3,mh:7,maxh:10,id:"filamentUsageByDay",bodyId:"filamentUsageByDayChart",title:"Расход филамента по дням",i:"fa-star-half-alt",c:"pt-2 text-center"
             }
             })
             %>
@@ -152,7 +152,7 @@
         <% if(dashboardSettings?.historical.historyCompletionByDay){ %>
             <%- include(itemPath, {
             tile:{
-            w:12,h:7,mw:3,mh:7,maxh:10,id:"historyCompletionByDay",bodyId:"printCompletionByDay",title:"Print Completion By Day",i:"fa-star-half-alt",c:"pt-2 text-center"
+            w:12,h:7,mw:3,mh:7,maxh:10,id:"historyCompletionByDay",bodyId:"printCompletionByDay",title:"Завершение печати по дням",i:"fa-star-half-alt",c:"pt-2 text-center"
             }
             })
             %>
@@ -160,7 +160,7 @@
         <% if(dashboardSettings?.other?.timeAndDate){ %>
             <%- include(itemPath, {
             tile:{
-            w:2,h:5,mw:1,mh:2,maxh:5,id:"timeAndDate",bodyId:"timeAndDateBody",title:"Date And Time",i:"fa-clock",c:"pt-2 text-center"
+            w:2,h:5,mw:1,mh:2,maxh:5,id:"timeAndDate",bodyId:"timeAndDateBody",title:"Дата и время",i:"fa-clock",c:"pt-2 text-center"
             }
             })
             %>
@@ -168,7 +168,7 @@
         <% if(dashboardSettings?.other?.cameraCarousel){ %>
             <%- include(itemPath, {
             tile:{
-            w:2,h:6,mw:1,mh:3,maxh:21,maxw:9,id:"printerCameraCarousel",bodyId:"cameraCarouselBody",title:"Cameras",i:"fa-video",c:"m-0 p-0",
+            w:2,h:6,mw:1,mh:3,maxh:21,maxw:9,id:"printerCameraCarousel",bodyId:"cameraCarouselBody",title:"Камеры",i:"fa-video",c:"m-0 p-0",
                 customBody: "customBody"
             }
             })

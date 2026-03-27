@@ -1,11 +1,11 @@
 import { getPrinterNameBadge } from "../../../templates/printer.templates";
 const returnAlerts = (id, printerURL) => {
   return `
-    <button title="No OctoPrint updates available!" id="octoprintUpdate-${id}"
+    <button title="Нет доступных обновлений OctoPrint!" id="octoprintUpdate-${id}"
             class='tag btn btn-outline-info btn-sm d-none' ><i class="fab fa-raspberry-pi"></i></button>
-    <button title="No OctoPrint plugin updates available" id="octoprintPluginUpdate-${id}"
+    <button title="Нет доступных обновлений плагинов OctoPrint" id="octoprintPluginUpdate-${id}"
             class='tag btn btn-outline-success btn-sm d-none' ><i class="fas fa-plug"></i></button>
-    <button title="No issue from scanning OctoPrints API"
+    <button title="Нет проблем при сканировании API OctoPrint"
             id="scanningIssues-${id}"
             type="button"
             class="tag btn btn-outline-danger btn-sm d-none"
@@ -13,7 +13,7 @@ const returnAlerts = (id, printerURL) => {
     >
         <i class="fas fa-exclamation-triangle"></i>
     </button>
-    <button title="No current printer health issues!"
+    <button title="Нет текущих проблем со здоровьем принтера!"
             id="healthIssues-${id}"
             type="button"
             class="tag btn btn-outline-warning btn-sm d-none"
@@ -22,14 +22,14 @@ const returnAlerts = (id, printerURL) => {
     >
         <i class="fas fa-heartbeat"></i>
     </button>
-    <button title="A restart is required on your OctoPrint instance!"
+    <button title="Требуется перезагрузка вашего экземпляра OctoPrint!"
             type="button"
             class="tag btn btn-outline-danger btn-sm d-none"
             id="restartRequired-${id}"  
     >
         <i class="fas fa-power-off"></i>
     </button>
-    <button title="Multiple user issue detected! Please open settings and choose one..."
+    <button title="Обнаружена проблема с несколькими пользователями! Откройте настройки и выберите одного..."
             type="button"
             class="tag btn btn-outline-primary btn-sm d-none"
             data-toggle="modal"
@@ -38,7 +38,7 @@ const returnAlerts = (id, printerURL) => {
     >
         <i class="fas fa-users"></i>
     </button>
-        <button title="Printer Events Registered"
+        <button title="Зарегистрированные события принтера"
             type="button"
             class="tag btn btn-outline-info btn-sm d-none"
             data-toggle="modal"
@@ -47,7 +47,7 @@ const returnAlerts = (id, printerURL) => {
     >
         <i class="fa-solid fa-calendar-check"></i> <span id="printerEventsCount-${id}"></span>
     </button>
-    <a title="CORS is not enable on OctoPrint!"
+    <a title="CORS не включён в OctoPrint!"
             type="button"
             class="tag btn btn-outline-danger btn-sm d-none"
             id="corsIssue-${id}" 
@@ -56,49 +56,49 @@ const returnAlerts = (id, printerURL) => {
     >
         <i class="fas fa-crosshairs"></i>
     </a>
-    <button  title="Offline Setup Scan Planned"
+    <button  title="Запланировано офлайн-сканирование настройки"
                  id="printerAPIScanning-${id}"
                  type="button"
                  class="tag btn btn-outline-danger btn-sm d-none"
                 >
                <span id="apiReScanIcon-${id}"><i class="fas fa-redo fa-sm"></i></span><span id="apiReScanText-${id}"></span> 
     </button>
-        <button  title="Offline Websocket Scan Planned"
+        <button  title="Запланировано офлайн-сканирование вебсокета"
                  id="printerWebsocketScanning-${id}"
                  type="button"
                  class="tag btn btn-outline-warning btn-sm d-none"
                 >
                <span id="webosocketScanIcon-${id}"><i class="fas fa-sync-alt fa-sm"></i></span><span id="websocketScanText-${id}"></span> 
     </button>
-    <button  title="Safe mode triggered!"
+    <button  title="Активирован безопасный режим!"
          id="printerSafeMode-${id}"
          type="button"
          class="tag btn btn-outline-warning btn-sm d-none"
         >
         <i class="fa-solid fa-shield-heart"></i>
     </button>
-    <button  title="Your Pi is undervoltaged!"
+    <button  title="Низкое напряжение на вашем Pi!"
          id="printerUnderVoltaged-${id}"
          type="button"
          class="tag btn btn-outline-warning btn-sm d-none"
         >
        <i class="fa-solid fa-plug-circle-bolt"></i>
     </button>
-    <button  title="Your Pi is overheating!"
+    <button  title="Ваш Pi перегревается!"
          id="printerOverHeating-${id}"
          type="button"
          class="tag btn btn-outline-danger btn-sm d-none"
         >
        <i class="fa-solid fa-fire"></i>
     </button>
-        <button  title="Your connection is throttled!"
+        <button  title="Ваше соединение ограничено!"
          id="printerConnectionThrottled-${id}"
          type="button"
          class="tag btn btn-outline-info btn-sm d-none"
         >
        <i class="fa-solid fa-toilet"></i> <span id="printerConnectionThrottledCount-${id}"></span>
     </button>
-    <button title="OctoPrints CPU Usage | OctoPrint System CPU Usage | OctoPrints System Memory Usage"
+    <button title="Загрузка ЦП OctoPrint | Загрузка ЦП системы OctoPrint | Использование памяти системы OctoPrint"
             id="octoPrintsUsage-${id}"
             type="button"
             class="tag btn btn-outline-info btn-sm d-none"
@@ -112,82 +112,82 @@ function returnPrinterManageDropDown(id, disabled) {
   let printerDisabledButton;
   if (!disabled) {
     printerDisabledButton = `
-        <button  title="Printer is enabled, click to disable"
+        <button  title="Принтер включён, нажмите для отключения"
                  id="printerDisable-${id}"
                  type="button"
                  class="btn dropdown-item"
                 >
-                <i class="fas fa-wheelchair"></i> Disable
+                <i class="fas fa-wheelchair"></i> Отключить
         </button>
         `;
   } else {
     printerDisabledButton = `
-        <button  title="Printer is enabled, click to disable"
+        <button  title="Принтер отключён, нажмите для включения"
                  id="printerDisable-${id}"
                  type="button"
                  class="btn dropdown-item"
                 >
-                <i class="fas fa-running text-success"></i> Enable
+                <i class="fas fa-running text-success"></i> Включить
         </button>
         `;
   }
   return `
     <div class="btn-group">
           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-bars-progress"></i> Manage
+            <i class="fa-solid fa-bars-progress"></i> Управление
           </button>
           <div class="dropdown-menu">
-          <h6 class="dropdown-header">Connection</h6>
-          <button  title="Change your Printer Settings"
+          <h6 class="dropdown-header">Подключение</h6>
+          <button  title="Изменить настройки принтера"
                  id="printerEdit-${id}"
                  type="button"
                  class="btn btn-primary dropdown-item"
                  data-toggle="modal"
                  data-target="#printerEditModal"
                 >
-                <i class="fa-solid fa-pen-to-square text-warning"></i> Edit
+                <i class="fa-solid fa-pen-to-square text-warning"></i> Редактировать
             </button>
-            <button title="Forces a complete re-enable of your printer"
+            <button title="Принудительное полное переподключение принтера"
                  id="printerForceReconnect-${id}"
                  type="button"
                  class="btn dropdown-item"
                 >
-                <i class="fa-solid fa-gavel text-danger"></i> Force Reconnect
+                <i class="fa-solid fa-gavel text-danger"></i> Принудительное переподключение
                 
             </button>
             ${printerDisabledButton}
             <hr>
-            <h6 class="dropdown-header">Printer</h6>
-            <button  title="Change your Printer Settings"
+            <h6 class="dropdown-header">Принтер</h6>
+            <button  title="Изменить настройки принтера"
                  id="printerSettings-${id}"
                  type="button"
                  class="btn btn-primary dropdown-item"
                  data-toggle="modal"
                  data-target="#printerSettingsModal"
                 >
-                <i class="fas fa-cog text-info"></i> Settings
+                <i class="fas fa-cog text-info"></i> Настройки
             </button>
-            <button  title="View logs for your printer"
+            <button  title="Просмотр логов принтера"
                  id="printerLog-${id}"
                  type="button"
                  class="tag btn btn-info dropdown-item"
                  data-toggle="modal"
                  data-target="#printerLogsModal"
             >
-                <i class="fas fa-file-alt text-primary"></i> Logs
+                <i class="fas fa-file-alt text-primary"></i> Логи
             </button>
             <hr>
-            <h6 class="dropdown-header">Other</h6>
-             <button title="View individual Printer Statistics"
+            <h6 class="dropdown-header">Прочее</h6>
+             <button title="Просмотр статистики принтера"
                      id="printerStatistics-${id}"
                      type="button"
                      class="tag btn btn-warning dropdown-item"
                      data-toggle="modal"
                      data-target="#printerStatisticsModal"
                 >
-                <i class="fas fa-chart-pie text-warning"></i> Statistics
+                <i class="fas fa-chart-pie text-warning"></i> Статистика
               </button>
-               <button  title="Setup and track Maintenance Issues with Printers"
+               <button  title="Настройка и отслеживание обслуживания принтеров"
                      id="printerMaintenance-${id}"
                      type="button"
                      class="tag btn btn-secondary dropdown-item d-none"
@@ -195,7 +195,7 @@ function returnPrinterManageDropDown(id, disabled) {
                      data-target="#printerMaintenanceModal"
                      disabled
                 >
-                    <i class="fas fa-wrench"></i> Maintainance
+                    <i class="fas fa-wrench"></i> Обслуживание
             </button>
           </div>
         </div>
@@ -206,7 +206,7 @@ export function returnPrinterTableRow(printer) {
   return `
         <tr class="" id="printerCard-${printer._id}">
         <td class="align-middle">
-            <span title="Drag and Change your Printers sorting"  id="printerSortIndex-${
+            <span title="Перетащите для изменения порядка принтеров"  id="printerSortIndex-${
               printer._id
             }"
                    class="btn btn-light btn-sm sortableList" style="vertical-align: middle"><i class="fas fa-spinner fa-spin"></i>
@@ -282,7 +282,7 @@ export function returnDisabledPrinterTableRow(printer) {
   return `
    <tr class="printerDisabled" id="printerCard-${printer._id}">
         <td class="align-middle">
-            <span title="Drag and Change your Printers sorting"  id="printerSortIndex-${
+            <span title="Перетащите для изменения порядка принтеров"  id="printerSortIndex-${
               printer._id
             }"
                    class="btn btn-light btn-sm sortableList" style="vertical-align: middle"><i class="fas fa-spinner fa-spin"></i>

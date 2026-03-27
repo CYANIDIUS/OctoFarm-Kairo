@@ -2,41 +2,41 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mb-3">
-        <i class="fas fa-user-plus"></i> Register
+        <i class="fas fa-user-plus"></i> Регистрация
       </h1>
       <%- include('./partials/messages') %>
       <% if(userCount === 0){ %>
         <div class="alert alert-warning text-dark" role="alert">
-          This will create an Administrator... After you have registered, registration will be disabled and you can either enable it again or manage your users on the "System" page.
+          Будет создан администратор... После регистрации функция регистрации будет отключена. Вы можете включить её снова или управлять пользователями на странице «Система».
         </div>
       <% } %>
       <form action="/users/register" method="POST">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name"
+          <label for="name">Имя</label>
+          <input type="name" id="name" name="name" class="form-control" placeholder="Введите имя"
             value="<%= typeof name != 'undefined' ? name : '' %>" />
         </div>
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="username" id="username" name="username" class="form-control" placeholder="Enter Username"
+          <label for="username">Имя пользователя</label>
+          <input type="username" id="username" name="username" class="form-control" placeholder="Введите имя пользователя"
             value="<%= typeof username != 'undefined' ? username : '' %>" />
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Create Password" autocomplete="new-password"
+          <label for="password">Пароль</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Создайте пароль" autocomplete="new-password"
             value="<%= typeof password != 'undefined' ? password : '' %>" />
         </div>
         <div class="form-group">
-          <label for="password2">Confirm Password</label>
-          <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password" autocomplete="new-password"
+          <label for="password2">Подтвердите пароль</label>
+          <input type="password" id="password2" name="password2" class="form-control" placeholder="Подтвердите пароль" autocomplete="new-password"
             value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block bg-colour-1" onSubmit="this.disabled=true; this.value='Registering…';">
-          Register
+        <button type="submit" class="btn btn-primary btn-block bg-colour-1" onSubmit="this.disabled=true; this.value='Регистрация…';">
+          Зарегистрироваться
         </button>
       </form>
       <% if(userCount === 0){ %>
-        <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
+        <p class="lead mt-4">Уже есть аккаунт? <a href="/users/login">Войти</a></p>
       <% } %>
     </div>
   </div>

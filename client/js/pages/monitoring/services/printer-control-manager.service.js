@@ -98,23 +98,23 @@ export default class PrinterControlManagerService {
                 <!-- Camera --> 
                 <div class="col-md-4 col-lg-3 text-center">
                   <span id="cameraRow">  
-                    <h5>Camera</h5><hr>
+                    <h5>Камера</h5><hr>
                     <div class="row">
                        <div class="col-12">
                           ${imageOrCamera(printer, undefined, "Modal")}
                         </div>
                     </div>
                   </span>
-                  <h5>Operation</h5><hr>
-                  <button id="pmPrintStart" type="button" class="btn btn-success" role="button"><i class="fas fa-print"></i> Print</button>
-                  <button id="pmPrintPause" type="button" class="btn btn-light" role="button" disabled><i class="fas fa-pause"></i> Pause</button>
-                  <button id="pmPrintRestart" type="button" class="btn btn-danger" role="button"><i class="fas fa-undo"></i> Restart</button>
-                  <button id="pmPrintResume" type="button" class="btn btn-success" role="button"><i class="fas fa-redo"></i> Resume</button>
-                  <button id="pmPrintStop" type="button" class="btn btn-danger" disabled><i class="fas fa-square"></i> Cancel</button>
+                  <h5>Операции</h5><hr>
+                  <button id="pmPrintStart" type="button" class="btn btn-success" role="button"><i class="fas fa-print"></i> Печать</button>
+                  <button id="pmPrintPause" type="button" class="btn btn-light" role="button" disabled><i class="fas fa-pause"></i> Пауза</button>
+                  <button id="pmPrintRestart" type="button" class="btn btn-danger" role="button"><i class="fas fa-undo"></i> Перезапуск</button>
+                  <button id="pmPrintResume" type="button" class="btn btn-success" role="button"><i class="fas fa-redo"></i> Возобновить</button>
+                  <button id="pmPrintStop" type="button" class="btn btn-danger" disabled><i class="fas fa-square"></i> Отмена</button>
                 </div>
                 <!-- Control -->
                 <div class="col-md-4 col-lg-6 text-center">
-                    <h5>Jog</h5><hr>    
+                    <h5>Перемещение</h5><hr>    
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-3 text-center">
@@ -159,22 +159,22 @@ export default class PrinterControlManagerService {
                                 </div>
                         </div>
                     </div>
-                    <h5>Extrusion</h5><hr>
+                    <h5>Экструзия</h5><hr>
                       <div class="input-group">
                           <input id="pcExtruder" type="number" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
                           <div class="input-group-append">
                               <span class="input-group-text" id="basic-addon2">mm</span>
-                                  <button id="pcExtrude" class="btn btn-light"><i class="fas fa-redo"></i> Extrude</button> 
-                                  <button id="pcRetract" class="btn btn-light"><i class="fas fa-undo"></i> Retract</button>
+                                  <button id="pcExtrude" class="btn btn-light"><i class="fas fa-redo"></i> Подать</button>
+                                  <button id="pcRetract" class="btn btn-light"><i class="fas fa-undo"></i> Втянуть</button>
                           </div>
                       </div>
                   </div>
                <!-- Tools -->
                 <div class="col-md-4 col-lg-3 text-center">
-                    <h5>Tools</h5><hr>
+                    <h5>Инструменты</h5><hr>
                     <div class="row">
                       <div class="col-12">
-                          <button id="pmTempTime" type="button" class="btn btn-secondary btn-sm float-right" disabled>Updated: <i class="far fa-clock"></i> Never</button>
+                          <button id="pmTempTime" type="button" class="btn btn-secondary btn-sm float-right" disabled>Обновлено: <i class="far fa-clock"></i> Никогда</button>
                       </div>
                       </div>
                     <div class="row" id="pmToolTemps">
@@ -185,10 +185,10 @@ export default class PrinterControlManagerService {
                 </div>  
                 <!-- Feed/Flow -->
                 <div class="col-md-4 col-lg-4 text-center">
-                  <h5>Feed/Flow Rate</h5><hr>
+                  <h5>Скорость подачи/потока</h5><hr>
                   <div class="row">
                       <div class="col-10 col-lg-8 col-xl-8">
-                          <label for="pcFeed">Feed Rate: <span id="pcFeedValue">${
+                          <label for="pcFeed">Скорость подачи: <span id="pcFeedValue">${
                             printer.feedRate
                           }%</span></label>
                           <input type="range" class="octoRange custom-range" min="10" max="300" step="1" id="pcFeed" value="${
@@ -196,12 +196,12 @@ export default class PrinterControlManagerService {
                           }">
                       </div>
                       <div class="col-2 col-lg-4 col-xl-4">
-                          <button id="pcFeedRate" type="button" class="btn btn-light">Update</button>
+                          <button id="pcFeedRate" type="button" class="btn btn-light">Применить</button>
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-10 col-lg-8 col-xl-8">
-                          <label for="pcFlow">Flow Rate: <span id="pcFlowValue">${
+                          <label for="pcFlow">Скорость потока: <span id="pcFlowValue">${
                             printer.flowRate
                           }%</span></label>
                           <input type="range" class="octoRange custom-range" min="75" max="125" step="1" id="pcFlow" value="${
@@ -209,29 +209,29 @@ export default class PrinterControlManagerService {
                           }">
                       </div>
                       <div class="col-2 col-lg-4 col-xl-4">
-                          <button id="pcFlowRate" type="button" class="btn btn-light">Update</button>
+                          <button id="pcFlowRate" type="button" class="btn btn-light">Применить</button>
                       </div>
                   </div>
                </div>
                 <!-- Motors/Fans -->
                 <div class="col-md-4 col-lg-4 text-center">
-                  <h5>Motors / Fans</h5><hr>
+                  <h5>Моторы / Вентиляторы</h5><hr>
                   <div class="row">
                     <div class="col-12 text-center">
-                        <button id="pcMotorTog" class="btn btn-light" type="submit">Motors Off</button>
+                        <button id="pcMotorTog" class="btn btn-light" type="submit">Выкл. моторы</button>
                     </div>
                 </div>
                   <div class="row">
                     <div class="col-12 text-center">
-                    <label for="pcFlow">Fan Percent: <span id="pcFanPercent">100%</span></label>
+                    <label for="pcFlow">Вентилятор: <span id="pcFanPercent">100%</span></label>
                     <input type="range" class="octoRange custom-range" min="0" max="100" step="1" id="pcFanPercent" value="100">
-                     <button id="pcFanOn" class="btn btn-light" type="submit">Set Fans</button> <button id="pcFanOff" class="btn btn-light" type="submit">Fans Off</button></center>
+                     <button id="pcFanOn" class="btn btn-light" type="submit">Вкл. вентиляторы</button> <button id="pcFanOff" class="btn btn-light" type="submit">Выкл. вентиляторы</button></center>
                     </div>
                 </div>
                </div>
                <!-- CustomGcode -->
                 <div class="col-md-4 col-lg-4 text-center">
-                  <h5>Custom Gcode</h5><hr>
+                  <h5>Пользовательский Gcode</h5><hr>
                   <span id="customGcodeCommandsArea" class="d-none">
                   </span>
                 </div>  
@@ -253,10 +253,10 @@ export default class PrinterControlManagerService {
                 "beforeend",
                 `
                 <div class="md-form input-group mb-3">
-                    <div title="Actual Tool temperature" class="input-group-prepend">
+                    <div title="Текущая температура сопла" class="input-group-prepend">
                         <span class="input-group-text"><span>${i}: </span><span id="tool${i}Actual"> 0°C</span></span>
                     </div>
-                    <input title="Set your target Tool temperature" id="tool${i}Target" type="number" class="form-control col" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
+                    <input title="Установить целевую температуру сопла" id="tool${i}Target" type="number" class="form-control col" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-md btn-light m-0 p-1" type="button" id="tool${i}Set">Set</button>
                     </div>
@@ -276,13 +276,13 @@ export default class PrinterControlManagerService {
                 "beforeend",
                 `
                            <div class="col text-center">
-                              <h5>Bed</h5>
+                              <h5>Стол</h5>
                           <hr>
                             <div class="md-form input-group mb-3">
-                                <div title="Actual Bed temperature" class="input-group-prepend">
+                                <div title="Текущая температура стола" class="input-group-prepend">
                                     <span id="bedActual" class="input-group-text">0°C</span>
                                 </div>
-                                <input title="Set your target Bed temperature" id="bedTarget" type="number" class="form-control col-lg-12 col-xl-12" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
+                                <input title="Установить целевую температуру стола" id="bedTarget" type="number" class="form-control col-lg-12 col-xl-12" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-md btn-light m-0 p-1" type="button" id="bedSet">Set</button>
                                 </div>
@@ -297,13 +297,13 @@ export default class PrinterControlManagerService {
                 "beforeend",
                 `
                          <div class="col text-center">
-                              <h5>Chamber</h5>
+                              <h5>Камера</h5>
                           <hr>
                           <div class="md-form input-group mb-3">
-                              <div title="Actual Bed temperature" class="input-group-prepend">
+                              <div title="Текущая температура камеры" class="input-group-prepend">
                                   <span id="chamberActual" class="input-group-text">0°C</span>
                               </div>
-                              <input title="Set your target Bed temperature" id="chamberTarget" type="number" class="form-control col-lg-12 col-xl-12" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
+                              <input title="Установить целевую температуру камеры" id="chamberTarget" type="number" class="form-control col-lg-12 col-xl-12" placeholder="0°C" aria-label="Recipient's username" aria-describedby="MaterialButton-addon2">
                               <div class="input-group-append">
                                   <button class="btn btn-md btn-light m-0 p-1" type="button" id="chamberSet">Set</button>
                               </div>
@@ -856,13 +856,13 @@ export default class PrinterControlManagerService {
     );
     elements.printerControls.printStop.addEventListener("click", async (e) => {
       bootbox.confirm({
-        message: `${currentPrinter.printerName}: <br>Are you sure you want to cancel the ongoing print?`,
+        message: `${currentPrinter.printerName}: <br>Вы уверены, что хотите отменить текущую печать?`,
         buttons: {
           cancel: {
-            label: "<i class=\"fa fa-times\"></i> Cancel",
+            label: "<i class=\"fa fa-times\"></i> Отмена",
           },
           confirm: {
-            label: "<i class=\"fa fa-check\"></i> Confirm",
+            label: "<i class=\"fa fa-check\"></i> Подтвердить",
           },
         },
         async callback(result) {

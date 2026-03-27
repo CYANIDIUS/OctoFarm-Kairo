@@ -7,7 +7,7 @@
         </button>
         <% if(serverSettings.server.loginRequired){ %>
             <a type="button" class="btn btn-success mb-3" href="/users/logout">
-                <i class="fas fa-sign-out-alt"></i>Sign Out
+                <i class="fas fa-sign-out-alt"></i>Выйти
             </a><br>
         <% } %>
         <% list.listItems.forEach((item, index) => {  %>
@@ -35,7 +35,7 @@
                         role="tabpanel"
                         aria-labelledby="<%= item.id %>-list">
                     <% if (!item.bodyFile) { %>
-                        <em> This widget failed to render due to missing 'tile.bodyId' or 'bodyFile' alternative </em>
+                        <em> Не удалось отобразить виджет из-за отсутствия 'tile.bodyId' или альтернативного 'bodyFile' </em>
                     <% } else { %>
                         <%# More complex card-body content %>
                         <%- include(item.bodyFile) %>

@@ -104,7 +104,7 @@ export function workerEventFunction(data) {
   } else {
     UI.createAlert(
       "warning",
-      "Server Events closed unexpectedly... Retying in 10 seconds",
+      "Соединение с сервером неожиданно закрыто... Повторная попытка через 10 секунд",
       10000,
       "Clicked"
     );
@@ -125,8 +125,8 @@ export async function loadPrintersRegisteredEvents(id) {
         <div class="card-header"><i class="${event.icon}"></i> ${event.name}</div>
         <div class="card-body">
           <p class="card-text">${event.description}</p>
-          <small class="card-text">Fires: ${event.amount}</small><br>
-          <small class="card-text">Related Setting: ${event.relatedSettings}</small>
+          <small class="card-text">Срабатываний: ${event.amount}</small><br>
+          <small class="card-text">Связанная настройка: ${event.relatedSettings}</small>
         </div>
       </div>
     `
@@ -138,7 +138,7 @@ export async function scanNetworkForDevices(e) {
   e.target.disabled = true;
   UI.createAlert(
     "info",
-    "Scanning your network for new devices now... Please wait!",
+    "Сканирование сети на наличие новых устройств... Пожалуйста, подождите!",
     20000
   );
   const scannedPrinters = await OctoFarmClient.get("printers/scanNetwork");
@@ -161,7 +161,7 @@ export async function scanNetworkForDevices(e) {
   }
   UI.createAlert(
     "success",
-    "Devices on your network have been scanned, any successful matches should now be visible to add to OctoFarm.",
+    "Сканирование сети завершено, найденные устройства теперь доступны для добавления в OctoFarm.",
     3000,
     "Clicked"
   );
@@ -174,10 +174,10 @@ export async function reSyncAPI(force = false, id = null) {
   reSyncAPIBtn.disabled = true;
   const alert = UI.createAlert(
     "info",
-    "Started a background re-sync of all printers connected to OctoFarm. You may navigate away from this screen."
+    "Запущена фоновая синхронизация всех принтеров, подключённых к OctoFarm. Вы можете покинуть этот экран."
   );
   reSyncAPIBtn.innerHTML =
-    '<i class="fas fa-redo fa-sm fa-spin"></i> Scanning APIs...';
+    '<i class="fas fa-redo fa-sm fa-spin"></i> Сканирование API...';
   const { msg } = await OctoFarmClient.post("printers/reSyncAPI", {
     id: id,
     force: force,
@@ -190,7 +190,7 @@ export async function reSyncAPI(force = false, id = null) {
 
   UI.createAlert(success, msg, 3000, "Clicked");
   reSyncAPIBtn.innerHTML =
-    '<i class="fas fa-redo fa-sm"></i> ReScan All API\'s';
+    '<i class="fas fa-redo fa-sm"></i> Пересканировать все API';
   reSyncAPIBtn.disabled = false;
 }
 export async function reSyncWebsockets() {
@@ -199,22 +199,22 @@ export async function reSyncWebsockets() {
   reSyncSocketsBtn.disabled = true;
   const alert = UI.createAlert(
     "info",
-    "Started a background re-sync of all printers connected to OctoFarm. You may navigate away from this screen."
+    "Запущена фоновая синхронизация всех принтеров, подключённых к OctoFarm. Вы можете покинуть этот экран."
   );
   reSyncSocketsBtn.innerHTML =
-    '<i class="fas fa-redo fa-sm fa-spin"></i> Syncing Sockets...';
+    '<i class="fas fa-redo fa-sm fa-spin"></i> Синхронизация сокетов...';
   await OctoFarmClient.post("printers/reSyncSockets", {
     id: null,
   });
   alert.close();
   UI.createAlert(
     "success",
-    "Background sync started successfully!",
+    "Фоновая синхронизация успешно запущена!",
     3000,
     "clicked"
   );
   reSyncSocketsBtn.innerHTML =
-    '<i class="fas fa-sync-alt fa-sm"></i> Reconnect All Sockets';
+    '<i class="fas fa-sync-alt fa-sm"></i> Переподключить все сокеты';
   reSyncSocketsBtn.disabled = false;
 }
 
@@ -282,7 +282,7 @@ export async function bulkEditPrinters() {
     printersAdded.forEach((printer) => {
       UI.createAlert(
         "success",
-        `Printer: ${printer.printerURL} information has been updated on the farm...`,
+        `Принтер: ${printer.printerURL} информация обновлена на ферме...`,
         1000,
         "Clicked"
       );
@@ -325,7 +325,7 @@ export async function importPrintersFromJsonFile(file) {
     reader.readAsText(files);
   } else {
     // File not json
-    UI.createAlert("error", "File type not .json!", 3000);
+    UI.createAlert("error", "Тип файла не .json!", 3000);
   }
 }
 
@@ -365,14 +365,14 @@ export async function saveAllOnAddPrinterTable() {
   }
   UI.createAlert(
     "warning",
-    "Starting to save all your instances... this may take some time...",
+    "Начинаем сохранение всех экземпляров... это может занять некоторое время...",
     onScreenButtons.length * 50
   );
   for (const btn of onScreenButtons) {
     btn.disabled = false;
     btn.click();
   }
-  UI.createAlert("success", "Successfully saved all your instances", 4000);
+  UI.createAlert("success", "Все экземпляры успешно сохранены", 4000);
   saveAllBtn.disabled = false;
   deleteAllBtn.disabled = true;
 }
@@ -403,7 +403,7 @@ export async function loadFarmOverviewInformation() {
   );
   farmOverviewInformation.innerHTML =
     "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>" +
-    '<i class="fas fa-sync fa-spin"></i> Generating records, please wait...' +
+    '<i class="fas fa-sync fa-spin"></i> Генерация записей, пожалуйста подождите...' +
     "</td><td></td><td></td><td></td><td></td><td></td></tr>";
 
   const farmOverview = await OctoFarmClient.getFarmOverview();

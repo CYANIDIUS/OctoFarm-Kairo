@@ -112,14 +112,14 @@ router.post(
     // Generate the log package
     const zipDumpResponse = {
       status: 'error',
-      msg: "Unable to generate zip file, please check 'OctoFarm-API.log' file for more information.",
+      msg: "Не удалось создать zip-файл, проверьте файл 'OctoFarm-API.log' для получения дополнительной информации.",
       zipDumpPath: '',
     };
 
     try {
       zipDumpResponse.zipDumpPath = await Logs.generateOctoFarmLogDump();
       zipDumpResponse.status = 'success';
-      zipDumpResponse.msg = 'Successfully generated zip file, please click the download button.';
+      zipDumpResponse.msg = 'Zip-файл успешно создан, нажмите кнопку загрузки.';
     } catch (e) {
       logger.error('Error Generating Log Dump Zip File | ', e.message);
     }
@@ -148,7 +148,7 @@ router.get(
       await AlertsDB.deleteMany({});
       await GcodeDB.deleteMany({});
       res.send({
-        message: 'Successfully deleted databases, server will restart...',
+        message: 'Базы данных успешно удалены, сервер будет перезапущен...',
       });
       logger.info('Database completely wiped.... Restarting server...');
       await SystemCommands.rebootOctoFarm();
@@ -163,7 +163,7 @@ router.get(
       logger.error('Unknown DB Name', databaseName);
     }
     res.send({
-      message: `Successfully deleted ${databaseName}, server will restart...`,
+      message: `${databaseName} успешно удалена, сервер будет перезапущен...`,
     });
     logger.info(databaseName + ' successfully deleted.... Restarting server...');
     await SystemCommands.rebootOctoFarm();
@@ -224,7 +224,7 @@ router.post(
         force
       );
     } catch (e) {
-      clientResponse.message = 'Issue with updating | ' + e?.message.replace(/(<([^>]+)>)/gi, '');
+      clientResponse.message = 'Ошибка обновления | ' + e?.message.replace(/(<([^>]+)>)/gi, '');
       // Log error with html tags removed if contained in response message
       logger.error('Issue with updating | ', e?.message.replace(/(<([^>]+)>)/gi, ''));
     } finally {
@@ -259,10 +259,10 @@ router.post('/client/update', ensureCurrentUserAndGroup, ensureAuthenticated, as
     .then(async () => {
       await SettingsClean.start();
       await fetchUsers(true);
-      res.send({ msg: 'Settings Saved' });
+      res.send({ msg: 'Настройки сохранены' });
     })
     .catch((e) => {
-      res.send({ msg: 'Settings Not Saved: ' + e });
+      res.send({ msg: 'Настройки не сохранены: ' + e });
     });
 });
 router.post(
@@ -335,15 +335,15 @@ router.post('/server/update', ensureAuthenticated, ensureAdministrator, (req, re
     if (influx.active) {
       if (influx.host.length === 0) {
         shouldDisableInflux = true;
-        returnMsg += 'Issue: No host information! <br>';
+        returnMsg += 'Ошибка: Не указана информация о хосте! <br>';
       }
       if (influx.port.length === 0) {
         shouldDisableInflux = true;
-        returnMsg += 'Issue: No port information! <br>';
+        returnMsg += 'Ошибка: Не указан порт! <br>';
       }
       if (influx.database.length === 0 || influx.database.includes(' ')) {
         shouldDisableInflux = true;
-        returnMsg += 'Issue: No database name or contains spaces! <br>';
+        returnMsg += 'Ошибка: Не указано имя базы данных или оно содержит пробелы! <br>';
       }
       if (shouldDisableInflux) {
         checked[0].influxExport.active = false;
@@ -359,7 +359,7 @@ router.post('/server/update', ensureAuthenticated, ensureAdministrator, (req, re
         status: 'warning',
       });
     } else {
-      res.send({ msg: 'Settings Saved', status: 'success', restartRequired });
+      res.send({ msg: 'Настройки сохранены', status: 'success', restartRequired });
     }
   });
 });

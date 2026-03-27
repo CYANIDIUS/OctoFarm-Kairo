@@ -33,12 +33,12 @@ export const getFolderTemplate = (folder, id) => {
                       <button id="${id}*folderActionMove*${
     folder.name
   }" type="button" class="btn btn-warning">
-                        <i class="fas fa-people-carry"></i> Move
+                        <i class="fas fa-people-carry"></i> Переместить
                       </button>
                       <button id="${id}*folderActionDelete*${
     folder.name
   }" type="button" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i> Delete
+                        <i class="fas fa-trash-alt"></i> Удалить
                       </button>
                     </div>
                   </div>
@@ -54,7 +54,7 @@ export const getFileTemplate = (file, printerURL, id) => {
     toolInfo = getSpinnerElement();
   } else {
     file.toolUnits.forEach((unit, index) => {
-      toolInfo += `<i class="fas fa-weight"></i> ${unit} / <i class="fas fa-dollar-sign"></i> Cost: ${file.toolCosts[index]}<br>`;
+      toolInfo += `<i class="fas fa-weight"></i> ${unit} / <i class="fas fa-dollar-sign"></i> Стоимость: ${file.toolCosts[index]}<br>`;
     });
   }
 
@@ -100,7 +100,7 @@ export const getFileTemplate = (file, printerURL, id) => {
                 <div class="row">
                 <div class="col-12">
                 <p class="mb-1 float-right">
-                <span title="File specific success / failure rate from OctoPrint" id="fileHistoryRate-${
+                <span title="Статистика успешных/неудачных печатей файла из OctoPrint" id="fileHistoryRate-${
                   file.fullPath
                 }"><i class="fas fa-thumbs-up"></i> ${
     file.success
@@ -109,32 +109,32 @@ export const getFileTemplate = (file, printerURL, id) => {
                 <span class="time" id="fileTime-${file.fullPath}">
                     ${Calc.generateTime(file.expectedPrintTime)}</span> <br> 
                 <i class="fas fa-dollar-sign"></i> 
-                <span title="Expected Printer Cost" class="cost" id="fileCost-${
+                <span title="Ожидаемая стоимость принтера" class="cost" id="fileCost-${
                   file.fullPath
-                }"> Printer Cost: ${
+                }"> Стоимость принтера: ${
     !!file.printCost ? file.printCost.toFixed(2) : getSpinnerElement()
   } </span>    <br> 
                 <i class="fa-solid fa-bolt"></i> 
-                <span title="Expected Electricity Cost" class="cost" id="fileElectricityCost-${
+                <span title="Ожидаемая стоимость электричества" class="cost" id="fileElectricityCost-${
                   file.fullPath
                 }">
-               
-                Electricity Cost: ${
+
+                Стоимость электричества: ${
                   typeof file?.electricityCosts !== "undefined"
                     ? file.electricityCosts.toFixed(2)
                     : getSpinnerElement()
                 } </span>    <br> 
                 <i class="fa-solid fa-wrench"></i>
-                <span title="Expected Maintainence Cost" class="cost" id="fileMaintainenceCost-${
+                <span title="Ожидаемая стоимость обслуживания" class="cost" id="fileMaintainenceCost-${
                   file.fullPath
-                }"> 
-               
-                Maintainence Cost: ${
+                }">
+
+                Стоимость обслуживания: ${
                   typeof file?.maintenanceCosts !== "undefined"
                     ? file.maintenanceCosts.toFixed(2)
                     : getSpinnerElement()
                 } </span>    <br> 
-                <span title="Expected Filament Cost"> </span>
+                <span title="Ожидаемая стоимость филамента"> </span>
 
                 </p>
                 <p class="mb-1 float-left">
@@ -148,7 +148,7 @@ export const getFileTemplate = (file, printerURL, id) => {
                 <span class="size" id="fileSize-${file.fullPath}">${
     !!file?.fileSize ? Calc.bytes(file.fileSize) : getSpinnerElement()
   }</span> <br>
-            <span class="usage" title="Expected Filament Usage/Cost" id="fileTool-${
+            <span class="usage" title="Ожидаемый расход/стоимость филамента" id="fileTool-${
               file.fullPath
             }"> ${toolInfo} </span>
 
@@ -163,38 +163,38 @@ export const getFileTemplate = (file, printerURL, id) => {
             aria-label="Basic example"
                 >
                 <button
-            title="Re-Sync File"
+            title="Пересинхронизировать файл"
             id="${id}*fileActionUpdate*${file.fullPath}"
             role="button"
           class="btn btn-dark"
                 >
-                <i class="fas fa-sync"></i> Re-Sync
+                <i class="fas fa-sync"></i> Пересинхронизация
                 </button>
-                <button           title="Start printing file"
+                <button           title="Начать печать файла"
             id="${id}*fileActionStart*${
     file.fullPath
   }" type="button" class="btn btn-success">
-          <i class="fas fa-play"></i> Start
+          <i class="fas fa-play"></i> Начать
               </button>
-              <button  title="Select file" id="${id}*fileActionSelect*${
+              <button  title="Выбрать файл" id="${id}*fileActionSelect*${
     file.fullPath
   }" type="button" class="btn btn-info">
-        <i class="fas fa-file-upload"></i> Select
+        <i class="fas fa-file-upload"></i> Выбрать
             </button>
-            <button          title="Move file" id="${id}*fileActionMove*${
+            <button          title="Переместить файл" id="${id}*fileActionMove*${
     file.fullPath
   }" type="button" class="btn btn-warning">
-      <i class="fas fa-people-carry"></i> Move
+      <i class="fas fa-people-carry"></i> Переместить
           </button>
-          <button          title="Download file" onclick="window.open('${printerURL}/downloads/files/local/${encodeURI(
+          <button          title="Скачать файл" onclick="window.open('${printerURL}/downloads/files/local/${encodeURI(
     file.fullPath
   )}')" type="button" class="btn btn-dark">
-    <i class="fas fa-download"></i> Download
+    <i class="fas fa-download"></i> Скачать
         </button>
-        <button title="Delete file" id="${printerURL}*fileActionDelete*${
+        <button title="Удалить файл" id="${printerURL}*fileActionDelete*${
     file.fullPath
   }" type="button" class="btn btn-danger">
-  <i class="fas fa-trash-alt"></i> Delete
+  <i class="fas fa-trash-alt"></i> Удалить
       </button>
       </div>
       </div>
@@ -216,7 +216,7 @@ export const noFilesToShow = () => {
             <div class="col-lg-12">
               <div class="row">
                 <div class="col-12">
-                    <h5 class="mb-1 name">No files available...</h5>         
+                    <h5 class="mb-1 name">Нет доступных файлов...</h5>         
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@ export const noFilesToShow = () => {
 };
 
 export const printerProfileTemplate = (printer) => {
-    let defaultProfileString = "<i class=\"fas fa-cube\"></i> Couldn't find profile";
+    let defaultProfileString = "<i class=\"fas fa-cube\"></i> Профиль не найден";
 
     const { currentProfile } = printer;
 
@@ -239,10 +239,10 @@ export const printerProfileTemplate = (printer) => {
         ${defaultProfileString}
     </small>
     <br><!--Fix for firefox-->
-    <small class="pt-2 pb-2 float-left"><i class="fas fa-pen"></i> <b>Extruders:</b>
+    <small class="pt-2 pb-2 float-left"><i class="fas fa-pen"></i> <b>Экструдеры:</b>
        ${printer.currentProfile.extruder.count}
-       <b>Nozzle Size:</b> 
-       ${printer.currentProfile.extruder.nozzleDiameter}mm
+       <b>Размер сопла:</b>
+       ${printer.currentProfile.extruder.nozzleDiameter}мм
     </small>
     `
 }
@@ -268,10 +268,10 @@ export const printerTemplate = (printer, storageWarning, extruderList) => {
                          ${printer.printerState.state}
                       </span>
                       <span id="fileManagerfileCount-${printer._id}" class="badge badge-secondary badge-pill text-center">
-                       Files: ${printer.fileList.fileList.length}
+                       Файлы: ${printer.fileList.fileList.length}
                     </span>
                     <span id="fileManagerFolderCount-${printer._id}" class="badge badge-secondary badge-pill text-center">
-                       Folders: ${printer.fileList.folderList.length}
+                       Папки: ${printer.fileList.folderList.length}
                     </span>
                   </small>
               </div>

@@ -84,19 +84,19 @@ async function addListeners(printer) {
   document
     .getElementById(`printerInfoButton-${printer._id}`)
     .addEventListener('click', async () => {
-      currentOpenModal.innerHTML = 'Printer Job Status: ';
+      currentOpenModal.innerHTML = 'Статус задания принтера: ';
       const printerInfo = getPrinterInfo();
       const controlList = getControlList();
       await initialiseCurrentJobPopover(printer._id, printerInfo, controlList);
     });
   document.getElementById(`printerButton-${printer._id}`).addEventListener('click', async () => {
-    currentOpenModal.innerHTML = 'Printer Control: ';
+    currentOpenModal.innerHTML = 'Управление принтером: ';
     const printerInfo = getPrinterInfo();
     const controlList = getControlList();
     await PrinterControlManagerService.init(printer._id, printerInfo, controlList);
   });
   document.getElementById(`printerFilesBtn-${printer._id}`).addEventListener('click', async () => {
-    currentOpenModal.innerHTML = 'Printer Files: ';
+    currentOpenModal.innerHTML = 'Файлы принтера: ';
     const printerInfo = getPrinterInfo();
     const controlList = getControlList();
     await PrinterFileManagerService.init(printer._id, printerInfo, controlList);
@@ -104,7 +104,7 @@ async function addListeners(printer) {
   document
     .getElementById(`printerTerminalButton-${printer._id}`)
     .addEventListener('click', async () => {
-      currentOpenModal.innerHTML = 'Printer Terminal: ';
+      currentOpenModal.innerHTML = 'Терминал принтера: ';
       const printerInfo = getPrinterInfo();
       const controlList = getControlList();
       await PrinterTerminalManagerService.init(printer._id, printerInfo, controlList);
@@ -131,13 +131,13 @@ async function addListeners(printer) {
       const print = returnPrinterInfo(printer._id);
       const name = printer.printerName;
       bootbox.confirm({
-        message: `${name}: <br>Are you sure you want to cancel the ongoing print?`,
+        message: `${name}: <br>Вы уверены, что хотите отменить текущую печать?`,
         buttons: {
           cancel: {
-            label: '<i class="fa fa-times"></i> Cancel',
+            label: '<i class="fa fa-times"></i> Отмена',
           },
           confirm: {
-            label: '<i class="fa fa-check"></i> Confirm',
+            label: '<i class="fa fa-check"></i> Подтвердить',
           },
         },
         async callback(result) {
@@ -229,7 +229,7 @@ function drawGroupFiles(fileList) {
 
         fileElem.insertAdjacentHTML(
           'beforeend',
-          '<button id="groupFileActionButton" type="button" class="mt-5 btn btn-success">Start Prints!</button>'
+          '<button id="groupFileActionButton" type="button" class="mt-5 btn btn-success">Начать печать!</button>'
         );
       } else {
         fileElem.innerHTML = `
@@ -244,7 +244,7 @@ function drawGroupFiles(fileList) {
                 <div class="col-lg-12">
                 <div class="row">
                 <div class="col-12">
-                <h5 class="mb-1 name">No files available...</h5>         
+                <h5 class="mb-1 name">Нет доступных файлов...</h5>         
                 </div>
                 </div>
       </div>
@@ -282,13 +282,13 @@ function addGroupListeners(printers) {
       if (cancelBtn) {
         cancelBtn.addEventListener('click', (e) => {
           bootbox.confirm({
-            message: 'Are you sure you want to cancel the ongoing prints?',
+            message: 'Вы уверены, что хотите отменить текущие печати?',
             buttons: {
               cancel: {
-                label: '<i class="fa fa-times"></i> Cancel',
+                label: '<i class="fa fa-times"></i> Отмена',
               },
               confirm: {
-                label: '<i class="fa fa-check"></i> Confirm',
+                label: '<i class="fa fa-check"></i> Подтвердить',
               },
             },
             async callback(result) {
@@ -515,24 +515,24 @@ function updateState(printer, clientSettings, view, index) {
     if (printer.printerState.colour.category === 'Active') {
       // Active Job
       let printTimeElapsedFormat = `
-        <small title="Print Time Elapsed">
+        <small title="Время печати (прошло)">
             <i class="fas fa-hourglass-start"></i> ${Calc.generateTime(
               printer.currentJob.printTimeElapsed
             )}
         </small>
         <br>
-        <small title="Expected Print Time">
+        <small title="Ожидаемое время печати">
             <i class="fas fa-clock"></i> ${Calc.generateTime(printer.currentJob.expectedPrintTime)}
         </small>
       `;
       let remainingPrintTimeFormat = `
-        <small title="Print Time Remaining">
+        <small title="Время печати (осталось)">
             <i class="fas fa-hourglass-end"></i> ${Calc.generateTime(
               printer.currentJob.printTimeRemaining
             )}
         </small>
         <br>
-        <small title="Estimated Time of Arrival">
+        <small title="Время окончания">
         <i class="fas fa-calendar-alt"></i> ${printer.currentJob.expectedCompletionDate}
         </small>
       `;
@@ -544,23 +544,23 @@ function updateState(printer, clientSettings, view, index) {
       );
     } else if (printer.printerState.colour.category === 'Complete') {
       let printTimeElapsedFormat = `
-        <small title="Print Time Elapsed">
+        <small title="Время печати (прошло)">
             <i class="fas fa-hourglass-start"></i> ${Calc.generateTime(
               printer.currentJob.printTimeElapsed
             )}
         </small>
         <br>
-        <small title="Expected Print Time">
+        <small title="Ожидаемое время печати">
             <i class="fas fa-clock"></i> ${Calc.generateTime(printer.currentJob.expectedPrintTime)}
         </small>
       `;
       let remainingPrintTimeFormat = `
-        <small title="Print Time Remaining">
+        <small title="Время печати (осталось)">
             <i class="fas fa-hourglass-end"></i> 0
         </small>
         <br>
-        <small title="Estimated Time of Arrival">
-        <i class="fas fa-calendar-alt"></i> Complete!
+        <small title="Время окончания">
+        <i class="fas fa-calendar-alt"></i> Завершено!
         </small>
       `;
       UI.doesElementNeedUpdating(printTimeElapsedFormat, elements.printTimeElapsed, 'innerHTML');
@@ -571,21 +571,21 @@ function updateState(printer, clientSettings, view, index) {
       );
     } else {
       let printTimeElapsedFormat = `
-        <small title="Print Time Elapsed">
-            <i class="fas fa-hourglass-start"></i> No Active Print
+        <small title="Время печати (прошло)">
+            <i class="fas fa-hourglass-start"></i> Нет активной печати
         </small>
         <br>
-        <small title="Expected Print Time">
-            <i class="fas fa-clock"></i> No Active Print
+        <small title="Ожидаемое время печати">
+            <i class="fas fa-clock"></i> Нет активной печати
         </small>
       `;
       let remainingPrintTimeFormat = `
-        <small title="Print Time Remaining">
-            <i class="fas fa-hourglass-end"></i> No Active Print
+        <small title="Время печати (осталось)">
+            <i class="fas fa-hourglass-end"></i> Нет активной печати
         </small>
         <br>
-        <small title="Estimated Time of Arrival">
-        <i class="fas fa-calendar-alt"></i> No Active Print
+        <small title="Время окончания">
+        <i class="fas fa-calendar-alt"></i> Нет активной печати
         </small>
       `;
       UI.doesElementNeedUpdating(printTimeElapsedFormat, elements.printTimeElapsed, 'innerHTML');
@@ -597,21 +597,21 @@ function updateState(printer, clientSettings, view, index) {
     }
   } else {
     let printTimeElapsedFormat = `
-        <small title="Print Time Elapsed">
-            <i class="fas fa-hourglass-start"></i> No Active Print
+        <small title="Время печати (прошло)">
+            <i class="fas fa-hourglass-start"></i> Нет активной печати
         </small>
         <br>
-        <small title="Expected Print Time">
-            <i class="fas fa-clock"></i> No Active Print
+        <small title="Ожидаемое время печати">
+            <i class="fas fa-clock"></i> Нет активной печати
         </small>
       `;
     let remainingPrintTimeFormat = `
-        <small title="Print Time Remaining">
-            <i class="fas fa-hourglass-end"></i> No Active Print
+        <small title="Время печати (осталось)">
+            <i class="fas fa-hourglass-end"></i> Нет активной печати
         </small>
         <br>
-        <small title="Estimated Time of Arrival">
-        <i class="fas fa-calendar-alt"></i> No Active Print
+        <small title="Время окончания">
+        <i class="fas fa-calendar-alt"></i> Нет активной печати
         </small>
       `;
     //No Job reset
@@ -619,8 +619,8 @@ function updateState(printer, clientSettings, view, index) {
     elements.progress.style.width = 0 + '%';
     UI.doesElementNeedUpdating(printTimeElapsedFormat, elements.printTimeElapsed, 'innerHTML');
     UI.doesElementNeedUpdating(remainingPrintTimeFormat, elements.remainingPrintTime, 'innerHTML');
-    elements.currentFile.setAttribute('title', 'No File Selected');
-    elements.currentFile.innerHTML = '<i class="fas fa-file-code"></i> ' + 'No File Selected';
+    elements.currentFile.setAttribute('title', 'Файл не выбран');
+    elements.currentFile.innerHTML = '<i class="fas fa-file-code"></i> ' + 'Файл не выбран';
   }
   if (!!printer?.layerData) {
     UI.doesElementNeedUpdating(
@@ -683,7 +683,7 @@ function updateState(printer, clientSettings, view, index) {
         }
       } else {
         if (tool) {
-          tool.innerHTML = 'No Spool';
+          tool.innerHTML = 'Нет катушки';
         }
       }
     }

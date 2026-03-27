@@ -57,7 +57,7 @@ export function drawListView(printer, clientSettings) {
            ${printer.printerState.state}
           </td>
           <td class="py-auto">
-                          <button title="Hover to see detailed job status"
+                          <button title="Наведите для просмотра статуса задания"
                             id="printerInfoButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-info mt-1 mb-1 btn-sm"
@@ -69,7 +69,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
                             <button
-                            title="Select and Manager your printers files"
+                            title="Выбор и управление файлами принтера"
                             id="printerFilesBtn-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-warning mt-1 mb-1 btn-sm"
@@ -81,7 +81,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fas fa-file-code"></i>
                           </button>
                           <button
-                                  title="Control your printer"
+                                  title="Управление принтером"
                             id="printerButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 btn-sm"
@@ -92,8 +92,8 @@ export function drawListView(printer, clientSettings) {
                           >
                             <i class="fas fa-print"></i>
                           </button>
-                          <button  
-                           title="Printers Terminal"
+                          <button
+                           title="Терминал принтера"
                            id="printerTerminalButton-${printer._id}"
                            type="button"
                            class="tag btn btn-outline-info btn-sm"
@@ -106,7 +106,7 @@ export function drawListView(printer, clientSettings) {
                     </td>
                     <td class="py-auto">
                     <button
-                            title="Start your currently selected print"
+                            title="Начать печать выбранного файла"
                             id="play-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 btn-sm"
@@ -116,7 +116,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fas fa-play-circle"></i>
                           </button>
                           <button
-                                  title="Pause your current print"
+                                  title="Приостановить текущую печать"
                             id="pause-${printer._id}"
                             type="button"
                             class="tag btn btn-light mt-1 mb-1 btn-sm"
@@ -126,7 +126,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fas fa-pause"></i>
                           </button>
                           <button
-                            title="Restart your current print"
+                            title="Перезапустить текущую печать"
                             id="restart-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 hidden btn-sm"
@@ -136,7 +136,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fas fa-undo"></i>
                           </button>
                           <button
-                                  title="Resume your current print"
+                                  title="Возобновить текущую печать"
                             id="resume-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 hidden btn-sm"
@@ -146,7 +146,7 @@ export function drawListView(printer, clientSettings) {
                             <i class="fas fa-redo"></i>
                           </button>
                           <button
-                                  title="Stop your current print"
+                                  title="Остановить текущую печать"
                             id="cancel-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 btn-sm"
@@ -160,8 +160,8 @@ export function drawListView(printer, clientSettings) {
 
           </td> 
           <td class="py-auto">
-          <p id="currentFile-${printer._id}" title="Loading..." class="mb-1 tag">
-            <i class="fas fa-file-code"></i> No File Selected </p>
+          <p id="currentFile-${printer._id}" title="Загрузка..." class="mb-1 tag">
+            <i class="fas fa-file-code"></i> Файл не выбран </p>
             <div id="filesViewProgressWrapper-${printer._id}" class="progress d-none">
                 <div id="filesViewProgressBar-${
                   printer._id
@@ -169,7 +169,7 @@ export function drawListView(printer, clientSettings) {
             </div>
           </td>
           <td class="p-1">
-          <span id="printTimeElapsed-${printer._id}">Loading...</span>
+          <span id="printTimeElapsed-${printer._id}">Загрузка...</span>
           </td>
           <td class="py-auto">
             <div class="progress m-0 p-0">
@@ -181,7 +181,7 @@ export function drawListView(printer, clientSettings) {
           </td>
           <td class="p-1">
           <span id="remainingTime-${printer._id}">
-                Loading...
+                Загрузка...
             </span>
           </td>
           <td class="py-auto">
@@ -207,13 +207,13 @@ export function drawPanelView(printer, clientSettings) {
     if (printer.currentProfile.heatedBed) {
       environment += `<small
     class="mb-0 float-left"
-          ><b>Bed: </b><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span>
+          ><b>Стол: </b><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span>
           </small>`;
     }
     if (printer.currentProfile.heatedChamber) {
       environment += `<small
     class="mb-0 float-right"
-        ><b>Chamber: </b><span  id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span>
+        ><b>Камера: </b><span  id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span>
           </small>`;
     }
   }
@@ -243,10 +243,10 @@ export function drawPanelView(printer, clientSettings) {
                     type="button"
                     class="tag btn btn-block btn-secondary mb-0 text-truncate btn-sm"
                     role="button"
-                    title="Loading..."
+                    title="Загрузка..."
                     disabled
             >
-                <i class="fas fa-file-code" ></i> No File Selected
+                <i class="fas fa-file-code" ></i> Файл не выбран
             </button>
             <div id="cameraContain-${printer._id}" class="noBlue text-center">
                 ${cameraElement}
@@ -277,56 +277,56 @@ export function drawPanelView(printer, clientSettings) {
             </button>
             <center>
                                      <button
-                            title="Start your currently selected print"
+                            title="Начать печать выбранного файла"
                             id="play-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-play-circle"></i> Print
+                            <i class="fas fa-play-circle"></i> Печать
                           </button>
                           <button
-                                  title="Pause your current print"
+                                  title="Приостановить текущую печать"
                             id="pause-${printer._id}"
                             type="button"
                             class="tag btn btn-light mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-pause"></i> Pause
+                            <i class="fas fa-pause"></i> Пауза
                           </button>
                           <button
-                            title="Restart your current print"
+                            title="Перезапустить текущую печать"
                             id="restart-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 hidden btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-undo"></i> Restart
+                            <i class="fas fa-undo"></i> Перезапуск
                           </button>
                           <button
-                                  title="Resume your current print"
+                                  title="Возобновить текущую печать"
                             id="resume-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 hidden btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-redo"></i> Resume
+                            <i class="fas fa-redo"></i> Возобновить
                           </button>
                           <button
-                                  title="Stop your current print"
+                                  title="Остановить текущую печать"
                             id="cancel-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-square"></i> Cancel
+                            <i class="fas fa-square"></i> Отмена
                           </button> <br>
-                          <button title="Hover to see detailed job status"
+                          <button title="Наведите для просмотра статуса задания"
                             id="printerInfoButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-info mt-1 mb-1 btn-sm"
@@ -334,10 +334,10 @@ export function drawPanelView(printer, clientSettings) {
                             data-toggle="modal"
                             data-target="#printerManagerModal"
                             >
-                            <i class="fa-solid fa-circle-info"></i> Job
+                            <i class="fa-solid fa-circle-info"></i> Задание
                           </button>
                           <button
-                            title="Select and Manager your printers files"
+                            title="Выбор и управление файлами принтера"
                             id="printerFilesBtn-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-warning mt-1 mb-1 btn-sm"
@@ -345,10 +345,10 @@ export function drawPanelView(printer, clientSettings) {
                             data-toggle="modal"
                             data-target="#printerManagerModal"
                           >
-                            <i class="fas fa-file-code"></i> Files
+                            <i class="fas fa-file-code"></i> Файлы
                           </button>
                           <button
-                                  title="Control your printer"
+                                  title="Управление принтером"
                             id="printerButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 btn-sm"
@@ -356,17 +356,17 @@ export function drawPanelView(printer, clientSettings) {
                             data-toggle="modal"
                             data-target="#printerManagerModal"
                           >
-                            <i class="fas fa-print"></i> Control
+                            <i class="fas fa-print"></i> Управление
                           </button>
-                          <button  
-                           title="Printers Terminal"
+                          <button
+                           title="Терминал принтера"
                            id="printerTerminalButton-${printer._id}"
                            type="button"
                            class="tag btn btn-outline-info btn-sm"
                            data-toggle="modal"
                            data-target="#printerManagerModal"
                            >
-                              <i class="fas fa-terminal"></i> Terminal
+                              <i class="fas fa-terminal"></i> Терминал
                         </button>
             </center>
           </div>
@@ -375,11 +375,11 @@ export function drawPanelView(printer, clientSettings) {
                 <small id="displayLayerProgressData-${printer._id}"></small>
             </div>
             <div class="col-6">
-                <span id="printTimeElapsed-${printer._id}">Loading...</span>
+                <span id="printTimeElapsed-${printer._id}">Загрузка...</span>
             </div>
             <div class="col-6">
                       <span id="remainingTime-${printer._id}">
-                Loading...
+                Загрузка...
             </span>
             </div> 
 
@@ -418,12 +418,12 @@ export function drawCameraView(printer, clientSettings) {
 
     if (printer.currentProfile.heatedBed) {
       environment += `
-          <span class="float-left"><b>Bed: </b><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></span>
+          <span class="float-left"><b>Стол: </b><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></span>
 `;
     }
     if (printer.currentProfile.heatedChamber) {
       environment += `
-         <span class="float-right"><b>Chamber: </b><span id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></span>
+         <span class="float-right"><b>Камера: </b><span id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></span>
  `;
     }
   }
@@ -454,7 +454,7 @@ export function drawCameraView(printer, clientSettings) {
               class="mb-0 text-center"
               id="currentFile-${printer._id}"
             >
-              <i class="fas fa-file-code"></i> Loading... 
+              <i class="fas fa-file-code"></i> Загрузка... 
             </small>
             <div id="filesViewProgressWrapper-${printer._id}" class="progress d-none">
                 <div id="filesViewProgressBar-${
@@ -476,7 +476,7 @@ export function drawCameraView(printer, clientSettings) {
           
           ${cameraElement}
           <div class="progress camProgress">
-            <div class="d-none percent">Loading...</div>
+            <div class="d-none percent">Загрузка...</div>
             <div
               id="progress-${printer._id}"
               class="progress-bar progress-bar-striped bg-${
@@ -495,7 +495,7 @@ export function drawCameraView(printer, clientSettings) {
             <div class="col-lg-12 camButtons">
                         <small class="float-right pr-2">
                          <button
-                            title="Start your currently selected print"
+                            title="Начать печать выбранного файла"
                             id="play-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 btn-sm"
@@ -505,7 +505,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fas fa-play-circle"></i>
                           </button>
                           <button
-                                  title="Pause your current print"
+                                  title="Приостановить текущую печать"
                             id="pause-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-light mt-1 mb-1 hidden btn-sm"
@@ -515,7 +515,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fas fa-pause"></i>
                           </button>
                           <button
-                            title="Restart your current print"
+                            title="Перезапустить текущую печать"
                             id="restart-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-danger mt-1 mb-1 hidden btn-sm"
@@ -525,7 +525,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fas fa-undo"></i>
                           </button>
                           <button
-                                  title="Resume your current print"
+                                  title="Возобновить текущую печать"
                             id="resume-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 hidden btn-sm"
@@ -535,7 +535,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fas fa-redo"></i>
                           </button>
                           <button
-                                  title="Stop your current print"
+                                  title="Остановить текущую печать"
                             id="cancel-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-danger mt-1 mb-1 btn-sm"
@@ -544,10 +544,10 @@ export function drawCameraView(printer, clientSettings) {
                           >
                             <i class="fas fa-square"></i>
                           </button>
-                          
+
                          </small>
                           <small class="float-left">
-                          <button title="Hover to see detailed job status"
+                          <button title="Наведите для просмотра статуса задания"
                             id="printerInfoButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-info mt-1 mb-1 btn-sm"
@@ -557,7 +557,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
                           <button
-                            title="Select and Manager your printers files"
+                            title="Выбор и управление файлами принтера"
                             id="printerFilesBtn-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-warning mt-1 mb-1 btn-sm"
@@ -568,7 +568,7 @@ export function drawCameraView(printer, clientSettings) {
                             <i class="fas fa-file-code"></i>
                           </button>
                           <button
-                                  title="Control your printer"
+                                  title="Управление принтером"
                             id="printerButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 btn-sm"
@@ -578,8 +578,8 @@ export function drawCameraView(printer, clientSettings) {
                           >
                             <i class="fas fa-print"></i>
                           </button>
-                          <button  
-                           title="Printers Terminal"
+                          <button
+                           title="Терминал принтера"
                            id="printerTerminalButton-${printer._id}"
                            type="button"
                            class="tag btn btn-outline-info btn-sm"
@@ -623,13 +623,13 @@ export function drawCombinedView(printer, clientSettings) {
     if (printer.currentProfile.heatedBed) {
       environment +=
         '<div class="btn-group btn-block mb-1" role="group" aria-label="Basic example">';
-      environment += `<button type="button" class="btn btn-secondary btn-sm" disabled><b>Bed: </b></button><button type="button" class="btn btn-secondary btn-sm" disabled><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></button>`;
+      environment += `<button type="button" class="btn btn-secondary btn-sm" disabled><b>Стол: </b></button><button type="button" class="btn btn-secondary btn-sm" disabled><span id="badTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></button>`;
       environment += '</div>';
     }
     if (printer.currentProfile.heatedChamber) {
       environment +=
         '<div class="btn-group btn-block mb-1" role="group" aria-label="Basic example">';
-      environment += `<button type="button" class="btn btn-secondary btn-sm" disabled><b>Chamber: </b></button><button type="button" class="btn btn-secondary btn-sm" disabled><span  id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></button>`;
+      environment += `<button type="button" class="btn btn-secondary btn-sm" disabled><b>Камера: </b></button><button type="button" class="btn btn-secondary btn-sm" disabled><span  id="chamberTemp-${printer._id}"><i class="far fa-circle "></i> 0°C <i class="fas fa-bullseye"></i> 0°C</span></button>`;
       environment += '</div>';
     }
   }
@@ -706,10 +706,10 @@ export function drawCombinedView(printer, clientSettings) {
                                 type="button"
                                 class="btn btn-block btn-secondary text-truncate btn-sm"
                                 role="button"
-                                title="Loading..."
+                                title="Загрузка..."
                                 disabled
                         >
-                            <i class="fas fa-file-code" ></i> No File Selected
+                            <i class="fas fa-file-code" ></i> Файл не выбран
                         </button>
                         <div id="filesViewProgressWrapper-${printer._id}" class="progress d-none">
                             <div id="filesViewProgressBar-${
@@ -719,66 +719,66 @@ export function drawCombinedView(printer, clientSettings) {
                         <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6 text-center">
                           <button
-                            title="Start your currently selected print"
+                            title="Начать печать выбранного файла"
                             id="play-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-play-circle"></i> Print
+                            <i class="fas fa-play-circle"></i> Печать
                           </button>
                           <button
-                                  title="Pause your current print"
+                                  title="Приостановить текущую печать"
                             id="pause-${printer._id}"
                             type="button"
                             class="tag btn btn-light mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-pause"></i> Pause
+                            <i class="fas fa-pause"></i> Пауза
                           </button>
                           <button
-                            title="Restart your current print"
+                            title="Перезапустить текущую печать"
                             id="restart-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 hidden btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-undo"></i> Restart
+                            <i class="fas fa-undo"></i> Перезапуск
                           </button>
                           <button
-                                  title="Resume your current print"
+                                  title="Возобновить текущую печать"
                             id="resume-${printer._id}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 hidden btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-redo"></i> Resume
+                            <i class="fas fa-redo"></i> Возобновить
                           </button>
                           <button
-                                  title="Stop your current print"
+                                  title="Остановить текущую печать"
                             id="cancel-${printer._id}"
                             type="button"
                             class="tag btn btn-danger mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-square"></i> Cancel
+                            <i class="fas fa-square"></i> Отмена
                           </button> <br>
-                          <button title="Hover to see detailed job status"
+                          <button title="Наведите для просмотра статуса задания"
                             id="printerInfoButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-info mt-1 mb-1 btn-sm"
                             role="button"
                             data-toggle="modal"
                             data-target="#printerManagerModal">
-                            <i class="fa-solid fa-circle-info"></i> Job
+                            <i class="fa-solid fa-circle-info"></i> Задание
                           </button>
                           <button
-                            title="Select and Manager your printers files"
+                            title="Выбор и управление файлами принтера"
                             id="printerFilesBtn-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-warning mt-1 mb-1 btn-sm"
@@ -786,10 +786,10 @@ export function drawCombinedView(printer, clientSettings) {
                             data-toggle="modal"
                             data-target="#printerManagerModal"
                           >
-                            <i class="fas fa-file-code"></i> Files
+                            <i class="fas fa-file-code"></i> Файлы
                           </button>
                           <button
-                                  title="Control your printer"
+                                  title="Управление принтером"
                             id="printerButton-${printer._id}"
                             type="button"
                             class="tag btn btn-outline-success mt-1 mb-1 btn-sm"
@@ -797,17 +797,17 @@ export function drawCombinedView(printer, clientSettings) {
                             data-toggle="modal"
                             data-target="#printerManagerModal"
                           >
-                            <i class="fas fa-print"></i> Control
+                            <i class="fas fa-print"></i> Управление
                           </button>
-                          <button  
-                           title="Printers Terminal"
+                          <button
+                           title="Терминал принтера"
                            id="printerTerminalButton-${printer._id}"
                            type="button"
                            class="tag btn btn-outline-info btn-sm"
                            data-toggle="modal"
                            data-target="#printerManagerModal"
                            >
-                              <i class="fas fa-terminal"></i> Terminal
+                              <i class="fas fa-terminal"></i> Терминал
                         </button>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 text-center">
@@ -816,11 +816,11 @@ export function drawCombinedView(printer, clientSettings) {
                               <small id="displayLayerProgressData-${printer._id}"></small>
                              </div>
                             <div class="col-6">
-                                <span id="printTimeElapsed-${printer._id}">Loading...</span>
+                                <span id="printTimeElapsed-${printer._id}">Загрузка...</span>
                             </div>
                             <div class="col-6">
                                       <span id="remainingTime-${printer._id}">
-                                Loading...
+                                Загрузка...
                             </span>
                             </div> 
                           </div>
@@ -869,7 +869,7 @@ export function drawGroupViewContainers(printers, printerArea, clientSettings) {
                 <div class="row">
                     <div class="col-lg-12 py-0 px-0 my-0 mx-0">
                      <div class="progress">
-                        <div class="d-none percent">Loading...</div>
+                        <div class="d-none percent">Загрузка...</div>
                         <div
                           id="progress-${cleanGroup}"
                           class="progress-bar progress-bar-striped percent"
@@ -889,64 +889,64 @@ export function drawGroupViewContainers(printers, printerArea, clientSettings) {
         
                     <div class="col-12 text-center">   
                       <button
-                            title="Start your currently selected print"
+                            title="Начать печать выбранного файла"
                             id="play-${cleanGroup}"
                             type="button"
                             class="tag btn btn-success mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-play-circle"></i> Print
+                            <i class="fas fa-play-circle"></i> Печать
                           </button>
                       <button
-                                  title="Pause your current print"
+                                  title="Приостановить текущую печать"
                             id="pause-${cleanGroup}"
                             type="button"
                             class="tag btn btn-light mt-1 mb-1 btn-sm"
                             role="button"
                             disabled
                           >
-                            <i class="fas fa-pause"></i> Pause
+                            <i class="fas fa-pause"></i> Пауза
                           </button>
                       <button
-                          title="Restart your current print"
+                          title="Перезапустить текущую печать"
                           id="restart-${cleanGroup}"
                           type="button"
                           class="tag btn btn-danger mt-1 mb-1 hidden btn-sm"
                           role="button"
                           disabled
                         >
-                          <i class="fas fa-undo"></i> Restart
+                          <i class="fas fa-undo"></i> Перезапуск
                         </button>
                       <button
-                                title="Resume your current print"
+                                title="Возобновить текущую печать"
                           id="resume-${cleanGroup}"
                           type="button"
                           class="tag btn btn-success mt-1 mb-1 hidden btn-sm"
                           role="button"
                           disabled
                         >
-                          <i class="fas fa-redo"></i> Resume
+                          <i class="fas fa-redo"></i> Возобновить
                         </button>
                       <button
-                                title="Stop your current print"
+                                title="Остановить текущую печать"
                           id="cancel-${cleanGroup}"
                           type="button"
                           class="tag btn btn-danger mt-1 mb-1 btn-sm"
                           role="button"
                           disabled
                         >
-                          <i class="fas fa-square"></i> Cancel
+                          <i class="fas fa-square"></i> Отмена
                         </button>
                         <button
-                            title="Unified File Selection"
+                            title="Общий выбор файлов"
                             id="unifiedFiles-${cleanGroup}"
                             type="button"
                             class="tag btn btn-outline-warning mt-1 mb-1 btn-sm float-right"
                             role="button"
                             data-toggle="modal" data-target="#unifiedFileListModal"
                           >
-                            <i class="fas fa-file-code"></i> Files
+                            <i class="fas fa-file-code"></i> Файлы
                           </button>
                     </div>
 

@@ -1,31 +1,31 @@
 <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 ">
     <div class="list-group sticky-top" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active notyet" id="system-logs-list"
-           data-toggle="list" href="#system-logs" role="tab" aria-controls="panelview"><i class="fa-solid fa-satellite-dish"></i> Connection Logs <span id="logCount">(<i
+           data-toggle="list" href="#system-logs" role="tab" aria-controls="panelview"><i class="fa-solid fa-satellite-dish"></i> Логи подключений <span id="logCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet" id="system-action-list"
-           data-toggle="list" href="#system-actionslogs" role="tab" aria-controls="panelview"><i class="fas fa-user-tag"></i> Action Logs <span id="actionCount">(<i
+           data-toggle="list" href="#system-actionslogs" role="tab" aria-controls="panelview"><i class="fas fa-user-tag"></i> Логи действий <span id="actionCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet" id="system-error-list"
            data-toggle="list" href="#system-error" role="tab" aria-controls="listview"><i
-                    class="fas fa-exclamation-triangle"></i> Printer Errors <span
+                    class="fas fa-exclamation-triangle"></i> Ошибки принтера <span
                     id="errorCount">(<i class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet" id="system-temperature-list"
            data-toggle="list" href="#system-temperature" role="tab" aria-controls="listview"><i
-                    class="fas fa-chart-line"></i> Printer Temperature <span id="tempCount">(<i
+                    class="fas fa-chart-line"></i> Температура принтера <span id="tempCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet" id="system-octologs-list"
-           data-toggle="list" href="#system-octologs" role="tab" aria-controls="listview"><i class="fa-brands fa-octopus-deploy"></i> OctoPrints Logs <span id="octoPrintCount">(<i
+           data-toggle="list" href="#system-octologs" role="tab" aria-controls="listview"><i class="fa-brands fa-octopus-deploy"></i> Логи OctoPrint <span id="octoPrintCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet d-none" id="system-octoprint-list"
            data-toggle="list" href="#system-octoprint" role="tab" aria-controls="listview"><i
-                    class="fas fa-plug"></i> OctoPrints Plugin Logs <span id="octoCount">(<i
+                    class="fas fa-plug"></i> Логи плагинов OctoPrint <span id="octoCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <a class="list-group-item list-group-item-action notyet d-none" id="system-octoprint-klipper-list"
-           data-toggle="list" href="#system-klipperlogs" role="tab" aria-controls="listview"><i class="fa-solid fa-scissors"></i> Klipper Logs <span id="klipperCount">(<i
+           data-toggle="list" href="#system-klipperlogs" role="tab" aria-controls="listview"><i class="fa-solid fa-scissors"></i> Логи Klipper <span id="klipperCount">(<i
                         class="fas fa-spinner fa-spin"></i>)</span></a>
         <button disabled class="btn btn-success" id="system-refresh-list" data-toggle="list" role="tab"
-                aria-controls="listview"><i id="refreshButtonIcon" class="fa-solid fa-arrows-rotate"></i> Refresh
+                aria-controls="listview"><i id="refreshButtonIcon" class="fa-solid fa-arrows-rotate"></i> Обновить
         </button>
     </div>
 </div>
@@ -38,8 +38,8 @@
                     <table id="printerConnectionLogTable" class="table table-dark text-center">
                         <thead>
                         <tr>
-                            <th class=" sticky-table table-dark text-wrap">Date</th>
-                            <th scope="col" class=" sticky-table table-dark">Message</th>
+                            <th class=" sticky-table table-dark text-wrap">Дата</th>
+                            <th scope="col" class=" sticky-table table-dark">Сообщение</th>
                         </tr>
                         </thead>
                         <tbody id="printerConnectionLogRows"
@@ -57,10 +57,10 @@
                     <table id="printerErrorLogTable" class="table table-dark text-center">
                         <thead>
                         <tr>
-                            <th class=" sticky-table table-dark text-wrap">Date</th>
-                            <th scope="col" class=" sticky-table table-dark text-wrap">Message</th>
-                            <th scope="col" class=" sticky-table table-dark text-wrap">Resend Stats</th>
-                            <th scope="col" class=" sticky-table table-dark text-wrap" style="min-width: 500px;">Terminal Logs</th>
+                            <th class=" sticky-table table-dark text-wrap">Дата</th>
+                            <th scope="col" class=" sticky-table table-dark text-wrap">Сообщение</th>
+                            <th scope="col" class=" sticky-table table-dark text-wrap">Статистика повторов</th>
+                            <th scope="col" class=" sticky-table table-dark text-wrap" style="min-width: 500px;">Логи терминала</th>
                         </tr>
                         </thead>
                         <tbody id="printerErrorLogRows"
@@ -87,9 +87,9 @@
                     <table id="octoprintLogsTable" class="table table-dark text-center">
                         <thead>
                         <tr>
-                            <th class=" sticky-table table-dark text-wrap">Date</th>
-                            <th scope="col" class=" sticky-table table-dark">Plugin</th>
-                            <th scope="col" class=" sticky-table table-dark">Message</th>
+                            <th class=" sticky-table table-dark text-wrap">Дата</th>
+                            <th scope="col" class=" sticky-table table-dark">Плагин</th>
+                            <th scope="col" class=" sticky-table table-dark">Сообщение</th>
                         </tr>
                         </thead>
                         <tbody id="octoprintLogsRows"
@@ -135,8 +135,8 @@
                     <table id="klipperLogsTable" class="table table-dark text-center">
                         <thead>
                         <tr>
-                            <th class=" sticky-table table-dark">Date</th>
-                            <th scope="col" class=" sticky-table table-dark">Message</th>
+                            <th class=" sticky-table table-dark">Дата</th>
+                            <th scope="col" class=" sticky-table table-dark">Сообщение</th>
                         </tr>
                         </thead>
                         <tbody id="klipperLogsTableRows"
@@ -154,11 +154,11 @@
                     <table id="actionLogsTable" class="table table-dark text-center">
                         <thead>
                         <tr>
-                            <th class="sticky-table table-dark">Date</th>
-                            <th scope="col" class=" sticky-table table-dark">User</th>
-                            <th scope="col" class=" sticky-table table-dark">Action</th>
-                            <th scope="col" class=" sticky-table table-dark">Data Sent</th>
-                            <th scope="col" class=" sticky-table table-dark">File Path</th>
+                            <th class="sticky-table table-dark">Дата</th>
+                            <th scope="col" class=" sticky-table table-dark">Пользователь</th>
+                            <th scope="col" class=" sticky-table table-dark">Действие</th>
+                            <th scope="col" class=" sticky-table table-dark">Отправленные данные</th>
+                            <th scope="col" class=" sticky-table table-dark">Путь к файлу</th>
                         </tr>
                         </thead>
                         <tbody id="actionLogsTableRow"

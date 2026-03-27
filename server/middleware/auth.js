@@ -11,7 +11,7 @@ module.exports = {
       return next();
     }
 
-    req.flash("error_msg", "Please log in to view this resource");
+    req.flash("error_msg", "Пожалуйста, войдите в систему для доступа к этому ресурсу");
     res.redirect("/users/login");
   },
   async ensureAdministrator(req, res, next) {

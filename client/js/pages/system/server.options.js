@@ -120,7 +120,7 @@ const settingsElements = {
 
 function returnSaveBtn() {
   return `
-    <button id="userActionSave" type="button" class="btn btn-success">Save</button>
+    <button id="userActionSave" type="button" class="btn btn-success">Сохранить</button>
   `;
 }
 

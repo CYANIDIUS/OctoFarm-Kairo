@@ -80,7 +80,7 @@ router.post('/save/filament', ensureAuthenticated, async (req, res) => {
     dataFilament
       .save()
       .catch((e) => {
-        errors.push("Couldn't save spool to OctoFarms database! Please check the logs...");
+        errors.push("Не удалось сохранить катушку в базу данных OctoFarm! Проверьте логи...");
         logger.error("Couldn't save spool to OctoFarms database", e);
       })
       .finally(async () => {
@@ -99,14 +99,14 @@ router.post('/delete/filament', ensureAuthenticated, async (req, res) => {
 
   const isSpoolAttached = checkIfSpoolAttachedToPrinter(searchId);
   if (isSpoolAttached) {
-    errors.push('Your spool is attached to a printer, your need to de-attach the spool first!');
+    errors.push('Катушка привязана к принтеру, сначала необходимо отвязать её!');
     return res.send({ errors });
   }
 
   await Spool.deleteOne({ _id: searchId })
     .catch((e) => {
       logger.error('Unable to delete spool... please resync!', e);
-      errors.push('Unable to delete spool... please resync!');
+      errors.push('Не удалось удалить катушку... выполните повторную синхронизацию!');
     })
     .finally(() => {
       logger.info('Spool deleted successfully');
@@ -135,7 +135,7 @@ router.post('/edit/filament', ensureAuthenticated, async (req, res) => {
   await oldSpoolData
     .save()
     .catch((e) => {
-      errors.push("Couldn't save to OctoFarms database!");
+      errors.push("Не удалось сохранить в базу данных OctoFarm!");
       logger.error(e);
     })
     .finally(() => {
@@ -162,7 +162,7 @@ router.post('/save/profile', ensureAuthenticated, async (req, res) => {
   await dataProfile
     .save()
     .catch((e) => {
-      errors.push("Couldn't save to OctoFarms database! Please check the logs...");
+      errors.push("Не удалось сохранить в базу данных OctoFarm! Проверьте логи...");
       logger.error("Couldn't save profile to OctoFarms database", e);
     })
     .finally(async () => {
@@ -188,7 +188,7 @@ router.post('/edit/profile', ensureAuthenticated, async (req, res) => {
   await oldProfileData
     .save()
     .catch((e) => {
-      errors.push("Couldn't save to OctoFarms database!");
+      errors.push("Не удалось сохранить в базу данных OctoFarm!");
       logger.error(e);
     })
     .finally(() => {
@@ -207,14 +207,14 @@ router.post('/delete/profile', ensureAuthenticated, async (req, res) => {
   const isProfileAttached = await checkIfProfileAttachedToSpool(searchId);
 
   if (isProfileAttached) {
-    errors.push('Your profile is attached to a spool! You need to delete the spool(s) first...');
+    errors.push('Профиль привязан к катушке! Сначала необходимо удалить катушку(и)...');
     return res.send({ errors });
   }
 
   await Profiles.deleteOne({ _id: searchId })
     .catch((e) => {
       logger.error('Unable to delete profile... please resync!', e);
-      errors.push('Unable to delete profile... please resync!');
+      errors.push('Не удалось удалить профиль... выполните повторную синхронизацию!');
     })
     .finally(() => {
       logger.info('Profile deleted successfully');

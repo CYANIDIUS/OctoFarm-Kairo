@@ -16,64 +16,64 @@
 <% } %>
 <% if(!serviceInformation?.isPm2 && !serviceInformation?.isNodemon){ %>
     <div class="alert alert-warning text-dark" role="alert">
-        Your system is not running with PM2! Some commands below may not work... Please
-        setup your system correctly as instructed here: <a
-                rel=”noopener” href='<%= instructionsURL %>' target='_blank'>Click Here</a>
+        Ваша система не работает с PM2! Некоторые команды ниже могут не работать... Пожалуйста,
+        настройте систему правильно, как указано здесь: <a
+                rel=”noopener” href='<%= instructionsURL %>' target='_blank'>Нажмите здесь</a>
     </div>
 <% } %>
 <% if(serviceInformation?.isNodemon){ %>
     <div class="alert alert-success" role="alert">
-        <i class="fas fa-heart text-danger"></i> Hey lovely developer! Thanks for helping make OctoFarm great!
+        <i class="fas fa-heart text-danger"></i> Привет, замечательный разработчик! Спасибо, что помогаете делать OctoFarm лучше!
     </div>
 <% } %>
 <% let systemButtonsDisabled = false; %>
 <% if(serviceInformation?.isDockerContainer){ %>
     <div class="alert alert-warning text-dark" role="alert">
-        The "Update OctoFarm" function has been disabled due to
-        Docker having it's own update mechanism
-        Please check the <a
-                rel=”noopener” href="<%= updateURL %>">Installation
-            Instructions</a> for more information on how to update
-        your docker container.
+        Функция “Обновить OctoFarm” отключена, так как
+        Docker имеет свой собственный механизм обновления.
+        Пожалуйста, проверьте <a
+                rel=”noopener” href=”<%= updateURL %>”>Инструкции по
+            установке</a> для получения дополнительной информации об обновлении
+        вашего docker-контейнера.
     </div>
     <% systemButtonsDisabled = true; %>
 <% } %>
 <% if(serviceInformation?.isNodemon && !serviceInformation?.isPm2){ %>
     <div class="alert alert-warning text-dark" role="alert">
-        The "Update OctoFarm" function has been disabled due to not been
-        able to detect the use of the pm2 process manager.
-        Please re-install OctoFarm following the <a rel=”noopener” target="_blank" href="<%= instructionsURL %>">Installation
-            Instructions</a>.
+        Функция “Обновить OctoFarm” отключена, так как не удалось
+        обнаружить использование менеджера процессов pm2.
+        Пожалуйста, переустановите OctoFarm, следуя <a rel=”noopener” target=”_blank” href=”<%= instructionsURL %>”>Инструкциям по
+            установке</a>.
     </div>
     <% systemButtonsDisabled = true; %>
 <% } %>
 <% if(!areWeGitRepo && !serviceInformation?.isDockerContainer){ %>
     <div class="alert alert-warning text-dark" role="alert">
-        The "Update OctoFarm" function has been disabled due to not been
-        able to detect a git repository.
-        Please check the <a rel=”noopener” target="_blank" href="<%= instructionsURL %>">Installation
-            Instructions</a> for more information on how to set this
-        up.
+        Функция “Обновить OctoFarm” отключена, так как не удалось
+        обнаружить git-репозиторий.
+        Пожалуйста, проверьте <a rel=”noopener” target=”_blank” href=”<%= instructionsURL %>”>Инструкции по
+            установке</a> для получения дополнительной информации о
+        настройке.
     </div>
     <% systemButtonsDisabled = true; %>
 <% } %>
 <div class="row">
     <div class="col-12">
-        <button title="Performs a restart of the OctoFarm service"
+        <button title="Выполняет перезапуск службы OctoFarm"
                 id="restartOctoFarmBtn" type="button"
                 class="btn btn-danger mr-3 btn-lg">
-            <i class="fas fa-sync"></i> Restart
+            <i class="fas fa-sync"></i> Перезапуск
         </button>
-        <button title="Performs a check for latest updates of OctoFarm"
+        <button title="Проверяет наличие последних обновлений OctoFarm"
                 id="checkUpdatesForOctoFarmBtn" type="button"
                 class="btn btn-info ml-3 float-right btn-lg">
-            <i class="fab fa-github"></i> Check for Update
+            <i class="fab fa-github"></i> Проверить обновления
         </button>
-        <button title="Performs an update command on OctoFarm to the latest version"
+        <button title="Выполняет команду обновления OctoFarm до последней версии"
                 id="updateOctoFarmBtn" type="button"
                 class="btn btn-success ml-3 float-right btn-lg"
                 <% updateDisabled %>>
-            <i class="fas fa-thumbs-up"></i> Update OctoFarm
+            <i class="fas fa-thumbs-up"></i> Обновить OctoFarm
         </button>
     </div>
 </div>
@@ -83,49 +83,49 @@
         <li class="nav-item">
             <a class="nav-link active"
                id="client-settings-list" data-toggle="list" href="#client-settings"
-               role="tab" aria-controls="system"><i class="fas fa-desktop"></i> General</a>
+               role="tab" aria-controls="system"><i class="fas fa-desktop"></i> Общие</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-settings-list" data-toggle="list" href="#server-settings"
                role="tab" aria-controls="panelview"><i class="fas fa-cogs"></i>
-                System</a>
+                Система</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-timeout-list" data-toggle="list" href="#server-timeout"
                role="tab" aria-controls="listview"><i class="fas fa-stopwatch"></i>
-                Timeout</a>
+                Таймауты</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-timeout-list" data-toggle="list" href="#server-views"
                role="tab" aria-controls="listview"><i class="fas fa-eye"></i>
-                Monitoring Views</a>
+                Виды мониторинга</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-history-list" data-toggle="list" href="#server-history"
                role="tab" aria-controls="listview"><i class="fas fa-history"></i>
-                History</a>
+                История</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-filament-list" data-toggle="list" href="#server-filament"
                role="tab" aria-controls="listview"><i
-                        class="fas fa-toilet-paper"></i> Filament Manager</a>
+                        class="fas fa-toilet-paper"></i> Менеджер филамента</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-influx-list" data-toggle="list" href="#server-influx"
                role="tab" aria-controls="listview"><i class="fas fa-database"></i>
-                InfluxDB Export</a>
+                Экспорт InfluxDB</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="server-camera-list" data-toggle="list" href="#server-camera"
                role="tab" aria-controls="listview"><i class="fa-solid fa-camera"></i>
-                Cameras</a>
+                Камеры</a>
         </li>
     </ul>
     <div class="col-12">
@@ -134,21 +134,21 @@
                  role="tabpanel" aria-labelledby="client-settings-list">
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <p class="font-weight-bold">Change Background</p>
-                        <p>Click the button below to upload your background
-                            image.</p>
-                        <small>NOTE: You may need to refresh your browser cache if
-                            this doesn't apply straight away.</small>
+                        <p class="font-weight-bold">Изменить фон</p>
+                        <p>Нажмите кнопку ниже, чтобы загрузить фоновое
+                            изображение.</p>
+                        <small>ПРИМЕЧАНИЕ: Возможно, вам потребуется обновить кеш браузера,
+                            если изменения не применились сразу.</small>
                         <form action="/settings/backgroundUpload"
                               enctype="multipart/form-data" method="POST">
                             <input class="btn bg-secondary" type="file"
                                    name="myFile"
                                    accept="image/jpeg,image/png,image/jpg"/>
                             <input id="backgroundSubmit" class="btn btn-primary"
-                                   type="submit" value="Upload"
+                                   type="submit" value="Загрузить"
                                    accept="image/jpeg,image/png">
                         </form>
-                        <p> Supports <code>PNG, JPG</code></p>
+                        <p> Поддерживает <code>PNG, JPG</code></p>
                     </div>
                     <div class="col-12 col-md-4">
                         <img width="100%" src="images/bg.jpg">
@@ -157,13 +157,13 @@
             </div>
             <div class="tab-pane fade" id="server-settings"
                  role="tabpanel" aria-labelledby="server-settings-list">
-                <p class="font-weight-bold">Server Port</p>
-                <p>The port that OctoFarm will accept connections from for it's
-                    inbuilt client. Use the .env file in your OctoFarm folder to change...</p>
-                <p><b>Default</b>: 4000</p>
+                <p class="font-weight-bold">Порт сервера</p>
+                <p>Порт, на котором OctoFarm будет принимать соединения для
+                    встроенного клиента. Используйте файл .env в папке OctoFarm для изменения...</p>
+                <p><b>По умолчанию</b>: 4000</p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">Port (disabled):</span>
+                        <span class="input-group-text">Порт (отключено):</span>
                     </div>
                     <input id="serverPortNo" type="number" class="form-control"
                            placeholder="6" aria-label="Refresh Rate"
@@ -171,14 +171,14 @@
                            value="4000" step="1">
 
                 </div>
-                <small class="form-text text-muted">Requires a server
-                    restart</small>
+                <small class="form-text text-muted">Требуется перезапуск
+                    сервера</small>
                 <hr>
                 <div class="row">
                     <div class="col-12">
-                        <p class="font-weight-bold">Login and Registration</p>
-                        <p>Change OctoFarm login/registration requirements. These
-                            are both defaulted as true.</p>
+                        <p class="font-weight-bold">Вход и регистрация</p>
+                        <p>Измените требования входа/регистрации OctoFarm. Оба параметра
+                            по умолчанию включены.</p>
                     </div>
 
                     <div class="col-md-12 col-lg-6">
@@ -188,9 +188,9 @@
                                        id="requireLogin" required <%= (serverSettings.server.loginRequired) ? "checked" : "" %>
                                 >
                                 <label class="custom-control-label"
-                                       for="requireLogin">Require a login</label>
-                                <div class="valid-feedback">Login turned on</div>
-                                <div class="invalid-feedback">Login turned off</div>
+                                       for="requireLogin">Требовать вход</label>
+                                <div class="valid-feedback">Вход включён</div>
+                                <div class="invalid-feedback">Вход отключён</div>
                             </div>
                         </form>
                     </div>
@@ -201,12 +201,12 @@
                                        id="requireRegistration" required <%= (serverSettings.server.registration) ? "checked" : "" %>
                                 >
                                 <label class="custom-control-label"
-                                       for="requireRegistration">Registration</label>
-                                <div class="valid-feedback">Registration is turned
-                                    on
+                                       for="requireRegistration">Регистрация</label>
+                                <div class="valid-feedback">Регистрация
+                                    включена
                                 </div>
-                                <div class="invalid-feedback">Registration is turned
-                                    off
+                                <div class="invalid-feedback">Регистрация
+                                    отключена
                                 </div>
                             </div>
                         </form>
@@ -215,57 +215,57 @@
             </div>
             <div class="tab-pane fade" id="server-timeout" role="tabpanel"
                  aria-labelledby="server-timeout">
-                <small class="form-text text-muted">Does not require a server
-                    restart</small>
+                <small class="form-text text-muted">Не требуется перезапуск
+                    сервера</small>
                 <hr>
                 <div class="row">
                     <div class="col-md-12 col-lg-6">
-                        <p class="font-weight-bold">Websocket Retry</p>
-                        <p>The interval in which OctoFarm will re-poll the websocket
-                            when it detects a lost connection during operation. It
-                            will re-poll at this rate until re-established.</p>
+                        <p class="font-weight-bold">Повтор Websocket</p>
+                        <p>Интервал, с которым OctoFarm будет повторно опрашивать websocket
+                            при обнаружении потери соединения во время работы. Опрос будет
+                            повторяться с этой частотой до восстановления соединения.</p>
 
-                        <p><b>Min</b>: 5 seconds (Default), <b>Max:</b> 30 seconds
+                        <p><b>Мин</b>: 5 секунд (по умолчанию), <b>Макс:</b> 30 секунд
                         </p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Websocket Retry:</span>
+                                <span class="input-group-text">Повтор Websocket:</span>
                             </div>
                             <input id="webSocketRetry" type="number"
                                    class="form-control" placeholder="6"
                                    aria-label="Refresh Rate"
                                    value="<%= serverSettings.timeout.webSocketRetry/1000 %>" min="5" max="30" step="0.5">
                             <div class="input-group-append">
-                                <span class="input-group-text">Seconds</span>
+                                <span class="input-group-text">Секунд</span>
                             </div>
 
                         </div>
-                        <small id="emailHelp" class="form-text text-muted">Requires
-                            a server restart</small>
+                        <small id="emailHelp" class="form-text text-muted">Требуется
+                            перезапуск сервера</small>
                         <hr>
                     </div>
                     <div class="col-md-6 col-lg-6">
-                        <p class="font-weight-bold">API Retry</p>
-                        <p>The interval that OctoFarm will attempt another
-                            connection to OctoPrint. Only really applicable if your
-                            printer is offline when added to the farm.</p>
-                        <p><b>Min</b>: 30 seconds (Default), <b>Max:</b> 60 seconds
+                        <p class="font-weight-bold">Повтор API</p>
+                        <p>Интервал, с которым OctoFarm будет пытаться подключиться
+                            к OctoPrint. Применимо в основном, если ваш
+                            принтер был офлайн при добавлении на ферму.</p>
+                        <p><b>Мин</b>: 30 секунд (по умолчанию), <b>Макс:</b> 60 секунд
                         </p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">API Retry:</span>
+                                <span class="input-group-text">Повтор API:</span>
                             </div>
                             <input id="APIRetry" type="number" class="form-control"
                                    placeholder="6" aria-label="Refresh Rate"
                                    value="<%= serverSettings.timeout.apiRetry/1000 %>" min="30" max="60"
                                    step="0.5">
                             <div class="input-group-append">
-                                <span class="input-group-text">Seconds</span>
+                                <span class="input-group-text">Секунд</span>
                             </div>
 
                         </div>
-                        <small id="emailHelp" class="form-text text-muted">Requires
-                            a server restart</small>
+                        <small id="emailHelp" class="form-text text-muted">Требуется
+                            перезапуск сервера</small>
                         <hr>
                     </div>
                 </div>
@@ -276,99 +276,99 @@
                  aria-labelledby="server-filament-list">
                 <div id="filamentManagerSetup" class="row">
                     <div class="col-lg-2">
-                        <h5>Check Spool?</h5>
+                        <h5>Проверять катушку?</h5>
                         <div class="alert alert-info small" role="alert">
-                            OctoFarm will throw a nag screen when trying to start a print without a spool attached.
+                            OctoFarm покажет предупреждение при попытке начать печать без прикреплённой катушки.
                         </div>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="checkFilament" required <%= (serverSettings.filament.filamentCheck) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="checkFilament">Filament Check</label>
-                                <div class="valid-feedback">Check for spool
+                                       for="checkFilament">Проверка филамента</label>
+                                <div class="valid-feedback">Проверять катушку
                                 </div>
-                                <div class="invalid-feedback">Ignore check for spool
+                                <div class="invalid-feedback">Игнорировать проверку катушки
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-lg-2">
-                        <h5>Hide Empty Spools?</h5>
+                        <h5>Скрывать пустые катушки?</h5>
                         <div class="alert alert-info small" role="alert">
-                            Any spool going below 0 will be hidden from the interfaces select menu's.
+                            Любая катушка с количеством ниже 0 будет скрыта из меню выбора интерфейса.
                         </div>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="hideEmpty" required <%= (serverSettings.filament.hideEmpty) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="hideEmpty">Hide Empty</label>
-                                <div class="valid-feedback">Hide empty spools
+                                       for="hideEmpty">Скрыть пустые</label>
+                                <div class="valid-feedback">Скрывать пустые катушки
                                 </div>
-                                <div class="invalid-feedback">Show empty spools
+                                <div class="invalid-feedback">Показывать пустые катушки
                                 </div>
                             </div>
                         </form>
                     </div>
                         <div class="col-lg-2">
-                            <h5>Downdate Successful Usage?</h5>
+                            <h5>Списывать при успешном использовании?</h5>
                             <div class="alert alert-info small" role="alert">
-                                On a successful print completion OctoFarm will use OctoPrints filament metadata and downdate the currently selected spool with that amount.
+                                При успешном завершении печати OctoFarm использует метаданные филамента OctoPrint и спишет соответствующее количество с текущей выбранной катушки.
                             </div>
                             <form class="was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"%>
                                            id="downDateSuccess" required <%= (serverSettings?.filament?.downDateSuccess) ? "checked" : "" %>>
                                     <label class="custom-control-label"
-                                           for="downDateSuccess">Downdate Successful</label>
-                                    <div class="valid-feedback">Downdate usage
+                                           for="downDateSuccess">Списание при успехе</label>
+                                    <div class="valid-feedback">Списывать использование
                                     </div>
-                                    <div class="invalid-feedback">Ignore usage
+                                    <div class="invalid-feedback">Игнорировать использование
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-lg-2">
-                        <h5>Downdate Failed/Cancelled Usage?</h5>
+                        <h5>Списывать при неудачной/отменённой печати?</h5>
                         <div class="alert alert-info small" role="alert">
-                            On failed/cancelled print completion OctoFarm will use OctoPrints filament meta data and downdate the currently selected spool with that amount.
-                            <b>NOTE: </b> This is an best guess calculation, it will never be accurate.
+                            При неудачном/отменённом завершении печати OctoFarm использует метаданные филамента OctoPrint и спишет соответствующее количество с текущей выбранной катушки.
+                            <b>ПРИМЕЧАНИЕ: </b> Это приблизительный расчёт, он никогда не будет точным.
                         </div>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="downDateFailed" required <%= (serverSettings?.filament?.downDateFailed) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="downDateFailed">Downdate failed/cancelled</label>
-                                <div class="valid-feedback">Downdate usage
+                                       for="downDateFailed">Списание при неудаче/отмене</label>
+                                <div class="valid-feedback">Списывать использование
                                 </div>
-                                <div class="invalid-feedback">Ignore usage
+                                <div class="invalid-feedback">Игнорировать использование
                                 </div>
                             </div>
                         </form>
                     </div>
                         <div class="col-lg-2">
-                            <h5>Allow Single Spools on Multiple Printers?</h5>
+                            <h5>Разрешить одну катушку на нескольких принтерах?</h5>
                             <div class="alert alert-info small" role="alert">
-                                Allow the selection of single spools on multiple printers. Great if your only tracking filament by type.. you can have 1 spool attached to multiple printers to get more accurate grams calculations this way.
+                                Разрешить выбор одной катушки на нескольких принтерах. Полезно, если вы отслеживаете филамент только по типу -- можно прикрепить 1 катушку к нескольким принтерам для более точного расчёта граммов.
                             </div>
                             <% let multiSelectOff = "d-none"; %>
                             <% if(serverSettings?.filament?.allowMultiSelect) { %>
                                 <% multiSelectOff = "" %>
                             <% }%>
                             <div class="alert alert-warning small text-dark <%= multiSelectOff %>" role="alert">
-                                Turning this off will remove all your current filament assignments.
+                                Отключение этой опции удалит все текущие назначения филамента.
                             </div>
                             <form class="was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="allowMultiSelect" required <%= (serverSettings?.filament?.allowMultiSelect) ? "checked" : "" %>>
                                     <label class="custom-control-label"
-                                           for="allowMultiSelect">Allow Multiple Select</label>
-                                    <div class="valid-feedback">Select multiple
+                                           for="allowMultiSelect">Множественный выбор</label>
+                                    <div class="valid-feedback">Множественный выбор
                                     </div>
-                                    <div class="invalid-feedback">Select single
+                                    <div class="invalid-feedback">Одиночный выбор
                                     </div>
                                 </div>
                             </form>
@@ -380,20 +380,20 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="alert alert-warning text-dark text-dark" role="alert">
-                            Below are some options to enable and disable certain monitoring views across the user interface.
+                            Ниже приведены опции для включения и отключения определённых видов мониторинга в пользовательском интерфейсе.
                             <hr>
-                            <b>Panel:</b> This view is OctoFarms standard view where each printer has it's own card. It allows for full control and monitoring of your farm.<br>
-                            <b>List:</b> This view is a table view where each printer is on a row of the table. It allows for full control and status monitoring of your farm due to no camera slot.<br>
-                            <b>Camera:</b> This view is similar to the panel view but has the cameras as a main focus. A bit like a NVR for your farm with full control.<br>
-                            <b>Group:</b> This view will organise your printers by common groups you have assigned. This view is great for bulk grouped control over your prints, but has limited monitoring. <br>
-                            <b>Current Operations:</b> This view is a cut down view with just basic print information. Great for a large status screen or keeping an eye on your farms status. There is no control and limited status.<br>
-                            <b>Super List:</b> This view is a list table view combining camera/list and panel views. It allows for full monitoring and control.<br>
+                            <b>Панельный:</b> Это стандартный вид OctoFarm, где у каждого принтера своя карточка. Позволяет полностью контролировать и мониторить ферму.<br>
+                            <b>Список:</b> Это табличный вид, где каждый принтер находится в строке таблицы. Позволяет полностью контролировать и мониторить статус фермы без слота камеры.<br>
+                            <b>Камеры:</b> Этот вид похож на панельный, но с фокусом на камеры. Напоминает видеорегистратор для фермы с полным контролем.<br>
+                            <b>Группы:</b> Этот вид организует принтеры по назначенным группам. Отлично подходит для группового управления печатью, но имеет ограниченный мониторинг. <br>
+                            <b>Текущие операции:</b> Это упрощённый вид с базовой информацией о печати. Отлично подходит для большого экрана статуса или наблюдения за состоянием фермы. Нет управления и ограниченный статус.<br>
+                            <b>Комбинированный:</b> Это табличный вид, объединяющий камеры, список и панельный виды. Позволяет полный мониторинг и контроль.<br>
 
                         </div>
                     </div>
                 </div>
                  <div class="row">
-                         <% const viewNames = [ "Panel", "List", "Camera", "Group", "Current Operations", "Super List" ] %>
+                         <% const viewNames = [ "Панельный", "Список", "Камеры", "Группы", "Текущие операции", "Комбинированный" ] %>
                          <% Object.keys(serverSettings.monitoringViews.toJSON()).forEach((key, index) => { %>
                              <div class="col-md-4 col-lg-2">
                                  <form class="was-validated">
@@ -402,9 +402,9 @@
                                                 id="monitoring-<%= key %>" required <%= serverSettings.monitoringViews[key] ? "checked" : "" %>
                                          >
                                          <label class="custom-control-label"
-                                                for="monitoring-<%= key %>"><%= viewNames[index] %> View</label>
-                                         <div class="valid-feedback"><%= viewNames[index] %> View Enabled</div>
-                                         <div class="invalid-feedback"><%= viewNames[index] %> View Disabled</div>
+                                                for="monitoring-<%= key %>"><%= viewNames[index] %> вид</label>
+                                         <div class="valid-feedback"><%= viewNames[index] %> вид включён</div>
+                                         <div class="invalid-feedback"><%= viewNames[index] %> вид отключён</div>
                                      </div>
                                  </form>
                              </div>
@@ -414,32 +414,32 @@
             <div class="tab-pane fade" id="server-history" role="tabpanel"
                  aria-labelledby="server-history-list">
                 <div class="alert alert-secondary" role="alert">
-                    OctoFarm has the ability to save a snapshot/thumbnail into
-                    History. These options are turned on by default as it will check
-                    if the thumbnail/camera url exist before actually saving.
+                    OctoFarm может сохранять снимки/миниатюры в
+                    историю. Эти опции включены по умолчанию, так как перед сохранением
+                    проверяется наличие URL миниатюры/камеры.
                 </div>
                 <div class="alert alert-warning text-dark text-dark" role="alert">
-                    If your running on Docker, make sure to mount "/app/images"
-                    otherwise these will not persist reboots/upgrades.
+                    Если вы используете Docker, убедитесь, что смонтировали "/app/images",
+                    иначе данные не сохранятся после перезагрузки/обновления.
                 </div>
                 <div id="filamentManagerSetup" class="row">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                        <h6>Timelapse Capture</h6>
+                        <h6>Захват таймлапса</h6>
                         <div class="alert alert-warning text-dark text-dark" role="alert">
-                            Timelapse must be turned on in OctoPrint for this to
-                            work, then activated below. It is not turned on by
-                            default and does not react to your OctoPrint setting.
+                            Для работы таймлапс должен быть включён в OctoPrint,
+                            а затем активирован ниже. Он не включён по
+                            умолчанию и не реагирует на настройки OctoPrint.
                         </div>
                         <div class="alert alert-info" role="alert">
-                            <h5>Update your instances settings</h5>
-                            This only works with the ".mp4" format for video types.
-                            OctoPrint defaults to ".mpg". You can update this under
-                            "Advanced Settings" in your OctoPrint instances "Webcam
-                            & Timelapse" setting. Change the setting to "libx264".
-                            You can also choose between Z or Times triggers in the drop downs.
+                            <h5>Обновите настройки экземпляров</h5>
+                            Работает только с форматом ".mp4" для видео.
+                            OctoPrint по умолчанию использует ".mpg". Вы можете изменить это в
+                            "Расширенных настройках" вашего экземпляра OctoPrint в
+                            "Веб-камера и таймлапс". Измените настройку на "libx264".
+                            Вы также можете выбрать между триггерами Z или Время в выпадающих списках.
                             <button id="setupTimelapseOctoPrint" type="button"
                                     class="btn btn-outline-dark btn-block mt-1">
-                                Setup Your Farm!
+                                Настроить ферму!
                             </button>
                         </div>
                         <form class="was-validated">
@@ -447,13 +447,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="timelapseOnComplete" required <%= (serverSettings.history.timelapse.onComplete) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="timelapseOnComplete">On
-                                    Completion</label>
-                                <div class="valid-feedback">On Complete timelapse
-                                    will be downloaded to OctoPrint
+                                       for="timelapseOnComplete">При
+                                    завершении</label>
+                                <div class="valid-feedback">Таймлапс при завершении
+                                    будет загружен в OctoPrint
                                 </div>
-                                <div class="invalid-feedback">On Complete timelapse
-                                    is ignored
+                                <div class="invalid-feedback">Таймлапс при завершении
+                                    игнорируется
                                 </div>
                             </div>
                         </form>
@@ -462,12 +462,12 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="timelapseOnFailure" required  <%= (serverSettings.history.timelapse.onFailure) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="timelapseOnFailure">On Failure</label>
-                                <div class="valid-feedback">On Failure timelapse
-                                    will be downloaded to OctoPrint
+                                       for="timelapseOnFailure">При неудаче</label>
+                                <div class="valid-feedback">Таймлапс при неудаче
+                                    будет загружен в OctoPrint
                                 </div>
-                                <div class="invalid-feedback">On Failure timelapse
-                                    is ignored
+                                <div class="invalid-feedback">Таймлапс при неудаче
+                                    игнорируется
                                 </div>
                             </div>
                         </form>
@@ -476,33 +476,33 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="timelapseDelete" required <%= (serverSettings.history.timelapse.deleteAfter) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="timelapseDelete">Delete from
+                                       for="timelapseDelete">Удалить из
                                     OctoPrint</label>
-                                <div class="valid-feedback">Timelapses will be
-                                    deleted once captured
+                                <div class="valid-feedback">Таймлапсы будут
+                                    удалены после захвата
                                 </div>
-                                <div class="invalid-feedback">Timelapses are not
-                                    removed from OctoPrints storage
+                                <div class="invalid-feedback">Таймлапсы не
+                                    удаляются из хранилища OctoPrint
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                        <h6>Printer snapshot capture</h6>
+                        <h6>Захват снимков принтера</h6>
                         <div class="alert alert-warning text-dark text-dark" role="alert">
-                            Requires an active camera URL in OctoFarm.
+                            Требуется активный URL камеры в OctoFarm.
                         </div>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="snapOnComplete" required <%= (serverSettings.history.snapshot.onComplete) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="snapOnComplete">On Complete</label>
-                                <div class="valid-feedback">On Complete snapshot
-                                    turned on
+                                       for="snapOnComplete">При завершении</label>
+                                <div class="valid-feedback">Снимок при завершении
+                                    включён
                                 </div>
-                                <div class="invalid-feedback">On Complete snapshot
-                                    turned off
+                                <div class="invalid-feedback">Снимок при завершении
+                                    отключён
                                 </div>
                             </div>
                         </form>
@@ -511,33 +511,33 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="snapOnFailure" required <%= (serverSettings.history.snapshot.onFailure) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="snapOnFailure">On Failure</label>
-                                <div class="valid-feedback">On Failure snapshot
-                                    turned on
+                                       for="snapOnFailure">При неудаче</label>
+                                <div class="valid-feedback">Снимок при неудаче
+                                    включён
                                 </div>
-                                <div class="invalid-feedback">On Failure snapshot
-                                    turned off
+                                <div class="invalid-feedback">Снимок при неудаче
+                                    отключён
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                        <h6>Prusa/Cura slicer thumbnailcapture</h6>
+                        <h6>Захват миниатюр слайсера Prusa/Cura</h6>
                         <div class="alert alert-warning text-dark text-dark" role="alert">
-                            Requires either the Prusa / Cura thumbnail plugins to be
-                            installed on OctoPrint.
+                            Требуется установка плагинов миниатюр Prusa / Cura
+                            на OctoPrint.
                         </div>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="thumbOnComplete" required <%= (serverSettings.history.thumbnails.onComplete) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="thumbOnComplete">On Complete</label>
-                                <div class="valid-feedback">On Complete snapshot
-                                    turned on
+                                       for="thumbOnComplete">При завершении</label>
+                                <div class="valid-feedback">Миниатюра при завершении
+                                    включена
                                 </div>
-                                <div class="invalid-feedback">On Complete snapshot
-                                    turned off
+                                <div class="invalid-feedback">Миниатюра при завершении
+                                    отключена
                                 </div>
                             </div>
                         </form>
@@ -546,12 +546,12 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="thumbOnFailure" required <%= (serverSettings.history.thumbnails.onFailure) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="thumbOnFailure">On Failure</label>
-                                <div class="valid-feedback">On Failure snapshot
-                                    turned on
+                                       for="thumbOnFailure">При неудаче</label>
+                                <div class="valid-feedback">Миниатюра при неудаче
+                                    включена
                                 </div>
-                                <div class="invalid-feedback">On Failure snapshot
-                                    turned off
+                                <div class="invalid-feedback">Миниатюра при неудаче
+                                    отключена
                                 </div>
                             </div>
                         </form>
@@ -560,59 +560,59 @@
             </div>
             <div class="tab-pane fade" id="server-influx" role="tabpanel"
                  aria-labelledby="server-influx-list">
-                <h5>InfluxDB Export (v1.x)</h5>
+                <h5>Экспорт InfluxDB (v1.x)</h5>
                 <hr>
                 <div class="alert alert-secondary" role="alert">
-                    OctoFarm can export your printer data to a time series database
-                    called InfluxDB. You can use this data to create yourself a
-                    dashboard in an application called Grafana or InfluxDB itself.
-                    Other options are also available. This option is for power users
-                    who would like to get more information from the data stored in
+                    OctoFarm может экспортировать данные ваших принтеров в базу данных
+                    временных рядов InfluxDB. Вы можете использовать эти данные для создания
+                    панели мониторинга в приложении Grafana или самой InfluxDB.
+                    Доступны и другие варианты. Эта опция для опытных пользователей,
+                    которые хотят получить больше информации из данных, хранящихся в
                     OctoFarm.
                 </div>
                 <div class="alert alert-warning text-dark" role="alert">
-                    You must already have influxDB setup and working to be able to
-                    use this feature. A restart will be required after saving the
-                    settings to correctly enable.
+                    У вас уже должна быть настроена и работать InfluxDB для использования
+                    этой функции. После сохранения настроек потребуется перезапуск
+                    для корректного включения.
                 </div>
                 <div class="alert alert-info" role="alert">
-                    You can find a sample grafana.json file to import to get you started from here:
+                    Вы можете найти образец файла grafana.json для импорта здесь:
                 </div>
                 <div class="alert alert-secondary" role="alert" id="influxParent">
-                    <p>This will activate the exporting of the following
-                        measurements you can grab from InfluxDB: (click a button to
-                        expand data view)</p>
+                    <p>Это активирует экспорт следующих
+                        измерений, которые вы можете получить из InfluxDB: (нажмите кнопку,
+                        чтобы развернуть представление данных)</p>
                     <p>
                         <button class="btn btn-primary" type="button"
                                 data-toggle="collapse"
                                 data-target="#collapseExample1"
                                 aria-expanded="false"
                                 aria-controls="collapseExample1">
-                            Live Printer Data
+                            Данные принтеров в реальном времени
                         </button>
                         <button class="btn btn-primary" type="button"
                                 data-toggle="collapse"
                                 data-target="#collapseExample2"
                                 aria-expanded="false"
                                 aria-controls="collapseExample2">
-                           Finished Print Data
+                           Данные завершённых печатей
                         </button>
                         <button class="btn btn-primary" type="button"
                                 data-toggle="collapse"
                                 data-target="#collapseExample3"
                                 aria-expanded="false"
                                 aria-controls="collapseExample3">
-                            Material Data
+                            Данные материалов
                         </button>
                     </p>
                     <div class="collapse" id="collapseExample1"
                          data-parent="#influxParent">
                         <div class="alert alert-dark" role="alert">
-                            Printer information is dumped every 5000ms (5 seconds).
-                            This will dump a record for each printer in your farm
-                            with the information below.
+                            Информация о принтерах выгружается каждые 5000 мс (5 секунд).
+                            Будет создана запись для каждого принтера на вашей ферме
+                            с информацией ниже.
                         </div>
-                        <h3>Available Tags:</h3>
+                        <h3>Доступные теги:</h3>
                         <code>
                             name:<br>
                             group:<br>
@@ -623,7 +623,7 @@
                             websocket_state:<br>
                             octoprint_version: <br>
                         </code>
-                        <h3>Information:</h3>
+                        <h3>Информация:</h3>
                         <code>
                             name: 'Printer Name'<br>
                             group: 'A group'<br>
@@ -672,17 +672,17 @@
                     <div class="collapse" id="collapseExample2"
                          data-parent="#influxParent">
                         <div class="alert alert-dark" role="alert">
-                            History information will be sent when a print is logged
-                            as completed or failed (cancelled / error).
+                            Информация истории будет отправлена, когда печать зарегистрирована
+                            как завершённая или неудачная (отменена / ошибка).
                         </div>
-                        <h3>Available Tags:</h3>
+                        <h3>Доступные теги:</h3>
                         <code>
                             printer_name: <br>
                             group: <br>
                             history_state: <br>
                             file_name: <br>
                         </code>
-                        <h3>Information:</h3>
+                        <h3>Информация:</h3>
                         <code>
                             id: '627208b58d771b4f22efadff' <br>
                             state: 'Cancelled' <br>
@@ -711,15 +711,15 @@
                     <div class="collapse" id="collapseExample3"
                          data-parent="#influxParent">
                         <div class="alert alert-dark" role="alert">
-                            Spool information will be logged everytime a print has
-                            completed.
+                            Информация о катушке будет записываться каждый раз при
+                            завершении печати.
                         </div>
                         <div class="alert alert-warning text-dark text-dark" role="alert">
-                            If you don't use the Filament Manager plugin or have "Downdate" settings enabled, then there
-                            will be 0 grams in the "used_difference" and
-                            "used_spool" fields as it is not tracked without that.
+                            Если вы не используете плагин Filament Manager или не включили настройки "Списание", то
+                            в полях "used_difference" и "used_spool" будет 0 граммов,
+                            так как без этого отслеживание не ведётся.
                         </div>
-                        <h3>Available Tags:</h3>
+                        <h3>Доступные теги:</h3>
                         <code>
                             state: <br>
                             printer_name: <br>
@@ -728,7 +728,7 @@
                             spool_manufacturer: 'Eryone',<br>
                             spool_material: 'PETG',<br>
                         </code>
-                        <h3>Information:</h3>
+                        <h3>Информация:</h3>
                         <code>
                             name: 'Spooler',<br>
                             price: 25,<br>
@@ -748,29 +748,29 @@
 
                 <div id="filamentManagerSetup" class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <h6>Activate</h6>
+                        <h6>Активировать</h6>
                         <form class="was-validated">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input"
                                        id="infActivateInfluxExport" required <%= (serverSettings.influxExport.active) ? "checked" : "" %>>
                                 <label class="custom-control-label"
-                                       for="infActivateInfluxExport">Activated?</label>
-                                <div class="valid-feedback">InfluxDB Export is
-                                    activated.
+                                       for="infActivateInfluxExport">Активировано?</label>
+                                <div class="valid-feedback">Экспорт InfluxDB
+                                    активирован.
                                 </div>
-                                <div class="invalid-feedback">InfluxDB Export is
-                                    de-activated.
+                                <div class="invalid-feedback">Экспорт InfluxDB
+                                    деактивирован.
                                 </div>
                             </div>
                         </form>
                         <form>
-                            <h6>Connection Settings</h6>
+                            <h6>Настройки подключения</h6>
                             <div class="row">
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                                                 <span class="input-group-text"
-                                                                                      id="infHostIPe">Host IP Address: </span>
+                                                                                      id="infHostIPe">IP-адрес хоста: </span>
                                         </div>
                                         <input id="infHostIP" type="text"
                                                class="form-control"
@@ -784,7 +784,7 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
-                                                              id="infHostPorte">Host Port: </span>
+                                                              id="infHostPorte">Порт хоста: </span>
                                         </div>
                                         <input id="infHostPort" type="text"
                                                value="<%= (serverSettings?.influxExport.port) ? serverSettings.influxExport.port : "" %>"
@@ -800,7 +800,7 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
-                                                              id="infUsernamee">Username: </span>
+                                                              id="infUsernamee">Имя пользователя: </span>
                                         </div>
                                         <input id="infUsername" type="text"
                                                value="<%= (serverSettings?.influxExport.username) ? serverSettings.influxExport.username : "" %>"
@@ -814,7 +814,7 @@
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
 
-                                                              id="infPassworde">Password: </span>
+                                                              id="infPassworde">Пароль: </span>
                                         </div>
                                         <input id="infPassword" type="text"
                                                class="form-control" placeholder=""
@@ -824,14 +824,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <h6>Database Settings</h6>
+                            <h6>Настройки базы данных</h6>
                             <div class="row">
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
 
-                                                              id="infDatabasee">Database Name: </span>
+                                                              id="infDatabasee">Имя базы данных: </span>
                                         </div>
                                         <input id="infDatabase" type="text"
                                                class="form-control"
@@ -842,13 +842,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <h6>Retention Policy (Advanced)</h6>
+                            <h6>Политика хранения (расширенные)</h6>
                             <div class="row">
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
-                                                              id="infDuration">Duration: </span>
+                                                              id="infDuration">Длительность: </span>
                                         </div>
                                         <input type="text" class="form-control"
                                                placeholder="365d"
@@ -861,7 +861,7 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                                         <span class="input-group-text"
-                                                              id="infReplication">Replication: </span>
+                                                              id="infReplication">Репликация: </span>
                                         </div>
                                         <input type="text" class="form-control"
                                                placeholder="1" aria-label="Username"
@@ -876,12 +876,12 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="infRetention" required <%= (!serverSettings?.influxExport.retentionPolicy.duration) ? "checked": "" %>>
                                 <label class="custom-control-label"
-                                       for="infRetention">Default Retention?</label>
-                                <div class="valid-feedback">Using default retention
-                                    settings.
+                                       for="infRetention">Хранение по умолчанию?</label>
+                                <div class="valid-feedback">Используются настройки хранения
+                                    по умолчанию.
                                 </div>
-                                <div class="invalid-feedback">Not using default
-                                    retention settings.
+                                <div class="invalid-feedback">Не используются настройки
+                                    хранения по умолчанию.
                                 </div>
                             </div>
                         </form>
@@ -891,17 +891,17 @@
             </div>
             <div class="tab-pane fade" id="server-camera" role="tabpanel"
                  aria-labelledby="server-influx-list">
-                <h5>Global Camera Settings</h5>
+                <h5>Глобальные настройки камер</h5>
                 <hr>
                 <div class="alert alert-secondary" role="alert">
-                    These settings apply to all of the camera feed within OctoFarm.
+                    Эти настройки применяются ко всем камерам в OctoFarm.
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <h5>Proxy</h5>
+                        <h5>Прокси</h5>
                         <hr>
                         <div class="alert alert-info" role="alert">
-                            OctoFarm can proxy all of your camera's through it's server. This is great for reverse proxy setups, or setups where your OctoPrint's are not accessible from the network your on.
+                            OctoFarm может проксировать все ваши камеры через свой сервер. Это удобно для настроек обратного прокси или ситуаций, когда ваши OctoPrint недоступны из сети, в которой вы находитесь.
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -910,49 +910,49 @@
                                         <input type="checkbox" class="custom-control-input"
                                                id="cameraProxyActive" required <%= (serverSettings.cameras.proxyEnabled) ? "checked" : "" %>>
                                         <label class="custom-control-label"
-                                               for="cameraProxyActive">Activated?</label>
-                                        <div class="valid-feedback">Camera Proxy is enabled
+                                               for="cameraProxyActive">Активировано?</label>
+                                        <div class="valid-feedback">Прокси камер включён
                                         </div>
-                                        <div class="invalid-feedback">Camera Proxy is disabled
+                                        <div class="invalid-feedback">Прокси камер отключён
                                         </div>
                                     </div>
                                 </form>
-                            <small id="helpCam" class="form-text text-muted">Requires
-                                a server restart</small>
-                            <h5 class="font-weight-bold">Update Interval</h5>
+                            <small id="helpCam" class="form-text text-muted">Требуется
+                                перезапуск сервера</small>
+                            <h5 class="font-weight-bold">Интервал обновления</h5>
                             <hr>
-                            <p>The interval in which OctoFarm will capture a frame from your camera. (only applies to the proxy)</p>
+                            <p>Интервал, с которым OctoFarm будет захватывать кадр с вашей камеры. (применяется только к прокси)</p>
 
-                            <p><b>Min</b>: 1 seconds, <b>Max:</b> 10 seconds (Default)
+                            <p><b>Мин</b>: 1 секунда, <b>Макс:</b> 10 секунд (по умолчанию)
                             </p>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Interval:</span>
+                                    <span class="input-group-text">Интервал:</span>
                                 </div>
                                 <input id="cameraUpdateInterval" type="number"
                                        class="form-control" placeholder="6"
                                        aria-label="Refresh Rate"
                                        value="<%= serverSettings.cameras.updateInterval/1000 %>" min="1" max="10" step="0.5">
                                 <div class="input-group-append">
-                                    <span class="input-group-text">Seconds</span>
+                                    <span class="input-group-text">Секунд</span>
                                 </div>
 
                             </div>
-                            <small id="helpProxy" class="form-text text-muted">Requires
-                                a server restart</small>
+                            <small id="helpProxy" class="form-text text-muted">Требуется
+                                перезапуск сервера</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <h5>Display</h5>
+                        <h5>Отображение</h5>
                         <hr>
-                        <p>The aspect ratio OctoFarm will display the cameras in. (Applies to all camera streams)</p>
+                        <p>Соотношение сторон, в котором OctoFarm будет отображать камеры. (Применяется ко всем потокам камер)</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="cameraAspectRatio">Aspect Ratio</label>
+                                <label class="input-group-text" for="cameraAspectRatio">Соотношение сторон</label>
                             </div>
                             <select class="custom-select" id="cameraAspectRatio">
-                                <option value="0" <%= serverSettings.cameras.aspectRatio === "0" ? "selected" : "" %>>Stream Default</option>
+                                <option value="0" <%= serverSettings.cameras.aspectRatio === "0" ? "selected" : "" %>>По умолчанию потока</option>
                                 <option value="1x1" <%= serverSettings.cameras.aspectRatio === "1x1" ? "selected" : "" %>>1x1</option>
                                 <option value="4x3" <%= serverSettings.cameras.aspectRatio === "4x3" ? "selected" : "" %>>4x3</option>
                                 <option value="16x9" <%= serverSettings.cameras.aspectRatio === "16x9" ? "selected" : "" %>>16x9</option>
@@ -965,11 +965,11 @@
     </div>
 </div>
 <button type="button" class="btn btn-success btn-block"
-        id="saveServerSettings" data-dismiss="modal">Save
+        id="saveServerSettings" data-dismiss="modal">Сохранить
 </button>
 <%- include(modal, {
 modal:{
-id:"filamentManagerPluginSetup", title:"Setup Filament Manager Plugin", size: "modal-sm"
+id:"filamentManagerPluginSetup", title:"Настройка плагина менеджера филамента", size: "modal-sm"
 },
 bodyFile:'./System/UserModals/filamentManagerSetup.ejs'
 })

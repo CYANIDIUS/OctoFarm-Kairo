@@ -2,28 +2,28 @@
     <div class="list-group" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active notyet" id="printer-connection-btn"
            data-toggle="list" href="#printer-connection" role="tab" aria-controls="messages"><i
-                    class="fas fa-plug"></i> Connection <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-plug"></i> Подключение <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-cost-btn"
            data-toggle="list" href="#printer-cost" role="tab" aria-controls="messages"><i
-                    class="fas fa-dollar-sign"></i> Cost <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-dollar-sign"></i> Стоимость <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-profile-btn"
            data-toggle="list" href="#printer-profile" role="tab" aria-controls="messages"><i
-                    class="fas fa-tags"></i> Profile <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-tags"></i> Профиль <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-power-btn"
            data-toggle="list" href="#printer-power" role="tab" aria-controls="messages"><i
-                    class="fas fa-plug"></i> Power <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-plug"></i> Питание <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-alerts-btn"
            data-toggle="list" href="#printer-alerts" role="tab" aria-controls="messages"><i
-                    class="fas fa-bell"></i> Alerts <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-bell"></i> Оповещения <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-gcode-btn"
            data-toggle="list" href="#printer-gcode" role="tab" aria-controls="messages"><i
-                    class="fas fa-pen"></i> Gcode Scripts <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-pen"></i> Gcode скрипты <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-settings-btn"
            data-toggle="list" href="#printer-settings" role="tab" aria-controls="messages"><i
-                    class="fas fa-cog"></i> Camera Settings <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-cog"></i> Настройки камеры <i class="fas fa-spinner fa-spin"></i></a>
         <a class="list-group-item list-group-item-action notyet" id="printer-trigger-btn"
            data-toggle="list" href="#printer-trigger" role="tab" aria-controls="messages"><i
-                    class="fas fa-cog"></i> Trigger Settings <i class="fas fa-spinner fa-spin"></i></a>
+                    class="fas fa-cog"></i> Настройки триггеров <i class="fas fa-spinner fa-spin"></i></a>
     </div>
     <span id="printerSettingsFooter">
 
@@ -34,26 +34,26 @@
         <div class="tab-pane fade active show" id="printer-connection" role="tabpanel"
              aria-labelledby="system-panel-view-list">
             <p id="offlineMessage"></p>
-            <h5>Current Status</h5>
+            <h5>Текущий статус</h5>
             <hr>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                     <button id="psHost" type="button" class="btn btn-warning mb-1"
                             href="#" target="_blank" disabled> <i
-                                class="fas fa-spinner fa-spin"></i> Checking..
+                                class="fas fa-spinner fa-spin"></i> Проверка..
                     </button>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                     <button id="psStatus" type="button" class="btn btn-warning mb-1"
                             href="#" target="_blank" disabled> <i
-                                class="fas fa-spinner fa-spin"></i> Checking..
+                                class="fas fa-spinner fa-spin"></i> Проверка..
                     </button>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                     <button id="psWebSocket" type="button"
                             class="btn btn-warning mb-1" href="#" target="_blank"
                             disabled> <i
-                                class="fas fa-spinner fa-spin"></i> Checking..
+                                class="fas fa-spinner fa-spin"></i> Проверка..
                     </button>
                 </div>
             </div>
@@ -106,12 +106,12 @@
                     </div>
                 </div>
             </div>
-            <h5>Serial Defaults</h5>
+            <h5>Настройки последовательного порта</h5>
             <hr>
             <p id="portNotAvailableMessage"></p>
-            <p>Set OctoPrints default serial connection settings. These will be saved to your
-                OctoPrint instance so it will always use these when connecting to your
-                printer.</p>
+            <p>Установите настройки последовательного подключения OctoPrint по умолчанию. Они будут сохранены
+                в вашем экземпляре OctoPrint и будут использоваться при подключении к
+                принтеру.</p>
             <div id="psConnectionDefaults" class="row">
 
                 <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" id="psDefaultPortDrop">
@@ -125,23 +125,23 @@
 
                 </div>
             </div>
-            <h5>Quick Connect Settings</h5>
+            <h5>Настройки быстрого подключения</h5>
             <hr>
             <div id="quickConnectionSettings" class="row">
                 <div class="col-12">
-                    Set your quick connection button settings.<br>
+                    Настройте параметры кнопки быстрого подключения.<br>
 
-                    <b>Connected/Disconnect: </b> When this is enabled the button will attempt to establish a connection between OctoPrint and your Printer.<br>
-                    <b>Power On/Off: </b>  When this is enabled the button will try and power your printer On, before connect attempt and off after a disconnect attempt.<br>
-                    <code>Requires an OctoPrint power plugin and power tab setting up to toggle printers power!</code>
+                    <b>Подключить/Отключить: </b> При включении кнопка будет пытаться установить соединение между OctoPrint и вашим принтером.<br>
+                    <b>Включить/Выключить питание: </b> При включении кнопка будет пытаться включить питание принтера перед подключением и выключить после отключения.<br>
+                    <code>Требуется плагин питания OctoPrint и настройка вкладки питания для управления питанием принтера!</code>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <form class="was-validated">
                         <div class="custom-control custom-checkbox mb-3">
                             <input type="checkbox" class="custom-control-input" id="psQuickConnect" required>
-                            <label class="custom-control-label" for="psQuickConnect">Connect/Disconnect</label>
-                            <div class="valid-feedback">Will try to connect/disconnect</div>
-                            <div class="invalid-feedback">Will skip connect/disconnect</div>
+                            <label class="custom-control-label" for="psQuickConnect">Подключить/Отключить</label>
+                            <div class="valid-feedback">Будет пытаться подключить/отключить</div>
+                            <div class="invalid-feedback">Пропустит подключение/отключение</div>
                         </div>
                     </form>
                 </div>
@@ -149,37 +149,37 @@
                     <form class="was-validated">
                         <div class="custom-control custom-checkbox mb-3">
                             <input type="checkbox" class="custom-control-input" id="psQuickPower" required>
-                            <label class="custom-control-label" for="psQuickPower">Power On/Off</label>
-                            <div class="valid-feedback">Will try to power on/off printer</div>
-                            <div class="invalid-feedback">Will skip powering on/off printer</div>
+                            <label class="custom-control-label" for="psQuickPower">Включить/Выключить питание</label>
+                            <div class="valid-feedback">Будет пытаться включить/выключить питание принтера</div>
+                            <div class="invalid-feedback">Пропустит включение/выключение питания принтера</div>
                         </div>
                     </form>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6">
                     <div class="form-group">
-                        <label for="psQuickConnectTimeout">Connect after power timeout</label>
+                        <label for="psQuickConnectTimeout">Тайм-аут подключения после включения</label>
                         <div class="input-group mb-2">
                             <input type="number" class="form-control" id="psQuickConnectTimeout" step="1">
                             <div class="input-group-append">
-                                <div class="input-group-text">Seconds</div>
+                                <div class="input-group-text">Секунды</div>
                             </div>
                         </div>
                         <small class="form-text text-muted">
-                            The time between attempting to power your printer on after a successful connection attempt.
+                            Время между попыткой включения питания принтера после успешного подключения.
                         </small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6">
                     <div class="form-group">
-                        <label for="psQuickPowerTimeout">Power after disconnect timeout</label>
+                        <label for="psQuickPowerTimeout">Тайм-аут питания после отключения</label>
                         <div class="input-group mb-2">
                             <input type="number" class="form-control" id="psQuickPowerTimeout" placeholder="3000" step="1">
                             <div class="input-group-append">
-                                <div class="input-group-text">Seconds</div>
+                                <div class="input-group-text">Секунды</div>
                             </div>
                         </div>
                         <small class="form-text text-muted">
-                            The time between attempting to disconnect your printer after a successful power off attempt.
+                            Время между попыткой отключения принтера после успешного выключения питания.
                         </small>
                     </div>
                 </div>
@@ -187,40 +187,40 @@
         </div>
         <div class="tab-pane fade" id="printer-profile" role="tabpanel"
              aria-labelledby="system-panel-view-list">
-            <h5>Printer Profiles</h5>
+            <h5>Профили принтера</h5>
             <hr>
-            <p>Below is your current selected printer profile information. You may make edits to
-                it here and have it saved back in OctoPrint.</p>
+            <p>Ниже представлена информация о текущем выбранном профиле принтера. Вы можете
+                отредактировать его здесь, и изменения будут сохранены в OctoPrint.</p>
             <div id="psPrinterProfiles" class="row">
 
             </div>
         </div>
         <div class="tab-pane fade" id="printer-cost" role="tabpanel"
              aria-labelledby="system-panel-view-list">
-            <h5>Printer Costs</h5>
+            <h5>Стоимость принтера</h5>
             <hr>
-            <p>Below are the settings used to calculate the printer costs column in history and
-                on other views.</p>
+            <p>Ниже представлены настройки, используемые для расчёта столбца стоимости принтера в истории и
+                на других видах.</p>
             <div id="psPrinterCost" class="row">
 
             </div>
         </div>
         <div class="tab-pane fade" id="printer-alerts" role="tabpanel"
              aria-labelledby="system-panel-view-list">
-            <h5>Alerts</h5>
+            <h5>Оповещения</h5>
             <hr>
-            <p>List of Alerts activated on this printer.</p>
-            <p>To set these up go to System -> Alerts</p>
+            <p>Список оповещений, активированных на этом принтере.</p>
+            <p>Для настройки перейдите в Система -> Оповещения</p>
             <div class="row">
                 <div class="col-12" id="psCustomAlertsTable">
                     <table id="customAltersTable"
                            class="table table-sm table-dark table-striped table-responsive-sm table-responsive-md text-center">
                         <thead>
                         <tr>
-                            <th scope="col">Active</th>
-                            <th scope="col" style="width:150px;">Trigger</th>
-                            <th scope="col">Script</th>
-                            <th scope="col">Message</th>
+                            <th scope="col">Активно</th>
+                            <th scope="col" style="width:150px;">Триггер</th>
+                            <th scope="col">Скрипт</th>
+                            <th scope="col">Сообщение</th>
                         </tr>
                         </thead>
                         <tbody id="printerAltersTableBody"
@@ -233,12 +233,12 @@
         </div>
         <div class="tab-pane fade" id="printer-power" role="tabpanel"
              aria-labelledby="system-panel-view-list">
-            <h5>Power Commands</h5>
+            <h5>Команды питания</h5>
             <hr>
-            <p>Setup your host/printer power commands here. Enabling these will add a Power menu
-                button next to printer control on all views.</p>
+            <p>Настройте команды питания хоста/принтера здесь. Включение добавит кнопку меню питания
+                рядом с управлением принтером на всех видах.</p>
             <div class="alert alert-warning text-dark" role="alert">
-                You will need to refresh the web interface for these settings to take effect!
+                Необходимо обновить веб-интерфейс, чтобы настройки вступили в силу!
             </div>
             <div class="row">
                 <div class="col-12" id="psPowerCommands">
@@ -248,7 +248,7 @@
         </div>
         <div class="tab-pane fade" id="printer-gcode" role="tabpanel"
              aria-labelledby="system-panel-view-list">
-            <h5>OctoPrint Gcode Scripts</h5>
+            <h5>Gcode скрипты OctoPrint</h5>
             <hr>
             <div id="psGcodeManagerGcode">
 
@@ -256,11 +256,11 @@
         </div>
         <div class="tab-pane fade" id="printer-settings" role="tabpanel"
              aria-labelledby="system-settings-list">
-            <h5>Camera Settings</h5>
+            <h5>Настройки камеры</h5>
             <hr>
             <div class="row">
                 <div class="col-12 col-md-12" id="printerManagerSettings">
-                    <h6><u>Camera Settings</u></h6>
+                    <h6><u>Настройки камеры</u></h6>
                     <div id="cameraRotation">
 
                     </div>
@@ -269,11 +269,11 @@
         </div>
         <div class="tab-pane fade" id="printer-trigger" role="tabpanel"
              aria-labelledby="system-settings-list">
-            <h5>Trigger Settings</h5>
+            <h5>Настройки триггеров</h5>
             <hr>
             <div class="row">
                 <div class="col-12 col-md-12" id="printerManagerSettings">
-                    <h6><u>Temperature Triggers</u></h6>
+                    <h6><u>Температурные триггеры</u></h6>
                     <div id="tempTriggers">
 
                     </div>

@@ -4,7 +4,7 @@ export const spoolsManagerTableRow = (spool, allowMultiSelectIsEnabled) => {
   if (allowMultiSelectIsEnabled) {
     multiple = "multiple=true";
     unassignSpools = `
-            <button title="Unassign Spool" id="unassign-${spool._id}" type="button" class="btn btn-sm btn-warning unassign">
+            <button title="Отвязать катушку" id="unassign-${spool._id}" type="button" class="btn btn-sm btn-warning unassign">
                 <i class="fa-solid fa-ban text-dark"></i>
             </button>
         `;
@@ -54,22 +54,22 @@ export const spoolsManagerTableRow = (spool, allowMultiSelectIsEnabled) => {
     </td>
         <td>
             ${unassignSpools}
-            <button title="Clone Spool" id="clone-${
+            <button title="Клонировать катушку" id="clone-${
               spool._id
             }" type="button" class="btn btn-sm btn-success clone">
                 <i class="far fa-copy"></i>
             </button>
-            <button title="Edit Spool" id="edit-${
+            <button title="Редактировать катушку" id="edit-${
               spool._id
             }" type="button" class="btn btn-sm btn-primary edit">
                 <i class="fas fa-edit editIcon"></i>
             </button>
-            <button title="Save Spool" id="save-${
+            <button title="Сохранить катушку" id="save-${
               spool._id
             }" type="button" class="btn btn-sm d-none btn-success save">
                 <i class="fas fa-save saveIcon"></i>
             </button>
-            <button title="Delete Spool" id="delete-${
+            <button title="Удалить катушку" id="delete-${
               spool._id
             }" type="button" class="btn btn-sm btn-danger delete">
                 <i class="fas fa-trash deleteIcon"></i>

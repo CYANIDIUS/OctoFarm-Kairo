@@ -1,13 +1,13 @@
 <div id="systemTasksTable" class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <h4>Startup Tasks</h4><hr>
+        <h4>Задачи запуска</h4><hr>
         <table class="table-hover table table-dark">
             <thead>
             <tr>
-                <th scope="col">Task Name</th>
-                <th scope="col">First Execution</th>
-                <th scope="col">Last Execution</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Название задачи</th>
+                <th scope="col">Первое выполнение</th>
+                <th scope="col">Последнее выполнение</th>
+                <th scope="col">Длительность</th>
             </tr>
             </thead>
             <tbody>
@@ -18,8 +18,8 @@
                 <% if(!currentTask.options.periodic){ %>
                     <tr>
                         <th scope="row"><%= taskName %></th>
-                        <td id="firstExecution-<%= task %>"><%= (currentTask.firstCompletion) ? new Date(currentTask.firstCompletion).toLocaleString().replace(",", ": ") : "Not Started" %></td>
-                        <td id="lastExecution-<%= task %>"><%= (currentTask.lastExecuted) ? new Date(currentTask.lastExecuted).toLocaleString().replace(",", ": ") : "Not Finished" %></td>
+                        <td id="firstExecution-<%= task %>"><%= (currentTask.firstCompletion) ? new Date(currentTask.firstCompletion).toLocaleString().replace(",", ": ") : "Не запущено" %></td>
+                        <td id="lastExecution-<%= task %>"><%= (currentTask.lastExecuted) ? new Date(currentTask.lastExecuted).toLocaleString().replace(",", ": ") : "Не завершено" %></td>
                         <td id="duration-<%= task %>"><%- (currentTask.duration) ? helpers.generateMilisecondsTime(currentTask.duration) : '<i class="fas fa-sync fa-spin"></i>'  %></td>
                     </tr>
                 <% } %>
@@ -29,16 +29,16 @@
         </table>
     </div>
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <h4>Recurring Tasks</h4><hr>
+        <h4>Периодические задачи</h4><hr>
         <table class="table-hover table table-dark">
             <thead>
             <tr>
-                <th scope="col">Task Name</th>
-                <th scope="col">Interval</th>
-                <th scope="col">First Execution</th>
-                <th scope="col">Last Execution</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Next Execution</th>
+                <th scope="col">Название задачи</th>
+                <th scope="col">Интервал</th>
+                <th scope="col">Первое выполнение</th>
+                <th scope="col">Последнее выполнение</th>
+                <th scope="col">Длительность</th>
+                <th scope="col">Следующее выполнение</th>
             </tr>
             </thead>
             <tbody>
@@ -49,11 +49,11 @@
                 <% if(currentTask.options.periodic){ %>
                     <tr>
                         <th scope="row"><%= taskName %></th>
-                        <td><%= (currentTask.options.periodic) ? helpers.generateMilisecondsTime(currentTask.options.milliseconds) : 'No Interval' %></td>
-                        <td id="firstExecution-<%= task %>"><%= (currentTask.firstCompletion) ? new Date(currentTask.firstCompletion).toLocaleString().replace(",", ": ") : "Not Started" %></td>
-                        <td id="lastExecution-<%= task %>"><%= (currentTask.lastExecuted) ? new Date(currentTask.lastExecuted).toLocaleString().replace(",", ": ") : "Not Finished" %></td>
+                        <td><%= (currentTask.options.periodic) ? helpers.generateMilisecondsTime(currentTask.options.milliseconds) : 'Нет интервала' %></td>
+                        <td id="firstExecution-<%= task %>"><%= (currentTask.firstCompletion) ? new Date(currentTask.firstCompletion).toLocaleString().replace(",", ": ") : "Не запущено" %></td>
+                        <td id="lastExecution-<%= task %>"><%= (currentTask.lastExecuted) ? new Date(currentTask.lastExecuted).toLocaleString().replace(",", ": ") : "Не завершено" %></td>
                         <td id="duration-<%= task %>"><%- (currentTask.duration) ? helpers.generateMilisecondsTime(currentTask.duration) : ''  %></td>
-                        <td id="next-<%= task %>"><%= (currentTask.nextRun) ? new Date(currentTask.nextRun).toLocaleString().replace(",", ": ") : "First Not Completed" %></td>
+                        <td id="next-<%= task %>"><%= (currentTask.nextRun) ? new Date(currentTask.nextRun).toLocaleString().replace(",", ": ") : "Первое не завершено" %></td>
                     </tr>
                 <% } %>
 

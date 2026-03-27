@@ -81,47 +81,47 @@ export default class PrinterTerminalManagerService {
 
           <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-3 text-center">
-              <h5>Camera</h5><hr>
+              <h5>Камера</h5><hr>
               ${imageOrCamera(printer, undefined, "Modal")}
-              <h5 class="mt-1">Filters</h5><hr>
+              <h5 class="mt-1">Фильтры</h5><hr>
               <form class="was-validated">
                       <div class="custom-control custom-checkbox mb-3">
                         <input 
                         type="checkbox" class="custom-control-input" id="tempMessages" required checked>
-                        <label class="custom-control-label" for="tempMessages">Temperature Messages</label>
-                        <div class="valid-feedback">Showing temperature messages</div>
-                        <div class="invalid-feedback">Not showing temperature messages</div>
+                        <label class="custom-control-label" for="tempMessages">Сообщения температуры</label>
+                        <div class="valid-feedback">Показаны сообщения температуры</div>
+                        <div class="invalid-feedback">Сообщения температуры скрыты</div>
                       </div>
                       </form>
               <form class="was-validated">
                <div class="custom-control custom-checkbox mb-3">
                 <input
                 type="checkbox" class="custom-control-input" id="sdMessages" required checked>
-                <label class="custom-control-label" for="sdMessages">SD Messages</label>
-                <div class="valid-feedback">Showing sd messages</div>
-                <div class="invalid-feedback">Not showing sd messages</div>
+                <label class="custom-control-label" for="sdMessages">Сообщения SD</label>
+                <div class="valid-feedback">Показаны сообщения SD</div>
+                <div class="invalid-feedback">Сообщения SD скрыты</div>
               </div>
               </form>
               <form class="was-validated">
               <div class="custom-control custom-checkbox mb-3">
                 <input
                 type="checkbox" class="custom-control-input" id="waitMessages" required checked>
-                <label class="custom-control-label" for="waitMessages">Wait Responses</label>
-                <div class="valid-feedback">Showing wait responses</div>
-                <div class="invalid-feedback">Not showing wait responses</div>
+                <label class="custom-control-label" for="waitMessages">Ответы ожидания</label>
+                <div class="valid-feedback">Показаны ответы ожидания</div>
+                <div class="invalid-feedback">Ответы ожидания скрыты</div>
               </div>
                 </form>
-              <h5 class="mt-1">Custom Gocde Scripts</h5><hr>
+              <h5 class="mt-1">Пользовательские Gcode скрипты</h5><hr>
               <div id="customGcodeCommandsArea" class="col-lg-12 text-center"></div>    
             </div>
             <div class="col-sm-12 col-md-8 col-lg-9 text-center">
-               <h5>Terminal</h5>
+               <h5>Терминал</h5>
                <hr>
                <div id="terminal" class="terminal-window bg-secondary text-left"></div>
               <div class="input-group">
                 <textarea id="terminalInput" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2"></textarea>
                 <div class="input-group-append">
-                  <button class="btn btn-secondary" id="terminalInputBtn" type="submit">Send</button>
+                  <button class="btn btn-secondary" id="terminalInputBtn" type="submit">Отправить</button>
                 </div>
               </div>
             </div>

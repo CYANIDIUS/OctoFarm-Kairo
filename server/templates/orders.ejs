@@ -1,40 +1,40 @@
-<!-- Orders Management Page -->
+<!-- Страница управления заказами -->
 <div class="row">
     <div class="col-lg-12">
         <div class="card bg-dark mb-3">
             <div class="card-header">
                 <h5 class="card-title mb-0">
-                    <i class="fas fa-clipboard-list"></i> Order Management
+                    <i class="fas fa-clipboard-list"></i> Управление заказами
                     <button id="btnCreateOrder" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#createOrderModal">
-                        <i class="fas fa-plus"></i> New Order
+                        <i class="fas fa-plus"></i> Новый заказ
                     </button>
                 </h5>
             </div>
             <div class="card-body">
                 <!-- Status Filters -->
                 <div class="btn-group mb-3" role="group" aria-label="Status filters">
-                    <button type="button" class="btn btn-sm btn-outline-info order-filter active" data-status="">All</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary order-filter" data-status="queued">Queued</button>
-                    <button type="button" class="btn btn-sm btn-outline-primary order-filter" data-status="calculated">Calculated</button>
-                    <button type="button" class="btn btn-sm btn-outline-warning order-filter" data-status="scheduled">Scheduled</button>
-                    <button type="button" class="btn btn-sm btn-outline-success order-filter" data-status="printing">Printing</button>
-                    <button type="button" class="btn btn-sm btn-outline-light order-filter" data-status="done">Done</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger order-filter" data-status="canceled">Canceled</button>
+                    <button type="button" class="btn btn-sm btn-outline-info order-filter active" data-status="">Все</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary order-filter" data-status="queued">В очереди</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary order-filter" data-status="calculated">Рассчитан</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning order-filter" data-status="scheduled">Назначен</button>
+                    <button type="button" class="btn btn-sm btn-outline-success order-filter" data-status="printing">Печать</button>
+                    <button type="button" class="btn btn-sm btn-outline-light order-filter" data-status="done">Завершён</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger order-filter" data-status="canceled">Отменён</button>
                 </div>
                 <!-- Orders Table -->
                 <div class="table-responsive">
                     <table class="table table-dark table-striped table-hover" id="ordersTable">
                         <thead>
                             <tr>
-                                <th>Priority</th>
-                                <th>Name</th>
-                                <th>Total Parts</th>
-                                <th>Material</th>
-                                <th>Mode</th>
-                                <th>Est. Time</th>
-                                <th>Status</th>
-                                <th>Created</th>
-                                <th style="min-width: 200px;">Actions</th>
+                                <th>Приоритет</th>
+                                <th>Название</th>
+                                <th>Итого деталей</th>
+                                <th>Материал</th>
+                                <th>Режим</th>
+                                <th>Расч. время</th>
+                                <th>Статус</th>
+                                <th>Создан</th>
+                                <th style="min-width: 200px;">Действия</th>
                             </tr>
                         </thead>
                         <tbody id="ordersTableBody">
@@ -44,22 +44,22 @@
                 </div>
                 <div id="ordersLoading" class="text-center">
                     <i class="fas fa-spinner fa-spin fa-2x"></i>
-                    <p>Loading orders...</p>
+                    <p>Загрузка заказов...</p>
                 </div>
                 <div id="ordersEmpty" class="text-center" style="display:none;">
-                    <p class="text-muted">No orders found. Create a new order to get started.</p>
+                    <p class="text-muted">Заказов не найдено. Создайте новый заказ для начала.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Create Order Modal -->
+<!-- Модальное окно создания заказа -->
 <div class="modal fade" id="createOrderModal" tabindex="-1" role="dialog" aria-labelledby="createOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="createOrderModalLabel"><i class="fas fa-plus-circle"></i> Create New Order</h5>
+                <h5 class="modal-title" id="createOrderModalLabel"><i class="fas fa-plus-circle"></i> Создание нового заказа</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,65 +68,65 @@
                 <form id="createOrderForm" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-8">
-                            <label for="orderName">Order Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="orderName" name="name" required placeholder="Enter order name">
+                            <label for="orderName">Название заказа <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="orderName" name="name" required placeholder="Введите название заказа">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="orderPriority">Priority (1=Highest)</label>
+                            <label for="orderPriority">Приоритет (1=Наивысший)</label>
                             <select class="form-control" id="orderPriority" name="priority">
-                                <option value="1">1 — Critical</option>
-                                <option value="2">2 — High</option>
-                                <option value="3" selected>3 — Normal</option>
-                                <option value="4">4 — Low</option>
-                                <option value="5">5 — Background</option>
+                                <option value="1">1 — Критический</option>
+                                <option value="2">2 — Высокий</option>
+                                <option value="3" selected>3 — Обычный</option>
+                                <option value="4">4 — Низкий</option>
+                                <option value="5">5 — Фоновый</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="orderComment">Comment</label>
-                        <textarea class="form-control" id="orderComment" name="comment" rows="2" placeholder="Operator notes..."></textarea>
+                        <label for="orderComment">Комментарий</label>
+                        <textarea class="form-control" id="orderComment" name="comment" rows="2" placeholder="Заметки оператора..."></textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="orderPartsPerFile">Parts in File <span class="text-danger">*</span></label>
+                            <label for="orderPartsPerFile">Деталей в файле <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="orderPartsPerFile" name="partsPerFile" value="1" min="1" required>
-                            <small class="form-text text-muted">How many parts in one 3MF file</small>
+                            <small class="form-text text-muted">Сколько деталей в одном 3MF файле</small>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="orderFileCopies">File Copies <span class="text-danger">*</span></label>
+                            <label for="orderFileCopies">Копий файла <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="orderFileCopies" name="fileCopies" value="1" min="1" required>
-                            <small class="form-text text-muted">How many times to print the file</small>
+                            <small class="form-text text-muted">Сколько раз печатать файл</small>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="orderEstTime">Est. Print Time (sec)</label>
+                            <label for="orderEstTime">Расч. время печати (сек)</label>
                             <input type="number" class="form-control" id="orderEstTime" name="estimatedPrintTime" value="0" min="0">
-                            <small class="form-text text-muted">Time per 1 print run (from slicer)</small>
+                            <small class="form-text text-muted">Время на 1 печать (из слайсера)</small>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>Total Parts</label>
+                            <label>Итого деталей</label>
                             <input type="text" class="form-control" id="orderTotalParts" readonly disabled>
-                            <small class="form-text text-muted">Parts in File × File Copies</small>
+                            <small class="form-text text-muted">Деталей в файле × Копий файла</small>
                         </div>
                     </div>
                     <hr class="border-secondary">
-                    <h6><i class="fas fa-cog"></i> Requirements</h6>
+                    <h6><i class="fas fa-cog"></i> Требования</h6>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="orderVolumeX">Volume X (mm)</label>
+                            <label for="orderVolumeX">Размер X (мм)</label>
                             <input type="number" step="0.1" class="form-control" id="orderVolumeX" name="volumeX" value="0" min="0">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="orderVolumeY">Volume Y (mm)</label>
+                            <label for="orderVolumeY">Размер Y (мм)</label>
                             <input type="number" step="0.1" class="form-control" id="orderVolumeY" name="volumeY" value="0" min="0">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="orderVolumeZ">Volume Z (mm)</label>
+                            <label for="orderVolumeZ">Размер Z (мм)</label>
                             <input type="number" step="0.1" class="form-control" id="orderVolumeZ" name="volumeZ" value="0" min="0">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="orderMaterial">Material</label>
+                            <label for="orderMaterial">Материал</label>
                             <select class="form-control" id="orderMaterial" name="material">
-                                <option value="">Any</option>
+                                <option value="">Любой</option>
                                 <option value="PLA">PLA</option>
                                 <option value="PETG">PETG</option>
                                 <option value="ABS">ABS</option>
@@ -138,69 +138,69 @@
                         </div>
                     </div>
                     <hr class="border-secondary">
-                    <h6><i class="fas fa-print"></i> Printer Assignment</h6>
+                    <h6><i class="fas fa-print"></i> Назначение принтеров</h6>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="orderReferencePrinter">Reference Printer</label>
+                            <label for="orderReferencePrinter">Референсный принтер</label>
                             <select class="form-control" id="orderReferencePrinter" name="referencePrinter">
-                                <option value="">— Select printer 3MF was sliced for —</option>
+                                <option value="">— Выберите принтер, для которого слайсирован 3MF —</option>
                             </select>
-                            <small class="form-text text-muted">The printer this file was sliced for</small>
+                            <small class="form-text text-muted">Принтер, для которого слайсирован файл</small>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="orderOptMode">Optimization Mode</label>
+                            <label for="orderOptMode">Режим оптимизации</label>
                             <select class="form-control" id="orderOptMode" name="optimizationMode">
-                                <option value="min_time">Minimize Time (Greedy)</option>
-                                <option value="min_idle">Minimize Idle (Balanced)</option>
+                                <option value="min_time">Минимум времени (жадный)</option>
+                                <option value="min_idle">Баланс загрузки (сбалансированный)</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Compatible Printer Groups</label>
+                        <label>Совместимые группы принтеров</label>
                         <div id="compatibleGroupsContainer" class="border border-secondary rounded p-2" style="max-height: 200px; overflow-y: auto;">
-                            <p class="text-muted mb-0"><i class="fas fa-spinner fa-spin"></i> Loading groups...</p>
+                            <p class="text-muted mb-0"><i class="fas fa-spinner fa-spin"></i> Загрузка групп...</p>
                         </div>
-                        <small class="form-text text-muted">Select which printer groups can produce this order. Reference printer's group is auto-selected.</small>
+                        <small class="form-text text-muted">Выберите группы принтеров для этого заказа. Группа референсного принтера выбирается автоматически.</small>
                     </div>
                     <div class="form-group">
-                        <label for="orderFile">3MF / G-code File</label>
+                        <label for="orderFile">3MF / G-code файл</label>
                         <input type="file" class="form-control-file" id="orderFile" name="file" accept=".3mf,.gcode,.gco,.g">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" id="btnSubmitOrder"><i class="fas fa-save"></i> Create Order</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-success" id="btnSubmitOrder"><i class="fas fa-save"></i> Создать заказ</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Schedule Results Modal -->
+<!-- Модальное окно результатов расписания -->
 <div class="modal fade" id="scheduleResultModal" tabindex="-1" role="dialog" aria-labelledby="scheduleResultModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="scheduleResultModalLabel"><i class="fas fa-calculator"></i> Schedule Calculation Result</h5>
+                <h5 class="modal-title" id="scheduleResultModalLabel"><i class="fas fa-calculator"></i> Результат расчёта расписания</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div id="scheduleResultInfo" class="mb-3">
-                    <p>Total Batches: <strong id="schedTotalBatches">-</strong></p>
-                    <p>Total Estimated Time: <strong id="schedTotalTime">-</strong></p>
+                    <p>Всего партий: <strong id="schedTotalBatches">-</strong></p>
+                    <p>Общее расч. время: <strong id="schedTotalTime">-</strong></p>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th>Printer Group</th>
-                                <th>Printers</th>
-                                <th>Batches</th>
-                                <th>Per Printer</th>
-                                <th>Est. Time</th>
-                                <th>Status</th>
+                                <th>Группа принтеров</th>
+                                <th>Принтеры</th>
+                                <th>Партий</th>
+                                <th>На принтер</th>
+                                <th>Расч. время</th>
+                                <th>Статус</th>
                             </tr>
                         </thead>
                         <tbody id="scheduleResultBody">
@@ -209,19 +209,19 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning" id="btnAssignSchedule"><i class="fas fa-check-double"></i> Assign Schedule</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-warning" id="btnAssignSchedule"><i class="fas fa-check-double"></i> Назначить расписание</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Upload G-code Modal -->
+<!-- Модальное окно загрузки G-code -->
 <div class="modal fade" id="uploadGcodeModal" tabindex="-1" role="dialog" aria-labelledby="uploadGcodeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadGcodeModalLabel"><i class="fas fa-file-upload"></i> Upload G-code for Group</h5>
+                <h5 class="modal-title" id="uploadGcodeModalLabel"><i class="fas fa-file-upload"></i> Загрузка G-code для группы</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -232,26 +232,26 @@
                     <input type="hidden" id="gcodeOrderId" name="orderId">
                     <input type="hidden" id="gcodeAssignmentId" name="assignmentId">
                     <div class="form-group">
-                        <label for="gcodeFile">G-code File</label>
+                        <label for="gcodeFile">Файл G-code</label>
                         <input type="file" class="form-control-file" id="gcodeFile" name="gcode" accept=".gcode,.gco,.g" required>
-                        <small class="form-text text-muted">This G-code will be shared by all printers in the group.</small>
+                        <small class="form-text text-muted">Этот G-code будет использоваться всеми принтерами группы.</small>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" id="btnSubmitGcode"><i class="fas fa-upload"></i> Upload</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-success" id="btnSubmitGcode"><i class="fas fa-upload"></i> Загрузить</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Order Detail Modal -->
+<!-- Модальное окно деталей заказа -->
 <div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="orderDetailModalLabel"><i class="fas fa-info-circle"></i> Order Details</h5>
+                <h5 class="modal-title" id="orderDetailModalLabel"><i class="fas fa-info-circle"></i> Детали заказа</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -260,7 +260,7 @@
                 <!-- Populated by JS -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>

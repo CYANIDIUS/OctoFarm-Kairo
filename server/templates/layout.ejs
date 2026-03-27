@@ -12,7 +12,7 @@
 <% } %>
 
 <!DOCTYPE html>
-<html id="octofarm_html" lang="en">
+<html id="octofarm_html" lang="ru">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -47,57 +47,57 @@
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключить навигацию">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li id="menuDashboard">
-                <a title="Farm Dashboard" class="nav-link text-center" href="/dashboard">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                <a title="Панель мониторинга фермы" class="nav-link text-center" href="/dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Панель
                 </a>
             </li>
             <% if(monitoringSettings.panel){ %>
                 <li class="nav-item">
-                    <a title="Panel layout monitoring view" class="nav-link text-light text-center btn-sm"
+                    <a title="Панельный вид мониторинга" class="nav-link text-light text-center btn-sm"
                        id="menuPanelView" href="/mon/panel"><i class="fas fa-columns"></i>
-                        Panel</a>
+                        Панель</a>
                 </li>
             <% } %>
             <% if(monitoringSettings.list){ %>
                 <li class="nav-item">
-                    <a title="List layout monitoring view" class="nav-link text-light text-center btn-sm"
-                       id="menuListView" href="/mon/list"><i class="fas fa-list"></i> List</a>
+                    <a title="Список мониторинга" class="nav-link text-light text-center btn-sm"
+                       id="menuListView" href="/mon/list"><i class="fas fa-list"></i> Список</a>
                 </li>
             <% } %>
             <% if(monitoringSettings.camera){ %>
                 <li class="nav-item">
-                    <a title="Camera layout monitoring view"
+                    <a title="Вид камер мониторинга"
                        class="nav-link text-light text-center btn-sm" id="menuCameraView"
                        href="/mon/camera"><i class="fas fa-video"></i>
-                        Camera</a>
+                        Камеры</a>
                 </li>
             <% } %>
             <% if(monitoringSettings.group){ %>
                 <li class="nav-item">
-                    <a title="Group layout lonitoring liew" class="nav-link text-light text-center btn-sm"
-                       id="menuListView" href="/mon/group" disabled><i class="fas fa-map-marked-alt"></i> Group</a>
+                    <a title="Групповой вид мониторинга" class="nav-link text-light text-center btn-sm"
+                       id="menuListView" href="/mon/group" disabled><i class="fas fa-map-marked-alt"></i> Группы</a>
                 </li>
             <% } %>
             <% if(monitoringSettings.combined){ %>
                 <li class="nav-item">
-                    <a title="Combined monitoring view layout"
+                    <a title="Комбинированный вид мониторинга"
                        class="nav-link text-light text-center btn-sm" id="menuCombinedView"
                        href="/mon/combined"><i class="fas fa-object-group"></i>
-                        Super List</a>
+                        Общий список</a>
                 </li>
             <% } %>
             <% if(monitoringSettings.currentOperations){ %>
                 <li class="nav-item">
-                    <a title="Current Operations Monitoring Layout View"
+                    <a title="Текущие операции"
                        class="nav-link text-light text-center btn-sm" id="menucurrentOperationsView"
                        href="/mon/currentOp"><i class="fas fa-star"></i>
-                        Current Operations</a>
+                        Текущие операции</a>
                 </li>
             <% } %>
 
@@ -129,40 +129,40 @@
         <ul class="nav navbar-nav navbar-right">
             <li id="menuPrinters">
                 <small>
-                    <a title="Current development version" class="nav-link text-center notyet">
+                    <a title="Текущая версия" class="nav-link text-center notyet">
                         <i class="fas fa-code-branch"></i> <%= serverVersion %>
                     </a>
                 </small>
             </li>
             <% if(currentUserGroup === "Administrator"){ %>
                 <li id="menuPrinters">
-                    <a title="Printer Setup" class="nav-link text-center" href="/printers">
-                        <i class="fas fa-print"></i> Printers
+                    <a title="Настройка принтеров" class="nav-link text-center" href="/printers">
+                        <i class="fas fa-print"></i> Принтеры
                     </a>
                 </li>
             <% } %>
             <li class="nav-item">
-                <a title="File Manager" class="nav-link text-center" href="/filemanager" id="fileManagerBtn">
-                    <i class="fas fa-folder-open"></i> File Manager
+                <a title="Файловый менеджер" class="nav-link text-center" href="/filemanager" id="fileManagerBtn">
+                    <i class="fas fa-folder-open"></i> Файлы
                 </a>
             </li>
             <li class="nav-item">
-                <a title="Print HistoryRoutes" class="nav-link text-center" href="/history" id="historyBtn">
-                    <i class="fas fa-history"></i> History
+                <a title="История печати" class="nav-link text-center" href="/history" id="historyBtn">
+                    <i class="fas fa-history"></i> История
                 </a>
             </li>
             <li class="nav-item">
-                <a title="Order Management" class="nav-link text-center" href="/orders" id="ordersBtn">
-                    <i class="fas fa-clipboard-list"></i> Orders
+                <a title="Управление заказами" class="nav-link text-center" href="/orders" id="ordersBtn">
+                    <i class="fas fa-clipboard-list"></i> Заказы
                 </a>
             </li>
             <li class="nav-item">
-                <a title="Filament Management" class="nav-link text-center" href="/filament" id=""><i
-                            class="fas fa-toilet-paper"></i> Filament</a>
+                <a title="Управление филаментом" class="nav-link text-center" href="/filament" id=""><i
+                            class="fas fa-toilet-paper"></i> Филамент</a>
             </li>
             <li class="nav-item">
-                <a title="Filament Management" class="nav-link text-center" href="/system">
-                    <i class="fas fa-cogs"></i> System
+                <a title="Настройки системы" class="nav-link text-center" href="/system">
+                    <i class="fas fa-cogs"></i> Система
                 </a>
             </li>
         </ul>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="modal-footer" id="printerManagerFooter">
                     <button id="" type="button" class="btn btn-light" data-dismiss="modal">
-                        Close
+                        Закрыть
                     </button>
                 </div>
             </div>
@@ -229,15 +229,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="lostServerConnection"><i class="fa-solid fa-satellite-dish"></i> Lost Connection to Server...</h3>
+                    <h3 class="modal-title" id="lostServerConnection"><i class="fa-solid fa-satellite-dish"></i> Потеряно соединение с сервером...</h3>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
                                 <p><i id="lostConnectionSpinner" class="fas fa-spinner fa-spin"></i></p>
-                                <p id="lostConnectionText">Attempting to reconnect in... <span id="lostServerConnectionTimer"></span></p>
-                                <button class="btn btn-outline-success" id="forceRefreshPageButton"><i class="fas fa-redo"></i> Refresh Page</button>
+                                <p id="lostConnectionText">Попытка переподключения через... <span id="lostServerConnectionTimer"></span></p>
+                                <button class="btn btn-outline-success" id="forceRefreshPageButton"><i class="fas fa-redo"></i> Обновить страницу</button>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="connectionModalLabel">Printer Connect/Disconnect</h3>
+                    <h3 class="modal-title" id="connectionModalLabel">Подключение/Отключение принтера</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
@@ -267,7 +267,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="" type="button" class="btn btn-light" data-dismiss="modal">
-                        Cancel
+                        Отмена
                     </button>
                 </div>
             </div>
@@ -276,21 +276,21 @@
     <%- include(fullScreenPrinter) %>
     <%- include(modal, {
     modal:{
-    id:"bulkActionProgress", title:"Bulk Action Progress: ", isBodyScrollable: "true", zIndex: 99999
+    id:"bulkActionProgress", title:"Прогресс массовых действий: ", isBodyScrollable: "true", zIndex: 99999
     },
     bodyFile:'./PrinterManager/bulkActionsProgress.modal.ejs'
     })
     %>
     <%- include(modal, {
     modal:{
-    id:"printerSelect", title:"Printer Select: "
+    id:"printerSelect", title:"Выбор принтера: "
     },
     bodyFile:'./PrinterManager/printerSelect.modal.ejs'
     })
     %>
     <%- include(modal, {
     modal:{
-    id:"bulkPrintSetup", title:"Multi-Print Setup: "
+    id:"bulkPrintSetup", title:"Настройка мульти-печати: "
     },
     bodyFile:'./PrinterManager/bulkPrintSetup.modal.ejs'
     })

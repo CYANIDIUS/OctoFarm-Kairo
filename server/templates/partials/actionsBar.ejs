@@ -7,7 +7,7 @@
 
       <div class="col-8">
         <button
-                title="Connect multiple Printers at once."
+                title="Подключить несколько принтеров одновременно."
                 id="bulkConnectBtn"
                 type="button"
                 class="btn btn-success"
@@ -15,10 +15,10 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-          <i class="fas fa-link"></i> Connect
+          <i class="fas fa-link"></i> Подключить
         </button>
         <button
-                title="Diconnect multiple Printers at once."
+                title="Отключить несколько принтеров одновременно."
                 id="bulkDisconnectBtn"
                 type="button"
                 class="btn btn-danger"
@@ -26,10 +26,10 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-          <i class="fas fa-unlink"></i> Disconnect
+          <i class="fas fa-unlink"></i> Отключить
         </button>
         <button
-                title="Power On/Off multiple Printers at once."
+                title="Включить/выключить несколько принтеров одновременно."
                 id="bulkPowerBtn"
                 type="button"
                 class="btn btn-outline-danger"
@@ -37,11 +37,11 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-          <i class="fas fa-power-off"></i> Power
+          <i class="fas fa-power-off"></i> Питание
         </button>
 
         <button
-                title="Send heating commands to multiple printers at once."
+                title="Отправить команды нагрева нескольким принтерам одновременно."
                 id="bulkPreHeat"
                 type="button"
                 class="btn btn-warning text-dark"
@@ -49,10 +49,10 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-          <i class="fas fa-temperature-high"></i> Pre-Heat
+          <i class="fas fa-temperature-high"></i> Преднагрев
         </button>
         <button
-                title="Control multiple printers at once."
+                title="Управлять несколькими принтерами одновременно."
                 id="bulkControl"
                 type="button"
                 class="btn btn-info"
@@ -60,10 +60,10 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-          <i class="fas fa-gamepad"></i> Control
+          <i class="fas fa-gamepad"></i> Управление
         </button>
         <button
-                title="Send gcode commands to multiple printers at once."
+                title="Отправить G-код команды нескольким принтерам одновременно."
                 id="bulkGcodeCommands"
                 type="button"
                 class="btn btn-success"
@@ -80,18 +80,18 @@
                 data-toggle="modal"
                 data-target="#printerSelectModal"
         >
-          <i class="fas fa-print"></i> Multi-Print
+          <i class="fas fa-print"></i> Мультипечать
         </button>
       </div>
       <div class="col-2">
         <div class="input-group">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="sortStates">Sort: </label>
+            <label class="input-group-text" for="sortStates">Сортировка: </label>
           </div>
           <select class="custom-select" id="sortStates">
-            <option href="#" value="index">Index</option>
-            <option href="#" value="percent">Percent</option>
-            <option id="timeOption" href="#" value="time">Time</option>
+            <option href="#" value="index">Индекс</option>
+            <option href="#" value="percent">Процент</option>
+            <option id="timeOption" href="#" value="time">Время</option>
           </select>
         </div>
       </div>
@@ -99,7 +99,7 @@
       <div class="col-2">
         <div class="input-group">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="filterStates">Filter: </label>
+            <label class="input-group-text" for="filterStates">Фильтр: </label>
           </div>
           <select class="custom-select" id="filterStates">
             <% for(let i = 0; i < printGroups.length; i++){ %>

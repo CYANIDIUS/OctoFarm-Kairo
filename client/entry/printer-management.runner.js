@@ -51,7 +51,7 @@ bulkDisablePrintersButton.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Disable Printers',
+    'Отключить принтеры',
     function () {
       bulkDisablePrinters();
     }
@@ -62,7 +62,7 @@ bulkEnablePrintersButton.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Enable Printers',
+    'Включить принтеры',
     function () {
       bulkEnablePrinters(true);
     }
@@ -79,7 +79,7 @@ blkPluginsBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Install Plugins',
+    'Установить плагины',
     function () {
       bulkOctoPrintPluginAction('install');
     }
@@ -91,7 +91,7 @@ blkPluginsUninstallBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Uninstall Plugins',
+    'Удалить плагины',
     function () {
       bulkOctoPrintPluginAction('uninstall');
     }
@@ -103,7 +103,7 @@ blkPluginsEnableBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Enable Plugins',
+    'Включить плагины',
     function () {
       bulkOctoPrintPluginAction('enable');
     }
@@ -115,7 +115,7 @@ blkPluginsDisableBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Disable Plugins',
+    'Отключить плагины',
     function () {
       bulkOctoPrintPluginAction('disable');
     }
@@ -127,7 +127,7 @@ blkOctoPrintSettingsUpdateBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Bulk Edit OctoPrint Settings',
+    'Массовое редактирование настроек OctoPrint',
     function () {
       bulkUpdateOctoPrintSettings();
     }
@@ -137,20 +137,20 @@ blkOctoPrintSettingsUpdateBtn.addEventListener('click', async () => {
 const reSyncSockets = document.getElementById('reSyncSockets');
 reSyncSockets.addEventListener('click', async () => {
   bootbox.dialog({
-    title: 'Reconnect all sockets',
+    title: 'Переподключить все сокеты',
     message:
-      '<p class="alert alert-warning text-dark" role="alert">Will terminate and re-open all currently established connections</p>',
+      '<p class="alert alert-warning text-dark" role="alert">Все текущие соединения будут разорваны и открыты заново</p>',
     size: 'large',
     buttons: {
       normal: {
-        label: 'Reconnect',
+        label: 'Переподключить',
         className: 'btn-warning text-dark',
         callback: function () {
           reSyncWebsockets();
         },
       },
       cancel: {
-        label: 'Cancel',
+        label: 'Отмена',
         className: 'btn-secondary',
       },
     },
@@ -162,7 +162,7 @@ editBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     true,
-    'Edit Printers',
+    'Редактировать принтеры',
     bulkEditPrinters
   );
 });
@@ -170,7 +170,7 @@ document.getElementById('deletePrintersBtn').addEventListener('click', async () 
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Printer Deletion',
+    'Удаление принтеров',
     bulkDeletePrinters
   );
 });
@@ -215,7 +215,7 @@ bulkConnectBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Connect Printers',
+    'Подключить принтеры',
     await bulkConnectPrinters
   );
 });
@@ -224,7 +224,7 @@ bulkDisconnectBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Disconnect Printers',
+    'Отключить принтеры от сервера',
     await bulkDisconnectPrinters
   );
 });
@@ -233,7 +233,7 @@ bulkPowerBtn.addEventListener('click', async () => {
   await PrinterSelectionService.create(
     multiPrinterSelectModal,
     false,
-    'Power On/Off Printers',
+    'Вкл/Выкл питание принтеров',
     await bulkOctoPrintPowerCommand
   );
 });

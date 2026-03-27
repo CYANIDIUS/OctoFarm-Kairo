@@ -66,17 +66,17 @@ export default class PrinterFileManagerService {
                      <h5 class="float-left  mb-0">
                      <span id="currentPrinter" class="d-none">${printer.printerName}</span>
                       <button id="printerFileCount" type="button" class="btn btn-secondary float-right d-block" href="#" aria-expanded="false" disabled="">
-                        <i class="fas fa-file"></i> Loading... <i class="fas fa-folder"></i> Loading...
+                        <i class="fas fa-file"></i> Загрузка... <i class="fas fa-folder"></i> Загрузка...
                       </button>
                       <button id="printerStorage" type="button" class="btn btn-secondary float-right d-block" href="#" aria-expanded="false" disabled="">
   
-                        <i class="fas fa-hdd"></i> Loading...
+                        <i class="fas fa-hdd"></i> Загрузка...
                       </button>
                      
                     </h5>
                     <h5 class="float-left mb-0">
                       <button type="button" class="btn btn-secondary float-right d-block" href="#" aria-expanded="false" disabled="">
-                        <i class="fas fa-file-code"></i> Files: <span id="currentFolder">local</span>/
+                        <i class="fas fa-file-code"></i> Файлы: <span id="currentFolder">local</span>/
                       </button>
                     </h5>
                     <div class="btn btn-secondary form-group float-right  mb-0">
@@ -85,7 +85,7 @@ export default class PrinterFileManagerService {
                           <label for="searchFiles">
                             <i class="fas fa-search pr-1"></i>
                           </label>
-                          <input id="searchFiles" type="text" placeholder="File Search..." class="search-control search-control-underlined">
+                          <input id="searchFiles" type="text" placeholder="Поиск файлов..." class="search-control search-control-underlined">
                         </div>
                       </form>
                     </div>
@@ -106,32 +106,32 @@ export default class PrinterFileManagerService {
           <div class="row mb-1">
                 <div class="col-12">
                  <button id="fileBackBtn" type="button" class="btn btn-success float-right">
-                  <i class="fas fa-chevron-left"></i> Back
+                  <i class="fas fa-chevron-left"></i> Назад
                 </button>
                 <!-- Split dropright button -->
                 <div class="float-right mr-3 btn-group">
-                    <div id="fileSortDropdownMenu" class="btn bg-secondary">Sort</div>
+                    <div id="fileSortDropdownMenu" class="btn bg-secondary">Сортировка</div>
                     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="sr-only">Toggle Dropdown</span>
+                      <span class="sr-only">Переключить выпадающий список</span>
                     </button>
                     <div class="dropdown-menu">
                       
-                 <a class="dropdown-item" id="sortFileNameDown"><i class="fas fa-sort-alpha-down"></i> File Name</a>
+                 <a class="dropdown-item" id="sortFileNameDown"><i class="fas fa-sort-alpha-down"></i> Имя файла</a>
 
-                <a class="dropdown-item" id="sortFileNameUp"><i class="fas fa-sort-alpha-up"></i> File Name</a>
+                <a class="dropdown-item" id="sortFileNameUp"><i class="fas fa-sort-alpha-up"></i> Имя файла</a>
                        <div class="dropdown-divider"></div>
-                <a class="dropdown-item" id="sortPrintTimeDown"><i class="fas fa-sort-numeric-down"></i> Print Time</a>
+                <a class="dropdown-item" id="sortPrintTimeDown"><i class="fas fa-sort-numeric-down"></i> Время печати</a>
 
-                <a class="dropdown-item" id="sortPrintTimeUp"><i class="fas fa-sort-numeric-up"></i> Print Time</a>
+                <a class="dropdown-item" id="sortPrintTimeUp"><i class="fas fa-sort-numeric-up"></i> Время печати</a>
                        <div class="dropdown-divider"></div>
-                <a class="dropdown-item" id="sortDateDown"><i class="fas fa-sort-numeric-down"></i> Upload Date</a>
+                <a class="dropdown-item" id="sortDateDown"><i class="fas fa-sort-numeric-down"></i> Дата загрузки</a>
 
-                <a class="dropdown-item" id="sortDateUp"><i class="fas fa-sort-numeric-up"></i> Upload Date</a>
+                <a class="dropdown-item" id="sortDateUp"><i class="fas fa-sort-numeric-up"></i> Дата загрузки</a>
                     </div>
                   </div>
-                  <label class="btn btn-success float-left mr-1 mb-0 bg-colour-1" for="fileUploadBtn"><i class="fas fa-file-import"></i> Upload File(s)</label>
+                  <label class="btn btn-success float-left mr-1 mb-0 bg-colour-1" for="fileUploadBtn"><i class="fas fa-file-import"></i> Загрузить файл(ы)</label>
                   <input id="fileUploadBtn" multiple accept="${allowedFileTypes}" type="file" class="btn btn-success float-left bg-colour-1" id="uploadFileBtn">
-                  <label class="btn btn-info float-left mr-1 mb-0 bg-colour-2" for="fileUploadPrintBtn"><i class="fas fa-file-import"></i> Upload and Print</label>
+                  <label class="btn btn-info float-left mr-1 mb-0 bg-colour-2" for="fileUploadPrintBtn"><i class="fas fa-file-import"></i> Загрузить и печатать</label>
                   <input id="fileUploadPrintBtn" accept="${allowedFileTypes}" type="file" class="btn btn-success float-left bg-colour-2" id="uploadFileBtn">
                 <button
                   id="createFolderBtn"
@@ -143,10 +143,10 @@ export default class PrinterFileManagerService {
                   aria-expanded="false"
                   aria-controls="createFolder"
                 >
-                  <i class="fas fa-folder-plus"></i> Create Folder
+                  <i class="fas fa-folder-plus"></i> Создать папку
                 </button>
                 <button id="fileReSync" type="button" class="btn btn-primary mb-0 bg-colour-4">
-                  <i class="fas fa-sync"></i> Re-Sync
+                  <i class="fas fa-sync"></i> Пересинхронизация
                 </button>
                 </div>
 
@@ -160,7 +160,7 @@ export default class PrinterFileManagerService {
     } catch (e) {
       UI.createAlert(
         "error",
-        "Something has gone wrong with loading the File Manager... Hard Failure, please submit as a bug on github: " +
+        "Произошла ошибка при загрузке файлового менеджера. Критический сбой, пожалуйста, сообщите об ошибке на github: " +
           e,
         0,
         "clicked"
@@ -190,9 +190,9 @@ export default class PrinterFileManagerService {
       async function () {
         UI.createAlert(
           "warning",
-          "Your files for Printer: " +
+          "Загрузка файлов для принтера: " +
             currentPrinter.printerName +
-            " has begun. Please do not navigate away from this page.",
+            " началась. Пожалуйста, не покидайте эту страницу.",
           3000,
           "Clicked"
         );

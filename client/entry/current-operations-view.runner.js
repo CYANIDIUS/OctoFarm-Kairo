@@ -33,13 +33,13 @@ function currentOperationsView(currentOperations, currentOperationsCount, printe
   printers = printerInfo;
 
   document.getElementById('completeCount').innerHTML =
-    'Complete: ' + currentOperationsCount.complete;
-  document.getElementById('idleCount').innerHTML = 'Idle: ' + currentOperationsCount.idle;
-  document.getElementById('activeCount').innerHTML = 'Active: ' + currentOperationsCount.active;
+    'Завершено: ' + currentOperationsCount.complete;
+  document.getElementById('idleCount').innerHTML = 'Простой: ' + currentOperationsCount.idle;
+  document.getElementById('activeCount').innerHTML = 'Активно: ' + currentOperationsCount.active;
   document.getElementById('disconCount').innerHTML =
-    'Disconnected: ' + currentOperationsCount.disconnected;
+    'Отключено: ' + currentOperationsCount.disconnected;
 
-  document.getElementById('offlineCount').innerHTML = 'Offline: ' + currentOperationsCount.offline;
+  document.getElementById('offlineCount').innerHTML = 'Не в сети: ' + currentOperationsCount.offline;
 
   document.getElementById('farmProgress').innerHTML = currentOperationsCount.farmProgress + '%';
   document.getElementById('farmProgress').style = `width: ${currentOperationsCount.farmProgress}%`;
@@ -57,8 +57,8 @@ function currentOperationsView(currentOperations, currentOperationsCount, printe
     let futureTimeString = new Date(currentDate + current.timeRemaining * 1000).toTimeString();
     futureTimeString = futureTimeString.substring(0, 8);
     const dateComplete = futureDateString + ': ' + futureTimeString;
-    const finishedPrint = `<button id='currentHarvest-${current.index}' type='button' title="Clear your finished print from current operations" class='tag btn btn-success btn-sm mt-0 pt-0 pb-0'>Print Harvested?</button>`;
-    const restartPrint = `<button id='restartCurrentPrint-${current.index}' type='button' title="Restart your current selected print" class='tag btn btn-warning btn-sm mt-0 pt-0 pb-0'>Restart Print</button>`;
+    const finishedPrint = `<button id='currentHarvest-${current.index}' type='button' title="Убрать завершённую печать из текущих операций" class='tag btn btn-success btn-sm mt-0 pt-0 pb-0'>Печать собрана?</button>`;
+    const restartPrint = `<button id='restartCurrentPrint-${current.index}' type='button' title="Перезапустить текущую выбранную печать" class='tag btn btn-warning btn-sm mt-0 pt-0 pb-0'>Перезапустить печать</button>`;
     // check if exists, create if not....
     let fileName = null;
     if (typeof current.fileName !== undefined) {

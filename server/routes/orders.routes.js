@@ -39,7 +39,7 @@ const orderFileFilter = function (req, file, cb) {
   if (allowedExtensions.includes(ext)) {
     cb(null, true);
   } else {
-    cb(new Error("Only 3MF and G-code files are allowed"), false);
+    cb(new Error("Допускаются только файлы 3MF и G-code"), false);
   }
 };
 
@@ -143,7 +143,7 @@ router.get("/:id", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
     res.json({ order });
   } catch (err) {
@@ -259,14 +259,14 @@ router.put("/:id", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     // Only allow updates to orders that are not yet printing or done
     if (["printing", "done"].includes(order.status)) {
       return res
         .status(400)
-        .json({ error: "Cannot update order in status: " + order.status });
+        .json({ error: "Невозможно обновить заказ в статусе: " + order.status });
     }
 
     const updateFields = [
@@ -323,7 +323,7 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     // Remove uploaded files
@@ -333,7 +333,7 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
     }
 
     await Order.findByIdAndDelete(req.params.id);
-    res.json({ message: "Order deleted successfully" });
+    res.json({ message: "Заказ успешно удалён" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -344,7 +344,7 @@ router.post("/:id/calculate", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     const printers = await Printer.find({});
@@ -378,13 +378,13 @@ router.post("/:id/assign", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     if (!["queued", "calculated"].includes(order.status)) {
       return res
         .status(400)
-        .json({ error: "Order cannot be assigned in status: " + order.status });
+        .json({ error: "Невозможно назначить заказ в статусе: " + order.status });
     }
 
     // Accept assignments from request body or calculate them
@@ -425,14 +425,14 @@ router.post("/:id/confirm-print", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     if (order.status !== "scheduled") {
       return res
         .status(400)
         .json({
-          error: "Order must be in 'scheduled' status to confirm print",
+          error: "Заказ должен быть в статусе 'scheduled' для подтверждения печати",
         });
     }
 
@@ -459,7 +459,7 @@ router.post(
     try {
       const order = await Order.findById(req.params.id);
       if (!order) {
-        return res.status(404).json({ error: "Order not found" });
+        return res.status(404).json({ error: "Заказ не найден" });
       }
 
       // Support both assignmentId (by subdoc ID) and groupKey (by group key)
@@ -474,11 +474,11 @@ router.post(
       }
 
       if (!assignment) {
-        return res.status(404).json({ error: "Assignment not found" });
+        return res.status(404).json({ error: "Назначение не найдено" });
       }
 
       if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
+        return res.status(400).json({ error: "Файл не загружен" });
       }
 
       assignment.gcodeFilePath = path.join(

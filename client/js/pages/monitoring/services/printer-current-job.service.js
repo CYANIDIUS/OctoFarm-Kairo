@@ -70,13 +70,13 @@ const options = {
     mode: "dark",
   },
   noData: {
-    text: "Loading...",
+    text: "Загрузка...",
   },
   series: [],
   yaxis: [
     {
       title: {
-        text: "Temperature",
+        text: "Температура",
       },
       labels: {
         formatter(value) {
@@ -300,20 +300,20 @@ const loadPrintersJobStatus = (printer) => {
   document.getElementById("printerControls").innerHTML = `
         <div class="row">
             <div class="col-lg-10 text-center">
-               <h5>File</h5><hr>
-               <p title="Loading..." id="pmFileName" class="mb-0 text-wrap">Loading...</p>
+               <h5>Файл</h5><hr>
+               <p title="Загрузка..." id="pmFileName" class="mb-0 text-wrap">Загрузка...</p>
    
             </div>
             <div class="col-lg-2 text-center">
-               <h5>User Printing</h5><hr>
-               <p title="Loading..." id="pmUserPrinting" class="mb-0 text-wrap">Loading...</p>
+               <h5>Пользователь</h5><hr>
+               <p title="Загрузка..." id="pmUserPrinting" class="mb-0 text-wrap">Загрузка...</p>
    
             </div>
         </div>
         <div class="row">
         <!-- Camera --> 
         <div class="${cameraClass} text-center ${hideCameraDisplay}">
-          <h5>Camera</h5><hr>
+          <h5>Камера</h5><hr>
           <span id="cameraRow">  
             <div class="row">
                <div class="col-12">
@@ -324,67 +324,67 @@ const loadPrintersJobStatus = (printer) => {
         </div>
         <!-- Print Status -->  
         <div class="${printStatusClass}">    
-            <h5>Status</h5><hr>   
+            <h5>Статус</h5><hr>   
                <div class="progress mb-1">
                      <div id="pmProgress" class="progress-bar" role="progressbar progress-bar-striped" style="width:100%" aria-valuenow="100%" aria-valuemin="0" aria-valuemax="100">Loading... </div>
                </div>     
                <div class="row">
                  <div class="col-md-4 col-lg-4">
-                        <b>Time Elapsed: </b><p class="mb-1" id="pmTimeElapsed">Loading...</p>
+                        <b>Прошло: </b><p class="mb-1" id="pmTimeElapsed">Загрузка...</p>
                  </div>
                  <div class="col-md-4 col-lg-4">
-                    <b>Completion Date: </b><p class="mb-1" id="pmExpectedCompletionDate">Loading...</p>
+                    <b>Дата завершения: </b><p class="mb-1" id="pmExpectedCompletionDate">Загрузка...</p>
                  </div>
                     <div class="col-md-4 col-lg-4">
-                        <b>Expected Time: </b><p class="mb-1" id="pmExpectedTime">Loading...</p>
+                        <b>Ожидаемое время: </b><p class="mb-1" id="pmExpectedTime">Загрузка...</p>
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <b>Time Remaining: </b><p class="mb-1" id="pmTimeRemain">Loading...</p>
+                        <b>Осталось: </b><p class="mb-1" id="pmTimeRemain">Загрузка...</p>
                     </div>
                     <div class="col-md-4 col-lg-4">                             
-                      <b>Current Z: </b><p class="mb-1" id="pmCurrentZ">Loading...</p>
+                      <b>Текущий Z: </b><p class="mb-1" id="pmCurrentZ">Загрузка...</p>
                     </div>
                     <div class="col-md-4 col-lg-4">
-                      <b id="resentTitle" class="mb-1 d-none">Resend Statistics: </b><br><p title="Current job resend ratio" class="tag mb-1 d-none" id="printerResends">Loading...</p>                          
+                      <b id="resentTitle" class="mb-1 d-none">Статистика повт. отправки: </b><br><p title="Коэффициент повторной отправки текущего задания" class="tag mb-1 d-none" id="printerResends">Загрузка...</p>                          
                     </div>
                </div>
            </div>   
         <div id="fileThumbnail" class="${thumbnailClass}">
-           <h5>Thumbnail</h5><hr>
+           <h5>Превью</h5><hr>
             ${thumbnailElement}
         </div>  
         <div class="col-12 text-center d-none" id="dlpPluginDataTitle">
-              <h5>Additional Information</h5><hr>               
+              <h5>Дополнительная информация</h5><hr>               
               <div class="row">
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Layer Progress: </b><br><p title="Current layer progress" class="tag mb-1" id="dlpLayerProgress">Loading...</p>
+                    <b class="mb-1">Прогресс слоёв: </b><br><p title="Текущий прогресс слоёв" class="tag mb-1" id="dlpLayerProgress">Загрузка...</p>
                 </div>
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Height Progress: </b><br><p title="Current height progress" class="tag mb-1e" id="dlpHeightProgress">Loading...</p>
+                    <b class="mb-1">Прогресс высоты: </b><br><p title="Текущий прогресс высоты" class="tag mb-1e" id="dlpHeightProgress">Загрузка...</p>
                 </div>
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Average Layer Duration: </b><br><p title="Average duration of layers" class="tag mb-1" id="dlpAvgLayerDuration">Loading...</p>
+                    <b class="mb-1">Среднее время слоя: </b><br><p title="Среднее время печати слоя" class="tag mb-1" id="dlpAvgLayerDuration">Загрузка...</p>
                 </div>
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Last Layer Time: </b><br><p title="Time to complete last layer" class="tag mb-1" id="dlpLastLayerTime">Loading...</p>
+                    <b class="mb-1">Время последнего слоя: </b><br><p title="Время завершения последнего слоя" class="tag mb-1" id="dlpLastLayerTime">Загрузка...</p>
                 </div>
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Current Fan Speed: </b><br><p title="Current fan speed" class="tag mb-1" id="dlpFanSpeed">Loading...</p>
+                    <b class="mb-1">Скорость вентилятора: </b><br><p title="Текущая скорость вентилятора" class="tag mb-1" id="dlpFanSpeed">Загрузка...</p>
                 </div>
                 <div class="col-sm-3 col-lg-2">
-                    <b class="mb-1">Current Feed Rate: </b><br><p title="Current feed rate" class="tag mb-1" id="dlpFeedRate">Loading...</p>
+                    <b class="mb-1">Скорость подачи: </b><br><p title="Текущая скорость подачи" class="tag mb-1" id="dlpFeedRate">Загрузка...</p>
                 </div>
               </div>
         </div> 
         <div class="col-lg-12 text-center">
-                 <h5>Estimated Costs (Used / Total)</h5><hr> 
+                 <h5>Расчётные затраты (Использовано / Всего)</h5><hr> 
         </div>   
-          <div class="col-md-4 col-lg-3 text-center"><b class="mb-1">Units: </b><br><p class="tag mb-1" id="pmExpectedWeight">Loading...</p></div>
-          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Materials: </b><br><p class="tag mb-1" id="pmExpectedFilamentCost">Loading...</p></div>  
-          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Electricity: </b><br><p class="tag mb-1" id="pmExpectedElectricity">Loading...</p></div>
-          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Maintainance: </b><br><p class="tag mb-1" id="pmExpectedMaintainance">Loading...</p></div>
-           <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Total Printer: </b><br><p class="tag mb-1" id="pmExpectedPrinterCost">Loading...</p></div>
-          <div class="col-md-4 col-lg-1 text-center"><b>Total Job: </b><p class="mb-1" id="pmJobCosts">Loading...</p></center></div>
+          <div class="col-md-4 col-lg-3 text-center"><b class="mb-1">Единицы: </b><br><p class="tag mb-1" id="pmExpectedWeight">Загрузка...</p></div>
+          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Материалы: </b><br><p class="tag mb-1" id="pmExpectedFilamentCost">Загрузка...</p></div>
+          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Электричество: </b><br><p class="tag mb-1" id="pmExpectedElectricity">Загрузка...</p></div>
+          <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Обслуживание: </b><br><p class="tag mb-1" id="pmExpectedMaintainance">Загрузка...</p></div>
+           <div class="col-md-4 col-lg-2 text-center"><b class="mb-1">Итого принтер: </b><br><p class="tag mb-1" id="pmExpectedPrinterCost">Загрузка...</p></div>
+          <div class="col-md-4 col-lg-1 text-center"><b>Итого задание: </b><p class="mb-1" id="pmJobCosts">Загрузка...</p></center></div>
            
         </div>
 
@@ -408,7 +408,7 @@ const updateCurrentJobStatus = (printer, elements) => {
     let currentDate = new Date();
 
     if (printer.currentJob.progress === 100) {
-      dateComplete = "Print Ready for Harvest";
+      dateComplete = "Печать завершена, готово к снятию";
     } else {
       currentDate = currentDate.getTime();
       const futureDateString = new Date(
@@ -421,7 +421,7 @@ const updateCurrentJobStatus = (printer, elements) => {
       dateComplete = futureDateString + ": " + futureTimeString;
     }
   } else {
-    dateComplete = "No Active Print";
+    dateComplete = "Нет активной печати";
   }
 
   elements.expectedCompletionDate.innerHTML = dateComplete;
@@ -493,7 +493,7 @@ const updateCurrentJobStatus = (printer, elements) => {
     printer.currentJob.printTimeElapsed
   );
   if (printer.currentJob.currentZ === null) {
-    elements.currentZ.innerHTML = "No Active Print";
+    elements.currentZ.innerHTML = "Нет активной печати";
   } else {
     elements.currentZ.innerHTML = printer.currentJob.currentZ + "mm";
   }
@@ -505,8 +505,8 @@ const updateCurrentJobStatus = (printer, elements) => {
   }`;
 
   if (typeof printer.currentJob === "undefined") {
-    elements.fileName.setAttribute("title", "No File Selected");
-    elements.fileName.innerHTML = "No File Selected";
+    elements.fileName.setAttribute("title", "Файл не выбран");
+    elements.fileName.innerHTML = "Файл не выбран";
   } else {
     elements.fileName.setAttribute("title", printer.currentJob.filePath);
     let fileName = printer.currentJob.fileDisplay;
@@ -529,8 +529,8 @@ const updateCurrentJobStatus = (printer, elements) => {
         printer.currentJob.progress
       );
     } else {
-      usageDisplay = "No File Selected";
-      elements.expectedTotalCosts.innerHTML = "No File Selected";
+      usageDisplay = "Файл не выбран";
+      elements.expectedTotalCosts.innerHTML = "Файл не выбран";
     }
     if (typeof printer.currentJob.expectedFilamentCosts === "object") {
       if (printer.currentJob.expectedFilamentCosts !== null) {
@@ -566,10 +566,10 @@ const updateCurrentJobStatus = (printer, elements) => {
           )}</p>`;
         });
       } else {
-        filamentCost = "No length estimate";
+        filamentCost = "Нет оценки длины";
       }
     } else {
-      filamentCost = "No File Selected";
+      filamentCost = "Файл не выбран";
     }
 
     elements.expectedWeight.innerHTML = usageDisplay;
