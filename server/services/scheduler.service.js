@@ -3,8 +3,6 @@ const { LOGGER_ROUTE_KEYS } = require("../constants/logger.constants");
 
 const logger = new Logger(LOGGER_ROUTE_KEYS.SERVER_CORE);
 
-const DEFAULT_BASE_SPEED = 60; // mm/s — baseline for time estimation
-
 /**
  * Filters printers by compatibility with order requirements.
  * @param {Array} printers - Array of printer objects
@@ -48,27 +46,61 @@ function filterCompatiblePrinters(printers, requirements) {
 }
 
 /**
- * Calculates the estimated time for a printer to complete a number of batches.
- * @param {Number} batches - Number of batches
- * @param {Number} estimatedPrintTime - Time per batch in seconds
- * @param {Number} printerSpeed - Printer speed in mm/s
+ * Estimates print time for a given printer based on the reference time.
+ *
+ * The operator enters estimatedPrintTime from the slicer — this is the real
+ * time for the REFERENCE printer (the one the G-code was sliced for).
+ * For other printers, we scale proportionally by print speed.
+ *
+ * If the reference printer has speed R and another printer has speed P:
+ *   adjustedTime = estimatedPrintTime * (R / P)
+ *
+ * If speeds are unknown (0), we assume the same time (no scaling).
+ *
+ * @param {Number} batches - Number of batches for this printer
+ * @param {Number} estimatedPrintTime - Time per batch in seconds (from slicer, for the reference printer)
+ * @param {Number} printerSpeed - This printer's speed (mm/s)
+ * @param {Number} referenceSpeed - Reference printer's speed (mm/s), i.e. the fastest compatible or user-specified
  * @returns {Number} Estimated time in seconds
  */
-function calculatePrinterTime(batches, estimatedPrintTime, printerSpeed) {
-  const speed = printerSpeed > 0 ? printerSpeed : DEFAULT_BASE_SPEED;
-  const speedFactor = speed / DEFAULT_BASE_SPEED;
-  return Math.ceil(batches * estimatedPrintTime / speedFactor);
+function calculatePrinterTime(batches, estimatedPrintTime, printerSpeed, referenceSpeed) {
+  // If either speed is unknown, no scaling — use raw time
+  if (!printerSpeed || printerSpeed <= 0 || !referenceSpeed || referenceSpeed <= 0) {
+    return Math.ceil(batches * estimatedPrintTime);
+  }
+  // Scale: if this printer is slower than reference, time increases proportionally
+  const scaleFactor = referenceSpeed / printerSpeed;
+  return Math.ceil(batches * estimatedPrintTime * scaleFactor);
+}
+
+/**
+ * Determines the reference speed — the speed of the fastest compatible printer.
+ * The assumption is that the operator sliced the G-code for the fastest printer
+ * in the fleet (or at least, the estimatedPrintTime corresponds to that speed).
+ *
+ * @param {Array} printers - Compatible printers
+ * @returns {Number} Reference speed in mm/s
+ */
+function getReferenceSpeed(printers) {
+  let maxSpeed = 0;
+  for (const p of printers) {
+    const speed = (p.specifications && p.specifications.printSpeed) || 0;
+    if (speed > maxSpeed) maxSpeed = speed;
+  }
+  return maxSpeed;
 }
 
 /**
  * min_time strategy: Greedy assignment — always assign next batch to the printer
  * that will finish earliest (minimizes total makespan).
+ *
  * @param {Number} totalBatches - Total batches to distribute
  * @param {Array} printers - Compatible printers
- * @param {Number} estimatedPrintTime - Time per batch in seconds
+ * @param {Number} estimatedPrintTime - Time per batch in seconds (from slicer)
+ * @param {Number} referenceSpeed - Speed of the printer the time was estimated for
  * @returns {Array} Assignment objects
  */
-function scheduleMinTime(totalBatches, printers, estimatedPrintTime) {
+function scheduleMinTime(totalBatches, printers, estimatedPrintTime, referenceSpeed) {
   if (printers.length === 0) return [];
 
   // Track current load (total time) for each printer
@@ -76,7 +108,7 @@ function scheduleMinTime(totalBatches, printers, estimatedPrintTime) {
     printer: p,
     batches: 0,
     currentTime: 0,
-    speed: (p.specifications && p.specifications.printSpeed) || DEFAULT_BASE_SPEED,
+    speed: (p.specifications && p.specifications.printSpeed) || 0,
   }));
 
   // Greedy: assign each batch to the printer that finishes earliest
@@ -86,17 +118,19 @@ function scheduleMinTime(totalBatches, printers, estimatedPrintTime) {
 
     for (let j = 0; j < printerLoads.length; j++) {
       const pl = printerLoads[j];
-      const speedFactor = pl.speed / DEFAULT_BASE_SPEED;
-      const newFinish = pl.currentTime + estimatedPrintTime / speedFactor;
+      // Time for one more batch on this printer
+      const batchTime = calculatePrinterTime(1, estimatedPrintTime, pl.speed, referenceSpeed);
+      const newFinish = pl.currentTime + batchTime;
       if (newFinish < minFinish) {
         minFinish = newFinish;
         minIdx = j;
       }
     }
 
-    printerLoads[minIdx].batches += 1;
-    const speedFactor = printerLoads[minIdx].speed / DEFAULT_BASE_SPEED;
-    printerLoads[minIdx].currentTime += estimatedPrintTime / speedFactor;
+    const pl = printerLoads[minIdx];
+    pl.batches += 1;
+    const batchTime = calculatePrinterTime(1, estimatedPrintTime, pl.speed, referenceSpeed);
+    pl.currentTime += batchTime;
   }
 
   return printerLoads
@@ -112,12 +146,14 @@ function scheduleMinTime(totalBatches, printers, estimatedPrintTime) {
 /**
  * min_idle strategy: Balanced load distribution — distribute batches as evenly
  * as possible across printers (minimizes idle time spread).
+ *
  * @param {Number} totalBatches - Total batches to distribute
  * @param {Array} printers - Compatible printers
- * @param {Number} estimatedPrintTime - Time per batch in seconds
+ * @param {Number} estimatedPrintTime - Time per batch in seconds (from slicer)
+ * @param {Number} referenceSpeed - Speed of the printer the time was estimated for
  * @returns {Array} Assignment objects
  */
-function scheduleMinIdle(totalBatches, printers, estimatedPrintTime) {
+function scheduleMinIdle(totalBatches, printers, estimatedPrintTime, referenceSpeed) {
   if (printers.length === 0) return [];
 
   const printerCount = printers.length;
@@ -131,12 +167,12 @@ function scheduleMinIdle(totalBatches, printers, estimatedPrintTime) {
         batches += 1;
         remainder -= 1;
       }
-      const speed =
-        (p.specifications && p.specifications.printSpeed) || DEFAULT_BASE_SPEED;
+      const speed = (p.specifications && p.specifications.printSpeed) || 0;
       const estimatedTime = calculatePrinterTime(
         batches,
         estimatedPrintTime,
-        speed
+        speed,
+        referenceSpeed
       );
       return {
         printerId: p._id,
@@ -152,8 +188,11 @@ function scheduleMinIdle(totalBatches, printers, estimatedPrintTime) {
  * Main scheduling function.
  * Calculates an optimal assignment of print batches to printers.
  *
- * @param {Object} order - Order document (or plain object with order fields)
- * @param {Array} printers - Array of printer objects (Mongoose docs or plain objects)
+ * The estimatedPrintTime is treated as the real slicer time for the fastest
+ * compatible printer. For slower printers, time is scaled proportionally.
+ *
+ * @param {Object} order - Order document
+ * @param {Array} printers - Array of printer objects
  * @returns {Object} { assignments, totalBatches, totalEstimatedTime }
  */
 function calculateSchedule(order, printers) {
@@ -172,19 +211,25 @@ function calculateSchedule(order, printers) {
     };
   }
 
+  // Reference speed = fastest compatible printer's speed
+  // (assumption: slicer time was calculated for this speed)
+  const referenceSpeed = getReferenceSpeed(compatible);
+
   let assignments;
   if (order.optimizationMode === "min_idle") {
     assignments = scheduleMinIdle(
       totalBatches,
       compatible,
-      order.estimatedPrintTime
+      order.estimatedPrintTime,
+      referenceSpeed
     );
   } else {
     // Default: min_time
     assignments = scheduleMinTime(
       totalBatches,
       compatible,
-      order.estimatedPrintTime
+      order.estimatedPrintTime,
+      referenceSpeed
     );
   }
 
@@ -204,5 +249,5 @@ module.exports = {
   calculateSchedule,
   filterCompatiblePrinters,
   calculatePrinterTime,
-  DEFAULT_BASE_SPEED,
+  getReferenceSpeed,
 };
