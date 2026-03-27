@@ -18,37 +18,37 @@
                         <div class="row">
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-34">
                                 <% if(serviceInformation?.air_gapped){ %>
-                                    <p class="text-light mb-0"><i class="fas fa-heartbeat text-danger"></i> Farm is
-                                        currently air gapped</p>
-                                    <small class="text-warning">Please note some features may not work as intended</small>
+                                    <p class="text-light mb-0"><i class="fas fa-heartbeat text-danger"></i> Ферма
+                                        в настоящее время изолирована от сети</p>
+                                    <small class="text-warning">Обратите внимание, что некоторые функции могут работать некорректно</small>
                                 <% }else{ %>
-                                    <p class="text-light"><i class="fas fa-heart text-success"></i> Farm is connected to the
-                                        internet</p>
+                                    <p class="text-light"><i class="fas fa-heart text-success"></i> Ферма подключена к
+                                        интернету</p>
                                 <% } %>
                             </div>
                             <% if(serviceInformation?.isNode){ %>
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                                    <p class="text-light">Powered by <i class="fab fa-node text-success"></i></p>
+                                    <p class="text-light">Работает на <i class="fab fa-node text-success"></i></p>
                                 </div>
                             <% } %>
                             <% if(serviceInformation?.isDockerContainer){ %>
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                                    <p class="text-light"><i class="fab fa-docker text-info"></i> Running under docker</p>
+                                    <p class="text-light"><i class="fab fa-docker text-info"></i> Запущен в docker</p>
                                 </div>
                             <% } %>
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                                 <% if(serviceInformation?.isPm2){ %>
-                                    <p class="text-light"><i class="far fa-eye text-info"></i> Running under pm2</p>
+                                    <p class="text-light"><i class="far fa-eye text-info"></i> Запущен под pm2</p>
                                 <% } %>
                                 <% if(serviceInformation?.isNodemon){ %>
-                                    <p class="text-light"><i class="far fa-eye text-info"></i> Running under nodemon</p>
+                                    <p class="text-light"><i class="far fa-eye text-info"></i> Запущен под nodemon</p>
                                 <% } %>
                             </div>
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                                 <% if(areWeGitRepo){ %>
-                                    <p class="text-light"><i class="fab fa-github text-success"></i> Detected git repository</p>
+                                    <p class="text-light"><i class="fab fa-github text-success"></i> Обнаружен git-репозиторий</p>
                                 <% }else{ %>
-                                    <p class="text-light"><i class="fab fa-github text-danger"></i> Couldn't detect git</p>
+                                    <p class="text-light"><i class="fab fa-github text-danger"></i> Не удалось обнаружить git</p>
                                 <%   } %>
                             </div>
                         </div>
@@ -59,13 +59,13 @@
              <div class="col-12 text-center">
                  <div class="row">
                      <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                         <i class="fas fa-hourglass-half"></i> OctoFarm Uptime: <br>
+                         <i class="fas fa-hourglass-half"></i> Время работы OctoFarm: <br>
                          <span class="text-light" id="processUpdate" style="font-size:0.8rem;">
                                <%= helpers.generateTime(systemInformation.uptime); %>
                         </span>
                      </div>
                      <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                         <i class="fas fa-code-branch"></i> Current Version: <a
+                         <i class="fas fa-code-branch"></i> Текущая версия: <a
                                  title="OctoFarm current version, will take you to github releases page"
                                  class="text-light"
                                  rel=”noopener”
@@ -74,14 +74,14 @@
                      </div>
                      <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
                          <% if(!serviceInformation?.update?.latestReleaseKnown){ %>
-                             <i class="fas fa-code-branch"></i> Latest Server Version: <a
+                             <i class="fas fa-code-branch"></i> Последняя версия сервера: <a
                                      title="OctoFarm latest version, will take you to github releases page"
                                      class="text-light"
                                      rel=”noopener”
                                      href="<%= releasesURL + serviceInformation?.update?.current_version %>"
                                      target="_blank"><br><%= serviceInformation?.update?.current_version; %></a>
                          <% }else{ %>
-                             <i class="fas fa-code-branch"></i> Latest Version:
+                             <i class="fas fa-code-branch"></i> Последняя версия:
                              <a title="OctoFarm latest version, will take you to github releases page"
                                 class="text-light"
                                 rel=”noopener”
@@ -92,14 +92,14 @@
                          <% } %>
                      </div>
                      <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                         <i class="fas fa-code-branch"></i> GitHub Branch: <a
+                         <i class="fas fa-code-branch"></i> Ветка GitHub: <a
                                  title="OctoFarm current version, will take you to github releases page"
                                  class="text-light"
                                  rel=”noopener”
-                                 target="_blank"><br><%= currentGitBranch?.current ? currentGitBranch.current : "Not a repository"; %></a>
+                                 target="_blank"><br><%= currentGitBranch?.current ? currentGitBranch.current : "Не является репозиторием"; %></a>
                      </div>
                      <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                         <i class="fas fa-code-branch"></i> Node Environment: <a
+                         <i class="fas fa-code-branch"></i> Окружение Node: <a
                                  title="OctoFarm current version, will take you to github releases page"
                                  class="text-light"
                                  rel=”noopener”
@@ -113,35 +113,35 @@
                     <div class="col-12 text-center">
                         <div class="row">
                             <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <i class="fas fa-hourglass-half"></i> System Uptime: <br><span
+                                <i class="fas fa-hourglass-half"></i> Время работы системы: <br><span
                                         class="text-light" id="systemUptime" style="font-size:0.8rem;">
                                         <%= helpers.generateTime(systemInformation.osUptime); %>
                                     </span>
                             </div>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <i class="fas fa-server"></i> OS: <br><span class="text-light"
+                                <i class="fas fa-server"></i> ОС: <br><span class="text-light"
                                                                             id="systemArch"
                                                                             style="font-size:0.8rem;">
                                         <%= systemInformation.distro; %>
                                     </span>
                             </div>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <i class="fas fa-bullseye"></i> System Architecture: <br><span
+                                <i class="fas fa-bullseye"></i> Архитектура системы: <br><span
                                         class="text-light" id="systemArch" style="font-size:0.8rem;">
                                             <%= systemInformation.architecture; %>
                                         </span>
                             </div>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                <i class="fas fa-hdd"></i> Main Disk:
+                                <i class="fas fa-hdd"></i> Основной диск:
                                 <b><%= systemInformation?.systemDisk?.mount; %></b><br>
-                                <b>Disk Partition: </b>
+                                <b>Раздел диска: </b>
                                 <%= systemInformation?.systemDisk?.fs; %><br>
                                 <span class="text-light" id="systemHardDrive" style="font-size:0.8rem;">
                                           <%= helpers.generateBytes(systemInformation?.systemDisk?.used); %>  /  <%= helpers.generateBytes(systemInformation?.systemDisk?.size); %> |  <%= systemInformation?.systemDisk?.use?.toFixed(2); %>%
                                     </span>
                             </div>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2">
-                                <i class="far fa-clock"></i> Timezone: <br>
+                                <i class="far fa-clock"></i> Часовой пояс: <br>
                                 <span class="text-light" id="timeZone" style="font-size:0.8rem;">
                                          <%= systemInformation?.timezoneName; %> (<%= systemInformation?.timezone; %>)
                                 </span>
@@ -153,10 +153,10 @@
         <% if(userGroup === "Administrator"){ %>
             <div id="activeUsersRow" class="row">
                 <div class="col-lg-12">
-                    <h5>Active Sessions: <span id="activeUserCount"><i class="fa-solid fa-spinner fa-spin"></i></span></h5>
+                    <h5>Активные сессии: <span id="activeUserCount"><i class="fa-solid fa-spinner fa-spin"></i></span></h5>
                     <div id="activeUserListContainer" class="text-center row">
                         <div class="col-lg-12">
-                            <i class="fa-solid fa-spinner fa-spin"></i><br> Loading Active Sessions List...
+                            <i class="fa-solid fa-spinner fa-spin"></i><br> Загрузка списка активных сессий...
                         </div>
                     </div>
                 </div>
@@ -166,8 +166,8 @@
 <% }else{ %>
         <div class="row">
             <div class="col-12 text-center">
-                <h5> It seems the required information for this page could not be found...  </h5>
-                <h5>Is OctoFarm still booting? Please refresh if so.</h5>
-                <h5>If the issue persists then please log an issue on our github!</h5>
+                <h5> Похоже, необходимая информация для этой страницы не найдена...  </h5>
+                <h5>OctoFarm всё ещё загружается? Пожалуйста, обновите страницу.</h5>
+                <h5>Если проблема сохраняется, создайте задачу на нашем github!</h5>
             </div>
         <% } %>

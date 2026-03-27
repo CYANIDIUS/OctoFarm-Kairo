@@ -42,7 +42,7 @@ async function initNewGraphs() {
       if (index === 0) {
         obj = {
           title: {
-            text: 'Weight',
+            text: 'Вес',
           },
           seriesName: filamentUsageOverTime[0]?.name,
           labels: {
@@ -64,7 +64,7 @@ async function initNewGraphs() {
   }
 
   if (!!filamentUsageByDay) {
-    const yAxis = [getUsageWeightSeries('Weight', filamentUsageByDay[0]?.name)];
+    const yAxis = [getUsageWeightSeries('Вес', filamentUsageByDay[0]?.name)];
     await ChartsManager.renderFilamentUsageByDayChart(filamentUsageByDay, yAxis);
   }
 

@@ -17,7 +17,7 @@
                     disabled>
                 <i class="fas <%= tile.i %>"></i>&nbsp;<%= tile.title %>
             </button>
-            <span title="Drag to move this panel about" class="tag sortableList btn btn-light btn-sm float-right">
+            <span title="Перетащите для перемещения панели" class="tag sortableList btn btn-light btn-sm float-right">
                 <i class="fas fa-grip-vertical"></i>
             </span>
 
@@ -34,7 +34,7 @@
                     <div id="<%= tile.bodyId %>"></div>
                 <% } else { %>
                     <% if (!bodyFile) { %>
-                        <em> This widget failed to render due to missing 'tile.bodyId' or 'bodyFile' alternative </em>
+                        <em> Не удалось отобразить виджет: отсутствует 'tile.bodyId' или альтернативный 'bodyFile' </em>
                     <% } else { %>
                         <%# More complex card-body content %>
                         <%- include(bodyFile) %>

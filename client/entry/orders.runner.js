@@ -54,7 +54,7 @@ async function loadOrders() {
     if (loading) loading.style.display = "none";
     console.error("Failed to load orders:", err);
     tbody.innerHTML =
-      '<tr><td colspan="9" class="text-center text-danger">Failed to load orders: ' +
+      '<tr><td colspan="9" class="text-center text-danger">Ошибка загрузки: ' +
       err.message +
       "</td></tr>";
   }
@@ -88,7 +88,7 @@ function populateReferencePrinterDropdown() {
   if (!select) return;
 
   // Keep the default empty option
-  select.innerHTML = '<option value="">— Select printer 3MF was sliced for —</option>';
+  select.innerHTML = '<option value="">— Выберите принтер —</option>';
 
   cachedPrinters.forEach((p) => {
     const name =
@@ -118,7 +118,7 @@ function populateCompatibleGroups() {
   if (!container) return;
 
   if (cachedGroups.length === 0) {
-    container.innerHTML = '<p class="text-muted mb-0">No printer groups available.</p>';
+    container.innerHTML = '<p class="text-muted mb-0">Нет доступных групп принтеров.</p>';
     return;
   }
 
@@ -128,7 +128,7 @@ function populateCompatibleGroups() {
       <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input compatible-group-cb" id="group-${CSS.escape(g.key)}" value="${g.key.replace(/"/g, '&quot;')}">
         <label class="custom-control-label" for="group-${CSS.escape(g.key)}">
-          ${g.label} <span class="badge badge-secondary">${g.printerCount} printer${g.printerCount !== 1 ? "s" : ""}</span>
+          ${g.label} <span class="badge badge-secondary">${g.printerCount} принтер(ов)</span>
         </label>
       </div>
     `
@@ -204,14 +204,14 @@ async function handleOrderDetail(e) {
         document.getElementById("gcodeOrderId").value = orderId;
         document.getElementById("gcodeAssignmentId").value = assignmentId;
         const labelEl = document.getElementById("gcodeGroupLabel");
-        if (labelEl) labelEl.textContent = groupLabel ? `Group: ${groupLabel}` : "";
+        if (labelEl) labelEl.textContent = groupLabel ? `Группа: ${groupLabel}` : "";
         $("#uploadGcodeModal").modal("show");
       });
     });
 
     $("#orderDetailModal").modal("show");
   } catch (err) {
-    alert("Error loading order: " + err.message);
+    alert("Ошибка загрузки: " + err.message);
   }
 }
 
@@ -251,7 +251,7 @@ async function handleCalculate(e) {
 
     $("#scheduleResultModal").modal("show");
   } catch (err) {
-    alert("Calculation error: " + err.message);
+    alert("Ошибка расчёта: " + err.message);
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-calculator"></i>';
@@ -263,7 +263,7 @@ async function handleCalculate(e) {
  */
 async function handleAssign(e) {
   const id = e.currentTarget.dataset.id;
-  if (!confirm("Assign schedule to this order? This will auto-calculate and assign printer groups.")) {
+  if (!confirm("Назначить расписание для этого заказа? Группы принтеров будут рассчитаны и назначены автоматически.")) {
     return;
   }
 
@@ -271,7 +271,7 @@ async function handleAssign(e) {
     await assignSchedule(id);
     await loadOrders();
   } catch (err) {
-    alert("Assignment error: " + err.message);
+    alert("Ошибка назначения: " + err.message);
   }
 }
 
@@ -280,7 +280,7 @@ async function handleAssign(e) {
  */
 async function handleConfirmPrint(e) {
   const id = e.currentTarget.dataset.id;
-  if (!confirm("Confirm sending this order to print?")) {
+  if (!confirm("Подтвердить начало печати?")) {
     return;
   }
 
@@ -288,7 +288,7 @@ async function handleConfirmPrint(e) {
     await confirmPrint(id);
     await loadOrders();
   } catch (err) {
-    alert("Confirm print error: " + err.message);
+    alert("Ошибка подтверждения печати: " + err.message);
   }
 }
 
@@ -297,7 +297,7 @@ async function handleConfirmPrint(e) {
  */
 async function handleDelete(e) {
   const id = e.currentTarget.dataset.id;
-  if (!confirm("Are you sure you want to delete this order?")) {
+  if (!confirm("Вы уверены, что хотите удалить этот заказ?")) {
     return;
   }
 
@@ -305,7 +305,7 @@ async function handleDelete(e) {
     await deleteOrder(id);
     await loadOrders();
   } catch (err) {
-    alert("Delete error: " + err.message);
+    alert("Ошибка удаления: " + err.message);
   }
 }
 
@@ -317,7 +317,7 @@ function updateTotalParts() {
   const fileCopies = parseInt(document.getElementById("orderFileCopies")?.value) || 1;
   const totalParts = partsPerFile * fileCopies;
   const el = document.getElementById("orderTotalParts");
-  if (el) el.value = totalParts + " pcs";
+  if (el) el.value = totalParts + " шт.";
 }
 
 /**
@@ -365,7 +365,7 @@ function init() {
       // Validate required fields
       const name = formData.get("name");
       if (!name || name.trim() === "") {
-        alert("Order name is required");
+        alert("Название заказа обязательно");
         return;
       }
 
@@ -376,7 +376,7 @@ function init() {
       }
 
       btnSubmitOrder.disabled = true;
-      btnSubmitOrder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+      btnSubmitOrder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Создание...';
 
       try {
         await createOrder(formData);
@@ -385,10 +385,10 @@ function init() {
         $("#createOrderModal").modal("hide");
         await loadOrders();
       } catch (err) {
-        alert("Error creating order: " + err.message);
+        alert("Ошибка создания заказа: " + err.message);
       } finally {
         btnSubmitOrder.disabled = false;
-        btnSubmitOrder.innerHTML = '<i class="fas fa-save"></i> Create Order';
+        btnSubmitOrder.innerHTML = '<i class="fas fa-save"></i> Создать заказ';
       }
     });
   }
@@ -407,7 +407,7 @@ function init() {
         currentScheduleAssignments = null;
         await loadOrders();
       } catch (err) {
-        alert("Assignment error: " + err.message);
+        alert("Ошибка назначения: " + err.message);
       } finally {
         btnAssignSchedule.disabled = false;
       }
@@ -424,12 +424,12 @@ function init() {
       const file = fileInput.files[0];
 
       if (!file) {
-        alert("Please select a G-code file");
+        alert("Выберите файл G-code");
         return;
       }
 
       btnSubmitGcode.disabled = true;
-      btnSubmitGcode.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+      btnSubmitGcode.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Загрузка...';
 
       try {
         await uploadGcode(orderId, assignmentId, file);
@@ -442,10 +442,10 @@ function init() {
           detailBody.innerHTML = buildOrderDetailHtml(data.order);
         }
       } catch (err) {
-        alert("Upload error: " + err.message);
+        alert("Ошибка загрузки: " + err.message);
       } finally {
         btnSubmitGcode.disabled = false;
-        btnSubmitGcode.innerHTML = '<i class="fas fa-upload"></i> Upload';
+        btnSubmitGcode.innerHTML = '<i class="fas fa-upload"></i> Загрузить';
       }
     });
   }

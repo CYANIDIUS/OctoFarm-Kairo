@@ -229,7 +229,7 @@ function calculateSchedule(order, printers, options) {
       assignments: [],
       totalBatches,
       totalEstimatedTime: 0,
-      error: "No compatible printers found",
+      error: "Совместимые принтеры не найдены",
     };
   }
 
@@ -256,7 +256,7 @@ function calculateSchedule(order, printers, options) {
       assignments: [],
       totalBatches,
       totalEstimatedTime: 0,
-      error: "No compatible printer groups found",
+      error: "Совместимые группы принтеров не найдены",
     };
   }
 

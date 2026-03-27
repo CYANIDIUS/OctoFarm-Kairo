@@ -2,23 +2,23 @@
 <div class="col-lg-12">
     <p>
         <a class="btn btn-info float-left" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <i class="fas fa-info"></i> Help
+            <i class="fas fa-info"></i> Помощь
         </a>
     </p>
-    <h5 class="float-right">Last Updated: <span id="lastUpdateConnectionOverview"></span></h5>
+    <h5 class="float-right">Последнее обновление: <span id="lastUpdateConnectionOverview"></span></h5>
 </div>
 <div class="col-lg-12">
     <div class="collapse" id="collapseExample">
         <div class="alert alert-secondary" role="alert">
-            <p> This is an overview screen of the current connection responses OctoFarm gets from your OctoPrint instances</p>
+            <p> Это обзорный экран текущих ответов на подключение, которые OctoFarm получает от ваших экземпляров OctoPrint</p>
             <hr>
-            <b>Average Response Time: </b> <p>This is the total time your printer takes to respond to a request. </p>
+            <b>Среднее время ответа: </b> <p>Это общее время, которое принтер тратит на ответ на запрос. </p>
             <hr>
-            <b>Success Percentage: </b> <p>This is the percentage of Failed vs Successful requests.  </p>
+            <b>Процент успеха: </b> <p>Это соотношение неудачных и успешных запросов.  </p>
             <hr>
-            <b>API Timeout Retries: </b> <p>How many times your timeout settings has stalled a connection Attempt.</p>
+            <b>Повторы по тайм-ауту API: </b> <p>Сколько раз настройки тайм-аута приостанавливали попытку подключения.</p>
             <hr>
-            <b>API Connection Errors: </b> <p>How many times the connection resulted in a total error. Usually from the OctoPrint host / incorrect printer settings.</p>
+            <b>Ошибки подключения API: </b> <p>Сколько раз подключение завершилось полной ошибкой. Обычно из-за хоста OctoPrint / неправильных настроек принтера.</p>
         </div>
     </div>
 </div>
@@ -29,11 +29,11 @@
         <tr>
             <th scope="col"></th>
             <th scope="col" class="sticky-table table-dark" style="">URL</th>
-            <th scope="col" class="sticky-table table-dark" style="">Average Response Time</th>
-            <th scope="col" class="sticky-table table-dark" style="">Success Percentage</th>
-            <th scope="col" class="sticky-table table-dark" style="">API Timeout Retry</th>
-            <th scope="col" class="sticky-table table-dark" style="">API Connection Errors</th>
-            <th scope="col" class="sticky-table table-dark" style="">WebSocket Ping/Pong Failure Count</th>
+            <th scope="col" class="sticky-table table-dark" style="">Среднее время ответа</th>
+            <th scope="col" class="sticky-table table-dark" style="">Процент успеха</th>
+            <th scope="col" class="sticky-table table-dark" style="">Повторы по тайм-ауту API</th>
+            <th scope="col" class="sticky-table table-dark" style="">Ошибки подключения API</th>
+            <th scope="col" class="sticky-table table-dark" style="">Счётчик сбоев WebSocket Ping/Pong</th>
         </tr>
         </thead>
         <tbody id="connectionOverViewTableBody" style="height:100%; overflow-y:auto;">

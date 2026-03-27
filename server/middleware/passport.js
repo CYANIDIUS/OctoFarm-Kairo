@@ -31,7 +31,7 @@ module.exports = function (passport) {
         .then((user) => {
           if (!user) {
             return done(null, false, {
-              message: "That username is not registered"
+              message: "Это имя пользователя не зарегистрировано"
             });
           }
           // Match password
@@ -40,7 +40,7 @@ module.exports = function (passport) {
             if (isMatch) {
               return done(null, user);
             }
-            return done(null, false, { message: "Password incorrect" });
+            return done(null, false, { message: "Неверный пароль" });
           });
         })
         .catch((err) => logger.error(err));

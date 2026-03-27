@@ -38,17 +38,17 @@ for (const key in serverDatabaseKeys) {
       elementNuke.addEventListener('click', async (e) => {
         const alert = UI.createAlert(
           'warning',
-          `${UI.returnSpinnerTemplate()} Deleting ${serverDatabaseKeys[key]} database...`
+          `${UI.returnSpinnerTemplate()} Удаление базы данных ${serverDatabaseKeys[key]}...`
         );
         bootbox.confirm({
-          message: 'This will destroy all data in your database... ARE YOU SURE?',
+          message: 'Это уничтожит все данные в вашей базе данных... ВЫ УВЕРЕНЫ?',
           buttons: {
             confirm: {
-              label: 'Yes',
+              label: 'Да',
               className: 'btn-success',
             },
             cancel: {
-              label: 'No',
+              label: 'Нет',
               className: 'btn-danger',
             },
           },
@@ -69,7 +69,7 @@ for (const key in serverDatabaseKeys) {
         elementExport.addEventListener('click', async (e) => {
           const alert = UI.createAlert(
             'warning',
-            `${UI.returnSpinnerTemplate()} Preparing ${serverDatabaseKeys[key]} database...`
+            `${UI.returnSpinnerTemplate()} Подготовка базы данных ${serverDatabaseKeys[key]}...`
           );
           await exportDatabases(`${serverDatabaseKeys[key]}DB`, e);
           alert.close();
@@ -108,7 +108,7 @@ if (serverActionsElements.LOG_DUMP_GENERATE) {
   serverActionsElements.LOG_DUMP_GENERATE.addEventListener('click', async () => {
     const alert = UI.createAlert(
       'warning',
-      `${UI.returnSpinnerTemplate()} Generating log dump, please wait...`
+      `${UI.returnSpinnerTemplate()} Создание дампа логов, пожалуйста подождите...`
     );
     await generateLogDumpFile();
     alert.close();
@@ -118,7 +118,7 @@ if (serverActionsElements.LOG_DUMP_GENERATE) {
 if (serverActionsElements.RESET_DASHBOARD) {
   serverActionsElements.RESET_DASHBOARD.addEventListener('click', (e) => {
     removeLocalStorage(localStorageKeys.DASHBOARD_SETTINGS);
-    UI.createAlert('success', 'Dashboard data cleared from browser', 3000, 'clicked');
+    UI.createAlert('success', 'Данные панели управления очищены из браузера', 3000, 'clicked');
   });
 }
 

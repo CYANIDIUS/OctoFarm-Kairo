@@ -37,7 +37,7 @@ const E = {
 
 const returnButton = (check, icon, id, message) => {
   const disabled = check ? "disabled" : "";
-  const validMessage = check ? message : "Click to find out more!";
+  const validMessage = check ? message : "Нажмите, чтобы узнать подробнее!";
 
   return `
     <button
@@ -66,7 +66,7 @@ const returnBootBox = (
                 <i class="fas fa-info-circle fa-2x"></i>  
             </div>
             <div class="col">
-               <h5><b>Issue:</b></h5>
+               <h5><b>Проблема:</b></h5>
                ${info}
             </div>                    
         </div>
@@ -81,7 +81,7 @@ const returnBootBox = (
                 <i class="fas fa-exclamation-triangle fa-2x"></i>
             </div>
             <div class="col">
-               <h5><b>Warning:</b></h5>
+               <h5><b>Предупреждение:</b></h5>
                ${warning}
             </div>                    
         </div>
@@ -96,7 +96,7 @@ const returnBootBox = (
                 <i class="fas fa-skull-crossbones fa-2x"></i> 
             </div>
             <div class="col">
-                  <h5><b>Danger:</b></h5>
+                  <h5><b>Опасность:</b></h5>
                ${danger}
             </div>                    
         </div>
@@ -111,7 +111,7 @@ const returnBootBox = (
                 <i class="fas fa-wrench fa-2x"></i>
             </div>
             <div class="col">
-                <h5><b>How to fix:</b></h5>
+                <h5><b>Как исправить:</b></h5>
                ${fix}
             </div>                    
         </div>
@@ -120,7 +120,7 @@ const returnBootBox = (
   }
 
   bootbox.dialog({
-    title: "<b>What's the problem?</b>",
+    title: "<b>В чём проблема?</b>",
     message: infoTemplate + warningTemplate + dangerTemplate + fixTemplate,
   });
 };
@@ -148,20 +148,20 @@ const returnHistoryCamera = (pClean, history) => {
     `;
 };
 const VALID = (check) => {
-  return `&#x2713; ${check} is valid and setup correctly!`;
+  return `&#x2713; ${check} корректен и настроен правильно!`;
 };
 const VALID_NOT = (check) => {
-  return `&#x2713; No recent ${check} failures!`;
+  return `&#x2713; Нет недавних сбоев ${check}!`;
 };
 const VALID_API = (check) => {
-  return `&#x2713; ${check} connected and captured!`;
+  return `&#x2713; ${check} подключено и получено!`;
 };
 const VALID_TIMEOUT = (check) => {
-  return `&#x2713; ${check} settings are okay!`;
+  return `&#x2713; Настройки ${check} в порядке!`;
 };
 
 const VALID_CONN = (check) => {
-  return `&#x2713; ${check} is saved in database!`;
+  return `&#x2713; ${check} сохранено в базе данных!`;
 };
 
 export function returnHealthCheckRow(check) {
@@ -582,7 +582,7 @@ export function returnFarmOverviewTableRow(
   printerOfflineRate,
   octoPi
 ) {
-  const NO_DATA = "No Data";
+  const NO_DATA = "Нет данных";
   const octoPiTableRows = document.querySelectorAll("[id^=\"trOctoPi-\"]");
   let octoPiColumns = "";
   if (!!octoPi && Object.keys(octoPi).length !== 0) {
@@ -592,18 +592,18 @@ export function returnFarmOverviewTableRow(
       <td>${octopi_version ? octopi_version : NO_DATA}</td>
       <td>${
         throttle_state?.current_issue
-          ? "<i title=\"OctoPi is reporting that it's in a throttled state! Please check your power supply!\" class=\"fas fa-thumbs-down text-danger\"></i>"
-          : "<i title=\"OctoPi is reporting it's not in a throttled state!\" class=\"fas fa-thumbs-up text-success\"></i>"
+          ? "<i title=\"OctoPi сообщает о состоянии троттлинга! Проверьте блок питания!\" class=\"fas fa-thumbs-down text-danger\"></i>"
+          : "<i title=\"OctoPi не находится в состоянии троттлинга!\" class=\"fas fa-thumbs-up text-success\"></i>"
       }</td>
       <td>${
         throttle_state?.current_overheat
-          ? "<i title=\"OctoPi is reporting an overheating issue! Blow on it and ReScan the API!\" class=\"fa-solid fa-fire text-danger\"></i>"
-          : "<i title=\"OctoPi is running cool!\" class=\"fa-solid fa-fire text-success\"></i>"
+          ? "<i title=\"OctoPi сообщает о перегреве! Проверьте охлаждение и пересканируйте API!\" class=\"fa-solid fa-fire text-danger\"></i>"
+          : "<i title=\"OctoPi работает в нормальном температурном режиме!\" class=\"fa-solid fa-fire text-success\"></i>"
       }</td>
       <td>${
         throttle_state?.current_undervoltage
-          ? "<i title=\"OctoPi is reporting that it's undervoltaged! Fix your PSU and Re-Scan the API.\" class=\"fa-solid fa-plug-circle-bolt text-danger\"></i>"
-          : "<i title=\"OctoPi is juiced up!\" class=\"fa-solid fa-plug-circle-bolt text-success\"></i>"
+          ? "<i title=\"OctoPi сообщает о пониженном напряжении! Замените блок питания и пересканируйте API.\" class=\"fa-solid fa-plug-circle-bolt text-danger\"></i>"
+          : "<i title=\"Напряжение питания OctoPi в норме!\" class=\"fa-solid fa-plug-circle-bolt text-success\"></i>"
       }</td>
     `;
     octoPiTableRows.forEach((tableRow) => {
@@ -651,15 +651,15 @@ export function returnFarmOverviewTableRow(
       }  </td>
       <td>${
         octoSysInfo?.["octoprint.safe_mode"]
-          ? "<i title=\"Something maybe wrong with your system? Detecting safe mode\" class=\"fas fa-thumbs-down text-danger\"></i>"
-          : "<i title=\"You are not in safe mode, all is fine\" class=\"fas fa-thumbs-up text-success\"></i>"
+          ? "<i title=\"Возможна проблема с системой? Обнаружен безопасный режим\" class=\"fas fa-thumbs-down text-danger\"></i>"
+          : "<i title=\"Безопасный режим не активен, всё в порядке\" class=\"fas fa-thumbs-up text-success\"></i>"
       } </td>
       <td>
-        <div class="progress" title="Success:  ${printerSuccessRate.toFixed(
+        <div class="progress" title="Успешно:  ${printerSuccessRate.toFixed(
           0
-        )}% / Cancel: ${printerCancelRate.toFixed(
+        )}% / Отмена: ${printerCancelRate.toFixed(
     0
-  )}% / Error: ${printerErrorRate.toFixed(0)}%">
+  )}% / Ошибка: ${printerErrorRate.toFixed(0)}%">
           <div class="progress-bar bg-success progress-bar-striped text-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width: ${printerSuccessRate}%;"> ${printerSuccessRate.toFixed(
     0
   )}% </div>
@@ -672,11 +672,11 @@ export function returnFarmOverviewTableRow(
         </div>
       </td>
       <td>
-        <div class="progress" title="Active:  ${printerActivityRate.toFixed(
+        <div class="progress" title="Активно:  ${printerActivityRate.toFixed(
           0
-        )}% / Idle: ${printerIdleRate.toFixed(
+        )}% / Простой: ${printerIdleRate.toFixed(
     0
-  )}% / Offline: ${printerOfflineRate.toFixed(0)}%">
+  )}% / Офлайн: ${printerOfflineRate.toFixed(0)}%">
           <div class="progress-bar bg-success progress-bar-striped text-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width: ${printerActivityRate}%;"> ${printerActivityRate.toFixed(
     0
   )}%</div>

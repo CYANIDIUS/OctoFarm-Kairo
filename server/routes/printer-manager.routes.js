@@ -239,7 +239,7 @@ router.post(
     const id = req.body.i;
     if (!id) {
       logger.error("Printer Settings: No ID key was provided");
-      res.statusMessage = "No ID key was provided";
+      res.statusMessage = "Не указан идентификатор";
       res.sendStatus(400);
       return;
     }
@@ -249,7 +249,7 @@ router.post(
       res.send(getPrinterStoreCache().getPrinterInformation(id));
     } catch (e) {
       logger.error(`The server couldn't update your printer settings! ${e}`);
-      res.statusMessage = `The server couldn't update your printer settings! ${e}`;
+      res.statusMessage = `Серверу не удалось обновить настройки принтера! ${e}`;
       res.sendStatus(500);
     }
   }
@@ -305,10 +305,10 @@ router.post("/reSyncSockets", ensureAuthenticated, async (req, res) => {
     logger.info("Full re-scan of OctoFarm completed");
     res.send({
       status: "success",
-      msg: "Successfully Reconnected Socket! Please await reconnect."
+      msg: "Сокет успешно переподключён! Ожидайте восстановления соединения."
     });
   } catch (e) {
-    res.send({ status: "error", msg: `Couldn't Reconnect Socket! : ${e.message}` });
+    res.send({ status: "error", msg: `Не удалось переподключить сокет! : ${e.message}` });
   }
 });
 router.post("/wakeHost", ensureAuthenticated, async (req, res) => {

@@ -21,13 +21,13 @@ export const setupConnectButton = (printer) => {
   const printerConnect = document.getElementById("printerConnect");
 
   printerPort.innerHTML = `
-    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardSerialPort">Port:</label> </div> <select class="custom-select bg-secondary text-light" id="pmSerialPort"></select></div>
+    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardSerialPort">Порт:</label> </div> <select class="custom-select bg-secondary text-light" id="pmSerialPort"></select></div>
     `;
   printerBaud.innerHTML = `
-    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardBaudrate">Baudrate:</label> </div> <select class="custom-select bg-secondary text-light" id="pmBaudrate"></select></div>
+    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardBaudrate">Скорость:</label> </div> <select class="custom-select bg-secondary text-light" id="pmBaudrate"></select></div>
     `;
   printerProfile.innerHTML = `
-    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardPrinterProfile">Profile:</label> </div> <select class="custom-select bg-secondary text-light" id="pmProfile"></select></div>
+    <div class="input-group mb-1"> <div class="input-group-prepend"> <label class="input-group-text bg-secondary text-light" for="dashboardPrinterProfile">Профиль:</label> </div> <select class="custom-select bg-secondary text-light" id="pmProfile"></select></div>
     `;
   baudrates.forEach((baud) => {
     if (baud !== 0) {
@@ -75,7 +75,7 @@ export const setupConnectButton = (printer) => {
   }
   if (printerIsDisconnectedOrError(printer)) {
     printerConnect.innerHTML =
-      '<button id="pmConnect" class="btn btn-success inline text-center" value="connect">Connect</button><a title="Open your Printers Web Interface" id="pmWebBtn" type="button" class="tag btn btn-info ml-1" target="_blank" href="' +
+      '<button id="pmConnect" class="btn btn-success inline text-center" value="connect">Подключить</button><a title="Открыть веб-интерфейс принтера" id="pmWebBtn" type="button" class="tag btn btn-info ml-1" target="_blank" href="' +
       printerURL +
       '" role="button"><i class="fas fa-globe-europe"></i></a><div id="powerBtn-' +
       _id +
@@ -85,7 +85,7 @@ export const setupConnectButton = (printer) => {
     document.getElementById("pmProfile").disabled = false;
   } else {
     printerConnect.innerHTML =
-      '<button id="pmConnect" class="btn btn-danger text-center inline" value="disconnect">Disconnect</button><a title="Open your Printers Web Interface" id="pmWebBtn" type="button" class="tag btn btn-info ml-1" target="_blank" href="' +
+      '<button id="pmConnect" class="btn btn-danger text-center inline" value="disconnect">Отключить</button><a title="Открыть веб-интерфейс принтера" id="pmWebBtn" type="button" class="tag btn btn-info ml-1" target="_blank" href="' +
       printerURL +
       '" role="button"><i class="fas fa-globe-europe"></i></a><div id="pmPowerBtn-' +
       _id +
@@ -123,7 +123,7 @@ export const updateConnectButtonState = (
 
   if (!printerIsDisconnectedOrError(printer)) {
     connectButton.value = "disconnect";
-    connectButton.innerHTML = "Disconnect";
+    connectButton.innerHTML = "Отключить";
     connectButton.classList = "btn btn-danger inline";
     connectButton.disabled = false;
 
@@ -132,7 +132,7 @@ export const updateConnectButtonState = (
     printerProfile.disabled = false;
   } else {
     connectButton.value = "connect";
-    connectButton.innerHTML = "Connect";
+    connectButton.innerHTML = "Подключить";
     connectButton.classList = "btn btn-success inline";
     connectButton.disabled = false;
 

@@ -1,7 +1,7 @@
 import UI from '../../utils/ui';
 
 const drawActiveUser = (record) => {
-  const noUser = 'Unknown';
+  const noUser = 'Неизвестно';
   let userTemplate = record?.activeControlUser ? record.activeControlUser : noUser;
 
   if (userTemplate === noUser) {
@@ -36,14 +36,14 @@ export const returnHistoryTableRow = function (record) {
     record.spools.forEach((tool, index) => {
       const weight = tool['tool' + index]?.weight ? tool['tool' + index]?.weight : false;
       const type = tool['tool' + index]?.type ? tool['tool' + index]?.type : false;
-      let spoolString = `${index}: No Spool`;
+      let spoolString = `${index}: Нет катушки`;
       if (!!weight && !!type) {
         spoolString = index + ': ' + type + ' - ' + weight + 'g';
       }
       spoolType.push(spoolString);
     });
   } else {
-    spoolType.push('0: No Spool');
+    spoolType.push('0: Нет катушки');
   }
   const spoolString = [];
   spoolType.forEach((spool) => {
@@ -90,7 +90,7 @@ export const returnHistoryTableRow = function (record) {
             <p class="mb-0"> ${record.totalCost} </p>
           </td>
           <td>
-            <code>${record.costPerHour} / hour</code>
+            <code>${record.costPerHour} / час</code>
           </td>
           <td>
               <button
@@ -139,10 +139,10 @@ const returnSkipPageNumber = function () {
 export const returnHistoryPagination = function (pagination) {
   const { hasPrevPage, hasNextPage, pageCount, currentPage, itemCount, perPage } = pagination;
   let pageList = '';
-  let itemsOutOf = `${perPage} Items of ${itemCount}`;
+  let itemsOutOf = `${perPage} записей из ${itemCount}`;
 
   if (perPage === 9007199254740991) {
-    itemsOutOf = 'ALL of ' + itemCount + ' items...';
+    itemsOutOf = 'ВСЕ из ' + itemCount + ' записей...';
   }
 
   let pagesToDraw = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -176,7 +176,7 @@ export const returnHistoryPagination = function (pagination) {
   return `
             <div class="col-lg-2 m-0 text-center">
                 <div id="currentPageCount" class="btn btn-secondary mt-1 btn-sm">
-                 Page ${currentPage} of ${pageCount}
+                 Страница ${currentPage} из ${pageCount}
                 </div>
             </div>
             <div class="col-lg-8 m-0">
@@ -184,10 +184,10 @@ export const returnHistoryPagination = function (pagination) {
                   <div class="btn-group mr-2" role="group" aria-label="First group">
                     <button id="firstPage" type="button" class="btn btn-secondary" ${isDisabled(
                       currentPage === 1
-                    )}>First</button>
+                    )}>Первая</button>
                     <button id="previousPage" type="button" class="btn btn-secondary" ${isDisabled(
                       !hasPrevPage
-                    )}>Previous</button>
+                    )}>Предыдущая</button>
                   </div>
                   <div id="pageList" class="btn-group mr-2" role="group" aria-label="Second group">
                     ${pageList}
@@ -195,10 +195,10 @@ export const returnHistoryPagination = function (pagination) {
                   <div class="btn-group" role="group" aria-label="Third group">
                     <button id="nextPage" type="button" class="btn btn-secondary" ${isDisabled(
                       !hasNextPage
-                    )}>Next</button>
+                    )}>Следующая</button>
                     <button id="lastPage" type="button" class="btn btn-secondary" ${isDisabled(
                       currentPage === pageCount
-                    )}>Last</button>
+                    )}>Последняя</button>
                   </div>
                 </div>            
             </div>
@@ -218,6 +218,6 @@ export const returnHistoryFilterDefaultSelected = function () {
                 href="#"
                 data-value="0"
                 data-path="default"
-        >Filter</option>
+        >Фильтр</option>
     `;
 };

@@ -28,7 +28,7 @@
               <i class="fas fa-hdd"></i> <%= helpers.generateBytes(printers[0].fileList.files[i].size) %>
             </p>
               <p class="mb-1 float-left">
-                  <i class="fas fa-hdd"></i> Loading... %>
+                  <i class="fas fa-hdd"></i> Загрузка... %>
               </p>
             <div
   class="float-right btn-group flex-wrap btn-group-sm"
@@ -40,22 +40,22 @@
                 role="button"
                 class="btn btn-dark"
               >
-                <i class="fas fa-sync"></i> Refresh
+                <i class="fas fa-sync"></i> Обновить
               </button>
               <button id="<%= printers[0].index %>*fileActionStart*<%= printers[0].fileList.files[i].fullPath %>" type="button" class="btn btn-success">
-                <i class="fas fa-play"></i> Start
+                <i class="fas fa-play"></i> Старт
               </button>
               <button id="<%= printers[0].index %>*fileActionSelect*<%= printers[0].fileList.files[i].fullPath %>" type="button" class="btn btn-info">
-                <i class="fas fa-file-upload"></i> Select
+                <i class="fas fa-file-upload"></i> Выбрать
               </button>
               <button id="<%= printers[0].index %>*fileActionMove*<%= printers[0].fileList.files[i].fullPath %>" type="button" class="btn btn-warning">
-                <i class="fas fa-people-carry"></i> Move
+                <i class="fas fa-people-carry"></i> Переместить
               </button>
               <button onclick="window.location.href='http://<%= printers[0].ip %>:<%= printers[0].port %>/downloads/files/local/<%= printers[0].fileList.files[i].fullPath %>'" role="button" class="btn btn-dark">
-                <i class="fas fa-download"></i> Download
+                <i class="fas fa-download"></i> Скачать
               </button>
               <button id="<%= printers[0].index %>*fileActionDelete*<%= printers[0].fileList.files[i].fullPath %>" type="button" class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i> Delete
+                <i class="fas fa-trash-alt"></i> Удалить
               </button>
             </div>
           </div>

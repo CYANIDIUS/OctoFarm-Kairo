@@ -38,7 +38,7 @@ class Manager {
     if (!printerList || !onlinePrinters) {
       printerList.innerHTML = `
       <div class="alert alert-dark text-center" role="alert">
-        No printers are online... Please refresh when they are!
+        Нет принтеров в сети... Пожалуйста, обновите страницу, когда они появятся!
       </div>
       `;
       return;
@@ -59,13 +59,13 @@ class Manager {
           storageWarning = `<button type="button" class="btn btn-outline-danger text-left disabled btn-sm"
                                    style="pointer-events: none" disabled>${percentRemain.toFixed(
                                      0
-                                   )}% Space Remains</button>`;
+                                   )}% Осталось места</button>`;
         }
         if (percentRemain <= 20) {
           storageWarning = `<button type="button" class="btn btn-outline-warning text-left disabled btn-sm"
                                    style="pointer-events: none" disabled>${percentRemain.toFixed(
                                      0
-                                   )}% Space Remains</button>`;
+                                   )}% Осталось места</button>`;
         }
       }
 
@@ -150,9 +150,9 @@ class Manager {
     fileList.innerHTML = `
          <div class="row mb-1">
           <div class="col-12">
-            <label class="btn btn-success float-left mr-1 mb-0 bg-colour-1" for="fileUploadBtn"><i class="fas fa-file-import"></i> Upload File(s)</label>
+            <label class="btn btn-success float-left mr-1 mb-0 bg-colour-1" for="fileUploadBtn"><i class="fas fa-file-import"></i> Загрузить файл(ы)</label>
             <input id="fileUploadBtn" multiple accept="${allowedFileTypes}" type="file" class="btn btn-success float-left bg-colour-1">
-            <label class="btn btn-info float-left mr-1 mb-0 bg-colour-2" for="fileUploadPrintBtn"><i class="fas fa-file-import"></i> Upload and Print</label>
+            <label class="btn btn-info float-left mr-1 mb-0 bg-colour-2" for="fileUploadPrintBtn"><i class="fas fa-file-import"></i> Загрузить и печатать</label>
             <input id="fileUploadPrintBtn" accept="${allowedFileTypes}" type="file" class="btn btn-success float-left bg-colour-2">
             <button
                     id="createFolderBtn"
@@ -164,16 +164,16 @@ class Manager {
                     aria-expanded="false"
                     aria-controls="createFolder"
             >
-              <i class="fas fa-folder-plus"></i> Create Folder
+              <i class="fas fa-folder-plus"></i> Создать папку
             </button>
-            <button title="Re-Sync OctoPrints file list back to OctoFarm" id="fileReSync" type="button" class="btn btn-primary mb-0 bg-colour-4">
-              <i class="fas fa-sync"></i> Re-Sync
+            <button title="Повторная синхронизация списка файлов OctoPrint с OctoFarm" id="fileReSync" type="button" class="btn btn-primary mb-0 bg-colour-4">
+              <i class="fas fa-sync"></i> Синхронизировать
             </button>
-            <button title="Delete all file from OctoPrint" id="fileDeleteAll" type="button" class="btn btn-outline-danger mb-0 float-right">
-              <i class="fa-solid fa-trash-can"></i> Delete All
+            <button title="Удалить все файлы из OctoPrint" id="fileDeleteAll" type="button" class="btn btn-outline-danger mb-0 float-right">
+              <i class="fa-solid fa-trash-can"></i> Удалить все
             </button>
-            <button title="Run house keeping on file list" id="fileHouseKeeping" type="button" class="btn btn-warning text-dark mb-0 mr-1 float-right">
-              <i class="fa-solid fa-broom"></i> House Keeping
+            <button title="Запустить очистку списка файлов" id="fileHouseKeeping" type="button" class="btn btn-warning text-dark mb-0 mr-1 float-right">
+              <i class="fa-solid fa-broom"></i> Очистка
             </button>
           </div>
         </div>
@@ -188,7 +188,7 @@ class Manager {
     const printer = await OctoFarmClient.getPrinter(id);
     await FileManagerSortingService.loadSort(id);
     document.getElementById('backBtn').innerHTML =
-      '<button id="fileBackBtn" type="button" class="btn btn-success"><i class="fas fa-chevron-left"></i> Back</button>';
+      '<button id="fileBackBtn" type="button" class="btn btn-success"><i class="fas fa-chevron-left"></i> Назад</button>';
     const fileButtons = {
       fileManager: {
         printerStorage: document.getElementById('printerStorage'),
@@ -240,9 +240,9 @@ class Manager {
     });
     fileButtons.fileManager.fileHouseKeeping.addEventListener('click', async (e) => {
       bootbox.prompt({
-        title: "Clean all files older than 'X' days...",
+        title: "Удалить все файлы старше 'X' дней...",
         message:
-          '<div class="alert alert-warning text-dark" role="alert">This action is permanent, and does NOT affect your folder structure.</div>',
+          '<div class="alert alert-warning text-dark" role="alert">Это действие необратимо и НЕ затрагивает структуру папок.</div>',
         inputType: 'number',
         callback: async function (result) {
           if (!!result) {
@@ -256,6 +256,6 @@ class Manager {
 
 Manager.init().catch((e) => {
   const errorObject = ClientErrors.UNKNOWN_ERROR;
-  errorObject.message = `File Manager - ${e}`;
+  errorObject.message = `Файловый менеджер - ${e}`;
   throw new ApplicationError(errorObject);
 });

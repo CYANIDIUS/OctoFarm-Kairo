@@ -9,7 +9,7 @@ import {
 } from "./filament-manager.utils";
 
 export const printErrors = (errors) => {
-  let errorMessage = "OctoFarm is having issues! Error(s): <br>";
+  let errorMessage = "У OctoFarm возникли проблемы! Ошибка(и): <br>";
   errors.forEach((error) => {
     errorMessage += error + "<br>";
   });
@@ -148,7 +148,7 @@ export const updatePrinterDrops = async () => {
             "</small>";
         });
       } else {
-        text.innerHTML = "Not Assigned";
+        text.innerHTML = "Не назначено";
       }
     }
   });

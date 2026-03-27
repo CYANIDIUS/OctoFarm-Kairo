@@ -152,6 +152,6 @@ export default class ClientSettings {
       },
     };
     await OctoFarmClient.post('settings/client/update', opts);
-    UI.createAlert('success', 'Client settings updated', 3000, 'clicked');
+    UI.createAlert('success', 'Настройки клиента обновлены', 3000, 'clicked');
   }
 }

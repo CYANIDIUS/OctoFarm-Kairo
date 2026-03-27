@@ -2,52 +2,52 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="gcodeScriptName">Name</label>
+                <label for="gcodeScriptName">Имя</label>
                 <input type="text" class="form-control" id="gcodeScriptName"
-                       placeholder="New script name">
+                       placeholder="Имя нового скрипта">
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="gcodeScriptDescription">Description</label>
+                <label for="gcodeScriptDescription">Описание</label>
                 <input type="text" class="form-control" id="gcodeScriptDescription"
-                       placeholder="New script description">
+                       placeholder="Описание нового скрипта">
             </div>
         </div>
         <div class="col-md-4">
-            <label for="gcodeScriptBtnColour">Button Colour</label>
+            <label for="gcodeScriptBtnColour">Цвет кнопки</label>
             <select class="custom-select" id="gcodeScriptBtnColour">
-                <option selected value="success">Green</option>
-                <option value="warning">Yellow</option>
-                <option value="info">Blue</option>
-                <option value="danger">Red</option>
-                <option value="dark">Black</option>
+                <option selected value="success">Зелёный</option>
+                <option value="warning">Жёлтый</option>
+                <option value="info">Синий</option>
+                <option value="danger">Красный</option>
+                <option value="dark">Чёрный</option>
             </select>
-            <small class="form-text text-muted">Choose a colour for your button!</small>
+            <small class="form-text text-muted">Выберите цвет для вашей кнопки!</small>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="gcodeScriptScript">Script</label>
+                <label for="gcodeScriptScript">Скрипт</label>
                 <textarea class="form-control" id="gcodeScriptScript" rows="5"></textarea>
-                <small class="form-text text-muted">New lines will be treated as separate
-                    commands<br> <kbd>SHIFT + RETURN/ENTER</kbd> or <kbd>RETURN/ENTER</kbd> To create a new line</small>
+                <small class="form-text text-muted">Новые строки будут обработаны как отдельные
+                    команды<br> <kbd>SHIFT + RETURN/ENTER</kbd> или <kbd>RETURN/ENTER</kbd> для создания новой строки</small>
             </div>
         </div>
         <div class="col-md-6">
-            <label for="gcodeScriptPrinters">Select Printers</label>
+            <label for="gcodeScriptPrinters">Выберите принтеры</label>
             <select multiple class="custom-select" id="gcodeScriptPrinters" size="6">
-                <option value="99aa99aaa9999a99999999aa" selected>Allow all printers</option>
+                <option value="99aa99aaa9999a99999999aa" selected>Разрешить все принтеры</option>
                 <% printers.forEach(printer => { %>
                     <option value="<%= printer._id %>"> <%= printer.printerName %> </option>
                 <% }) %>
             </select>
-            <small class="form-text text-muted">Choose the printers this button is visible to. <br>
-                <kbd>CTRL + A</kbd> to select all <br>
-                <kbd>CTRL + Left Click</kbd> to select multiple
+            <small class="form-text text-muted">Выберите принтеры, для которых видна эта кнопка. <br>
+                <kbd>CTRL + A</kbd> выбрать всё <br>
+                <kbd>CTRL + Left Click</kbd> выбрать несколько
             </small>
         </div>
         <div class="col-12">
-            <button id="createNewScriptBtn" type="submit" class="btn btn-success">Create Script</button>
+            <button id="createNewScriptBtn" type="submit" class="btn btn-success">Создать скрипт</button>
         </div>
     </div>
 </div>
@@ -57,13 +57,13 @@
         <thead>
         <tr>
             <th class="table-dark table-dark d-none" scope="col"></th>
-            <th class="table-dark table-dark" scope="col" style="min-width: 50px">Name</th>
-            <th class="table-dark table-dark" scope="col">Description</th>
-            <th class="table-dark" scope="col">Colour</th>
-            <th class="table-dark" scope="col" style="min-width: 300px">Printers</th>
-            <th class="table-dark table-dark" scope="col" style="min-width: 400px">Script</th>
+            <th class="table-dark table-dark" scope="col" style="min-width: 50px">Имя</th>
+            <th class="table-dark table-dark" scope="col">Описание</th>
+            <th class="table-dark" scope="col">Цвет</th>
+            <th class="table-dark" scope="col" style="min-width: 300px">Принтеры</th>
+            <th class="table-dark table-dark" scope="col" style="min-width: 400px">Скрипт</th>
             <th class="table-dark table-dark" scope="col">
-                Actions
+                Действия
             </th>
         </tr>
         </thead>

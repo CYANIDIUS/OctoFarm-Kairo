@@ -41,7 +41,7 @@ export class PrintersManagement {
         `
    <tr id="newPrinterCard-${newPrintersIndex}">
         <td><div class="mb-0">
-          <input id="newPrinterName-${newPrintersIndex}" type="text" class="form-control" placeholder="Leave blank to grab from OctoPrint" value="${newPrinter.name}">
+          <input id="newPrinterName-${newPrintersIndex}" type="text" class="form-control" placeholder="Оставьте пустым для получения из OctoPrint" value="${newPrinter.name}">
         </div></td>
         <td><div class="mb-0">
           <input id="newPrinterGroup-${newPrintersIndex}" type="text" class="form-control" placeholder="" value="${newPrinter.group}">
@@ -50,7 +50,7 @@ export class PrintersManagement {
           <input id="newPrinterURL-${newPrintersIndex}" type="text" class="form-control" placeholder="" value="${newPrinter.printerURL}">
         </div></td>
         <td><div class="mb-0">
-          <input id="newPrinterCamURL-${newPrintersIndex}" type="text" class="form-control" placeholder="Leave blank to grab from OctoPrint" value="${newPrinter.camURL}">
+          <input id="newPrinterCamURL-${newPrintersIndex}" type="text" class="form-control" placeholder="Оставьте пустым для получения из OctoPrint" value="${newPrinter.camURL}">
         </div></td>
         <td><div class="mb-0">
           <input id="newPrinterAPIKEY-${newPrintersIndex}" type="text" class="form-control" placeholder="" value="${newPrinter.apikey}">
@@ -71,24 +71,24 @@ export class PrintersManagement {
         `
         <tr id="newPrinterCard-${newPrintersIndex}">
         <td><div class="mb-0">
-          <input id="newPrinterName-${newPrintersIndex}" type="text" class="form-control" placeholder="Leave blank to grab from OctoPrint">
-          <small>Example: <code>My Awesome Printer Name</code></small>
+          <input id="newPrinterName-${newPrintersIndex}" type="text" class="form-control" placeholder="Оставьте пустым для получения из OctoPrint">
+          <small>Пример: <code>Мой принтер</code></small>
         </div></td>
         <td><div class="mb-0">
           <input id="newPrinterGroup-${newPrintersIndex}" type="text" class="form-control" placeholder="">
-          <small>Example: <code>Rack 1</code></small>
+          <small>Пример: <code>Стойка 1</code></small>
         </div></td>
         <td><div class="mb-0">
           <input id="newPrinterURL-${newPrintersIndex}" type="text" class="form-control" placeholder="">
-          <small>Example: <code>http://192.168.1.5:80</code></small>
+          <small>Пример: <code>http://192.168.1.5:80</code></small>
         </div></td>
         <td><div class="mb-0">
-          <input id="newPrinterCamURL-${newPrintersIndex}" type="text" class="form-control" placeholder="Leave blank to grab from OctoPrint">
-          <small>Example: <code>http://192.168.1.5/webcam/?action=stream</code></small>
+          <input id="newPrinterCamURL-${newPrintersIndex}" type="text" class="form-control" placeholder="Оставьте пустым для получения из OctoPrint">
+          <small>Пример: <code>http://192.168.1.5/webcam/?action=stream</code></small>
         </div></td>
         <td><div class="mb-0">
           <input id="newPrinterAPIKEY-${newPrintersIndex}" type="text" class="form-control" placeholder="">
-          <small>OctoPrint Version 1.4.1+: <code>Must use generated User/Application Key</code></small>
+          <small>OctoPrint версия 1.4.1+: <code>Необходимо использовать сгенерированный ключ пользователя/приложения</code></small>
         </div></td>
         <td><button id="saveButton-${newPrintersIndex}" type="button" class="btn btn-success btn-sm">
                 <i class="fas fa-save"></i>
@@ -160,13 +160,13 @@ export class PrintersManagement {
         }
         UI.createAlert(
           "success",
-          "Successfully imported your printer list, Please check it over and save when ready.",
+          "Список принтеров успешно импортирован. Пожалуйста, проверьте его и сохраните, когда будете готовы.",
           3000
         );
       } else {
         UI.createAlert(
           "error",
-          "The file you have tried to upload contains json syntax errors.",
+          "Загруженный файл содержит синтаксические ошибки JSON.",
           3000
         );
       }
@@ -176,7 +176,7 @@ export class PrintersManagement {
   static async deletePrinter(deletedPrinters) {
     const deletingAlert = UI.createAlert(
       "warning",
-      `Deleting ${[...deletedPrinters]} from the farm...`,
+      `Удаление ${[...deletedPrinters]} из фермы...`,
       0
     );
     if (deletedPrinters.length > 0) {
@@ -188,7 +188,7 @@ export class PrintersManagement {
       printersRemoved.forEach((printer) => {
         UI.createAlert(
           "success",
-          `Printer: ${printer.printerURL} has successfully been removed from the farm...`,
+          `Принтер: ${printer.printerURL} успешно удалён из фермы...`,
           1000,
           "Clicked"
         );
@@ -201,7 +201,7 @@ export class PrintersManagement {
       deletingAlert.close();
       UI.createAlert(
         "error",
-        "To delete a printer... one must first select a printer.",
+        "Чтобы удалить принтер, сначала необходимо его выбрать.",
         3000,
         "Clicked"
       );
@@ -242,25 +242,25 @@ export class PrintersManagement {
       if (printerURL.value === "") {
         errors.push({
           type: "warning",
-          msg: "Please input your printers URL",
+          msg: "Пожалуйста, введите URL принтера",
         });
       }
       if (printerAPIKEY.value === "") {
         errors.push({
           type: "warning",
-          msg: "Please input your printers API Key",
+          msg: "Пожалуйста, введите API-ключ принтера",
         });
       }
       if (printerName.value.length > 50) {
         errors.push({
           type: "warning",
-          msg: "Printer names must be less than 50 characters",
+          msg: "Имя принтера должно быть не длиннее 50 символов",
         });
       }
       if (printCheck > -1) {
         errors.push({
           type: "error",
-          msg: `Printer URL: ${printerURL.value} already exists on farm`,
+          msg: `URL принтера: ${printerURL.value} уже существует на ферме`,
         });
       }
     }
@@ -285,7 +285,7 @@ export class PrintersManagement {
       printersAdded.forEach((p) => {
         UI.createAlert(
           "success",
-          `Printer: ${p.printerURL} has successfully been added to the farm...`,
+          `Принтер: ${p.printerURL} успешно добавлен на ферму...`,
           500,
           "Clicked"
         );

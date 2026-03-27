@@ -3,29 +3,29 @@
         <li class="nav-item">
             <a class="nav-link active"
                id="alerts-new-list" data-toggle="list" href="#alerts-new" role="tab"
-               aria-controls="system"><i class="fas fa-plus"></i> New</a>
+               aria-controls="system"><i class="fas fa-plus"></i> Новое</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="alerts-current-list" data-toggle="list" href="#alerts-current"
                role="tab" aria-controls="panelview"><i class="fas fa-list"></i>
-                Current</a>
+                Текущие</a>
         </li>
     </ul>
     <div class="col-12">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="alerts-new" role="tabpanel"
                  aria-labelledby="server-status-list">
-                <p class="mb-0">Alerts are managed by the OctoFarm server.</p>
-                <p>NOTE: If you want to pass through information to your script then
-                    it needs to allow for a single variable, the message you input
-                    below will be passed into that variable before sending.</p>
-                <p>List of available tags here: <a class="" data-toggle="collapse"
+                <p class="mb-0">Оповещения управляются сервером OctoFarm.</p>
+                <p>ПРИМЕЧАНИЕ: Если вы хотите передать информацию в ваш скрипт, он
+                    должен принимать одну переменную, сообщение, которое вы вводите
+                    ниже, будет передано в эту переменную перед отправкой.</p>
+                <p>Список доступных тегов здесь: <a class="" data-toggle="collapse"
                                                    href="#variableList"
                                                    role="button"
                                                    aria-expanded="false"
                                                    aria-controls="variableList">
-                        Variable List
+                        Список переменных
                     </a></p>
                 <div class="collapse" id="variableList">
                     <div class="card card-body">
@@ -34,18 +34,18 @@
                                 <thead>
                                 <tr>
                                     <th class="table-dark" scope="col"
-                                        width="200px">Variable
+                                        width="200px">Переменная
                                     </th>
-                                    <th class="table-dark" scope="col">Example</th>
-                                    <th class="table-dark" scope="col">Notes</th>
+                                    <th class="table-dark" scope="col">Пример</th>
+                                    <th class="table-dark" scope="col">Примечания</th>
                                 </tr>
                                 </thead>
                                 <tbody id="historyTable">
                                 <tr>
                                     <td><code>[PrinterName]</code></td>
                                     <td>CR10</td>
-                                    <td>Defaults to <code>[PrinterURL]</code> if not
-                                        available.
+                                    <td>По умолчанию <code>[PrinterURL]</code>, если
+                                        недоступно.
                                     </td>
                                 </tr>
                                 <tr>
@@ -61,36 +61,36 @@
                                 <tr>
                                     <td><code>[TimeRemaining]</code></td>
                                     <td>3 Hrs, 48 Mins, 48 Seconds</td>
-                                    <td>"No Time Estimate" will be shown if not
-                                        available
+                                    <td>"No Time Estimate" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[EstimatedTime]</code></td>
                                     <td>5 Days, 24 Hrs, 10 Mins, 48 Seconds</td>
-                                    <td>"No Estimated Time Available" will be shown
-                                        if not available
+                                    <td>"No Estimated Time Available" будет показано,
+                                        если недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[CurrentZ]</code></td>
                                     <td>25.5mm</td>
-                                    <td>"No Current Z" will be shown if not
-                                        available
+                                    <td>"No Current Z" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[PercentRemaining]</code></td>
                                     <td>55%</td>
-                                    <td>"No Percent Available" will be shown if not
-                                        available
+                                    <td>"No Percent Available" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[ETA]</code></td>
                                     <td>Tue Jun 02 2020: 02:47:17</td>
-                                    <td>"No Percent Available" will be shown if not
-                                        available
+                                    <td>"No Percent Available" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
@@ -101,43 +101,43 @@
                                 <tr>
                                     <td><code>[CurrentFile]</code></td>
                                     <td>dickasaurous.gcode</td>
-                                    <td>"No selected file" will be shown if not
-                                        available
+                                    <td>"No selected file" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[CurrentFilePath]</code></td>
                                     <td>/lewd/dickasaurous.gcode</td>
-                                    <td>"No selected file" will be shown if not
-                                        available
+                                    <td>"No selected file" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[Tool0Temp]</code></td>
                                     <td>T:220°C / A:220°C</td>
-                                    <td>"No tool0 temperature" will be shown if not
-                                        available
+                                    <td>"No tool0 temperature" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[BedTemp]</code></td>
                                     <td>T:60°C / A:60°C</td>
-                                    <td>"No bed temperature" will be shown if not
-                                        available
+                                    <td>"No bed temperature" будет показано, если
+                                        недоступно
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><code>[Error!]</code></td>
                                     <td>Thermal Runaway detected! Halting printer
                                     </td>
-                                    <td>"No error" If not available</td>
+                                    <td>"No error" если недоступно</td>
                                 </tr>
                                 <tr>
                                     <td><code>[historyID]</code></td>
                                     <td>5f76e9e99c99832cd8fef414</td>
-                                    <td>"history id undefined" if not available,
-                                        only works on Print Done, Print Failed,
-                                        Print Error.
+                                    <td>"history id undefined" если недоступно,
+                                        работает только при завершении печати, ошибке печати,
+                                        неудачной печати.
                                     </td>
                                 </tr>
                                 </tbody>
@@ -148,11 +148,11 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Choose the initial trigger for the alert</label>
+                            <label>Выберите начальный триггер для оповещения</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text"
-                                           for="alertsTrigger">Trigger</label>
+                                           for="alertsTrigger">Триггер</label>
                                 </div>
                                 <select class="custom-select" id="alertsTrigger">
 
@@ -163,15 +163,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="scriptLocation">Input the current script
-                            location (must be reachable by OctoFarm and have
-                            permissions to execute)</label>
+                        <label for="scriptLocation">Введите текущее расположение скрипта
+                            (должен быть доступен для OctoFarm и иметь
+                            права на выполнение)</label>
                         <input type="text" class="form-control" id="scriptLocation"
                                placeholder="/home/octofarm/printAlert">
                     </div>
                     <div class="form-group">
-                        <label for="scriptMessage">Input the message that is passed
-                            through to the script.</label>
+                        <label for="scriptMessage">Введите сообщение, которое будет передано
+                            в скрипт.</label>
                         <textarea id="scriptMessage" class="form-control"
                                   aria-label="With textarea"
                                   placeholder="[PrinterName]: Just completed [CurrentFilePath] and took [EstimatedTime]"></textarea>
@@ -179,10 +179,10 @@
 
                 </form>
                 <button id="testScript" type="button"
-                        class="btn btn-secondary btn-block mt-1">Test Script
+                        class="btn btn-secondary btn-block mt-1">Тестировать скрипт
                 </button>
                 <button id="saveScript" type="button"
-                        class="btn btn-success btn-block">Save Script
+                        class="btn btn-success btn-block">Сохранить скрипт
                 </button>
             </div>
             <div class="tab-pane fade" id="alerts-current" role="tabpanel"
@@ -192,13 +192,13 @@
                         <thead>
                         <tr>
                             <th class="table-dark d-none" scope="col"></th>
-                            <th class="table-dark" scope="col">Active</th>
+                            <th class="table-dark" scope="col">Активно</th>
                             <th class="table-dark" scope="col" width="150px">
-                                Trigger
+                                Триггер
                             </th>
-                            <th class="table-dark" scope="col">Script</th>
-                            <th class="table-dark" scope="col">Message</th>
-                            <th class="table-dark" scope="col">Printers</th>
+                            <th class="table-dark" scope="col">Скрипт</th>
+                            <th class="table-dark" scope="col">Сообщение</th>
+                            <th class="table-dark" scope="col">Принтеры</th>
                             <th class="table-dark" scope="col" width="200px"></th>
                         </tr>
                         </thead>
@@ -212,7 +212,7 @@
             </div>
             <div class="tab-pane fade" id="alerts-log" role="tabpanel"
                  aria-labelledby="server-timeout">
-                <h5>Alert Logs</h5>
+                <h5>Журнал оповещений</h5>
                 <hr>
             </div>
 

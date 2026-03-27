@@ -34,11 +34,11 @@ timelapseButton.addEventListener('click', () => {
     let days_between_text = ""
     const days_between_count = days_between(history.endDate, new Date())
     if(days_between_count <= 0){
-      days_between_text = "today!";
+      days_between_text = "сегодня!";
     }else if(days_between_count > 365){
-      days_between_text = (days_between_count / 365).toFixed(0) + " years ago";
+      days_between_text = (days_between_count / 365).toFixed(0) + " лет назад";
     }else{
-      days_between_text = days_between_count + " days ago";
+      days_between_text = days_between_count + " дней назад";
     }
     gallery += `
       <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
@@ -48,7 +48,7 @@ timelapseButton.addEventListener('click', () => {
           </video>
           <div class="card-body">
             <h6 class="card-text text-truncate">${history.file.name}</h6>
-            <p class="card-text"><small class="text-muted">Printed ${days_between_text}</small></p>
+            <p class="card-text"><small class="text-muted">Напечатано ${days_between_text}</small></p>
           </div>
         </div>
       </div>
@@ -65,11 +65,11 @@ snapshotsButton.addEventListener('click', () => {
     let days_between_text = ""
     const days_between_count = days_between(history.endDate, new Date())
     if(days_between_count <= 0){
-      days_between_text = "today!";
+      days_between_text = "сегодня!";
     }else if(days_between_count > 365){
-      days_between_text = (days_between_count / 365).toFixed(0) + " years ago";
+      days_between_text = (days_between_count / 365).toFixed(0) + " лет назад";
     }else{
-      days_between_text = days_between_count + " days ago";
+      days_between_text = days_between_count + " дней назад";
     }
     gallery += `
       <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
@@ -77,7 +77,7 @@ snapshotsButton.addEventListener('click', () => {
           <img src="${history.snapshot}" class="card-img-top" alt="">
           <div class="card-body">
             <h6 class="card-text text-truncate">${history.file.name}</h6>
-            <p class="card-text"><small class="text-muted">Printed ${days_between_text}</small></p>
+            <p class="card-text"><small class="text-muted">Напечатано ${days_between_text}</small></p>
           </div>
         </div>
       </div>
@@ -108,11 +108,11 @@ thumbnailButton.addEventListener('click', () => {
     let days_between_text = ""
     const days_between_count = days_between(history.endDate, new Date())
     if(days_between_count <= 0){
-      days_between_text = "today!";
+      days_between_text = "сегодня!";
     }else if(days_between_count > 365){
-      days_between_text = (days_between_count / 365).toFixed(0) + " years ago";
+      days_between_text = (days_between_count / 365).toFixed(0) + " лет назад";
     }else{
-      days_between_text = days_between_count + " days ago";
+      days_between_text = days_between_count + " дней назад";
     }
     gallery += `
       <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
@@ -120,7 +120,7 @@ thumbnailButton.addEventListener('click', () => {
           <img src="${history.thumbnail}" class="card-img-top" alt="">
           <div class="card-body">
             <h6 class="card-text text-truncate">${history.file.name}</h6>
-            <p class="card-text"><small class="text-muted">Printed ${days_between_text}</small></p>
+            <p class="card-text"><small class="text-muted">Напечатано ${days_between_text}</small></p>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ class History {
   static listenersApplied;
 
   static loadNoData() {
-    ELEMENTS.historyTable.innerHTML = `<tr><td>NO DATA</td></tr>`;
+    ELEMENTS.historyTable.innerHTML = `<tr><td>НЕТ ДАННЫХ</td></tr>`;
     ELEMENTS.historyPagination.innerHTML = '';
     const paginationZero = {
       itemCount: 0,
@@ -182,7 +182,7 @@ class History {
         returnHistoryPagination(paginationZero)
       );
     }
-    ELEMENTS.printTimeTotal.innerHTML = 'No Time';
+    ELEMENTS.printTimeTotal.innerHTML = 'Нет времени';
     ELEMENTS.filamentUsageTotal.innerHTML = `0m / 0g`;
     ELEMENTS.filamentCostTotal.innerHTML = 0;
     ELEMENTS.printerCostTotal.innerHTML = 0;
@@ -287,14 +287,14 @@ class History {
         );
         if (daysBetweenDates > 50) {
           bootbox.confirm({
-            message: `You are trying to load ${daysBetweenDates} of your records, this could be very slow! are you sure?`,
+            message: `Вы пытаетесь загрузить записи за ${daysBetweenDates} дней, это может быть очень медленно! Вы уверены?`,
             buttons: {
               confirm: {
-                label: 'Yes',
+                label: 'Да',
                 className: 'btn-success',
               },
               cancel: {
-                label: 'No',
+                label: 'Нет',
                 className: 'btn-danger',
               },
             },
@@ -329,14 +329,14 @@ class History {
         if (ELEMENTS.itemsPerPage.value === '9007199254740991') {
           bootbox.confirm({
             message:
-              'You are trying to load ALL of your records, this could be very slow! are you sure?',
+              'Вы пытаетесь загрузить ВСЕ ваши записи, это может быть очень медленно! Вы уверены?',
             buttons: {
               confirm: {
-                label: 'Yes',
+                label: 'Да',
                 className: 'btn-success',
               },
               cancel: {
-                label: 'No',
+                label: 'Нет',
                 className: 'btn-danger',
               },
             },
@@ -404,8 +404,8 @@ class History {
         numberOfColumns: 2,
         resetButton: true,
         tooltipText: {
-          one: 'night',
-          other: 'nights',
+          one: 'ночь',
+          other: 'ночей',
         },
         tooltipNumber: (totalDays) => {
           return totalDays - 1;
@@ -538,22 +538,22 @@ class History {
         mode: 'dark',
       },
       noData: {
-        text: 'Loading...',
+        text: 'Загрузка...',
       },
       series: [
         {
-          name: 'Success Percent',
+          name: 'Процент успешных',
           data: successRateList,
         },
         {
-          name: 'Failed Percent',
+          name: 'Процент неудачных',
           data: failureRateList,
         },
       ],
       yaxis: [
         {
           title: {
-            text: 'Success Percent',
+            text: 'Процент успешных',
           },
           min: 0,
           max: 100,
@@ -567,7 +567,7 @@ class History {
         },
         {
           title: {
-            text: 'Count',
+            text: 'Количество',
           },
           seriesName: 'Failed Percent',
           labels: {
@@ -617,7 +617,7 @@ class History {
     topPrinterPerMonth.insertAdjacentHTML(
       'beforeend',
       `
-        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Month</small><small class="col-lg-3 text-center">Printer</small><small class="text-center col-lg-2">Time</small><small class="col-lg-2 text-center">Count</small><small class="col-lg-4 text-center">Success Rate</small></li>
+        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Месяц</small><small class="col-lg-3 text-center">Принтер</small><small class="text-center col-lg-2">Время</small><small class="col-lg-2 text-center">Кол-во</small><small class="col-lg-4 text-center">Процент успеха</small></li>
       `
     );
     printerLists.forEach((item) => {
@@ -683,7 +683,7 @@ class History {
     monthlyMostSuccessPrinter.insertAdjacentHTML(
       'beforeend',
       `
-        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Month</small><small class="col-lg-3 text-center">Printer</small><small class="text-center col-lg-2">Time</small><small class="col-lg-2 text-center">Count</small><small class="col-lg-4 text-center">Success Rate</small></li>
+        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Месяц</small><small class="col-lg-3 text-center">Принтер</small><small class="text-center col-lg-2">Время</small><small class="col-lg-2 text-center">Кол-во</small><small class="col-lg-4 text-center">Процент успеха</small></li>
       `
     );
     printerSuccessLists.forEach((item) => {
@@ -752,7 +752,7 @@ class History {
     topFilePerMonth.insertAdjacentHTML(
       'beforeend',
       `
-        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Month</small><small class="col-lg-3 text-center">File</small><small class="text-center col-lg-2">Time</small><small class="col-lg-2 text-center">Count</small><small class="col-lg-4 text-center">Success Rate</small></li>
+        <li class="list-group-item m-0 p-0 row d-flex"><small class="col-lg-1 text-center">Месяц</small><small class="col-lg-3 text-center">Файл</small><small class="text-center col-lg-2">Время</small><small class="col-lg-2 text-center">Кол-во</small><small class="col-lg-4 text-center">Процент успеха</small></li>
       `
     );
     fileLists.forEach((item) => {
@@ -930,13 +930,13 @@ class History {
         mode: 'dark',
       },
       noData: {
-        text: 'Loading...',
+        text: 'Загрузка...',
       },
       series: [],
       yaxis: [
         {
           title: {
-            text: 'Count',
+            text: 'Количество',
           },
 
           seriesName: 'Success Count',
@@ -950,7 +950,7 @@ class History {
         },
         {
           title: {
-            text: 'Count',
+            text: 'Количество',
           },
           seriesName: 'Success Count',
           labels: {
@@ -964,7 +964,7 @@ class History {
         },
         {
           title: {
-            text: 'Count',
+            text: 'Количество',
           },
           seriesName: 'Success Count',
           labels: {
@@ -978,7 +978,7 @@ class History {
         },
         {
           title: {
-            text: 'Total',
+            text: 'Итого',
           },
           seriesName: 'Success Count',
           labels: {
@@ -1004,17 +1004,17 @@ class History {
     }
 
     this.monthlyCompetionByDay.updateSeries([
-      { name: 'Total Count', data: totalPrintCountList },
+      { name: 'Всего', data: totalPrintCountList },
       {
-        name: 'Success Count',
+        name: 'Успешных',
         data: successCountList,
       },
       {
-        name: 'Failed Count',
+        name: 'Неудачных',
         data: failedCountList,
       },
       {
-        name: 'Cancelled Count',
+        name: 'Отменённых',
         data: cancelledCountList,
       },
     ]);
@@ -1031,14 +1031,14 @@ class History {
     }
 
     const totalDays = UI.milisecondsToDays(totalPrintTimeList[totalPrintTimeList.length - 1]);
-    document.getElementById('totalSparkLast').innerHTML = totalDays.toFixed(0) + ' Days';
+    document.getElementById('totalSparkLast').innerHTML = totalDays.toFixed(0) + ' Дней';
 
     sparkOptions.colors = ['#00bc8c'];
     sparkOptions.series[0].data = successPercentList;
     sparkOptions.tooltip.y.formatter = function (value) {
       return value + '%';
     };
-    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Success: ';
+    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Успешных: ';
     if (!this?.completeSpark) {
       this.completeSpark = new ApexCharts(document.querySelector('#successSpark'), sparkOptions);
       this.completeSpark.render();
@@ -1049,7 +1049,7 @@ class History {
 
     sparkOptions.colors = ['#f39c12'];
     sparkOptions.series[0].data = cancelledPercentList;
-    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Cancelled: ';
+    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Отменённых: ';
     if (!this?.cancelledSpark) {
       this.cancelledSpark = new ApexCharts(document.querySelector('#cancelledSpark'), sparkOptions);
       this.cancelledSpark.render();
@@ -1060,7 +1060,7 @@ class History {
 
     sparkOptions.colors = ['#e74c3c'];
     sparkOptions.series[0].data = failedPercentList;
-    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Failed: ';
+    sparkOptions.tooltip.y.title.formatter = (seriesName) => 'Неудачных: ';
     if (!this?.failedSpark) {
       this.failedSpark = new ApexCharts(document.querySelector('#failedSpark'), sparkOptions);
       this.failedSpark.render();
@@ -1179,7 +1179,7 @@ class History {
   static async edit(e) {
     if (e.target.classList.contains('historyEdit')) {
       document.getElementById('saveHistoryBtns').innerHTML =
-        ' <button id="historyUpdateCostBtn" type="button" class="btn btn-warning" data-dismiss="modal">\n        Update Cost\n      </button>\n      <button id="historySaveBtn" type="button" class="btn btn-success" data-dismiss="modal">\n        Save Changes\n      </button>';
+        ' <button id="historyUpdateCostBtn" type="button" class="btn btn-warning" data-dismiss="modal">\n        Обновить стоимость\n      </button>\n      <button id="historySaveBtn" type="button" class="btn btn-success" data-dismiss="modal">\n        Сохранить изменения\n      </button>';
       document.getElementById('historySaveBtn').addEventListener('click', (f) => {
         History.save(e.target.id);
       });
@@ -1267,11 +1267,11 @@ class History {
         }
       }
 
-      startDate.innerHTML = `<b>Started</b><hr>${new Date(
+      startDate.innerHTML = `<b>Начало</b><hr>${new Date(
         current.startDate
       ).toLocaleDateString()} - ${new Date(current.startDate).toLocaleTimeString()}`;
-      printTime.innerHTML = `<b>Duration</b><hr>${Calc.generateTime(current.printTime)}`;
-      endDate.innerHTML = `<b>Finished</b><hr>${new Date(
+      printTime.innerHTML = `<b>Длительность</b><hr>${Calc.generateTime(current.printTime)}`;
+      endDate.innerHTML = `<b>Завершено</b><hr>${new Date(
         current.endDate
       ).toLocaleDateString()} - ${new Date(current.endDate).toLocaleTimeString()}`;
       printerCost.value = current.printerCost;
@@ -1302,7 +1302,7 @@ class History {
                 `
           <tr>
               <td>
-              ${!!spool[sp]?.toolName ? spool[sp]?.toolName : "0"}: ${!!spool[sp]?.spoolName ? spool[sp].spoolName : "No Spool"}
+              ${!!spool[sp]?.toolName ? spool[sp]?.toolName : "0"}: ${!!spool[sp]?.spoolName ? spool[sp].spoolName : "Нет катушки"}
               </td>
               <td>
               ${!!spool[sp]?.volume ? spool[sp]?.volume : 0}m3
@@ -1329,7 +1329,7 @@ class History {
           `
           <tr>
               <td>
-                No Spool
+                Нет катушки
               </td>
               <td>
               0m3
@@ -1354,7 +1354,7 @@ class History {
         `
         <tr style="background-color:#303030;">
         <td>
-        Totals
+        Итого
         </td>
         <td>
         ${current.totalVolume.toFixed(4)}m3
@@ -1419,7 +1419,7 @@ class History {
                 current.snapshot
             )}')">
                   <div class="carousel-caption d-none d-md-block">
-                    <h6>Camera Snapshot</h6>
+                    <h6>Снимок камеры</h6>
                   </div>
                 </div>
           `
@@ -1447,7 +1447,7 @@ class History {
                 current.thumbnail
             )}')">
                   <div class="carousel-caption d-none d-md-block">
-                    <h6>Slicer Thumbnail</h6>
+                    <h6>Миниатюра слайсера</h6>
                   </div>
                 </div>
           `
@@ -1475,7 +1475,7 @@ class History {
                     <source src='${encodeURI(current.timelapse)}'>
                 </video>
                   <div class="carousel-caption d-none d-md-block">
-                    <h6>Timelapse</h6>
+                    <h6>Таймлапс</h6>
                   </div>
             </div>
           `
@@ -1500,14 +1500,14 @@ class History {
     if (post) {
       UI.createAlert(
         'success',
-        'Successfully added your printers cost to history.',
+        'Стоимость принтера успешно добавлена в историю.',
         3000,
         'clicked'
       );
     } else {
       UI.createAlert(
         'warning',
-        'Printer no longer exists in database, default cost applied.',
+        'Принтер больше не существует в базе данных, применена стоимость по умолчанию.',
         3000,
         'clicked'
       );
@@ -1530,21 +1530,21 @@ class History {
     const post = await OctoFarmClient.post('history/update', update);
 
     if (post) {
-      UI.createAlert('success', 'Successfully updated your history entry...', 3000, 'clicked');
+      UI.createAlert('success', 'Запись истории успешно обновлена...', 3000, 'clicked');
     }
   }
 
   static async delete(e) {
     if (e.target.classList.value.includes('historyDelete')) {
       bootbox.confirm({
-        message: "Are you sure you'd like to delete this entry? this is not reversible.",
+        message: "Вы уверены, что хотите удалить эту запись? Это действие необратимо.",
         buttons: {
           confirm: {
-            label: 'Yes',
+            label: 'Да',
             className: 'btn-success',
           },
           cancel: {
-            label: 'No',
+            label: 'Нет',
             className: 'btn-danger',
           },
         },
@@ -1557,11 +1557,11 @@ class History {
             const post = await OctoFarmClient.post('history/delete', histID);
             if (post) {
               e.target.parentElement.parentElement.remove();
-              UI.createAlert('success', 'Your history entry has been deleted...', 3000, 'clicked');
+              UI.createAlert('success', 'Запись истории удалена...', 3000, 'clicked');
             } else {
               UI.createAlert(
                 'error',
-                "Hmmmm seems we couldn't contact the server to delete... is it online?",
+                "Не удалось связаться с сервером для удаления... Сервер доступен?",
                 3000,
                 'clicked'
               );

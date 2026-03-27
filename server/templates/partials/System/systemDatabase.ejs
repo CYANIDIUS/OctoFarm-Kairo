@@ -1,99 +1,99 @@
-<p>Current Database URL.</p>
+<p>Текущий URL базы данных.</p>
 <div class="input-group mb-3">
     <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3">Database URL: </span>
+        <span class="input-group-text" id="basic-addon3">URL базы данных: </span>
     </div>
     <input type="text" class="form-control" id="basic-url"
            aria-describedby="basic-addon3" value="<%= db; %>" disabled>
 </div>
 <br>
-<h5>Actions</h5>
+<h5>Действия</h5>
 <hr>
-<p class="mb-1">Actions to perform at the database level.</p>
+<p class="mb-1">Действия, выполняемые на уровне базы данных.</p>
 
-<small>Below are some actions you can perform on your database.</small><br>
+<small>Ниже приведены некоторые действия, которые можно выполнить с базой данных.</small><br>
 
 <br>
-<h6>Export the Database to .json</h6>
+<h6>Экспорт базы данных в .json</h6>
 <hr>
-<p class="mb-1">This is just a simple information dump. Does not replace a good database backup.</p>
+<p class="mb-1">Это простой дамп информации. Не заменяет полноценное резервное копирование базы данных.</p>
 <center>
     <button id="exportAlerts" type="button"
             class="btn btn-warning btn-lg bg-colour-1 mb-2"><i
-                class="fas fa-history"></i> <br> Export Alerts
+                class="fas fa-history"></i> <br> Экспорт оповещений
     </button>
     <button id="exportClientSettings" type="button"
             class="btn btn-info btn-lg bg-colour-2 mb-2"><i class="fas fa-cog"></i><br>
-        Export Client Settings
+        Экспорт настроек клиента
     </button>
     <button id="exportFilament" type="button"
             class="btn btn-primary btn-lg bg-colour-3 mb-2"><i
-                class="fas fa-toilet-paper"></i><br> Export Filament
+                class="fas fa-toilet-paper"></i><br> Экспорт филамента
     </button>
     <button id="exportHistory" type="button"
             class="btn btn-danger btn-lg bg-colour-4 mb-2"><i class="fas fa-history"></i>
-        <br> Export History
+        <br> Экспорт истории
     </button>
     <button id="exportPrinters" type="button"
             class="btn btn-warning btn-lg bg-colour-1 mb-2"><i
-                class="fas fa-print"></i><br> Export Printers
+                class="fas fa-print"></i><br> Экспорт принтеров
     </button>
     <button id="exportRoomData" type="button"
             class="btn btn-info btn-lg bg-colour-2 mb-2"><i class="fas fa-print"></i><br>
-        Export Room Data
+        Экспорт данных помещения
     </button>
     <button id="exportServerSettings" type="button"
             class="btn btn-primary btn-lg bg-colour-3 mb-2"><i
-                class="fas fa-cog"></i><br> Export Server Settings
+                class="fas fa-cog"></i><br> Экспорт настроек сервера
     </button>
     <button id="exportUsers" type="button"
             class="btn btn-secondary btn-lg bg-colour-4 mb-2"><i
-                class="fas fa-users"></i><br> Export Users
+                class="fas fa-users"></i><br> Экспорт пользователей
     </button>
 </center>
 <br>
-<h6>Nuke the Database</h6>
+<h6>Очистить базу данных</h6>
 <hr>
-<p class="mb-1">This should only be used as a last resort. You will clear out your
-    entire database so it's best to have a backup in place before even thinking of
-    actioning the below options.</p>
-<code>WARNING! Do not mess around with this unless you have a backup in place and/or
-    know what your doing...</code>
+<p class="mb-1">Это следует использовать только в крайнем случае. Вы полностью очистите
+    базу данных, поэтому лучше иметь резервную копию, прежде чем даже думать
+    о выполнении нижеприведённых действий.</p>
+<code>ВНИМАНИЕ! Не экспериментируйте с этим, если у вас нет резервной копии и/или
+    вы не знаете, что делаете...</code>
 <center>
     <button id="nukeAlerts" type="button"
             class="btn btn-warning btn-lg bg-colour-1 mb-2"><i
-                class="fas fa-history"></i> <br> Nuke Alerts
+                class="fas fa-history"></i> <br> Очистить оповещения
     </button>
     <button id="nukeClientSettings" type="button"
             class="btn btn-info btn-lg bg-colour-2 mb-2"><i class="fas fa-cog"></i><br>
-        Nuke Client Settings
+        Очистить настройки клиента
     </button>
     <button id="nukeFilament" type="button"
             class="btn btn-primary btn-lg bg-colour-3 mb-2"><i
-                class="fas fa-toilet-paper"></i><br> Nuke Filament
+                class="fas fa-toilet-paper"></i><br> Очистить филамент
     </button>
     <button id="nukeHistory" type="button"
             class="btn btn-danger btn-lg bg-colour-4 mb-2"><i class="fas fa-history"></i>
-        <br> Nuke History
+        <br> Очистить историю
     </button>
     <button id="nukePrinters" type="button"
             class="btn btn-warning btn-lg bg-colour-1 mb-2"><i
-                class="fas fa-print"></i><br> Nuke Printers
+                class="fas fa-print"></i><br> Очистить принтеры
     </button>
     <button id="nukeRoomData" type="button" class="btn btn-info btn-lg bg-colour-2 mb-2">
-        <i class="fas fa-print"></i><br> Nuke Room Data
+        <i class="fas fa-print"></i><br> Очистить данные помещения
     </button>
     <button id="nukeServerSettings" type="button"
             class="btn btn-primary btn-lg bg-colour-3 mb-2"><i
-                class="fas fa-cog"></i><br> Nuke Server Settings
+                class="fas fa-cog"></i><br> Очистить настройки сервера
     </button>
     <button id="nukeUsers" type="button"
             class="btn btn-secondary btn-lg bg-colour-4 mb-2"><i
-                class="fas fa-users"></i><br> Nuke Users
+                class="fas fa-users"></i><br> Очистить пользователей
     </button>
     <br>
     <button id="nukeEverything" type="button"
             class="btn btn-danger mb-1 btn-lg mb-2"><i
-                class="fas fa-database"></i><br> Nuke Everything
+                class="fas fa-database"></i><br> Очистить всё
     </button>
 </center>

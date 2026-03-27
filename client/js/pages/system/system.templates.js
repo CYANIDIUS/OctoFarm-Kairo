@@ -14,10 +14,10 @@ export const activeUserListRowTemplate = (user) => {
            <h6><i class="fa-solid fa-ethernet"></i> ${user.ip}</h6>
            ${forwardedIpAddress}
             <p class="card-text">
-                Session Start: <br>
+                Начало сессии: <br>
                 ${Calc.dateClean(new Date(user.connectionDate))}
                 <br>
-                Time Active: <br>
+                Время активности: <br>
                 ${Calc.timeSince(new Date(user.connectionDate))}
             </p>    
           </div>

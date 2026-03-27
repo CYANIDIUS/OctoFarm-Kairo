@@ -100,17 +100,17 @@ router.post("/register", async (req, res) => {
 
   // Check required fields
   if (!name || !username || !password || !password2) {
-    errors.push({ msg: "Please fill in all fields..." });
+    errors.push({ msg: "Заполните все поля..." });
   }
 
   // Check passwords match
   if (password !== password2) {
-    errors.push({ msg: "Passwords do not match..." });
+    errors.push({ msg: "Пароли не совпадают..." });
   }
 
   // Password at least 6 characters
   if (password.length < 6) {
-    errors.push({ msg: "Password should be at least 6 characters..." });
+    errors.push({ msg: "Пароль должен содержать не менее 6 символов..." });
   }
 
   if (errors.length > 0) {
@@ -131,7 +131,7 @@ router.post("/register", async (req, res) => {
     User.findOne({ username }).then((currentUser) => {
       if (currentUser) {
         // User exists
-        errors.push({ msg: "Username is already registered" });
+        errors.push({ msg: "Пользователь уже зарегистрирован" });
         res.render("register", {
           page: "Login",
           octoFarmPageTitle: process.env[AppConstants.OCTOFARM_SITE_TITLE_KEY],
@@ -183,7 +183,7 @@ router.post("/register", async (req, res) => {
                     currentSettings[0].save();
                     await SettingsClean.start();
                   }
-                  req.flash("success_msg", "You are now registered and can login");
+                  req.flash("success_msg", "Вы зарегистрированы и можете войти");
                   res.redirect("/users/login");
                 })
                 .catch((theError) => {
@@ -203,7 +203,7 @@ router.post("/register", async (req, res) => {
 // Logout Handle
 router.get("/logout", (req, res) => {
   req.logout();
-  req.flash("success_msg", "You are logged out");
+  req.flash("success_msg", "Вы вышли из системы");
   res.redirect("/users/login");
 });
 

@@ -27,38 +27,38 @@
 
             </div>
         </center>
-        <b class="mb-0 d-inline"><i class="fas fa-square text-warning d-inline"></i> Used: </b>
+        <b class="mb-0 d-inline"><i class="fas fa-square text-warning d-inline"></i> Использовано: </b>
         <p id="fsUsed" class="mb-1 d-inline"><%= helpers.generateBytes(fileStatistics.storageUsed) %></p> /
-        <b class="mb-0 d-inline"><i class="fas fa-square text-success"></i> Remaining: </b>
+        <b class="mb-0 d-inline"><i class="fas fa-square text-success"></i> Осталось: </b>
         <p id="fsRemain" class="mb-1 d-inline"><%= helpers.generateBytes((fileStatistics.storageTotal - fileStatistics.storageUsed)) %></p> /
-        <b class="mb-0 d-inline"><i class="fas fa-square"></i> Total: </b>
+        <b class="mb-0 d-inline"><i class="fas fa-square"></i> Всего: </b>
         <p id="fsTotal" class="mb-1 d-inline"><%=helpers.generateBytes( fileStatistics.storageTotal) %></p>
     </div>
 <div class="col-12">
     <div class="row">
         <div class="col-lg-3">
-            <h6>Counts</h6>
+            <h6>Количество</h6>
             <hr>
-            <i class="fas fa-file"></i> Files: <%= fileStatistics.fileCount %> <br><i class="fas fa-folder"></i> Folders: <%= fileStatistics.folderCount %>
+            <i class="fas fa-file"></i> Файлы: <%= fileStatistics.fileCount %> <br><i class="fas fa-folder"></i> Папки: <%= fileStatistics.folderCount %>
         </div>
         <div class="col-lg-3">
-            <h6>Largest</h6>
+            <h6>Наибольший</h6>
             <hr>
-            <b>Size: </b><%=helpers.generateBytes( fileStatistics.biggestFile) %><br>
-            <b>Length: </b><%= (fileStatistics.biggestLength).toFixed(2)  %>m
+            <b>Размер: </b><%=helpers.generateBytes( fileStatistics.biggestFile) %><br>
+            <b>Длина: </b><%= (fileStatistics.biggestLength).toFixed(2)  %>м
 
         </div>
         <div class="col-lg-3">
-            <h6>Smallest</h6>
+            <h6>Наименьший</h6>
             <hr>
-            <b>Size: </b><%=helpers.generateBytes( fileStatistics.smallestFile) %><br>
-            <b>Length: </b><%= (fileStatistics.smallestLength).toFixed(2) %>m
+            <b>Размер: </b><%=helpers.generateBytes( fileStatistics.smallestFile) %><br>
+            <b>Длина: </b><%= (fileStatistics.smallestLength).toFixed(2) %>м
         </div>
         <div class="col-lg-3">
-            <h6>Average</h6>
+            <h6>Средний</h6>
             <hr>
-            <b>Size: </b><%=helpers.generateBytes( fileStatistics.averageFile) %><br>
-            <b>Length: </b><%= (fileStatistics.averageLength).toFixed(2)%>m
+            <b>Размер: </b><%=helpers.generateBytes( fileStatistics.averageFile) %><br>
+            <b>Длина: </b><%= (fileStatistics.averageLength).toFixed(2)%>м
         </div>
     </div>
 </div>

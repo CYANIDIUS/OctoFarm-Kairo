@@ -3,10 +3,10 @@
 <div class="btn-group float-left">
     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-        <i class="fab fa-octopus-deploy"></i> OctoPrint Manager
+        <i class="fab fa-octopus-deploy"></i> Менеджер OctoPrint
     </button>
     <div class="dropdown-menu">
-        <h6 class="dropdown-header d-none">Settings</h6>
+        <h6 class="dropdown-header d-none">Настройки</h6>
         <button
                 title="Update multiple OctoPrint's at once."
                 id="blkOctoPrintSettingsUpdateBtn"
@@ -16,9 +16,9 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-            <i class="fas fa-cogs"></i> Bulk Settings Update<%= disable_btn_air_gapped %>
+            <i class="fas fa-cogs"></i> Массовое обновление настроек<%= disable_btn_air_gapped %>
         </button>
-        <h6 class="dropdown-header">Client</h6>
+        <h6 class="dropdown-header">Клиент</h6>
         <button
                 title="Update multiple OctoPrint's at once."
                     id="blkOctoPrintUpdate"
@@ -26,7 +26,7 @@
                     class="dropdown-item"
                     href="#"
             >
-                <i class="fab fa-raspberry-pi text-success"></i> Update Clients <%= disable_btn_air_gapped %>
+                <i class="fab fa-raspberry-pi text-success"></i> Обновить клиенты <%= disable_btn_air_gapped %>
             </button>
             <button
                     title="Install multiple plugins at once."
@@ -38,7 +38,7 @@
                     data-toggle="modal" data-target="#printerSelectModal"
                     disabled
             >
-                <i class="fas fa-plug text-info"></i> Backup Clients
+                <i class="fas fa-plug text-info"></i> Резервное копирование клиентов
             </button>
             <button
                     title="Install multiple plugins at once."
@@ -50,9 +50,9 @@
                     data-toggle="modal" data-target="#printerSelectModal"
                     disabled
             >
-                <i class="fas fa-plug text-success"></i> Restore Client
+                <i class="fas fa-plug text-success"></i> Восстановить клиент
             </button>
-        <h6 class="dropdown-header">Plugins</h6>
+        <h6 class="dropdown-header">Плагины</h6>
         <button
                 title="Install multiple plugins at once."
                 id="blkPluginsInstallBtn"
@@ -62,7 +62,7 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal" <%= disable_btn_air_gapped %>
         >
-            <i class="fas fa-download text-info"></i> Install Plugins
+            <i class="fas fa-download text-info"></i> Установить плагины
         </button>
         <button
                 title="Uninstall multiple plugins at once."
@@ -75,7 +75,7 @@
         >
 
 
-            <i class="fas fa-trash text-danger"></i> Uninstall Plugins
+            <i class="fas fa-trash text-danger"></i> Удалить плагины
         </button>
         <button
                 title="Enable multiple plugins at once"
@@ -86,7 +86,7 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-            <i class="fas fa-toggle-on text-info"></i> Enable Plugin
+            <i class="fas fa-toggle-on text-info"></i> Включить плагин
         </button>
         <button
                 title="Disable multiple plugins at once"
@@ -97,7 +97,7 @@
                 aria-expanded="false"
                 data-toggle="modal" data-target="#printerSelectModal"
         >
-            <i class="fas fa-toggle-off text-warning"></i> Disable Plugin
+            <i class="fas fa-toggle-off text-warning"></i> Отключить плагин
         </button>
         <button
                 title="Update multiple OctoPrint Plugins at once."
@@ -106,7 +106,7 @@
                 class="dropdown-item"
                 href="#"
         >
-            <i class="fas fa-sync text-success"></i> Update Plugins <%= disable_btn_air_gapped %>
+            <i class="fas fa-sync text-success"></i> Обновить плагины <%= disable_btn_air_gapped %>
         </button>
         </div>
     </div>

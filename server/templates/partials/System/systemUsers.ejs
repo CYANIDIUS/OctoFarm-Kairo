@@ -7,16 +7,16 @@
         <% if(!serverSettings.server.loginRequired){ %>
         <% disabledUsers = "disabled=true" %>
             <div class="alert alert-warning text-dark" role="alert">
-                The server has the login requirement turned off, the users below cannot be used.
+                На сервере отключено требование входа, пользователи ниже не могут быть использованы.
             </div>
         <% } %>
     </div>
     <div class="col-12">
         <div class="float-left">
-            <h4>User Manager</h4>
+            <h4>Менеджер пользователей</h4>
         </div>
         <div class="float-right">
-            <button id="createUserBtn" type="button" class="btn btn-success" data-toggle="modal" data-target="#userCreateModal" <%=disabledUsers%>><i class="fas fa-user-plus"></i> New User</button>
+            <button id="createUserBtn" type="button" class="btn btn-success" data-toggle="modal" data-target="#userCreateModal" <%=disabledUsers%>><i class="fas fa-user-plus"></i> Новый пользователь</button>
         </div>
     </div>
 </div>
@@ -25,11 +25,11 @@
         <table id="" class="table table-dark table-striped text-center">
             <thead>
             <tr>
-                <th scope="col" class="sticky-table table-dark" style="">Name</th>
-                <th scope="col" class="sticky-table table-dark" style="">Username</th>
-                <th scope="col" class="sticky-table table-dark" style="">Group</th>
-                <th scope="col" class="sticky-table table-dark" style="">Created Date</th>
-                <th scope="col" class="sticky-table table-dark" style="">Actions</th>
+                <th scope="col" class="sticky-table table-dark" style="">Имя</th>
+                <th scope="col" class="sticky-table table-dark" style="">Имя пользователя</th>
+                <th scope="col" class="sticky-table table-dark" style="">Группа</th>
+                <th scope="col" class="sticky-table table-dark" style="">Дата создания</th>
+                <th scope="col" class="sticky-table table-dark" style="">Действия</th>
             </tr>
             </thead>
             <tbody id="userTable" style="height:100%; overflow-y:auto;">
@@ -42,9 +42,9 @@
                             <td id="userRowUserGroup-<%=user._id%>"><%= user.group %></td>
                             <td><%= user.date.toLocaleDateString() %></td>
                             <td>
-                                <button id="resetPasswordBtn-<%=user._id%>" type="button" class="btn btn-warning text-dark btn-sm" data-toggle="modal" data-target="#usersResetPasswordModal" disabled><i class="fas fa-user-shield"></i> Reset Password</button>
-                                <button id="editUserBtn-<%=user._id%>" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userEditModal" disabled><i class="fas fa-user-edit"></i> Edit</button>
-                                <button id="deleteUserBtn-<%=user._id%>" type="button" class="btn btn-danger btn-sm" disabled><i class="fas fa-user-minus"></i> Delete</button>
+                                <button id="resetPasswordBtn-<%=user._id%>" type="button" class="btn btn-warning text-dark btn-sm" data-toggle="modal" data-target="#usersResetPasswordModal" disabled><i class="fas fa-user-shield"></i> Сбросить пароль</button>
+                                <button id="editUserBtn-<%=user._id%>" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userEditModal" disabled><i class="fas fa-user-edit"></i> Редактировать</button>
+                                <button id="deleteUserBtn-<%=user._id%>" type="button" class="btn btn-danger btn-sm" disabled><i class="fas fa-user-minus"></i> Удалить</button>
                             </td>
                         </tr>
                     <% } else { %>
@@ -54,9 +54,9 @@
                         <td id="userRowUserGroup-<%=user._id%>"><%= user.group %></td>
                         <td><%= user.date.toLocaleDateString() %></td>
                         <td>
-                            <button id="resetPasswordBtn-<%=user._id%>" type="button" class="btn btn-warning text-dark btn-sm" data-toggle="modal" data-target="#usersResetPasswordModal"><i class="fas fa-user-shield"></i> Reset Password</button>
-                            <button id="editUserBtn-<%=user._id%>" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userEditModal"><i class="fas fa-user-edit"></i> Edit</button>
-                            <button id="deleteUserBtn-<%=user._id%>" type="button" class="btn btn-danger btn-sm"><i class="fas fa-user-minus"></i> Delete</button>
+                            <button id="resetPasswordBtn-<%=user._id%>" type="button" class="btn btn-warning text-dark btn-sm" data-toggle="modal" data-target="#usersResetPasswordModal"><i class="fas fa-user-shield"></i> Сбросить пароль</button>
+                            <button id="editUserBtn-<%=user._id%>" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userEditModal"><i class="fas fa-user-edit"></i> Редактировать</button>
+                            <button id="deleteUserBtn-<%=user._id%>" type="button" class="btn btn-danger btn-sm"><i class="fas fa-user-minus"></i> Удалить</button>
                         </td>
                     </tr>
                     <% } %>
@@ -69,21 +69,21 @@
 
 <%- include(modal, {
 modal:{
-id:"usersResetPassword", title:"Reset Password", size: "modal-sm"
+id:"usersResetPassword", title:"Сбросить пароль", size: "modal-sm"
 },
 bodyFile:'./System/UserModals/userResetPassword.ejs'
 })
 %>
 <%- include(modal, {
 modal:{
-id:"userEdit", title:"Edit User", size: "modal-sm"
+id:"userEdit", title:"Редактировать пользователя", size: "modal-sm"
 },
 bodyFile:'./System/UserModals/userEdit.ejs'
 })
 %>
 <%- include(modal, {
 modal:{
-id:"userCreate", title:"Create User", size: "modal-sm"
+id:"userCreate", title:"Создать пользователя", size: "modal-sm"
 },
 bodyFile:'./System/UserModals/userCreate.ejs'
 })

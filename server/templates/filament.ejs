@@ -12,7 +12,7 @@
     <div class="col-sm-12 col-md-4 col-lg-2">
         <%- include(card, {
             tile:{
-                id:"filamentManager",i:"fa-toilet-paper",title:"Filament Manager",class:"col-lg-12",
+                id:"filamentManager",i:"fa-toilet-paper",title:"Менеджер филамента",class:"col-lg-12",
                 },
                 bodyFile:'./Filament/filamentManager.panel.ejs'
             })
@@ -21,7 +21,7 @@
     <div class="col-sm-12 col-md-8 col-lg-10">
         <%- include(card, {
             tile:{
-                id:"filamentStatistics",i:"fa-chart-area",title:"Filament Statistics",class:"col-lg-12",
+                id:"filamentStatistics",i:"fa-chart-area",title:"Статистика филамента",class:"col-lg-12",
                 },
                 bodyFile:'./Filament/filamentStatistics.panel.ejs'
             })
@@ -33,7 +33,7 @@
     <div class="col-lg-6">
         <%- include(card, {
         tile:{
-        id:"spoolUsageOverTime",i:"fa-star-half-alt",title:"Total Usage By Day",class:"col-lg-12",
+        id:"spoolUsageOverTime",i:"fa-star-half-alt",title:"Расход по дням",class:"col-lg-12",
         },
         bodyFile:'./Filament/totalSpoolUsage.chart.ejs'
         })
@@ -44,7 +44,7 @@
     <div class="col-lg-6">
         <%- include(card, {
         tile:{
-        id:"incrementalSpoolUsage",i:"fa-star-half-alt",title:"Incremental Usage By Day",class:"col-lg-12",
+        id:"incrementalSpoolUsage",i:"fa-star-half-alt",title:"Инкрементальный расход по дням",class:"col-lg-12",
         },
         bodyFile:'./Filament/incrementalSpoolUsage.chart.ejs'
         })
@@ -57,14 +57,14 @@
         table:{
             id:"filamentOverviewTable", contentId:"filamentOverviewList", hide:false, headers: [
                 { title:"", style:"" },
-                { title:"Spool Name", style:"min-width:50px;" },
-                { title:"Material", style:"" },
-                { title:"Manufacturer", style:"min-width:300px;" },
-                { title:"Spool Weight", style:"min-width:200px;" },
-                { title:"Remaining", style:"min-width:50px;" },
-                { title:"Tool Offset", style:"min-width:150px;" },
-                { title:"Bed Offset", style:"min-width:150px;" },
-                { title:"Assigned Printer", style:"min-width:10px;" }
+                { title:"Название катушки", style:"min-width:50px;" },
+                { title:"Материал", style:"" },
+                { title:"Производитель", style:"min-width:300px;" },
+                { title:"Вес катушки", style:"min-width:200px;" },
+                { title:"Остаток", style:"min-width:50px;" },
+                { title:"Сдвиг сопла", style:"min-width:150px;" },
+                { title:"Сдвиг стола", style:"min-width:150px;" },
+                { title:"Назначенный принтер", style:"min-width:10px;" }
             ]
             },
             bodyFile:'./Filament/spool.table.ejs'
@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Profile Manager</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Менеджер профилей</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -88,11 +88,11 @@
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="profilesManufactuer">Manufacturer</label>
+                                    <label for="profilesManufactuer">Производитель</label>
                                     <input type="text" class="form-control" id="profilesManufactuer">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="profilesMaterial">Material</label>
+                                    <label for="profilesMaterial">Материал</label>
                                     <input autocomplete="off" list="huge_list" type="text" class="form-control" id="profilesMaterial">
                                     <datalist id="huge_list" class="bg-secondary">
                                     </datalist>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="profilesDensity">Density</label>
+                                    <label for="profilesDensity">Плотность</label>
                                     <div class="input-group mb-3">
                                         <input id="profilesDensity" type="number" class="form-control" value="1.25" step="0.01" aria-label="profilesDansity" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
@@ -109,7 +109,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="profilesDiameter">Diameter</label>
+                                    <label for="profilesDiameter">Диаметр</label>
                                     <div class="input-group mb-3">
                                         <input id="profilesDiameter" type="number" class="form-control" value="1.75" step="0.01" aria-label="" aria-describedby="profilesDiameter">
                                         <div class="input-group-append">
@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="addProfilesBtn" type="submit" class="btn btn-success">Add</button>
+                            <button id="addProfilesBtn" type="submit" class="btn btn-success">Добавить</button>
                         </form>
                         <br>
                         <hr>
@@ -137,32 +137,32 @@
                                 data-id="profiles-pagination">
                             <!-- first and previous buttons -->
                             <div class="btn-group pagination d-inline-flex" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-secondary" data-type="first">First</button>
-                                <button type="button" class="btn btn-secondary" data-type="prev">Previous</button>
+                                <button type="button" class="btn btn-secondary" data-type="first">Первая</button>
+                                <button type="button" class="btn btn-secondary" data-type="prev">Предыдущая</button>
                             </div>
                             <div class="btn-group pagination d-inline-flex" data-type="pages">
                                 <button type="button" class="btn btn-secondary" data-type="page">{pageNumber}</button>
                             </div>
                             <div class="btn-group pagination d-inline-flex" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-secondary" data-type="next">Next</button>
-                                <button type="button" class="btn btn-secondary" data-type="lase">Last</button>
+                                <button type="button" class="btn btn-secondary" data-type="next">Следующая</button>
+                                <button type="button" class="btn btn-secondary" data-type="lase">Последняя</button>
                             </div>
                             <!-- items per page dropdown -->
                             <div class="input-group mt-1 d-inline-flex">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Items per page: </label>
+                                    <label class="input-group-text" for="inputGroupSelect01">Элементов на странице: </label>
                                 </div>
                                 <select data-type="items-per-page" class="custom-select" id="inputGroupSelect01">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
                                     <option value="20">20</option>
-                                    <option value="0">All</option>
+                                    <option value="0">Все</option>
                                 </select>
                             </div>
                             <!-- information labels -->
                             <span data-type="info" class="badge badge-secondary ml-3 p-2">
-                                    Page {pageNumber} of {pagesNumber}
+                                    Стр. {pageNumber} из {pagesNumber}
                             </span>
                         </nav>
                     </div>
@@ -170,10 +170,10 @@
                         <table class="table-hover table table-responsive-sm table-responsive-md">
                             <thead>
                             <tr>
-                                <th scope="col" style="min-width: 250px">Manufacturer</th>
-                                <th scope="col" style="min-width: 250px">Material</th>
-                                <th scope="col" style="max-width: 50px">Density</th>
-                                <th scope="col" style="max-width: 50px">Diameter</th>
+                                <th scope="col" style="min-width: 250px">Производитель</th>
+                                <th scope="col" style="min-width: 250px">Материал</th>
+                                <th scope="col" style="max-width: 50px">Плотность</th>
+                                <th scope="col" style="max-width: 50px">Диаметр</th>
                                 <th scope="col" style="min-width: 250px"></th>
                             </tr>
                             </thead>
@@ -184,7 +184,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>
@@ -194,7 +194,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Spool Manager</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Менеджер катушек</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -204,22 +204,22 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="spoolsName">Name</label>
+                            <label for="spoolsName">Название</label>
                             <input type="text" class="form-control" id="spoolsName">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="spoolsProfile">Profile</label>
+                            <label for="spoolsProfile">Профиль</label>
                             <select id="spoolsProfile" class="form-control">
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="spoolsPrice">Price</label>
+                            <label for="spoolsPrice">Цена</label>
                             <input type="number" class="form-control" id="spoolsPrice" step="0.01">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="spoolsWeight">Weight</label>
+                            <label for="spoolsWeight">Вес</label>
                             <div class="input-group mb-3">
                                 <input id="spoolsWeight" type="number" class="form-control" value="1000" step="1" aria-label="" aria-describedby="profilesDiameter">
                                 <div class="input-group-append">
@@ -228,7 +228,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="spoolsRemaining">Used</label>
+                            <label for="spoolsRemaining">Использовано</label>
                             <div class="input-group mb-3">
                                 <input id="spoolsRemaining" type="number" class="form-control" value="0" step="1" aria-label="" aria-describedby="profilesDiameter">
                                 <div class="input-group-append">
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="spoolsTempOffset">Tool Temperature Offset</label>
+                            <label for="spoolsTempOffset">Сдвиг температуры сопла</label>
                             <div class="input-group mb-3">
                                 <input id="spoolsTempOffset" type="number" class="form-control" placeholder="Recipient's username" value="0" step="1" max="50" min="-50" aria-label="" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
@@ -246,7 +246,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="spoolsBedOffset">Bed Temperature Offset</label>
+                            <label for="spoolsBedOffset">Сдвиг температуры стола</label>
                             <div class="input-group mb-3">
                                 <input id="spoolsBedOffset" type="number" class="form-control" placeholder="Recipient's username" value="0" step="1" max="50" min="-50" aria-label="" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
@@ -255,7 +255,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="addSpoolBtn" type="submit" class="btn btn-success">Add</button>
+                    <button id="addSpoolBtn" type="submit" class="btn btn-success">Добавить</button>
                 </form>
                 <br>
                 <hr>
@@ -264,7 +264,7 @@
                     <div class="col-lg-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Default Sort: </label>
+                                <label class="input-group-text" for="inputGroupSelect01">Сортировка: </label>
                             </div>
                             <select class="custom-select" id="inputGroupSelect01"
                                     data-jplist-control="select-sort"
@@ -274,40 +274,40 @@
                             >
                                 <option
                                         value="0"
-                                        data-path="default">Sort by</option>
+                                        data-path="default">Сортировка по</option>
                                 <option             value="1"
                                                     data-path=".name"
                                                     data-order="asc"
-                                                    data-type="text">Name (&uarr;)</option>
+                                                    data-type="text">Название (&uarr;)</option>
                                 <option             value="2"
                                                     data-path=".name"
                                                     data-order="desc"
-                                                    data-type="text">Name (&darr;)</option>
+                                                    data-type="text">Название (&darr;)</option>
                                 <option             value="3"
                                                     data-path=".price"
                                                     data-order="asc"
-                                                    data-type="number">Price (&uarr;)</option>
+                                                    data-type="number">Цена (&uarr;)</option>
                                 <option             value="4"
                                                     data-path=".price"
                                                     data-order="desc"
-                                                    data-type="number">Price (&darr;)</option>
+                                                    data-type="number">Цена (&darr;)</option>
                                 <option             value="5"
                                                     data-path=".grams"
                                                     data-order="asc"
                                                     data-type="number"
-                                                    class="">Remaining (&uarr;)</option>
+                                                    class="">Остаток (&uarr;)</option>
                                 <option             value="6"
                                                     data-path=".grams"
                                                     data-order="desc"
                                                     data-type="number"
-                                                    class="">Remaining (&darr;)</option>
+                                                    class="">Остаток (&darr;)</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="materialsList">Material: </label>
+                                <label class="input-group-text" for="materialsList">Материал: </label>
                             </div>
                             <select class="custom-select" id="materialsList"
                                     data-jplist-control="select-filter"
@@ -321,7 +321,7 @@
                     <div class="col-lg-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Spool Search</span>
+                                <span class="input-group-text" id="basic-addon1">Поиск катушек</span>
                             </div>
                             <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
                                    data-jplist-control="textbox-filter"
@@ -330,7 +330,7 @@
                                    data-path=".name"
                                    type="text"
                                    value=""
-                                   placeholder="Search...">
+                                   placeholder="Поиск...">
                         </div>
                     </div>
                     <div class="col-12">
@@ -347,33 +347,33 @@
                                     data-id="spools-pagination">
                                 <!-- first and previous buttons -->
                                 <div class="btn-group pagination d-inline-flex" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary" data-type="first">First</button>
-                                    <button type="button" class="btn btn-secondary" data-type="prev">Previous</button>
+                                    <button type="button" class="btn btn-secondary" data-type="first">Первая</button>
+                                    <button type="button" class="btn btn-secondary" data-type="prev">Предыдущая</button>
                                 </div>
                                 <div class="btn-group pagination d-inline-flex" data-type="pages">
                                     <button type="button" class="btn btn-secondary" data-type="page">{pageNumber}</button>
                                 </div>
                                 <div class="btn-group pagination d-inline-flex" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary" data-type="next">Next</button>
-                                    <button type="button" class="btn btn-secondary" data-type="lase">Last</button>
+                                    <button type="button" class="btn btn-secondary" data-type="next">Следующая</button>
+                                    <button type="button" class="btn btn-secondary" data-type="lase">Последняя</button>
                                 </div>
                                 <!-- items per page dropdown -->
                                 <div class="input-group mb-3 d-inline-flex w-25">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text" for="inputGroupSelect01">Items per page: </label>
+                                        <label class="input-group-text" for="inputGroupSelect01">Элементов на странице: </label>
                                     </div>
                                     <select data-type="items-per-page" class="custom-select" id="inputGroupSelect01">
                                         <option value="5">5</option>
                                         <option value="20">20</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
-                                        <option value="0"> All </option>
+                                        <option value="0"> Все </option>
                                     </select>
                                 </div>
                                 <br>
                                 <!-- information labels -->
                                 <span data-type="info" class="badge badge-secondary ml-3 p-2">
-                                    Page {pageNumber} of {pagesNumber}
+                                    Стр. {pageNumber} из {pagesNumber}
                               </span>
                             </nav>
                         </center>
@@ -384,11 +384,11 @@
                         <table class="table-hover table table-responsive-sm table-responsive-md col-lg-12">
                             <thead>
                             <tr>
-                                <th scope="col">Total Price</th>
-                                <th scope="col">Total Weight (g)</th>
-                                <th scope="col">Total Used (g)</th>
-                                <th scope="col">Total Remaining (g)</th>
-                                <th scope="col">Total Remaining (%)</th>
+                                <th scope="col">Общая цена</th>
+                                <th scope="col">Общий вес (г)</th>
+                                <th scope="col">Использовано (г)</th>
+                                <th scope="col">Остаток (г)</th>
+                                <th scope="col">Остаток (%)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -406,14 +406,14 @@
                 <table class="table-hover table table-responsive-sm table-responsive-md col-lg-12">
                     <thead>
                     <tr>
-                        <th scope="col" style="min-width: 250px;">Name</th>
-                        <th scope="col" style="min-width: 200px">Profile</th>
-                        <th scope="col" style="max-width: 50px">Price</th>
-                        <th scope="col" style="max-width: 100px">Weight (g)</th>
-                        <th scope="col" style="max-width: 100px">Used (g)</th>
-                        <th scope="col" style="max-width: 50px">Tool Offset (°C)</th>
-                        <th scope="col" style="max-width: 50px">Bed Offset (°C)</th>
-                        <th scope="col" style="min-width: 300px">Printer Assignment</th>
+                        <th scope="col" style="min-width: 250px;">Название</th>
+                        <th scope="col" style="min-width: 200px">Профиль</th>
+                        <th scope="col" style="max-width: 50px">Цена</th>
+                        <th scope="col" style="max-width: 100px">Вес (г)</th>
+                        <th scope="col" style="max-width: 100px">Использовано (г)</th>
+                        <th scope="col" style="max-width: 50px">Сдвиг сопла (°C)</th>
+                        <th scope="col" style="max-width: 50px">Сдвиг стола (°C)</th>
+                        <th scope="col" style="min-width: 300px">Назначение принтера</th>
                         <th scope="col" style="min-width: 200px"></th>
                     </tr>
                     </thead>
@@ -423,7 +423,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>
@@ -433,7 +433,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Materials List</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Список материалов</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -442,19 +442,19 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="alert alert-info" role="alert">
-                            <p>Below is a list of OctoFarm's pre-defined materials. When creating a spool the information below will be used to automatically update a spool's density for you.</p>
+                            <p>Ниже приведён список предопределённых материалов OctoFarm. При создании катушки эти данные используются для автоматического обновления плотности.</p>
 
-                            <p>The density is used in calculations across OctoFarms interface, especially history, to make a best guess at usage from the length provided from OctoPrint.</p>
+                            <p>Плотность используется в расчётах по всему интерфейсу OctoFarm, особенно в истории, для оценки расхода по длине, полученной от OctoPrint.</p>
                         </div>
                     </div>
                     <div class="col-6">
 
                         <div class="alert alert-success" role="alert">
-                            <p>Always entering custom materials? would you like to help build this list?</p>
+                            <p>Постоянно вводите свои материалы? Хотите помочь дополнить этот список?</p>
 
-                            <p>Then please make a P.R at OctoFarms github repository on the file /client/pages/filament-manager.utils.js on the array called "materialsList".</p>
+                            <p>Пожалуйста, создайте P.R. в GitHub-репозитории OctoFarm для файла /client/pages/filament-manager.utils.js, массив "materialsList".</p>
 
-                            <a target="_blank" href="https://github.com/OctoFarm/OctoFarm/edit/master/client/js/pages/filament-manager.utils.js#L8"> Click here to edit! </a>
+                            <a target="_blank" href="https://github.com/OctoFarm/OctoFarm/edit/master/client/js/pages/filament-manager.utils.js#L8"> Нажмите, чтобы редактировать! </a>
                         </div>
                     </div>
                     <div class="col-12">
@@ -462,10 +462,10 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th scope="col">Code</th>
-                                <th scope="col">Material</th>
-                                <th scope="col">Abbreviation</th>
-                                <th scope="col">Density</th>
+                                <th scope="col">Код</th>
+                                <th scope="col">Материал</th>
+                                <th scope="col">Сокращение</th>
+                                <th scope="col">Плотность</th>
                             </tr>
                             </thead>
                             <tbody id="materialsListTable">
@@ -475,7 +475,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>

@@ -4,32 +4,32 @@
             <a class="nav-link active"
                id="system-monitoring-list" data-toggle="list"
                href="#system-monitoring" role="tab"
-               aria-controls="dashboard"><i class="fas fa-eye"></i> Views</a>
+               aria-controls="dashboard"><i class="fas fa-eye"></i> Виды</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="system-dashboard-list" data-toggle="list"
-               href="#system-dashboard" role="tab" aria-controls="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+               href="#system-dashboard" role="tab" aria-controls="dashboard"><i class="fas fa-tachometer-alt"></i> Панель</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="system-dashboard-list" data-toggle="list"
-               href="#system-printer-manager" role="tab" aria-controls="dashboard"><i class="fas fa-print"></i> Printers</a>
+               href="#system-printer-manager" role="tab" aria-controls="dashboard"><i class="fas fa-print"></i> Принтеры</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="system-dashboard-list" data-toggle="list"
-               href="#system-file-manager" role="tab" aria-controls="dashboard"><i class="fas fa-folder-open"></i> File Manager</a>
+               href="#system-file-manager" role="tab" aria-controls="dashboard"><i class="fas fa-folder-open"></i> Файловый менеджер</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="system-dashboard-list" data-toggle="list"
-               href="#system-history" role="tab" aria-controls="dashboard"><i class="fas fa-history"></i> History</a>
+               href="#system-history" role="tab" aria-controls="dashboard"><i class="fas fa-history"></i> История</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                id="system-dashboard-list" data-toggle="list"
-               href="#system-filament-manager" role="tab" aria-controls="dashboard"><i class="fas fa-toilet-paper"></i> Filament Manager</a>
+               href="#system-filament-manager" role="tab" aria-controls="dashboard"><i class="fas fa-toilet-paper"></i> Менеджер филамента</a>
         </li>
     </ul>
 
@@ -37,9 +37,9 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="system-monitoring" role="tabpanel"
                  aria-labelledby="dashboard-monitoring-list">
-                <h4>Views Visibility</h4><hr>
-                <p>Enable and disable different parts of the UI on any of the views
-                    pages.</p>
+                <h4>Видимость видов</h4><hr>
+                <p>Включайте и отключайте различные части интерфейса на любой из страниц
+                    видов.</p>
                 <div class="row">
                     <div class="col-3">
                         <form class="was-validated">
@@ -47,13 +47,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="panelCurrentOpOn" required>
                                 <label class="custom-control-label"
-                                       for="panelCurrentOpOn">Current
-                                    Operations</label>
-                                <div class="valid-feedback">Current Operations will
-                                    be shown on the views.
+                                       for="panelCurrentOpOn">Текущие
+                                    операции</label>
+                                <div class="valid-feedback">Текущие операции будут
+                                    показаны на видах.
                                 </div>
-                                <div class="invalid-feedback">Current Operations
-                                    will not be shown on the views.
+                                <div class="invalid-feedback">Текущие операции
+                                    не будут показаны на видах.
                                 </div>
                             </div>
                         </form>
@@ -64,13 +64,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="panelHideOffline" checked required>
                                 <label class="custom-control-label"
-                                       for="panelHideOffline">Offline
-                                    Printers</label>
-                                <div class="invalid-feedback">Offline printers will be
-                                    hidden from the views.
+                                       for="panelHideOffline">Офлайн
+                                    принтеры</label>
+                                <div class="invalid-feedback">Офлайн принтеры будут
+                                    скрыты из видов.
                                 </div>
-                                <div class="valid-feedback">Offline printers will
-                                    be shown on the views.
+                                <div class="valid-feedback">Офлайн принтеры будут
+                                    показаны на видах.
                                 </div>
                             </div>
                         </form>
@@ -81,13 +81,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="panelHideClosed" required>
                                 <label class="custom-control-label"
-                                       for="panelHideClosed">Disconnected
-                                    Printers</label>
-                                <div class="invalid-feedback">Disconnected printers
-                                    will be hidden from the views.
+                                       for="panelHideClosed">Отключённые
+                                    принтеры</label>
+                                <div class="invalid-feedback">Отключённые принтеры
+                                    будут скрыты из видов.
                                 </div>
-                                <div class="valid-feedback">Disconnected printers
-                                    will be shown on the views.
+                                <div class="valid-feedback">Отключённые принтеры
+                                    будут показаны на видах.
                                 </div>
                             </div>
                         </form>
@@ -103,16 +103,15 @@
                     <!--                                                        </form>-->
                     <!--                                                    </div>-->
                     <div class="col-sm-12 col-md-6">
-                        <h4>Camera View Columns</h4><hr>
-                        <p>Select how many columns you would like on camera view</p>
+                        <h4>Столбцы камер</h4><hr>
+                        <p>Выберите количество столбцов для вида камер</p>
                         <div class="alert alert-warning text-dark" role="alert">
-                            This only takes effect on screen sizes larger than a
-                            tablet.
+                            Действует только на экранах больше планшета.
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text"
-                                       for="selectCameraGrid">Camera Columns</label>
+                                       for="selectCameraGrid">Столбцы камер</label>
                             </div>
                             <select class="custom-select" id="selectCameraGrid">
                                 <option value="12">1</option>
@@ -125,16 +124,15 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <h4>Group View Columns</h4><hr>
-                        <p>Select how many columns you would like on group view</p>
+                        <h4>Столбцы групп</h4><hr>
+                        <p>Выберите количество столбцов для вида групп</p>
                         <div class="alert alert-warning text-dark" role="alert">
-                            This only takes effect on screen sizes larger than a
-                            tablet.
+                            Действует только на экранах больше планшета.
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text"
-                                       for="selectCameraGrid">Group Columns</label>
+                                       for="selectCameraGrid">Столбцы групп</label>
                             </div>
                             <select class="custom-select" id="selectGroupGrid">
                                 <option value="12">1</option>
@@ -153,210 +151,209 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <button id="resetDashboardBtn" type="button"
-                                class="btn btn-danger">Reset Dashboard
+                                class="btn btn-danger">Сбросить панель
                         </button>
                     </div>
                     <div class="col-lg-12">
-                        <h5>Enable/Disable</h5>
+                        <h5>Включить/Отключить</h5>
                         <hr>
-                        <p>Select which sections of your dasboard you'd like enabled
-                            or disabled. Disabling a dashboard panel will hide it
-                            from view.</p>
+                        <p>Выберите, какие секции панели вы хотите включить
+                            или отключить. Отключение секции панели скроет её
+                            из вида.</p>
                     </div>
                     <div class="col-lg-4">
-                        <h6 title="Current Operations block shows any currently active prints on the farm.">
-                            Farm Activity</h6><hr>
+                        <h6 title="Блок текущих операций показывает все активные печати на ферме.">
+                            Активность фермы</h6><hr>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="currentOperations" required>
                                     <label class="custom-control-label"
-                                           for="currentOperations">Current
-                                        Operations</label><br>
+                                           for="currentOperations">Текущие
+                                        операции</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Shows the
-                                    current active prints</small>
+                                <small><i class="fas fa-info-circle"></i> Показывает
+                                    текущие активные печати</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="cumulativeTimes" checked required>
                                     <label class="custom-control-label"
-                                           for="cumulativeTimes">Cumulative
-                                        Times</label><br>
+                                           for="cumulativeTimes">Суммарное
+                                        время</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Totals up
-                                    the Estimated, Remaining and Eslapsed time of
-                                    active prints on the farm</small>
+                                <small><i class="fas fa-info-circle"></i> Суммирует
+                                    расчётное, оставшееся и прошедшее время
+                                    активных печатей на ферме</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3 ">
                                     <input type="checkbox" class="custom-control-input"
                                            id="averageTimes" checked required>
                                     <label class="custom-control-label"
-                                           for="averageTimes">Average Times</label><br>
+                                           for="averageTimes">Среднее время</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Mean
-                                    Averages of the Estimated, Remaining and
-                                    Eslapsed time of active prints on the
-                                    farm</small>
+                                <small><i class="fas fa-info-circle"></i> Средние значения
+                                    расчётного, оставшегося и прошедшего времени
+                                    активных печатей на ферме</small>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h6 title="Printer Status blocks will show the last state grabbed of each instance. (these may need re-sizing to see all printers)">
-                            Printer Status</h6><hr>
+                        <h6 title="Блоки статуса принтеров показывают последнее состояние каждого экземпляра. (может потребоваться изменение размера для отображения всех принтеров)">
+                            Статус принтеров</h6><hr>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="printerState" checked required>
                                     <label class="custom-control-label"
-                                           for="printerState">State</label><br>
+                                           for="printerState">Состояние</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Grid that
-                                    shows the individual printer states on the farm</small>
+                                <small><i class="fas fa-info-circle"></i> Сетка, показывающая
+                                    состояния отдельных принтеров на ферме</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="printerTemps" checked required>
                                     <label class="custom-control-label"
-                                           for="printerTemps">Temps</label><br>
+                                           for="printerTemps">Температуры</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Grid that
-                                    shows the individual printer temps on the
-                                    farm</small>
+                                <small><i class="fas fa-info-circle"></i> Сетка, показывающая
+                                    температуры отдельных принтеров на
+                                    ферме</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="printerUtilisation" checked required>
                                     <label class="custom-control-label"
-                                           for="printerUtilisation">Utilisation</label><br>
+                                           for="printerUtilisation">Использование</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Grid that
-                                    shows the individual printer utilisation
-                                    activitiy vs idle/offline time.</small>
+                                <small><i class="fas fa-info-circle"></i> Сетка, показывающая
+                                    использование отдельных принтеров:
+                                    активность против простоя/офлайн.</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="printerProgress" checked required>
                                     <label class="custom-control-label"
-                                           for="printerProgress">Progress</label><br>
+                                           for="printerProgress">Прогресс</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Grid that
-                                    shows the individual printer progress for active
-                                    prints</small>
+                                <small><i class="fas fa-info-circle"></i> Сетка, показывающая
+                                    прогресс отдельных принтеров для активных
+                                    печатей</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="currentStatus" checked required>
                                     <label class="custom-control-label"
-                                           for="currentStatus">Current
-                                        Status</label><br>
+                                           for="currentStatus">Текущий
+                                        статус</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Overview
-                                    of all the printers status totalled into a bar
-                                    graph</small>
+                                <small><i class="fas fa-info-circle"></i> Обзор
+                                    всех статусов принтеров, суммированных в
+                                    столбчатую диаграмму</small>
                             </form>
                         </div>
 
                     </div>
                     <div class="col-lg-4">
-                        <h6>Farm Utilisation</h6><hr>
+                        <h6>Использование фермы</h6><hr>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="weeklyUtilisation" checked required>
                                     <label class="custom-control-label"
-                                           for="weeklyUtilisation">Weekly
-                                        Utilisation</label><br>
+                                           for="weeklyUtilisation">Еженедельное
+                                        использование</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Heat map
-                                    showing the total percentages of printer states
-                                    on the farm. Shows previous 7 days.</small>
+                                <small><i class="fas fa-info-circle"></i> Тепловая карта,
+                                    показывающая общие проценты состояний принтеров
+                                    на ферме. Показывает последние 7 дней.</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="currentUtilisation" checked required>
                                     <label class="custom-control-label"
-                                           for="currentUtilisation">Current
-                                        Utilisation</label><br>
+                                           for="currentUtilisation">Текущее
+                                        использование</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Donut
-                                    chart of total printers in Active/Idle/Offline
-                                    states</small>
+                                <small><i class="fas fa-info-circle"></i> Кольцевая
+                                    диаграмма общего количества принтеров в состояниях
+                                    Активен/Простой/Офлайн</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="farmUtilisation" checked required>
                                     <label class="custom-control-label"
-                                           for="farmUtilisation">Farm
-                                        Utilisation</label><br>
+                                           for="farmUtilisation">Использование
+                                        фермы</label><br>
 
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Overview
-                                    of the entire farms utilisation hours inc.
-                                    Active/Failed/Idle/Offline</small>
+                                <small><i class="fas fa-info-circle"></i> Обзор
+                                    часов использования всей фермы, включая
+                                    Активность/Ошибки/Простой/Офлайн</small>
                             </form>
                         </div>
 
                     </div>
                     <div class="col-lg-4">
-                        <h6>Historical</h6><hr>
+                        <h6>Историческое</h6><hr>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="hourlyTotalTemperatures" required>
                                     <label class="custom-control-label"
-                                           for="hourlyTotalTemperatures">Hourly Total
-                                        Temperatures</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="hourlyTotalTemperatures">Почасовые общие
+                                        температуры</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Graph
-                                    showing the total tool/bed/chamber temperatures
-                                    across the farm inc. total temp.</small>
+                                <small><i class="fas fa-info-circle"></i> График,
+                                    показывающий общие температуры инструмента/стола/камеры
+                                    на ферме, включая общую температуру.</small>
 
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
@@ -364,98 +361,98 @@
                                     <input type="checkbox" class="custom-control-input"
                                            id="printCompletionCheck" required>
                                     <label class="custom-control-label"
-                                           for="printCompletionCheck">Print Completion
-                                        By Day</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="printCompletionCheck">Завершение печати
+                                        по дням</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Graph
-                                    showing counts of daily print completion
-                                    totalled by day.</small>
+                                <small><i class="fas fa-info-circle"></i> График,
+                                    показывающий количество завершённых печатей
+                                    по дням.</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="filamentUsageCheck" required>
                                     <label class="custom-control-label"
-                                           for="filamentUsageCheck">Filament Usage By
-                                        Day</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="filamentUsageCheck">Расход филамента
+                                        по дням</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Graph
-                                    showing filament usage totally by day.</small>
+                                <small><i class="fas fa-info-circle"></i> График,
+                                    показывающий расход филамента по дням.</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="filamentUsageOverTimeCheck" required>
                                     <label class="custom-control-label"
-                                           for="filamentUsageOverTimeCheck">Filament
-                                        Usage Over Time</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="filamentUsageOverTimeCheck">Расход филамента
+                                        за всё время</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Graph
-                                    showing filament usage summed up by day over
-                                    time.</small>
+                                <small><i class="fas fa-info-circle"></i> График,
+                                    показывающий расход филамента, суммированный
+                                    по дням за всё время.</small>
                             </form>
                         </div>
 
                     </div>
                     <div class="col-lg-4 d-none">
-                        <h6>Environmental</h6><hr>
+                        <h6>Окружение</h6><hr>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="environmentalHistory" required>
                                     <label class="custom-control-label"
-                                           for="environmentalHistory">Environmental
-                                        HistoryRoutes</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="environmentalHistory">История
+                                        окружения</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Shows
-                                    global Environmental data for room
-                                    temperature/humidity/pressure/IAQ. To setup fire
-                                    a POST request(requires Auth) to <code>/input/roomData</code>
+                                <small><i class="fas fa-info-circle"></i> Показывает
+                                    глобальные данные окружения для комнатной
+                                    температуры/влажности/давления/IAQ. Для настройки отправьте
+                                    POST-запрос (требуется авторизация) на <code>/input/roomData</code>
                                     with the following format:<br> <code>{<br>
                                         temperature: value (°C),<br>
                                         humidity: value (%),<br>
                                         iaq: value,<br>
                                         pressure: value (Pa)<br>
                                         date: value<br>
-                                        }</code><br> Null values are required if
-                                    data is missing!</small>
+                                        }</code><br> Значения null обязательны, если
+                                    данные отсутствуют!</small>
                             </form>
                         </div>
 
                     </div>
                     <div class="col-lg-4">
-                        <h6>Other</h6><h4></h4>
+                        <h6>Прочее</h6><h4></h4>
                         <div class="row">
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="dateAndTime" required>
                                     <label class="custom-control-label"
-                                           for="dateAndTime">Date and Time</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="dateAndTime">Дата и время</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Shows your local current date and time</small>
+                                <small><i class="fas fa-info-circle"></i> Показывает текущую локальную дату и время</small>
                             </form>
                             <form class="border border-secondary rounded col-lg-12 was-validated">
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input"
                                            id="cameraCarousel" required>
                                     <label class="custom-control-label"
-                                           for="cameraCarousel">Camera Carousel</label><br>
-                                    <div class="valid-feedback">Shown</div>
-                                    <div class="invalid-feedback">Hidden</div>
+                                           for="cameraCarousel">Карусель камер</label><br>
+                                    <div class="valid-feedback">Показано</div>
+                                    <div class="invalid-feedback">Скрыто</div>
                                 </div>
-                                <small><i class="fas fa-info-circle"></i> Shows an auto scrolling camera carousel</small>
+                                <small><i class="fas fa-info-circle"></i> Показывает автоматически прокручивающуюся карусель камер</small>
                             </form>
                         </div>
 
@@ -465,8 +462,8 @@
             </div>
             <div class="tab-pane fade" id="system-printer-manager" role="tabpanel"
                  aria-labelledby="dashboard-monitoring-list">
-                <h4>Printer Manager Visibility</h4><hr>
-                <p>Enable and disable different parts of the UI on the Printer Manager page.</p>
+                <h4>Видимость менеджера принтеров</h4><hr>
+                <p>Включайте и отключайте различные части интерфейса на странице менеджера принтеров.</p>
                 <div class="row">
                     <div class="col-3">
                         <form class="was-validated">
@@ -474,13 +471,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="printerManagerCurrentOp" required>
                                 <label class="custom-control-label"
-                                       for="printerManagerCurrentOp">Current
-                                    Operations</label>
-                                <div class="valid-feedback">Current Operations will
-                                    be shown on printer manager.
+                                       for="printerManagerCurrentOp">Текущие
+                                    операции</label>
+                                <div class="valid-feedback">Текущие операции будут
+                                    показаны в менеджере принтеров.
                                 </div>
-                                <div class="invalid-feedback">Current Operations
-                                    will not be shown on printer manager.
+                                <div class="invalid-feedback">Текущие операции
+                                    не будут показаны в менеджере принтеров.
                                 </div>
                             </div>
                         </form>
@@ -489,8 +486,8 @@
             </div>
             <div class="tab-pane fade" id="system-file-manager" role="tabpanel"
                  aria-labelledby="dashboard-monitoring-list">
-                <h4>File Manager Visibility</h4><hr>
-                <p>Enable and disable different parts of the UI on File Manager page.</p>
+                <h4>Видимость файлового менеджера</h4><hr>
+                <p>Включайте и отключайте различные части интерфейса на странице файлового менеджера.</p>
                 <div class="row">
                     <div class="col-3">
                         <form class="was-validated">
@@ -498,13 +495,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="fileManagerCurrentOp" required>
                                 <label class="custom-control-label"
-                                       for="fileManagerCurrentOp">Current
-                                    Operations</label>
-                                <div class="valid-feedback">Current Operations will
-                                    be shown on file manager.
+                                       for="fileManagerCurrentOp">Текущие
+                                    операции</label>
+                                <div class="valid-feedback">Текущие операции будут
+                                    показаны в файловом менеджере.
                                 </div>
-                                <div class="invalid-feedback">Current Operations
-                                    will not be shown on file manager.
+                                <div class="invalid-feedback">Текущие операции
+                                    не будут показаны в файловом менеджере.
                                 </div>
                             </div>
                         </form>
@@ -513,8 +510,8 @@
             </div>
             <div class="tab-pane fade" id="system-history" role="tabpanel"
                  aria-labelledby="dashboard-monitoring-list">
-                <h4>History Visibility</h4><hr>
-                <p>Enable and disable different parts of the UI on the History page.</p>
+                <h4>Видимость истории</h4><hr>
+                <p>Включайте и отключайте различные части интерфейса на странице истории.</p>
                 <div class="row">
                     <div class="col-3">
                         <form class="was-validated">
@@ -522,13 +519,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="historyCurrentOp" required>
                                 <label class="custom-control-label"
-                                       for="historyCurrentOp">Current
-                                    Operations</label>
-                                <div class="valid-feedback">Current Operations will
-                                    be shown on history.
+                                       for="historyCurrentOp">Текущие
+                                    операции</label>
+                                <div class="valid-feedback">Текущие операции будут
+                                    показаны в истории.
                                 </div>
-                                <div class="invalid-feedback">Current Operations
-                                    will not be shown on history.
+                                <div class="invalid-feedback">Текущие операции
+                                    не будут показаны в истории.
                                 </div>
                             </div>
                         </form>
@@ -537,8 +534,8 @@
             </div>
             <div class="tab-pane fade" id="system-filament-manager" role="tabpanel"
                  aria-labelledby="dashboard-monitoring-list">
-                <h4>Filament Manager Visibility</h4><hr>
-                <p>Enable and disable different parts of the UI on Filament Manager page.</p>
+                <h4>Видимость менеджера филамента</h4><hr>
+                <p>Включайте и отключайте различные части интерфейса на странице менеджера филамента.</p>
                 <div class="row">
                     <div class="col-3">
                         <form class="was-validated">
@@ -546,13 +543,13 @@
                                 <input type="checkbox" class="custom-control-input"
                                        id="filamentManagerCurrentOp" required>
                                 <label class="custom-control-label"
-                                       for="filamentManagerCurrentOp">Current
-                                    Operations</label>
-                                <div class="valid-feedback">Current Operations will
-                                    be shown on filament manager.
+                                       for="filamentManagerCurrentOp">Текущие
+                                    операции</label>
+                                <div class="valid-feedback">Текущие операции будут
+                                    показаны в менеджере филамента.
                                 </div>
-                                <div class="invalid-feedback">Current Operations
-                                    will not be shown on filament manager.
+                                <div class="invalid-feedback">Текущие операции
+                                    не будут показаны в менеджере филамента.
                                 </div>
                             </div>
                         </form>
@@ -563,5 +560,5 @@
     </div>
 </div>
 <button type="button" class="btn btn-success btn-block mt-1"
-        id="saveClientSettingsBtn">Save
+        id="saveClientSettingsBtn">Сохранить
 </button>

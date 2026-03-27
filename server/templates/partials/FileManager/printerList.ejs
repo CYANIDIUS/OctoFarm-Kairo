@@ -1,5 +1,5 @@
-<p>Check the boxes below to select the printers you'd like to upload files too. (Only idle printers available for selection...)</p>
-<p><b>Note:</b> You must select at least 2 printers.</p>
+<p>Отметьте принтеры, на которые вы хотите загрузить файлы. (Доступны только простаивающие принтеры...)</p>
+<p><b>Примечание:</b> Необходимо выбрать минимум 2 принтера.</p>
 <% if (typeof printers != 'undefined'){ %>
   <% for(let i=0;i < printers.length;i++){%>
     <% let name = "";%>
@@ -17,9 +17,9 @@
       <form class="was-validated form-check-inline form-check">
         <div class="custom-control custom-checkbox mb-2 pr-2"><input type="checkbox" class="custom-control-input" id="multiUpPrinters-<%= printers[i]._id %>" value="<%= printers[i]._id %>" required>
           <label class="custom-control-label" for="multiUpPrinters-<%= printers[i]._id %>"><%= name%></label>
-          <div class="invalid-feedback">Not this printer</div>
+          <div class="invalid-feedback">Не этот принтер</div>
           <div class="valid-feedback">
-            Sending to this printer
+            Отправка на этот принтер
           </div>
         </div>
       </form>

@@ -3,50 +3,50 @@
         <div class="card">
             <div class="card-title">
                 <h1 class="text-center mb-3" style="margin-top:20px">
-                    <i class="fas fa-database"></i> Database Issue!
+                    <i class="fas fa-database"></i> Проблема с базой данных!
                 </h1>
             </div>
             <div class="card-subtitle row align-items-center">
                 <h4 class="badge col text-warning">
-                    OctoFarm failed to connect with MongoDB. Please adjust, test and save your connection setting below.
+                    OctoFarm не удалось подключиться к MongoDB. Пожалуйста, настройте, проверьте и сохраните параметры подключения ниже.
                 </h4>
             </div>
             <div class="card card-body">
                 <%- include('./partials/messages') %>
                 <span>
-                    Docker mode:
+                    Режим Docker:
                     <span class="badge badge-dark"><%= isDocker; %></span>
                 </span>
                 <span>
-                    Pm2 mode:
+                    Режим Pm2:
                     <span class="badge badge-dark"><%= isPm2; %></span>
                 </span>
                 <span>
-                    Nodemon mode:
+                    Режим Nodemon:
                     <span class="badge badge-dark"><%= isNodemon; %></span>
                 </span>
                 <span>
-                    OctoFarm version:
+                    Версия OctoFarm:
                     <span class="badge badge-dark"><%= npmPackageJson; %></span>
                 </span>
                 <span>
-                    NodeJS version:
+                    Версия NodeJS:
                     <span class="badge badge-dark"><%= nodeVersion; %></span>
                 </span>
                 <span>
-                    OS:
+                    ОС:
                     <span class="badge badge-dark"><%= os; %></span>
                 </span>
                 <br/>
 
                 <form method="post">
                     <div class="form-group">
-                        <label for="connString">MongoDB url:</label>
+                        <label for="connString">URL MongoDB:</label>
                         <div class="input-group">
                             <div id="set-default-connection-button"
                                  class="btn btn-secondary"
                                  onclick="setDefaultMongoDbString()">
-                                Set default
+                                По умолчанию
                             </div>
                             <input type="url" id="connString" class="input-group-append form-control"
                                    oninput="evaluateMongoDbInput()"
@@ -54,21 +54,21 @@
                                    placeholder=""/>
                         </div>
                         <small id="connection-string-invalid" class="form-text text-danger">
-                            Your connection string seems to have invalid format. <br/>
+                            Строка подключения имеет неверный формат. <br/>
                             <ul>
-                                <li>Must start with <small class="badge">'mongodb://'</small></li>
-                                <li>Must contain <small class="badge">'/octofarm'</small></li>
+                                <li>Должна начинаться с <small class="badge">'mongodb://'</small></li>
+                                <li>Должна содержать <small class="badge">'/octofarm'</small></li>
                                 <li>
-                                    Read more about connection string in
+                                    Подробнее о строке подключения в
                                     <a href="https://docs.mongodb.com/manual/reference/connection-string/"
                                        target="_blank">
-                                        MongoDB Connection String URI Format documentation
+                                        документации MongoDB по формату URI строки подключения
                                     </a>...
                                 </li>
                             </ul>
                         </small>
                         <small id="connection-string-valid" class="form-text text-success">
-                            Your connection string seems properly formatted.
+                            Строка подключения имеет правильный формат.
                         </small>
                     </div>
                     <br/>
@@ -77,7 +77,7 @@
                             class="btn btn-warning"
                             onclick="postTestConnection()"
                             disabled>
-                        Test connection
+                        Проверить подключение
                     </button>
                     <button
                             type="button"
@@ -88,7 +88,7 @@
                             hidden
                             <% } %>
                             disabled>
-                        Save connection setting
+                        Сохранить настройки подключения
                     </button>
                     <button
                             type="button"
@@ -96,27 +96,27 @@
                             class="btn btn-danger"
                             onclick="postRestartServer()"
                             disabled>
-                        Restart OctoFarm
+                        Перезапустить OctoFarm
                     </button>
                     <small id="not-yet-validated-connection" class="form-text text-warning">
-                        Test your connection before saving.
+                        Проверьте подключение перед сохранением.
                     </small>
                     <br/>
                     <% if (isDocker) { %>
                         <div class="text-warning">
-                            <strong>Running OctoFarm in a docker container.</strong>
-                            <br/> Update the MONGO variable in your docker command `-e
-                            MONGO=...` or docker-compose.yml file's `environment:` section.
+                            <strong>OctoFarm запущен в Docker-контейнере.</strong>
+                            <br/> Обновите переменную MONGO в команде docker `-e
+                            MONGO=...` или в разделе `environment:` файла docker-compose.yml.
                             <br/>
-                            You can still use the test button above. Make sure to restart the container after you've
-                            managed to establish a successful connection here.
+                            Вы можете использовать кнопку проверки выше. Обязательно перезапустите контейнер после
+                            успешного подключения.
                         </div>
                     <% } %>
 
                     <div class="list-group" style="margin-top: 15px">
-                        Last OctoFarm response:
+                        Последний ответ OctoFarm:
                         <small id="connection-string-server-response" class="text-light">
-                            not requested yet
+                            запрос ещё не отправлен
                         </small>
                     </div>
                 </form>
@@ -127,7 +127,7 @@
 
 <script>
   const defaultMongoDBString = "<%= defaultMongoConnectionString %>";
-  const defaultPlaceholder = "Add your 'mongodb://.../octofarm' string";
+  const defaultPlaceholder = "Введите строку 'mongodb://.../octofarm'";
   const isDocker = <%= isDocker %>;
   const isPm2 = "<%= isPm2 %>";
 
@@ -175,7 +175,7 @@
     const mongoDbURL = getPageElements().mongoDBString;
 
     if (!isValidMongoDbInput()) {
-      alert("Connection URL is invalid " + mongoDbURL);
+      alert("URL подключения недействителен: " + mongoDbURL);
       return;
     }
 
@@ -203,23 +203,23 @@
       return;
     }
     notYetValidatedConnection = true;
-    setLastMessageBox("Awaiting response from OctoFarm server.");
+    setLastMessageBox("Ожидание ответа от сервера OctoFarm.");
     fetch("/test-connection", fetchOptions)
         .then(r => r.json())
         .catch(e => {
-          setLastMessageBox("Could not test because of lost connection... is OctoFarm still alive and kicking?", true);
+          setLastMessageBox("Не удалось проверить из-за потери соединения... OctoFarm всё ещё работает?", true);
         })
         .then(b => {
           if (b.succeeded === true) {
             notYetValidatedConnection = false;
             if (isDocker) {
-              setLastMessageBox("Successfully tested, you should rebuild or edit the octofarm docker container with the new MONGO variable to apply this change! \n If this is a startup problem, use the restart button.", false);
+              setLastMessageBox("Проверка успешна! Перестройте или отредактируйте Docker-контейнер OctoFarm с новой переменной MONGO для применения изменений! \n Если это проблема запуска, используйте кнопку перезапуска.", false);
               getPageElements().restartOctoFarmButton.disabled = notYetValidatedConnection;
             } else {
-              setLastMessageBox("Successfully tested, you can save this setting!", false);
+              setLastMessageBox("Проверка успешна! Вы можете сохранить эту настройку.", false);
             }
           } else {
-            setLastMessageBox("Test failed! Reason '" + b.reason + "'", true);
+            setLastMessageBox("Проверка не удалась! Причина: '" + b.reason + "'", true);
           }
         })
         .finally(() => {
@@ -235,13 +235,13 @@
     fetch("/save-connection-env", fetchOptions)
         .then(r => r.json())
         .catch(e => {
-          setLastMessageBox("Could not test because of lost connection... is OctoFarm still alive and kicking?", true);
+          setLastMessageBox("Не удалось сохранить из-за потери соединения... OctoFarm всё ещё работает?", true);
         })
         .then(b => {
           if (b.succeeded === true) {
             setLastMessageBox(b.reason, false);
           } else {
-            setLastMessageBox("Failed to save connection setting. Reason '" + b.reason + "'", true);
+            setLastMessageBox("Не удалось сохранить настройки подключения. Причина: '" + b.reason + "'", true);
           }
         })
         .finally(() => {
@@ -257,14 +257,14 @@
     fetch("/restart-octofarm", fetchOptions)
         .then(r => r.json())
         .catch(e => {
-          setLastMessageBox("Could not restart because of lost connection... is OctoFarm still alive and kicking?", true);
+          setLastMessageBox("Не удалось перезапустить из-за потери соединения... OctoFarm всё ещё работает?", true);
         })
         .then(b => {
           if (b === true) {
-            setLastMessageBox("System restart command was successful,the server will restart in 5 seconds... Please refresh page or wait for automatic refresh in 10 seconds.", false);
+            setLastMessageBox("Команда перезапуска выполнена успешно, сервер перезапустится через 5 секунд... Обновите страницу или дождитесь автоматического обновления через 10 секунд.", false);
             setTimeout(() => location.reload(), 10 * 1000)
           } else {
-            setLastMessageBox("Failed to Restart OctoFarm. Reason:'" + b + "'", true);
+            setLastMessageBox("Не удалось перезапустить OctoFarm. Причина: '" + b + "'", true);
           }
         });
   }
