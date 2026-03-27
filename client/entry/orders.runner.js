@@ -7,6 +7,8 @@ import {
   assignSchedule,
   confirmPrint,
   uploadGcode,
+  fetchPrinterGroups,
+  fetchPrinters,
 } from "../js/pages/orders/orders.api";
 import {
   buildOrderRow,
@@ -19,6 +21,9 @@ let currentStatusFilter = "";
 // Current order ID for schedule assignment
 let currentScheduleOrderId = null;
 let currentScheduleAssignments = null;
+// Cached groups and printers for form
+let cachedGroups = [];
+let cachedPrinters = [];
 
 /**
  * Load and render orders table.
@@ -52,6 +57,101 @@ async function loadOrders() {
       '<tr><td colspan="9" class="text-center text-danger">Failed to load orders: ' +
       err.message +
       "</td></tr>";
+  }
+}
+
+/**
+ * Load printer groups and printers for the create order form.
+ */
+async function loadGroupsAndPrinters() {
+  try {
+    const [groupsData, printersData] = await Promise.all([
+      fetchPrinterGroups(),
+      fetchPrinters(),
+    ]);
+
+    cachedGroups = groupsData.groups || [];
+    cachedPrinters = printersData.printers || [];
+
+    populateReferencePrinterDropdown();
+    populateCompatibleGroups();
+  } catch (err) {
+    console.error("Failed to load groups/printers:", err);
+  }
+}
+
+/**
+ * Populate the reference printer dropdown.
+ */
+function populateReferencePrinterDropdown() {
+  const select = document.getElementById("orderReferencePrinter");
+  if (!select) return;
+
+  // Keep the default empty option
+  select.innerHTML = '<option value="">— Select printer 3MF was sliced for —</option>';
+
+  cachedPrinters.forEach((p) => {
+    const name =
+      (p.settingsAppearance && p.settingsAppearance.name) ||
+      p.printerName ||
+      p.printerURL ||
+      "Unknown";
+    const nozzle = (p.specifications && p.specifications.nozzleDiameter) || 0.4;
+    const nozzleMat = (p.specifications && p.specifications.nozzleMaterial) || "Brass";
+    const filType = (p.loadedFilament && p.loadedFilament.type) || "";
+    let label = `${name} (${nozzle}mm ${nozzleMat}`;
+    if (filType) label += `, ${filType}`;
+    label += ")";
+
+    const opt = document.createElement("option");
+    opt.value = p._id;
+    opt.textContent = label;
+    select.appendChild(opt);
+  });
+}
+
+/**
+ * Populate compatible groups checkboxes.
+ */
+function populateCompatibleGroups() {
+  const container = document.getElementById("compatibleGroupsContainer");
+  if (!container) return;
+
+  if (cachedGroups.length === 0) {
+    container.innerHTML = '<p class="text-muted mb-0">No printer groups available.</p>';
+    return;
+  }
+
+  container.innerHTML = cachedGroups
+    .map(
+      (g) => `
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input compatible-group-cb" id="group-${CSS.escape(g.key)}" value="${g.key.replace(/"/g, '&quot;')}">
+        <label class="custom-control-label" for="group-${CSS.escape(g.key)}">
+          ${g.label} <span class="badge badge-secondary">${g.printerCount} printer${g.printerCount !== 1 ? "s" : ""}</span>
+        </label>
+      </div>
+    `
+    )
+    .join("");
+}
+
+/**
+ * Auto-select the group matching the selected reference printer.
+ */
+function onReferencePrinterChange() {
+  const printerId = document.getElementById("orderReferencePrinter")?.value;
+  if (!printerId) return;
+
+  // Find which group this printer belongs to
+  for (const group of cachedGroups) {
+    const inGroup = group.printerIds.some((id) => id.toString() === printerId);
+    const cb = document.querySelector(`.compatible-group-cb[value="${CSS.escape(group.key)}"]`);
+    if (cb) {
+      if (inGroup) {
+        cb.checked = true;
+      }
+    }
   }
 }
 
@@ -100,8 +200,11 @@ async function handleOrderDetail(e) {
       btn.addEventListener("click", function () {
         const orderId = this.dataset.orderId;
         const assignmentId = this.dataset.assignmentId;
+        const groupLabel = this.dataset.groupLabel || "";
         document.getElementById("gcodeOrderId").value = orderId;
         document.getElementById("gcodeAssignmentId").value = assignmentId;
+        const labelEl = document.getElementById("gcodeGroupLabel");
+        if (labelEl) labelEl.textContent = groupLabel ? `Group: ${groupLabel}` : "";
         $("#uploadGcodeModal").modal("show");
       });
     });
@@ -135,8 +238,10 @@ async function handleCalculate(e) {
       .map(
         (a) => `
       <tr>
-        <td>${a.printerName || a.printerId}</td>
+        <td>${a.groupLabel || a.groupKey || "-"}</td>
+        <td>${a.printerIds ? a.printerIds.length : "-"}</td>
         <td>${a.copies}</td>
+        <td>${a.copiesPerPrinter || "-"}</td>
         <td>${formatTime(a.estimatedTime)}</td>
         <td>${a.status}</td>
       </tr>
@@ -158,7 +263,7 @@ async function handleCalculate(e) {
  */
 async function handleAssign(e) {
   const id = e.currentTarget.dataset.id;
-  if (!confirm("Assign schedule to this order? This will auto-calculate and assign printers.")) {
+  if (!confirm("Assign schedule to this order? This will auto-calculate and assign printer groups.")) {
     return;
   }
 
@@ -205,9 +310,6 @@ async function handleDelete(e) {
 }
 
 /**
- * Initialize the page.
- */
-/**
  * Update the "Total Parts" display in the create order form.
  */
 function updateTotalParts() {
@@ -218,6 +320,17 @@ function updateTotalParts() {
   if (el) el.value = totalParts + " pcs";
 }
 
+/**
+ * Get selected compatible group keys from checkboxes.
+ */
+function getSelectedGroupKeys() {
+  const checkboxes = document.querySelectorAll(".compatible-group-cb:checked");
+  return Array.from(checkboxes).map((cb) => cb.value);
+}
+
+/**
+ * Initialize the page.
+ */
 function init() {
   // Auto-calculate total parts when inputs change
   const partsInput = document.getElementById("orderPartsPerFile");
@@ -225,6 +338,12 @@ function init() {
   if (partsInput) partsInput.addEventListener("input", updateTotalParts);
   if (copiesInput) copiesInput.addEventListener("input", updateTotalParts);
   updateTotalParts(); // initial calculation
+
+  // Reference printer change → auto-select group
+  const refPrinterSelect = document.getElementById("orderReferencePrinter");
+  if (refPrinterSelect) {
+    refPrinterSelect.addEventListener("change", onReferencePrinterChange);
+  }
 
   // Filter buttons
   document.querySelectorAll(".order-filter").forEach((btn) => {
@@ -250,12 +369,19 @@ function init() {
         return;
       }
 
+      // Add compatible groups as JSON
+      const selectedGroups = getSelectedGroupKeys();
+      if (selectedGroups.length > 0) {
+        formData.set("compatibleGroups", JSON.stringify(selectedGroups));
+      }
+
       btnSubmitOrder.disabled = true;
       btnSubmitOrder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
 
       try {
         await createOrder(formData);
         form.reset();
+        updateTotalParts();
         $("#createOrderModal").modal("hide");
         await loadOrders();
       } catch (err) {
@@ -324,7 +450,10 @@ function init() {
     });
   }
 
-  // Initial load
+  // Load groups and printers for the form
+  loadGroupsAndPrinters();
+
+  // Initial load of orders
   loadOrders();
 }
 

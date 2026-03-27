@@ -2,14 +2,27 @@ const mongoose = require("mongoose");
 
 const AssignmentSchema = new mongoose.Schema(
   {
-    printerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Printer",
+    groupKey: {
+      type: String,
       required: true,
     },
+    groupLabel: {
+      type: String,
+      required: false,
+    },
+    printerIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Printer",
+      },
+    ],
     copies: {
       type: Number,
       required: true,
+    },
+    copiesPerPrinter: {
+      type: Number,
+      required: false,
     },
     estimatedTime: {
       type: Number,
@@ -90,6 +103,16 @@ const OrderSchema = new mongoose.Schema(
         },
       ],
     },
+    referencePrinter: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Printer",
+      required: false,
+    },
+    compatibleGroups: [
+      {
+        type: String,
+      },
+    ],
     estimatedPrintTime: {
       type: Number,
       required: true,

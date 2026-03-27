@@ -123,6 +123,7 @@ export function buildOrderRow(order) {
 
 /**
  * Build order detail HTML for the detail modal.
+ * Shows group-based assignments with G-code upload per group.
  * @param {Object} order
  * @returns {string}
  */
@@ -154,20 +155,23 @@ export function buildOrderDetailHtml(order) {
   if (order.assignments && order.assignments.length > 0) {
     html += `
       <hr class="border-secondary">
-      <h6><i class="fas fa-tasks"></i> Assignments</h6>
+      <h6><i class="fas fa-tasks"></i> Group Assignments</h6>
       <div class="table-responsive">
         <table class="table table-dark table-sm table-striped">
-          <thead><tr><th>Printer ID</th><th>Copies</th><th>Est. Time</th><th>Status</th><th>G-code</th></tr></thead>
+          <thead><tr><th>Printer Group</th><th>Printers</th><th>Batches</th><th>Per Printer</th><th>Est. Time</th><th>Status</th><th>G-code</th></tr></thead>
           <tbody>
     `;
     order.assignments.forEach((a) => {
+      const printerCount = a.printerIds ? a.printerIds.length : 0;
       const gcodeStatus = a.gcodeFilePath
         ? '<span class="text-success"><i class="fas fa-check"></i> Uploaded</span>'
-        : `<button class="btn btn-xs btn-outline-info btn-upload-gcode" data-order-id="${order._id}" data-assignment-id="${a._id}"><i class="fas fa-upload"></i> Upload</button>`;
+        : `<button class="btn btn-xs btn-outline-info btn-upload-gcode" data-order-id="${order._id}" data-assignment-id="${a._id}" data-group-label="${escapeHtml(a.groupLabel || "")}"><i class="fas fa-upload"></i> Upload</button>`;
       html += `
         <tr>
-          <td><small>${a.printerId}</small></td>
+          <td>${escapeHtml(a.groupLabel || a.groupKey || "-")}</td>
+          <td>${printerCount}</td>
           <td>${a.copies}</td>
+          <td>${a.copiesPerPrinter || "-"}</td>
           <td>${formatTime(a.estimatedTime)}</td>
           <td><span class="badge ${getStatusBadgeClass(a.status)}">${a.status}</span></td>
           <td>${gcodeStatus}</td>

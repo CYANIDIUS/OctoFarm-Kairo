@@ -137,7 +137,16 @@
                             </select>
                         </div>
                     </div>
+                    <hr class="border-secondary">
+                    <h6><i class="fas fa-print"></i> Printer Assignment</h6>
                     <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="orderReferencePrinter">Reference Printer</label>
+                            <select class="form-control" id="orderReferencePrinter" name="referencePrinter">
+                                <option value="">— Select printer 3MF was sliced for —</option>
+                            </select>
+                            <small class="form-text text-muted">The printer this file was sliced for</small>
+                        </div>
                         <div class="form-group col-md-6">
                             <label for="orderOptMode">Optimization Mode</label>
                             <select class="form-control" id="orderOptMode" name="optimizationMode">
@@ -145,10 +154,17 @@
                                 <option value="min_idle">Minimize Idle (Balanced)</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="orderFile">3MF / G-code File</label>
-                            <input type="file" class="form-control-file" id="orderFile" name="file" accept=".3mf,.gcode,.gco,.g">
+                    </div>
+                    <div class="form-group">
+                        <label>Compatible Printer Groups</label>
+                        <div id="compatibleGroupsContainer" class="border border-secondary rounded p-2" style="max-height: 200px; overflow-y: auto;">
+                            <p class="text-muted mb-0"><i class="fas fa-spinner fa-spin"></i> Loading groups...</p>
                         </div>
+                        <small class="form-text text-muted">Select which printer groups can produce this order. Reference printer's group is auto-selected.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderFile">3MF / G-code File</label>
+                        <input type="file" class="form-control-file" id="orderFile" name="file" accept=".3mf,.gcode,.gco,.g">
                     </div>
                 </form>
             </div>
@@ -179,8 +195,10 @@
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th>Printer</th>
+                                <th>Printer Group</th>
+                                <th>Printers</th>
                                 <th>Batches</th>
+                                <th>Per Printer</th>
                                 <th>Est. Time</th>
                                 <th>Status</th>
                             </tr>
@@ -203,18 +221,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadGcodeModalLabel"><i class="fas fa-file-upload"></i> Upload G-code</h5>
+                <h5 class="modal-title" id="uploadGcodeModalLabel"><i class="fas fa-file-upload"></i> Upload G-code for Group</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <p id="gcodeGroupLabel" class="text-info mb-3"></p>
                 <form id="uploadGcodeForm" enctype="multipart/form-data">
                     <input type="hidden" id="gcodeOrderId" name="orderId">
                     <input type="hidden" id="gcodeAssignmentId" name="assignmentId">
                     <div class="form-group">
                         <label for="gcodeFile">G-code File</label>
                         <input type="file" class="form-control-file" id="gcodeFile" name="gcode" accept=".gcode,.gco,.g" required>
+                        <small class="form-text text-muted">This G-code will be shared by all printers in the group.</small>
                     </div>
                 </form>
             </div>
