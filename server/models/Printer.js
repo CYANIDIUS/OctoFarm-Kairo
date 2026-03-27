@@ -253,6 +253,11 @@ const PrinterSchema = new mongoose.Schema({
       required: false,
       default: 0.4
     },
+    nozzleMaterial: {
+      type: String,
+      required: false,
+      default: "Brass"
+    },
     supportedMaterials: {
       type: [String],
       required: false,
@@ -263,6 +268,10 @@ const PrinterSchema = new mongoose.Schema({
       required: false,
       default: 0
     }
+  },
+  loadedFilament: {
+    type: { type: String, required: false, default: "" },
+    color: { type: String, required: false, default: "" }
   }
 });
 

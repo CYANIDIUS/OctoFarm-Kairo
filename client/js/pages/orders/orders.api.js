@@ -134,7 +134,7 @@ export async function confirmPrint(id) {
 }
 
 /**
- * Upload G-code for a specific assignment.
+ * Upload G-code for a specific group assignment.
  * @param {string} orderId
  * @param {string} assignmentId
  * @param {File} gcodeFile
@@ -153,5 +153,25 @@ export async function uploadGcode(orderId, assignmentId, gcodeFile) {
     const err = await response.json();
     throw new Error(err.error || "Failed to upload G-code");
   }
+  return response.json();
+}
+
+/**
+ * Fetch printer groups (printers grouped by config key).
+ * @returns {Promise<Object>}
+ */
+export async function fetchPrinterGroups() {
+  const response = await fetch(`${ORDERS_API_BASE}/printers/groups`);
+  if (!response.ok) throw new Error("Failed to fetch printer groups");
+  return response.json();
+}
+
+/**
+ * Fetch printers list with group-relevant fields.
+ * @returns {Promise<Object>}
+ */
+export async function fetchPrinters() {
+  const response = await fetch(`${ORDERS_API_BASE}/printers/list`);
+  if (!response.ok) throw new Error("Failed to fetch printers");
   return response.json();
 }

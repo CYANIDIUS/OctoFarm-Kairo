@@ -7,6 +7,7 @@ const { ensureAuthenticated } = require("../middleware/auth");
 const Order = require("../models/Order.js");
 const Printer = require("../models/Printer.js");
 const { calculateSchedule } = require("../services/scheduler.service");
+const { groupPrinters } = require("../services/printer-groups.service");
 
 // Ensure uploads base directory exists
 const uploadsBase = path.join(__dirname, "..", "uploads", "orders");
@@ -71,6 +72,57 @@ const uploadGcode = multer({
   limits: { fileSize: 500 * 1024 * 1024 },
 });
 
+// GET /api/orders/printers/list — List printers with group-relevant fields
+router.get("/printers/list", ensureAuthenticated, async (req, res) => {
+  try {
+    const printers = await Printer.find({}, {
+      settingsAppearance: 1,
+      printerURL: 1,
+      printerName: 1,
+      specifications: 1,
+      loadedFilament: 1,
+    });
+    res.json({ printers });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/orders/printers/groups — List printers grouped by config key
+router.get("/printers/groups", ensureAuthenticated, async (req, res) => {
+  try {
+    const printers = await Printer.find({});
+    const groups = groupPrinters(printers);
+
+    const result = [];
+    for (const group of groups.values()) {
+      result.push({
+        key: group.key,
+        label: group.label,
+        printerCount: group.printerCount,
+        speed: group.speed,
+        printerIds: group.printers.map((p) => p._id),
+        printers: group.printers.map((p) => ({
+          _id: p._id,
+          name:
+            (p.settingsAppearance && p.settingsAppearance.name) ||
+            p.printerName ||
+            p.printerURL ||
+            "Unknown",
+          nozzleDiameter: (p.specifications && p.specifications.nozzleDiameter) || 0.4,
+          nozzleMaterial: (p.specifications && p.specifications.nozzleMaterial) || "Brass",
+          filamentType: (p.loadedFilament && p.loadedFilament.type) || "",
+          filamentColor: (p.loadedFilament && p.loadedFilament.color) || "",
+        })),
+      });
+    }
+
+    res.json({ groups: result });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // GET /api/orders — List all orders
 router.get("/", ensureAuthenticated, async (req, res) => {
   try {
@@ -116,6 +168,26 @@ router.post(
         optimizationMode: req.body.optimizationMode || "min_time",
         status: "queued",
       };
+
+      // Reference printer
+      if (req.body.referencePrinter) {
+        orderData.referencePrinter = req.body.referencePrinter;
+      }
+
+      // Compatible groups (array of group keys)
+      if (req.body.compatibleGroups) {
+        try {
+          const groups =
+            typeof req.body.compatibleGroups === "string"
+              ? JSON.parse(req.body.compatibleGroups)
+              : req.body.compatibleGroups;
+          if (Array.isArray(groups)) {
+            orderData.compatibleGroups = groups;
+          }
+        } catch (e) {
+          // Ignore parse errors
+        }
+      }
 
       // Parse requirements
       orderData.requirements = {
@@ -206,12 +278,17 @@ router.put("/:id", ensureAuthenticated, async (req, res) => {
       "estimatedPrintTime",
       "optimizationMode",
       "status",
+      "referencePrinter",
     ];
     updateFields.forEach((field) => {
       if (req.body[field] !== undefined) {
         order[field] = req.body[field];
       }
     });
+
+    if (req.body.compatibleGroups !== undefined) {
+      order.compatibleGroups = req.body.compatibleGroups;
+    }
 
     // Update requirements if provided
     if (req.body.requirements) {
@@ -262,7 +339,7 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
   }
 });
 
-// POST /api/orders/:id/calculate — Calculate schedule (does NOT save to DB)
+// POST /api/orders/:id/calculate — Calculate group-based schedule (does NOT save to DB)
 router.post("/:id/calculate", ensureAuthenticated, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -271,34 +348,23 @@ router.post("/:id/calculate", ensureAuthenticated, async (req, res) => {
     }
 
     const printers = await Printer.find({});
-    const result = calculateSchedule(order, printers);
+
+    // Pass compatible groups from order or from request body
+    const compatibleGroups =
+      (req.body && req.body.compatibleGroups) ||
+      order.compatibleGroups ||
+      [];
+
+    const result = calculateSchedule(order, printers, {
+      compatibleGroups: compatibleGroups.length > 0 ? compatibleGroups : null,
+    });
 
     if (result.error) {
       return res.status(400).json({ error: result.error, result });
     }
 
-    // Populate printer names for display
-    const printerMap = {};
-    printers.forEach((p) => {
-      printerMap[p._id.toString()] = {
-        name:
-          (p.settingsAppearance && p.settingsAppearance.name) ||
-          p.printerName ||
-          p.printerURL ||
-          "Unknown",
-        _id: p._id,
-      };
-    });
-
-    const assignmentsWithNames = result.assignments.map((a) => ({
-      ...a,
-      printerName: printerMap[a.printerId.toString()]
-        ? printerMap[a.printerId.toString()].name
-        : "Unknown",
-    }));
-
     res.json({
-      assignments: assignmentsWithNames,
+      assignments: result.assignments,
       totalBatches: result.totalBatches,
       totalEstimatedTime: result.totalEstimatedTime,
     });
@@ -327,7 +393,10 @@ router.post("/:id/assign", ensureAuthenticated, async (req, res) => {
       assignments = req.body.assignments;
     } else {
       const printers = await Printer.find({});
-      const result = calculateSchedule(order, printers);
+      const compatibleGroups = order.compatibleGroups || [];
+      const result = calculateSchedule(order, printers, {
+        compatibleGroups: compatibleGroups.length > 0 ? compatibleGroups : null,
+      });
       if (result.error) {
         return res.status(400).json({ error: result.error });
       }
@@ -381,7 +450,7 @@ router.post("/:id/confirm-print", ensureAuthenticated, async (req, res) => {
   }
 });
 
-// POST /api/orders/:id/upload-gcode — Upload G-code for a specific assignment
+// POST /api/orders/:id/upload-gcode — Upload G-code for a group assignment
 router.post(
   "/:id/upload-gcode",
   ensureAuthenticated,
@@ -393,12 +462,17 @@ router.post(
         return res.status(404).json({ error: "Order not found" });
       }
 
+      // Support both assignmentId (by subdoc ID) and groupKey (by group key)
       const assignmentId = req.body.assignmentId;
-      if (!assignmentId) {
-        return res.status(400).json({ error: "assignmentId is required" });
+      const groupKey = req.body.groupKey;
+
+      let assignment;
+      if (assignmentId) {
+        assignment = order.assignments.id(assignmentId);
+      } else if (groupKey) {
+        assignment = order.assignments.find((a) => a.groupKey === groupKey);
       }
 
-      const assignment = order.assignments.id(assignmentId);
       if (!assignment) {
         return res.status(404).json({ error: "Assignment not found" });
       }
@@ -416,7 +490,7 @@ router.post(
       );
 
       await order.save();
-      res.json({ order, assignmentId, gcodeFilePath: assignment.gcodeFilePath });
+      res.json({ order, assignmentId: assignment._id, gcodeFilePath: assignment.gcodeFilePath });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
