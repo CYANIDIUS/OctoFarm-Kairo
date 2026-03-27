@@ -48,11 +48,18 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    totalCopies: {
+    // Number of print runs (how many times to print the file)
+    fileCopies: {
       type: Number,
       required: true,
       default: 1,
     },
+    // Legacy field alias — for backward compatibility with existing data
+    totalCopies: {
+      type: Number,
+      required: false,
+    },
+    // Number of parts/details in one file
     partsPerFile: {
       type: Number,
       required: true,
@@ -105,8 +112,23 @@ const OrderSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
+
+// Virtual: total number of parts to be produced
+OrderSchema.virtual("totalParts").get(function () {
+  const copies = this.fileCopies || this.totalCopies || 1;
+  return copies * (this.partsPerFile || 1);
+});
+
+// Helper: get effective fileCopies (supports legacy totalCopies field)
+OrderSchema.methods.getFileCopies = function () {
+  return this.fileCopies || this.totalCopies || 1;
+};
 
 const Order = mongoose.model("Order", OrderSchema);
 

@@ -109,7 +109,7 @@ router.post(
       const orderData = {
         name: req.body.name,
         comment: req.body.comment || "",
-        totalCopies: parseInt(req.body.totalCopies) || 1,
+        fileCopies: parseInt(req.body.fileCopies) || parseInt(req.body.totalCopies) || 1,
         partsPerFile: parseInt(req.body.partsPerFile) || 1,
         priority: parseInt(req.body.priority) || 3,
         estimatedPrintTime: parseInt(req.body.estimatedPrintTime) || 0,
@@ -200,7 +200,7 @@ router.put("/:id", ensureAuthenticated, async (req, res) => {
     const updateFields = [
       "name",
       "comment",
-      "totalCopies",
+      "fileCopies",
       "partsPerFile",
       "priority",
       "estimatedPrintTime",

@@ -28,7 +28,7 @@
                             <tr>
                                 <th>Priority</th>
                                 <th>Name</th>
-                                <th>Copies</th>
+                                <th>Total Parts</th>
                                 <th>Material</th>
                                 <th>Mode</th>
                                 <th>Est. Time</th>
@@ -87,17 +87,25 @@
                         <textarea class="form-control" id="orderComment" name="comment" rows="2" placeholder="Operator notes..."></textarea>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="orderTotalCopies">Total Copies <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="orderTotalCopies" name="totalCopies" value="1" min="1" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="orderPartsPerFile">Parts Per File <span class="text-danger">*</span></label>
+                        <div class="form-group col-md-3">
+                            <label for="orderPartsPerFile">Parts in File <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="orderPartsPerFile" name="partsPerFile" value="1" min="1" required>
+                            <small class="form-text text-muted">How many parts in one 3MF file</small>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="orderFileCopies">File Copies <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="orderFileCopies" name="fileCopies" value="1" min="1" required>
+                            <small class="form-text text-muted">How many times to print the file</small>
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="orderEstTime">Est. Print Time (sec)</label>
                             <input type="number" class="form-control" id="orderEstTime" name="estimatedPrintTime" value="0" min="0">
+                            <small class="form-text text-muted">Time per 1 print run (from slicer)</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Total Parts</label>
+                            <input type="text" class="form-control" id="orderTotalParts" readonly disabled>
+                            <small class="form-text text-muted">Parts in File × File Copies</small>
                         </div>
                     </div>
                     <hr class="border-secondary">

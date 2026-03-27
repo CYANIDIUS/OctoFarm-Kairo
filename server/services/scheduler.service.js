@@ -196,7 +196,11 @@ function scheduleMinIdle(totalBatches, printers, estimatedPrintTime, referenceSp
  * @returns {Object} { assignments, totalBatches, totalEstimatedTime }
  */
 function calculateSchedule(order, printers) {
-  const totalBatches = Math.ceil(order.totalCopies / order.partsPerFile);
+  // Each file copy = 1 batch (1 print run)
+  // fileCopies = number of times to run the file
+  // totalParts = fileCopies * partsPerFile (total individual parts produced)
+  const fileCopies = order.fileCopies || order.totalCopies || 1;
+  const totalBatches = fileCopies;
   const requirements = order.requirements || {};
 
   const compatible = filterCompatiblePrinters(printers, requirements);
