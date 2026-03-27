@@ -207,7 +207,25 @@ async function handleDelete(e) {
 /**
  * Initialize the page.
  */
+/**
+ * Update the "Total Parts" display in the create order form.
+ */
+function updateTotalParts() {
+  const partsPerFile = parseInt(document.getElementById("orderPartsPerFile")?.value) || 1;
+  const fileCopies = parseInt(document.getElementById("orderFileCopies")?.value) || 1;
+  const totalParts = partsPerFile * fileCopies;
+  const el = document.getElementById("orderTotalParts");
+  if (el) el.value = totalParts + " pcs";
+}
+
 function init() {
+  // Auto-calculate total parts when inputs change
+  const partsInput = document.getElementById("orderPartsPerFile");
+  const copiesInput = document.getElementById("orderFileCopies");
+  if (partsInput) partsInput.addEventListener("input", updateTotalParts);
+  if (copiesInput) copiesInput.addEventListener("input", updateTotalParts);
+  updateTotalParts(); // initial calculation
+
   // Filter buttons
   document.querySelectorAll(".order-filter").forEach((btn) => {
     btn.addEventListener("click", function () {

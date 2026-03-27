@@ -110,7 +110,7 @@ export function buildOrderRow(order) {
     <tr data-order-id="${order._id}">
       <td>${getPriorityLabel(order.priority)}</td>
       <td>${escapeHtml(order.name)}</td>
-      <td>${order.totalCopies} (${order.partsPerFile}/file)</td>
+      <td>${order.totalParts || ((order.fileCopies || order.totalCopies || 1) * (order.partsPerFile || 1))} pcs (${order.partsPerFile}/file × ${order.fileCopies || order.totalCopies || 1})</td>
       <td>${escapeHtml(order.requirements?.material || "Any")}</td>
       <td>${getOptModeLabel(order.optimizationMode)}</td>
       <td>${formatTime(order.totalEstimatedTime || order.estimatedPrintTime)}</td>
@@ -137,9 +137,10 @@ export function buildOrderDetailHtml(order) {
         <p><strong>File:</strong> ${escapeHtml(order.originalFileName || "-")}</p>
       </div>
       <div class="col-md-6">
-        <p><strong>Total Copies:</strong> ${order.totalCopies}</p>
-        <p><strong>Parts Per File:</strong> ${order.partsPerFile}</p>
-        <p><strong>Est. Print Time (per batch):</strong> ${formatTime(order.estimatedPrintTime)}</p>
+        <p><strong>Parts in File:</strong> ${order.partsPerFile}</p>
+        <p><strong>File Copies (print runs):</strong> ${order.fileCopies || order.totalCopies || 1}</p>
+        <p><strong>Total Parts:</strong> <span class="text-warning">${order.totalParts || ((order.fileCopies || order.totalCopies || 1) * (order.partsPerFile || 1))} pcs</span></p>
+        <p><strong>Est. Print Time (per run):</strong> ${formatTime(order.estimatedPrintTime)}</p>
         <p><strong>Total Est. Time:</strong> ${formatTime(order.totalEstimatedTime)}</p>
         <p><strong>Optimization:</strong> ${getOptModeLabel(order.optimizationMode)}</p>
       </div>
