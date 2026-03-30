@@ -1,33 +1,49 @@
-## [1.8.0-kairo](https://github.com/CYANIDIUS/OctoFarm-Kairo/tree/feature/order-scheduler) (2026-03-25)
+## [1.8.0-kairo](https://github.com/CYANIDIUS/OctoFarm-Kairo/tree/feature/order-scheduler) (2026-03-30)
 
 ### :rocket: New Features :rocket:
 
 * **orders:** Order scheduling module — automated distribution of print jobs across FDM printer fleet
 * **orders:** Two optimization modes: Minimize Time (greedy) and Minimize Idle (balanced load)
 * **orders:** Full order lifecycle: queued → calculated → scheduled → printing → done / canceled
-* **orders:** REST API with 9 endpoints: CRUD + calculate + assign + confirm-print + upload-gcode
-* **orders:** UI page "Orders" with order table, status filters, creation modal, schedule preview
-* **orders:** 3MF/G-code file upload and per-assignment G-code management
-* **printers:** Extended Printer model with specifications (bedSize, nozzleDiameter, supportedMaterials, printSpeed)
-* **docker:** Updated Dockerfile to node:18-slim with webpack client build stage
-* **docker:** Added docker-compose.yml (OctoFarm + MongoDB 6 + persistent volumes)
+* **orders:** REST API with 11 endpoints: CRUD + calculate + assign + confirm-print + upload-gcode + printers/list + printers/groups
+* **orders:** UI page "Заказы" with order table, status filters, creation modal, schedule preview
+* **orders:** 3MF/G-code file upload, G-code uploaded per printer group (shared by all printers in group)
+* **groups:** Automatic printer grouping by configuration (model + nozzle diameter + nozzle material + filament type)
+* **groups:** G-code uploaded once per group, distributed to all printers with same configuration
+* **groups:** Group-aware scheduler distributes batches across groups with parallel printing within groups
+* **printers:** Extended Printer model: bedSize, nozzleDiameter, nozzleMaterial, supportedMaterials, printSpeed, loadedFilament (type + color)
+* **orders:** Smart field naming: fileCopies × partsPerFile = totalParts (auto-calculated in UI)
+* **orders:** Reference printer selection — slicer time is scaled proportionally for other printer speeds
+* **i18n:** Full Russian localization of the entire web interface (81 EJS templates, 27 client JS files)
+* **docker:** Dockerfile on node:18-slim with webpack client build stage
+* **docker:** docker-compose.yml (OctoFarm + MongoDB 6 + persistent volumes)
+* **testing:** Seed script creates 6 test printers in 3 groups for development
 
 ### :hammer: Bug Fixes :hammer:
 
 * **docker:** Fixed Alpine 3.14 package repository unavailability by switching to Debian slim
 * **docker:** Fixed Windows CRLF entrypoint issue by inlining startup command in Dockerfile
 * **docker:** Fixed webpack client build — added server/constants/ to build context
+* **scheduler:** Fixed time estimation — slicer time now treated as real time for reference printer, scaled proportionally for others
 
 ### :page_facing_up: New Files :page_facing_up:
 
-* `server/models/Order.js` — Mongoose model for print orders
-* `server/services/scheduler.service.js` — Scheduling algorithm with printer compatibility filtering
-* `server/routes/orders.routes.js` — REST API with multer file uploads
-* `server/templates/orders.ejs` — Orders management UI page
+* `server/models/Order.js` — Mongoose model with group-based assignments
+* `server/services/scheduler.service.js` — Group-based scheduling algorithm
+* `server/services/printer-groups.service.js` — Printer grouping by configuration
+* `server/routes/orders.routes.js` — REST API with 11 endpoints
+* `server/templates/orders.ejs` — Orders management UI page (Russian)
 * `client/entry/orders.runner.js` — Client-side webpack entry point
 * `client/js/pages/orders/orders.api.js` — Client API module
 * `client/js/pages/orders/orders.utils.js` — UI rendering utilities
+* `server/scripts/seed-test-printers.js` — Test data: 6 printers in 3 groups
 * `docker-compose.yml` — Docker Compose for local development
+
+### :globe_with_meridians: Localization :globe_with_meridians:
+
+* Full Russian translation of all EJS templates (81 files)
+* Russian translation of all client-side JS strings (27 files)
+* Russian flash messages and API error messages
 
 ---
 
