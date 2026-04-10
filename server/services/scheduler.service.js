@@ -1,9 +1,8 @@
 const Logger = require("../handlers/logger.js");
 const { LOGGER_ROUTE_KEYS } = require("../constants/logger.constants");
+const { groupPrinters } = require("./printer-groups.service");
 
 const logger = new Logger(LOGGER_ROUTE_KEYS.SERVER_CORE);
-
-const DEFAULT_BASE_SPEED = 60; // mm/s — baseline for time estimation
 
 /**
  * Filters printers by compatibility with order requirements.
@@ -48,150 +47,178 @@ function filterCompatiblePrinters(printers, requirements) {
 }
 
 /**
- * Calculates the estimated time for a printer to complete a number of batches.
- * Each batch is printed sequentially on the same printer, so total time is
- * batches * timePerBatch adjusted by speed factor.
+ * Estimates print time for a given speed based on the reference time.
  *
- * @param {Number} batches - Number of batches assigned to this printer
- * @param {Number} estimatedPrintTime - Time per single batch in seconds
- * @param {Number} printerSpeed - Printer speed in mm/s
- * @returns {Number} Estimated total sequential time in seconds for this printer
+ * @param {Number} batches - Number of batches for this printer/group
+ * @param {Number} estimatedPrintTime - Time per batch in seconds (from slicer, for the reference printer)
+ * @param {Number} printerSpeed - This printer/group's speed (mm/s)
+ * @param {Number} referenceSpeed - Reference printer's speed (mm/s)
+ * @returns {Number} Estimated time in seconds
  */
-function calculatePrinterTime(batches, estimatedPrintTime, printerSpeed) {
-  const speed = printerSpeed > 0 ? printerSpeed : DEFAULT_BASE_SPEED;
-  const speedFactor = speed / DEFAULT_BASE_SPEED;
-  return Math.ceil((batches * estimatedPrintTime) / speedFactor);
+function calculatePrinterTime(batches, estimatedPrintTime, printerSpeed, referenceSpeed) {
+  if (!printerSpeed || printerSpeed <= 0 || !referenceSpeed || referenceSpeed <= 0) {
+    return Math.ceil(batches * estimatedPrintTime);
+  }
+  const scaleFactor = referenceSpeed / printerSpeed;
+  return Math.ceil(batches * estimatedPrintTime * scaleFactor);
 }
 
 /**
- * min_time strategy: Greedy assignment — always assign next batch to the printer
- * that will finish earliest (minimizes total makespan / wall-clock time).
+ * Determines the reference speed — the speed of the fastest compatible printer.
  *
- * Total time = max(estimatedTime per printer) — the last printer to finish.
- * Fast printers receive more batches so all printers finish at roughly the same time.
- *
- * @param {Number} totalBatches - Total batches to distribute
  * @param {Array} printers - Compatible printers
- * @param {Number} estimatedPrintTime - Time per batch in seconds
- * @returns {Array} Assignment objects
+ * @returns {Number} Reference speed in mm/s
  */
-function scheduleMinTime(totalBatches, printers, estimatedPrintTime) {
-  if (printers.length === 0) return [];
+function getReferenceSpeed(printers) {
+  let maxSpeed = 0;
+  for (const p of printers) {
+    const speed = (p.specifications && p.specifications.printSpeed) || 0;
+    if (speed > maxSpeed) maxSpeed = speed;
+  }
+  return maxSpeed;
+}
 
-  // Track current load (total time) for each printer
-  const printerLoads = printers.map((p) => ({
-    printer: p,
-    batches: 0,
-    currentTime: 0,
-    speed:
-      (p.specifications && p.specifications.printSpeed) || DEFAULT_BASE_SPEED,
+/**
+ * Calculate wall time for a group assignment.
+ * Within a group, printers print in parallel, so wall time = ceil(copies/printerCount) * timePerBatch.
+ *
+ * @param {Number} totalGroupCopies - Total batches assigned to this group
+ * @param {Number} printerCount - Number of printers in the group
+ * @param {Number} estimatedPrintTime - Time per batch (slicer time)
+ * @param {Number} groupSpeed - Speed of printers in this group
+ * @param {Number} referenceSpeed - Reference speed
+ * @returns {Number} Wall time in seconds
+ */
+function calculateGroupWallTime(totalGroupCopies, printerCount, estimatedPrintTime, groupSpeed, referenceSpeed) {
+  const copiesPerPrinter = Math.ceil(totalGroupCopies / printerCount);
+  return calculatePrinterTime(copiesPerPrinter, estimatedPrintTime, groupSpeed, referenceSpeed);
+}
+
+/**
+ * min_time strategy for groups: Greedy — assign next batch to the group
+ * that will finish earliest (considering parallel printers within each group).
+ *
+ * @param {Number} totalBatches
+ * @param {Array} groups - Array of group objects { key, label, printers, speed, printerCount }
+ * @param {Number} estimatedPrintTime
+ * @param {Number} referenceSpeed
+ * @returns {Array} Group assignment objects
+ */
+function scheduleGroupsMinTime(totalBatches, groups, estimatedPrintTime, referenceSpeed) {
+  if (groups.length === 0) return [];
+
+  const groupLoads = groups.map((g) => ({
+    group: g,
+    copies: 0,
+    currentWallTime: 0,
   }));
 
-  // Greedy: assign each batch to the printer that finishes earliest
   for (let i = 0; i < totalBatches; i++) {
     let minIdx = 0;
     let minFinish = Infinity;
 
-    for (let j = 0; j < printerLoads.length; j++) {
-      const pl = printerLoads[j];
-      const speedFactor = pl.speed / DEFAULT_BASE_SPEED;
-      const newFinish = pl.currentTime + estimatedPrintTime / speedFactor;
-      if (newFinish < minFinish) {
-        minFinish = newFinish;
+    for (let j = 0; j < groupLoads.length; j++) {
+      const gl = groupLoads[j];
+      // Wall time if we add one more batch to this group
+      const newCopies = gl.copies + 1;
+      const newWallTime = calculateGroupWallTime(
+        newCopies,
+        gl.group.printerCount,
+        estimatedPrintTime,
+        gl.group.speed,
+        referenceSpeed
+      );
+      if (newWallTime < minFinish) {
+        minFinish = newWallTime;
         minIdx = j;
       }
     }
 
-    printerLoads[minIdx].batches += 1;
-    const speedFactor = printerLoads[minIdx].speed / DEFAULT_BASE_SPEED;
-    printerLoads[minIdx].currentTime += estimatedPrintTime / speedFactor;
+    groupLoads[minIdx].copies += 1;
+    groupLoads[minIdx].currentWallTime = minFinish;
   }
 
-  return printerLoads
-    .filter((pl) => pl.batches > 0)
-    .map((pl) => ({
-      printerId: pl.printer._id,
-      copies: pl.batches,
-      estimatedTime: Math.ceil(pl.currentTime),
+  return groupLoads
+    .filter((gl) => gl.copies > 0)
+    .map((gl) => ({
+      groupKey: gl.group.key,
+      groupLabel: gl.group.label,
+      printerIds: gl.group.printers.map((p) => p._id),
+      copies: gl.copies,
+      copiesPerPrinter: Math.ceil(gl.copies / gl.group.printerCount),
+      estimatedTime: Math.ceil(gl.currentWallTime),
       status: "pending",
+      gcodeFilePath: null,
     }));
 }
 
 /**
- * min_idle strategy: Balanced load distribution — distribute batches as evenly
- * as possible across printers by COUNT (minimizes idle time spread).
+ * min_idle strategy for groups: Balanced distribution across groups,
+ * weighted by effective throughput (printerCount × speed).
  *
- * Each printer gets floor(totalBatches / printerCount) batches,
- * with the first (totalBatches % printerCount) printers each getting one extra.
- *
- * Total wall-clock time = max(batches_i * estimatedPrintTime / speedFactor_i)
- * i.e. the time of the slowest/most-loaded printer, since all work in parallel.
- *
- * @param {Number} totalBatches - Total batches to distribute
- * @param {Array} printers - Compatible printers
- * @param {Number} estimatedPrintTime - Time per batch in seconds
- * @returns {Array} Assignment objects
+ * @param {Number} totalBatches
+ * @param {Array} groups
+ * @param {Number} estimatedPrintTime
+ * @param {Number} referenceSpeed
+ * @returns {Array} Group assignment objects
  */
-function scheduleMinIdle(totalBatches, printers, estimatedPrintTime) {
-  if (printers.length === 0) return [];
+function scheduleGroupsMinIdle(totalBatches, groups, estimatedPrintTime, referenceSpeed) {
+  if (groups.length === 0) return [];
 
-  const printerCount = printers.length;
-  const baseBatches = Math.floor(totalBatches / printerCount);
-  let remainder = totalBatches % printerCount;
+  // Weight each group by effective throughput = printerCount * speed
+  const totalThroughput = groups.reduce((sum, g) => {
+    const effectiveSpeed = (g.speed || referenceSpeed || 1) * g.printerCount;
+    return sum + effectiveSpeed;
+  }, 0);
 
-  const assignments = [];
-
-  for (const p of printers) {
-    let batches = baseBatches;
-    if (remainder > 0) {
-      batches += 1;
-      remainder -= 1;
+  let remaining = totalBatches;
+  const assignments = groups.map((g, idx) => {
+    const effectiveSpeed = (g.speed || referenceSpeed || 1) * g.printerCount;
+    let copies;
+    if (idx === groups.length - 1) {
+      copies = remaining; // last group gets the remainder
+    } else {
+      copies = Math.round((effectiveSpeed / totalThroughput) * totalBatches);
+      copies = Math.min(copies, remaining);
     }
-    if (batches === 0) continue; // skip printers that got no batches
+    remaining -= copies;
 
-    const speed =
-      (p.specifications && p.specifications.printSpeed) || DEFAULT_BASE_SPEED;
-
-    // estimatedTime = total sequential print time for this printer
-    // = batches × timePerBatch / speedFactor
-    const estimatedTime = calculatePrinterTime(
-      batches,
+    const copiesPerPrinter = g.printerCount > 0 ? Math.ceil(copies / g.printerCount) : copies;
+    const wallTime = calculateGroupWallTime(
+      copies,
+      g.printerCount,
       estimatedPrintTime,
-      speed
+      g.speed,
+      referenceSpeed
     );
 
-    assignments.push({
-      printerId: p._id,
-      copies: batches,
-      estimatedTime,
+    return {
+      groupKey: g.key,
+      groupLabel: g.label,
+      printerIds: g.printers.map((p) => p._id),
+      copies,
+      copiesPerPrinter,
+      estimatedTime: Math.ceil(wallTime),
       status: "pending",
-    });
-  }
+      gcodeFilePath: null,
+    };
+  });
 
-  return assignments;
+  return assignments.filter((a) => a.copies > 0);
 }
 
 /**
- * Main scheduling function.
- * Calculates an optimal assignment of print batches to printers.
+ * Main scheduling function — group-based.
+ * Groups compatible printers by config key, then distributes batches across groups.
  *
- * For BOTH strategies, total estimated time is the wall-clock time until
- * all printing is done:
- *   totalEstimatedTime = max(estimatedTime_i across all assigned printers)
- *
- * This is correct because printers work IN PARALLEL — each runs its batches
- * sequentially, but all printers run simultaneously. The farm finishes when
- * the LAST printer finishes.
- *
- * min_time minimizes this max by giving more batches to faster printers.
- * min_idle distributes batches equally by count regardless of speed.
- *
- * @param {Object} order - Order document (or plain object with order fields)
- * @param {Array} printers - Array of printer objects (Mongoose docs or plain objects)
+ * @param {Object} order - Order document
+ * @param {Array} printers - Array of printer objects
+ * @param {Object} [options] - Optional: { compatibleGroups: [groupKey, ...] }
  * @returns {Object} { assignments, totalBatches, totalEstimatedTime }
  */
-function calculateSchedule(order, printers) {
-  const totalBatches = Math.ceil(order.totalCopies / order.partsPerFile);
+function calculateSchedule(order, printers, options) {
+  const fileCopies = order.fileCopies || order.totalCopies || 1;
+  const totalBatches = fileCopies;
   const requirements = order.requirements || {};
 
   const compatible = filterCompatiblePrinters(printers, requirements);
@@ -202,30 +229,56 @@ function calculateSchedule(order, printers) {
       assignments: [],
       totalBatches,
       totalEstimatedTime: 0,
-      error: "No compatible printers found",
+      error: "Совместимые принтеры не найдены",
     };
   }
 
+  // Group compatible printers
+  const allGroups = groupPrinters(compatible);
+
+  // If specific groups were requested, filter to only those
+  let selectedGroups;
+  const compatibleGroupKeys = options && options.compatibleGroups;
+  if (compatibleGroupKeys && compatibleGroupKeys.length > 0) {
+    selectedGroups = [];
+    for (const key of compatibleGroupKeys) {
+      if (allGroups.has(key)) {
+        selectedGroups.push(allGroups.get(key));
+      }
+    }
+  } else {
+    selectedGroups = Array.from(allGroups.values());
+  }
+
+  if (selectedGroups.length === 0) {
+    logger.warning("No compatible printer groups found for order: " + order.name);
+    return {
+      assignments: [],
+      totalBatches,
+      totalEstimatedTime: 0,
+      error: "Совместимые группы принтеров не найдены",
+    };
+  }
+
+  const referenceSpeed = getReferenceSpeed(compatible);
+
   let assignments;
   if (order.optimizationMode === "min_idle") {
-    assignments = scheduleMinIdle(
+    assignments = scheduleGroupsMinIdle(
       totalBatches,
-      compatible,
-      order.estimatedPrintTime
+      selectedGroups,
+      order.estimatedPrintTime,
+      referenceSpeed
     );
   } else {
-    // Default: min_time
-    assignments = scheduleMinTime(
+    assignments = scheduleGroupsMinTime(
       totalBatches,
-      compatible,
-      order.estimatedPrintTime
+      selectedGroups,
+      order.estimatedPrintTime,
+      referenceSpeed
     );
   }
 
-  // Wall-clock total time = time until the last printer finishes.
-  // Printers run in parallel, so this is max(estimatedTime) across all printers.
-  // For min_idle: max(batches_i × estimatedPrintTime / speedFactor_i)
-  // For min_time: max(accumulated greedy load per printer)
   const totalEstimatedTime =
     assignments.length > 0
       ? Math.max(...assignments.map((a) => a.estimatedTime))
@@ -242,5 +295,5 @@ module.exports = {
   calculateSchedule,
   filterCompatiblePrinters,
   calculatePrinterTime,
-  DEFAULT_BASE_SPEED,
+  getReferenceSpeed,
 };
